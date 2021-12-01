@@ -32,7 +32,7 @@ body{
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
 }
@@ -44,7 +44,7 @@ body{
 .profile__form input{
     min-width: 8em;
     font-size: 18px;
-    background: #7597b9;
+    background: #7597b2;
     border-radius: 8px;
     margin-left: 10px;
     border: none;

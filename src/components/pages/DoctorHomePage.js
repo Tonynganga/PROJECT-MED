@@ -25,24 +25,6 @@ function DoctorHomePage() {
             </div>
         <SideBar2/>
         
-        {/* <div className="dashboard">
-            <div className="namedashboard">
-                <Link href="#" to="/" className="dashboardname"><FontAwesomeIcon className="icons" icon={faColumns} />Dashboard</Link>
-            </div>
-            <div className="namedashboard">
-                <Link href="#" to="/" className="dashboardname"><FontAwesomeIcon className="icons" icon={faFileMedical} />Healthcard</Link>
-            </div>
-            <div className="namedashboard">
-                <Link href="#" to="/" className="dashboardname"><FontAwesomeIcon className="icons" icon={faUserCog}/>Profile Settings</Link>
-            </div>
-            <div className="namedashboard">
-                <Link href="#" to="/" className="dashboardname"><FontAwesomeIcon className="icons" icon={faLock}/>Change Password</Link>
-            </div>
-            <div className="namedashboard">
-                <Link href="#" to="/" className="dashboardname"><FontAwesomeIcon className="icons" icon={faSignOutAlt} />LogOut</Link>
-            </div>
-        </div> */}
-        
         
         <Footer/>
         </div>
