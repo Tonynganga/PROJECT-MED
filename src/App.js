@@ -13,6 +13,9 @@ import Alerts from './components/Alerts';
 import PrivateRoute from './components/PrivateRoute';
 import Logout from './components/pages/Logout';
 import {PersistGate} from 'redux-persist/integration/react'
+import PatientProfile from './components/pages/PatientProfile';
+import PatientChangePass from './components/pages/PatientChangePass';
+import DoctorProfile from './components/pages/DoctorProfile';
 
 
 function App() {
@@ -38,8 +41,16 @@ function App() {
         <Route path='/register' exact component={Register}/>
         <PrivateRoute path='/patienthomepage' exact component={PatientHomePage}/>
         <PrivateRoute path='/doctorhomepage' exact component={DoctorHomePage}/>
-        </div>      
-      </Switch>      
+        <Route path='/patientprofile' exact component={PatientProfile}/>
+        <Route path='/patientchangepass' exact component={PatientChangePass}/>
+        <Route path='/doctorprofile' exact component={DoctorProfile}/>
+
+        </div>
+      
+      
+       
+      </Switch>
+
       </Router>
       </PersistGate>
       

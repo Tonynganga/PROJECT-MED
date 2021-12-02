@@ -26,12 +26,12 @@ export const SidebarData2 = [
     {
         title: "Profile Settings",
         icon: <PersonAddIcon/>,
-        link:"/patienthomepage"
+        link:"/doctorprofile"
     },
     {
         title: "Change Password",
         icon: <LockIcon/>,
-        link:"/patienthomepage"
+        link:"/patientchangepass"
     },
     {
         title: "LogOut",
