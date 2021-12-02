@@ -61,6 +61,7 @@ import {
         dispatch ({type: LOGOUT});
       })
       .catch (err => {
+        dispatch ({type: LOGOUT});
         dispatch (getErrors (err.data, err.status));
       });
   };

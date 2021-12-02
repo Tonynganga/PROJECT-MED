@@ -10,7 +10,7 @@ export const SidebarData = [
     {
         title: "DashBoard",
         icon: <DashboardIcon/>,
-        link:"/home"
+        link:"/"
     },
     {
         title: "HealthCard",
@@ -30,7 +30,7 @@ export const SidebarData = [
     {
         title: "LogOut",
         icon: <ExitToAppIcon/>,
-        link:"/patienthomepage"
+        link:"/logout"
     }
 ]
 

@@ -11,7 +11,7 @@ export const SidebarData2 = [
     {
         title: "DashBoard",
         icon: <DashboardIcon/>,
-        link:"/home"
+        link:"/"
     },
     {
         title: "Appointments",
@@ -36,7 +36,7 @@ export const SidebarData2 = [
     {
         title: "LogOut",
         icon: <ExitToAppIcon/>,
-        link:"/patienthomepage"
+        link:"/logout"
     }
 ]
 

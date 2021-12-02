@@ -1,6 +1,18 @@
 import {combineReducers} from 'redux';
 import auth from './auth';
 import errors from './errors';
+import { persistReducer } from 'redux-persist'; 
 import {reducer as notificationsReducer} from 'reapop'
+import storage from 'redux-persist/lib/storage';
 
-export default combineReducers ({auth,errors,notifications: notificationsReducer()});
+const persistConfig={
+    key:'root',
+    storage,
+    whitelist:['auth','errors']
+}
+
+const rootReducer=combineReducers({
+    auth,errors,notifications: notificationsReducer()
+})
+
+export default persistReducer (persistConfig,rootReducer);
