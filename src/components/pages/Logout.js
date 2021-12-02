@@ -6,7 +6,7 @@ function Logout(props) {
     useEffect(() => {  
     props.LogoutAction();  
 });  
-    return  <Redirect to="/" />;
+    return  <Redirect to="/loginsignup" />;
 }
 
 export default connect (null, {LogoutAction}) (Logout);

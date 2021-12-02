@@ -14,7 +14,7 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-// import "./LoginSignup.css";
+
 import "./Main.css"
 import Footer from "../Footer";
 
@@ -51,7 +51,7 @@ function LoginSignup(props) {
     }else return(
     <div className="loginpage" >
        
-      <div className="grid-outline">
+      <div className="login__grid-outline">
         <div className="divloginimage">
           <img src="/images/loginimage.jpg" alt="#"/>
         </div>
@@ -64,23 +64,25 @@ function LoginSignup(props) {
                 </Avatar>
                 <h2>Sign In</h2>
               </Grid>
-              <TextField
-                label="Username"
-                placeholder="Enter username"
-                fullWidth
-                onChange={(e)=>setUsername(e.target.value)}
+              <div className="form">
+                  <div className="sign-form-group">
+                    <label htmlFor="username">Username:</label>
+                    <input type="text" name="username" placeholder="username"
+                      required
+                      onChange={(e)=>setUsername(e.target.value)}
                 value={username}
-                required
-              />
-              <TextField
-                label="Password"
-                placeholder="Enter password"
-                type="password"
-                onChange={(e)=>setPassword(e.target.value)}
+                       />
+                  </div>
+                  <div className="sign-form-group">
+                    <label htmlFor="firstname">Password:</label>
+                    <input type="password" name="password" placeholder="Password"
+                      required
+                      onChange={(e)=>setPassword(e.target.value)}
                 value={password}
-                fullWidth
-                required
-              />
+                       />
+                  </div>
+                  </div>
+             
               <FormControlLabel
                 control={<Checkbox name="checkedB" color="primary" />}
                 label="Remember me"
