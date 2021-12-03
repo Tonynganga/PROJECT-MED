@@ -109,17 +109,33 @@ body{
     padding-left: 18px;
     background: #00C0F0;
     color: white;
-    margin-left: 25px;
+    margin-left: 5px;
     margin-top: 20px;
     border-radius: 20px;
+    cursor: pointer;
     font-size: 15px;
 
+}
+.image-upload{
+    cursor: pointer;
+}
+#input[type="file"] {
+	display: none;
 }
 .jpg{
     margin-left: 25px;
     font-size: 14px;
     margin-top: 10px;
     font-style: normal;
+}
+.uploadimage__form{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    align-items: flex-start;
+}
+.uploadimage__form img{
+    border-radius: 30px;
 }
 
 

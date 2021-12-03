@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import './PatientHomePage.css';
 import './Main.css';
 import Footer from "../Footer";
@@ -12,93 +12,120 @@ import './PatientProfile.css';
 //     faUserCog,
 //     faColumns
 //   } from "@fortawesome/free-solid-svg-icons";
-  
 
 
-function DoctorProfile() {
-    return(
-        <div className="profilemain__container">
-            
-            <div className="profile__home">
-                <h4>Home / Dashboard</h4>
-                <p>Dashboard</p>
-            </div>
-            <div class="profile__header">
-                <h2>Profile</h2>
-            </div>
-            <div className='profile__container'>
-                <div className='profile__sidebar'>
-                    <SideBar2 />
+
+export class DoctorProfile extends Component {
+    state = {
+        profileImg: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+    }
+    imageHandler = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                this.setState({ profileImg: reader.result })
+            }
+        }
+        reader.readAsDataURL(e.target.files[0])
+    };
+    render() {
+        const { profileImg } = this.state
+        return (
+            <div className="profilemain__container">
+
+                <div className="profile__home">
+                    <h4>Home / Dashboard</h4>
+                    <p>Dashboard</p>
                 </div>
-                
-                <div className='profile__form'>
-                <button className='upload__btn'>Upload Photo</button>
-                <h5 className='jpg'>Allowed JPG and PNG, Max size 2MB</h5>
-                    <div className='form__data'>
-                        <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Username :</label>
-                            </div>
-                            <input type="text" placeholder="Username..." /><br />
-                        </div>
-                        <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Email :</label>
-                            </div>
-                            <input type="text" placeholder="Email..." /><br />
-                        </div>
+                <div class="profile__header">
+                    <h2>Profile</h2>
+                </div>
+                <div className='profile__container'>
+                    <div className='profile__sidebar'>
+                        <SideBar2 />
                     </div>
-                    <div className='form__data'>
-                        <div className='form__data__two'>
-                            <div className='label'>
-                                <label>First Name :</label>
+
+                    <div className='profile__form'>
+                        <div className="uploadimage__form">
+                            <img src={profileImg} id="img" alt="#" width="80px" height="80px" />
+                            <input type="file" accept="image/*" name="image-upload" id="input" onChange={this.imageHandler} />
+                            <div className="upload__btn">
+                                <label className="image-upload" htmlFor="input">
+                                    <i className="material-icons">add_photo_alternate</i>
+                                    Choose your Photo
+                                </label>
                             </div>
-                            <input type="text" placeholder="First Name..." /><br />
                         </div>
-                        <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Last Name :</label>
+                        <h5 className='jpg'>Allowed JPG and PNG, Max size 2MB</h5>
+                        <div className='form__data'>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>Username :</label>
+                                </div>
+                                <input type="text" placeholder="Username..." /><br />
                             </div>
-                            <input type="text" placeholder="Last Name..." /><br />
-                        </div>
-                    </div>
-                    <div className='form__data'>
-                    <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Phone Number :</label>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>Email :</label>
+                                </div>
+                                <input type="text" placeholder="Email..." /><br />
                             </div>
-                            <input type="text" placeholder="Phone Number..." /><br />
                         </div>
-                        <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Gender :</label>
+                        <div className='form__data'>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>First Name :</label>
+                                </div>
+                                <input type="text" placeholder="First Name..." /><br />
                             </div>
-                            <input type="text" placeholder="Gender..." /><br />
-                        </div>
-                        
-                    </div>
-                    <div className='form__data'>
-                    <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Date of Birth :</label>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>Last Name :</label>
+                                </div>
+                                <input type="text" placeholder="Last Name..." /><br />
                             </div>
-                            <input type="text" placeholder="DOB..." /><br />
                         </div>
-                       
+                        <div className='form__data'>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>Phone Number :</label>
+                                </div>
+                                <input type="text" placeholder="Phone Number..." /><br />
+                            </div>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>Gender :</label>
+                                </div>
+                                <input type="text" placeholder="Gender..." /><br />
+                            </div>
+
+                        </div>
+                        <div className='form__data'>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>Date of Birth :</label>
+                                </div>
+                                <input type="text" placeholder="DOB..." /><br />
+                            </div>
+
+
+                        </div>
+                        <div className='form__data'>
+                            <div className='form__data__two'>
+                                <div className='label'>
+                                    <label>Address :</label>
+                                </div>
+                                <input type="text" placeholder="Address..." /><br />
+                            </div>
+
+
+                        </div>
+
+                        <input type="submit" value="Save Changes" />
+
+
 
                     </div>
-                    <div className='form__data'>
-                    <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Address :</label>
-                            </div>
-                            <input type="text" placeholder="Address..." /><br />
-                        </div>
-                       
-
-                    </div>
-                    
-                    <input type="submit" value="Save Changes" />
 
 
 
@@ -106,15 +133,13 @@ function DoctorProfile() {
 
 
 
+
+
+                <Footer />
             </div>
+        );
+    }
 
-
-
-
-
-            <Footer />
-        </div>
-    );
 }
 
 export default DoctorProfile;

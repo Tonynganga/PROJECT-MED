@@ -6,7 +6,7 @@
 }
 
 .SidebarList{
-    margin-top: 10px;
+    margin-top: 5px;
     border-radius: 15px;
     height: auto;
     background: #7597b9;
@@ -76,4 +76,19 @@
 
 .row #title{
     flex: 70%;
+}
+
+.name__doctor{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.name__doctor p{
+    margin-top: 5px;
+    color: white;
+}
+
+.name__doctor h4{
+    color: white;
 }

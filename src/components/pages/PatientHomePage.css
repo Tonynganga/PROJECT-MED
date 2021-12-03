@@ -61,3 +61,43 @@
     color: white;
     font-size: 25px;
 }
+.doctor__dashboard{
+    background: #00A1C9;
+    height: 60px;
+}
+.doctor__dashboard h4{
+    margin-left:30px;
+    color: white;
+}
+.doctor__dashboard p{
+    font-size: 24px;
+    margin-left: 30px;
+    color: white;
+    font-weight: bolder;
+}
+.doctor__sidebar{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin: 20px;
+}
+.doctorhome__container{
+    display: flex;
+    flex-direction: row;
+}
+.appointment__bar{
+    height: 50px;
+    background-color: white;
+    width: 100%;
+    margin-top: 20px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 5px;
+    align-items: initial;
+    margin-left: 0px;
+    
+}
+.today__app_title, .pending__app_title, .total__app_title{
+    cursor: pointer;
+}

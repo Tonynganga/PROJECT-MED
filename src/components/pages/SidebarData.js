@@ -10,7 +10,7 @@ export const SidebarData = [
     {
         title: "DashBoard",
         icon: <DashboardIcon/>,
-        link:"/"
+        link:"/patienthomepage"
     },
     {
         title: "HealthCard",

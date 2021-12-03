@@ -30,7 +30,7 @@ function App() {
   return (
     <Provider store={store}>
       <Alerts/>
-      <PersistGate persistor={persistor}> 
+      {/* <PersistGate persistor={persistor}>  */}
     <Router>
      
       <Switch>
@@ -52,7 +52,7 @@ function App() {
       </Switch>
 
       </Router>
-      </PersistGate>
+      {/* </PersistGate> */}
       
     </Provider>
   

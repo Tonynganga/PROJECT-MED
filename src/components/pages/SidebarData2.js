@@ -11,17 +11,17 @@ export const SidebarData2 = [
     {
         title: "DashBoard",
         icon: <DashboardIcon/>,
-        link:"/"
+        link:"/doctorhomepage"
     },
     {
         title: "Appointments",
         icon: <EventAvailableIcon/>,
-        link:"/patienthomepage"
+        link:"/doctorappointments"
     },
     {
         title: "My Patients",
         icon: <PersonIcon/>,
-        link:"/patienthomepage"
+        link:"/doctorpatients"
     },
     {
         title: "Profile Settings",
@@ -31,7 +31,7 @@ export const SidebarData2 = [
     {
         title: "Change Password",
         icon: <LockIcon/>,
-        link:"/patientchangepass"
+        link:"/doctorchangepass"
     },
     {
         title: "LogOut",

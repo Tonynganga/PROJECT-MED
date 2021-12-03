@@ -46,7 +46,6 @@ function PatientHomePage() {
                         </div>
                         
                     <input type="submit" value="Save Changes" className='save__changes'/>
-                    <input type="submit" value="Save Changes" className='save__changes'/>
 
                     
 
