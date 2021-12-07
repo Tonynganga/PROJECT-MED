@@ -1,6 +1,7 @@
 .patient__dashboard{
     background: #00A1C9;
     height: 60px;
+    margin-top: 0;
 }
 .patient__dashboard h4{
     margin-left:30px;

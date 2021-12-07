@@ -1,0 +1,131 @@
+.Bapp__page{
+    min-width: 100%;
+    max-width: 100%;
+}
+.Bapp__dashboard{
+    background: #00A1C9;
+    height: 60px;
+    margin-top: 0;
+}
+.Bapp__dashboard h4{
+    margin-left:30px;
+    color: white;
+}
+.Bapp__dashboard p{
+    font-size: 24px;
+    margin-left: 30px;
+    color: white;
+    font-weight: bolder;
+}
+
+.Bapp__sidebar{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin: 20px;
+}
+.Bapp__container{
+    display: flex;
+    flex-direction: row;
+}
+.Bapp__wrapper{
+    margin-top: 30px;
+    width: 100%;
+}
+.Bapp__header{
+    width: 100%;
+    text-align: center;
+}
+.Bapp_form{
+    width: 90%;
+}
+.Bapp__appdate input{
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+.Bapp__label label{
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 25px;
+}
+.Bapp__appdate__edt{
+    width: 92%;
+    margin-left: 25px;
+}
+
+.Bapp_form input[type=submit] {
+    background-color: rgba(4, 101, 212, 0.603);
+    border: none;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px;
+    max-width: max-content;
+    margin-top: 10px;
+    margin-left: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.payment__div input[type=submit] {
+    background-color: rgba(4, 101, 212, 0.603);
+    border: none;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 40px;
+    padding: 10px;
+    max-width: max-content;
+    margin-top: 10px;
+    margin-left: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Bapp__personalinfo{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+.payment__div{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.payment__radiogroup{
+    margin-left: 25px;
+    margin-top: 10px;
+}
+.payment__div__header{
+    margin-left: 25px;
+    
+}
+.Bapp__paymentinfo{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+}
+.Bapp__personalinf__edt{
+    width: 45%;
+    margin-left: 25px;
+}
+.Bapp__paymentinf__edt{
+    width: 45%;
+    margin-left: 25px;
+}
+.Bapp__personalinf__edt2{
+    width: 29%;
+    margin-left: 25px;
+}
+.Bapp__paymentinf__edt2{
+    width: 29%;
+    margin-left: 25px;
+}
+.Bapp__terms{
+    margin-top: 20px;
+    margin-left: 25px;
+}
+

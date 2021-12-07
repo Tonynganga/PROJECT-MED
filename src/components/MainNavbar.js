@@ -100,7 +100,7 @@ function MainNavbar() {
 
           <li className="main__navbar__nav-item">
             <Link
-              to="/patientprofile"
+              to="/appointment"
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
