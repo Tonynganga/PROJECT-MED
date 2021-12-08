@@ -18,7 +18,7 @@ import PatientChangePass from './components/pages/PatientChangePass';
 import DoctorProfile from './components/pages/DoctorProfile';
 import SearchDoctor from './components/pages/SearchDoctor';
 import Appointment from './components/pages/Appointment';
-
+import P_Appointment from './components/pages/P_Appointment';
 
 function App() {
   setUpNotifications({
@@ -48,6 +48,7 @@ function App() {
         <Route path='/doctorprofile' exact component={DoctorProfile}/>
         <Route path='/search_doctor' exact component={SearchDoctor}/>
         <Route path='/appointment' exact component={Appointment}/>
+        <Route path= '/p_appointment' exact component={P_Appointment}/>
 
         </div>
       
