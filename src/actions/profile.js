@@ -2,6 +2,7 @@ import {GET_PROFILE, UPDATE_PROFILE,USER_RELOAD} from './types';
 import axios from 'axios';
 import {tokenConfig} from './auth';
 import {getErrors} from './errors';
+import {notify} from 'reapop'
 
 export const getProfile = () => (dispatch, getState) => {
   axios
@@ -26,9 +27,11 @@ export const updateProfile = body => (dispatch, getState) => {
     .post ('http://localhost:8000/api/auth/profile/', body, tokenConfig (getState))
     .then (res => {
       dispatch ({type: UPDATE_PROFILE, payload: res.data});
+      dispatch(notify("update unsuccessfull","success"))
       dispatch ({type: USER_RELOAD, payload: res.data});
     })
     .catch (err => {
+      dispatch(notify("update failed","error"))
       dispatch (getErrors (err.response.data, err.response.status));
     });
 };

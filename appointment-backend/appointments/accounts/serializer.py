@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        fields=['id','username','blood_group','phone_number','gender','first_name','last_name','email','is_patient']
+        fields=['id','username','blood_group','phone_number','address','gender','first_name','last_name','email','is_patient']
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model=User

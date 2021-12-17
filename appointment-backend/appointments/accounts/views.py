@@ -27,14 +27,14 @@ class LoginAPI(generics.GenericAPIView):
             'token':AuthToken.objects.create(user)[1],
             'user':UserSerializer(user,context=self.get_serializer_context()).data,
         })
-class ProfileAPI(generics.RetrieveAPIView):
-    permission_classes=[
-        permissions.IsAuthenticated,
-    ]
-    serializer_class=ProfileSerializer
-    def get_object(self):
-        return self.request.user.profile
-class ProfileUpdateAPI(viewsets.ModelViewSet):
+# class ProfileAPI(generics.RetrieveAPIView):
+#     permission_classes=[
+#         permissions.IsAuthenticated,
+#     ]
+#     serializer_class=ProfileSerializer
+#     def get_object(self):
+#         return self.request.user.profile
+class ProfileAPI(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
     
@@ -42,6 +42,8 @@ class ProfileUpdateAPI(viewsets.ModelViewSet):
         return Profile.objects.filter(user=self.request.user)
     def list(self,request):
         queryset = Profile.objects.filter(user=request.user).first()
+        if queryset == None:
+            queryset=Profile.objects.create(user=self.request.user)
         serializer=ProfileSerializer(queryset)
         return Response(serializer.data)
     def create(self,request):        

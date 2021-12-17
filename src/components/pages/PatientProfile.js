@@ -62,6 +62,7 @@ const PatientProfile =props=> {
               formData.append ('last_name', lastnameState);
             //   formData.append ('date_of_birth', dateofbirthState);
               formData.append ('image', image)
+              formData.append ('address', addressState)
               setImage (null);
               props.updateProfile (formData);
             };

@@ -140,7 +140,8 @@ REST_FRAMEWORK = {
 from datetime import timedelta
 REST_KNOX={
     'TOKEN_LIMIT_PER_USER':None,
-    'TOKEN_TTL': timedelta(hours=10),
+    # 'TOKEN_TTL': timedelta(hours=10),
+    'TOKEN_TTL': None,
 }
 
 
