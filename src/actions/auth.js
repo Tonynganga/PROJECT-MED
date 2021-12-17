@@ -9,6 +9,18 @@ import {
   import {getErrors} from './errors';
   import {notify} from 'reapop'
 
+  // export const loadUser = () => (dispatch, getState) => {
+  //   axios
+  //     .get ('/api/auth/user', tokenConfig (getState))
+  //     .then (res => {
+  //       dispatch ({type: USER_LOADED, payload: res.data});
+  //     })
+  //     .catch (err => {
+  //       dispatch (getErrors (err.response.data, err.response.status));
+  //       dispatch ({type: LOADED_FAILED});
+  //     });
+  // };
+
   export const LoginAction = (username, password) => dispatch => {
     const body = {
       username,

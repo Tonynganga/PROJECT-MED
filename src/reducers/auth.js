@@ -4,6 +4,7 @@ import {
     REGISTER_FAIL,
     REGISTER_SUCCESS,
     LOGOUT,
+    USER_RELOAD,
   } from '../actions/types';
   
   const initialState = {
@@ -26,7 +27,7 @@ import {
           isLoading: false,
         };
       case LOGIN_FAIL:
-      case REGISTER_FAIL:
+      case REGISTER_FAIL:      
       case LOGOUT:
         localStorage.removeItem ('token');
         return {
@@ -34,6 +35,11 @@ import {
           token: null,
           isLoading: false,
           user:null,
+        };
+      case USER_RELOAD:
+        return{
+          ...state,
+          user:action.payload.user,
         };
       default:
         return state;
