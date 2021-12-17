@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+
 start-react-server:
 	npm run start
 start-django-server:

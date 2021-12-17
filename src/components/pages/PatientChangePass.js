@@ -1,6 +1,5 @@
 import React from 'react';
 import './PatientChangePass.css';
-//import './Main.css'
 import Footer from "../Footer";
 import SideBar from "./SideBar";
 import PatientNavBar from '../../components/PatientNavBar';

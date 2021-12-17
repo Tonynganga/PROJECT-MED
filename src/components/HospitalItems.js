@@ -1,7 +1,7 @@
 export const HospitalItems = [
     {
       title: 'Pending Appointments',
-      path: '/',
+      path: '/p_appointment',
       cName: 'dropdown-link'
     },
     {
