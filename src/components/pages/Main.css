@@ -102,7 +102,28 @@ align-items: center;
   outline: none;
   background-color: #fff;
 }
-
+.datepicker{
+  min-width: 18em;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  border: 0;
+  margin-top: 5px;
+  padding-left: 0px;
+  margin-bottom: 25px;
+  transition: all 250ms ease-in-out;
+  width: 300px;
+  height: 37px;
+  border-radius: 60px;
+  box-shadow: inset 0px 0px 25px 0px #888;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  bottom: none;
+}
+.form-group-datepicker{
+  margin-top: -8px;
+}
 
   /* ============================= PatientHomePage ============================== */
   .dashboard{
@@ -438,7 +459,7 @@ align-items: center;
   
   /* ===================================== MainNavBar ============================== */
   .main__navbar {
-    background: white;
+    background: beige;
     height: 60px;
     display: flex;
     justify-content: flex-start;

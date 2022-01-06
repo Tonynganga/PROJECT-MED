@@ -4,7 +4,7 @@ import MainNavbar from '../../components/MainNavbar';
 function Home() {
   return (
     
-    <div><MainNavbar /><h1 className='home1'>EPIC</h1></div>
+    <div><MainNavbar /><h1 className='home1'></h1></div>
     
   );
 }

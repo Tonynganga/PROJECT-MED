@@ -7,11 +7,11 @@ import HospitalDropdown from "./HospitalDropdown";
 
 function PatientNavBar() {
   const [click, setClick] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState(true);
  
 
   const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+  const closeMobileMenu = () => setClick(true);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {

@@ -72,7 +72,6 @@ function MainNavbar() {
             onMouseLeave={onMouseLeave}
           >
             <Link
-              to="/services"
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
@@ -87,7 +86,6 @@ function MainNavbar() {
             onMouseLeave={onMouseLeave2}
           >
             <Link
-              to="/services"
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >

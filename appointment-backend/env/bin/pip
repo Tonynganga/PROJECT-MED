@@ -1,4 +1,4 @@
-#!/home/vicmwas/Desktop/projects/appointment-backend/env/bin/python3
+#!/home/tripplecoders/Desktop/PROJECT-MED/appointment-backend/appointments/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

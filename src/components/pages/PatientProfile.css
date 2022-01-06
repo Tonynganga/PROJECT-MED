@@ -8,7 +8,8 @@ body{
 }
 .profile__home{
     background: #00A1C9;
-    height: 50px;
+    height: 60px;
+    margin-top: 10px;
 }
 .profile__home h4{
     margin-left:30px;
@@ -22,7 +23,7 @@ body{
 }
 .profile__header{
     text-align: center;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .profile__sidebar{
     margin-top: 20px;
@@ -44,8 +45,6 @@ body{
 .profile__form input{
     min-width: 8em;
     font-size: 18px;
-    background: #7597b2;
-    border-radius: 8px;
     margin-left: 10px;
     border: none;
     margin-top: 10px;
@@ -74,18 +73,38 @@ body{
         
 }
 .form__data__two input {
+    text-decoration-color: black;
     width: 100%;
+    height: 40px;
     padding: 10px 10px;
     margin: 8px 0;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: inset 0px 0px 25px 0px #fff;
+  } 
+
+.form__data__two input::selection{
+    border: 1px solid skyblue;
+}  
+.dropdown{
+    width: 100%;
+    padding: 10px 10px;
+    padding-left: 15px;
+    margin: -1px 0;
     border: none;
     border-radius: 15px;
     font-size: 15px;
-    background-color: #f3f3f3;
     color: rgb(10, 10, 10);
     font-family: Arial, Helvetica, sans-serif;
-    box-shadow: inset 0px 0px 25px 0px #888;
-  } 
-
+    
+   
+}
+.dropdown label{
+    margin: 2px;
+}
 
 .label{
     margin: 4px;

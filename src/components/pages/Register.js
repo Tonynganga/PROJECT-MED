@@ -18,6 +18,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import "./Main.css";
 import Footer from "../Footer";
+import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 
 function Register(props) {
   const paperStyle = { padding: 20, width: 450, margin: "0 auto" };
@@ -121,6 +122,21 @@ function Register(props) {
                       required
                       onChange={(e) => setEmail(e.target.value)}
                       value={email} />
+                  </div>
+                  <div className="form-group-datepicker">
+                    <label htmlFor="dateofbirth">Date of Birth:</label>
+                    <div className="datepicker">
+                      <DatePickerComponent
+                        id="datepicker"
+                        placeholder='Enter Date...'
+                        format="dd-MMM-yy"
+                        variant="none"
+                      >
+
+                      </DatePickerComponent>
+                    </div>
+
+
                   </div>
 
                   <div className="form-group">

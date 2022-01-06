@@ -101,7 +101,7 @@ const PatientProfile =props=> {
                                 <div className='label'>
                                     <label>Username :</label>
                                 </div>
-                                <input type="text" placeholder="FirstName..." 
+                                <input type="text" placeholder="Username..." 
                                  name="username"
                                  onChange={e => {
                                  setUsername (e.target.value);
