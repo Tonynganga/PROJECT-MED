@@ -116,7 +116,7 @@ function DoctorProfile(props) {
                             <div className='label'>
                                 <label>Username :</label>
                             </div>
-                            <input type="text" placeholder="FirstName..."
+                            <input type="text" placeholder="Username..."
                                 name="username"
                                 onChange={e => {
                                     setUsername(e.target.value);
@@ -182,23 +182,7 @@ function DoctorProfile(props) {
                         </div>
                        
                     </div>
-                    <div className='form__data'>
-                        <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Date of Birth :</label>
-                            </div>
-                            <input
-                                type="text" placeholder="DateofBirth..."
-                                name="dateofbirth"
-                                onChange={e => {
-                                    setDateofbirth(e.target.value);
-                                }}
-                                value={dateofbirthState}
-                            /><br />
-                        </div>
-
-
-                    </div>
+                    
                     <div className='form__data'>
                         <div className='form__data__two'>
                             <div className='label'>

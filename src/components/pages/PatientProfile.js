@@ -123,6 +123,21 @@ const PatientProfile = props => {
                         </div>
                         <div className='form__data__two'>
                             <div className='label'>
+                                <label>Email :</label>
+                            </div>
+                            <input type="text" placeholder="EmailID..."
+                                name="email"
+                                onChange={e => {
+                                    setEmail(e.target.value);
+                                }}
+                                value={emailState} /><br />
+                        </div>
+                        
+                        
+                    </div>
+                    <div className='form__data'>
+                    <div className='form__data__two'>
+                            <div className='label'>
                                 <label>FirstName :</label>
                             </div>
                             <input
@@ -134,7 +149,8 @@ const PatientProfile = props => {
                                 value={firstnameState}
                             /><br />
                         </div>
-                        <div className='form__data__two'>
+
+                    <div className='form__data__two'>
                             <div className='label'>
                                 <label>LastName :</label>
                             </div>
@@ -145,67 +161,19 @@ const PatientProfile = props => {
                                 }}
                                 value={lastnameState} /><br />
                         </div>
+                    
+                    
+                        
                     </div>
                     <div className='form__data'>
-                    <div className="form-group-datepicker">
-                        <label>Date of Birth:</label>
-                        <div className="datepicker">
-                            <DatePickerComponent
-                                id="datepicker"
-                                placeholder='Enter Date...'
-                                format="dd-MMM-yy"
-                                variant="none"
-                                onChange={e => {
-                                    setDateofbirth(e.target.value);
-                                }}
-                                value={dateofbirthState}
-                            >
-                            </DatePickerComponent>
-                        </div>
-                    </div>
-                    
-                        {/* <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Date of Birth :</label>
-                            </div>
-                            <input
-                                type="text" placeholder="DateofBirth..."
-                                name="dateofbirth"
-                                onChange={e => {
-                                    setDateofbirth(e.target.value);
-                                }}
-                                value={dateofbirthState}
-                            /><br />
-                        </div> */}
-                        {/* <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Blood Group :</label>
-                            </div>
-                            <input type="text" placeholder="BloodGroup..." name="bloodgroup"
-                                onChange={e => {
-                                    setBloodgroup(e.target.value);
-                                }}
-                                value={bloodgroupState} /><br />
-                        </div> */}
-                        <div className="dropdown">
+
+                    <div className="dropdown">
                             <div className='label'>
                                 <label>Blood Group :</label>
                             </div>
                             <Select options={bloodgroup} />
                         </div>
-                    </div>
-                    <div className='form__data'>
-                        <div className='form__data__two'>
-                            <div className='label'>
-                                <label>Email :</label>
-                            </div>
-                            <input type="text" placeholder="EmailID..."
-                                name="email"
-                                onChange={e => {
-                                    setEmail(e.target.value);
-                                }}
-                                value={emailState} /><br />
-                        </div>
+                       
                         <div className='form__data__two'>
                             <div className='label'>
                                 <label>Mobile :</label>
