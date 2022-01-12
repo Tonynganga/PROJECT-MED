@@ -4,6 +4,7 @@ import './PatientHomePage.css';
 import Footer from "../Footer";
 import SideBar from "./SideBar";
 import PatientNavBar from '../../components/PatientNavBar';
+import DoctorCard from '../DoctorCard';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import {
 //     faSignOutAlt,
@@ -31,6 +32,10 @@ function PatientHomePage() {
                 <div className="patient__sidebar">
                     <SideBar />
                 </div>
+                <div className='doctorcard__holder'>
+                    <DoctorCard />
+                </div>
+
             </div>
             <Footer />
         </div>

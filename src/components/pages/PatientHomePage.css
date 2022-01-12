@@ -1,3 +1,7 @@
+.patienthome__page, .patienthome__containerd{
+    display: flex;
+    flex-direction: column;
+}
 .patient__dashboard{
     background: #00A1C9;
     height: 60px;
@@ -101,4 +105,8 @@
 }
 .today__app_title, .pending__app_title, .total__app_title{
     cursor: pointer;
+}
+
+.doctorcard__holder{
+    margin-top: 25px;
 }
