@@ -85,7 +85,7 @@
     margin-bottom: 30px;
     margin: 20px;
 }
-.doctorhome__container{
+.doctorhome__sidebar{
     display: flex;
     flex-direction: row;
 }
@@ -97,7 +97,7 @@
     margin-right: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding-top: 5px;
     align-items: initial;
     margin-left: 0px;
@@ -105,8 +105,66 @@
 }
 .today__app_title, .pending__app_title, .total__app_title{
     cursor: pointer;
+    margin-right: 70px;
 }
 
 .doctorcard__holder{
     margin-top: 25px;
+}
+.doctorhome__container{
+    display: flex;
+    flex-direction: row;
+    
+}
+.each__appointment{
+    display: flex;
+    flex-direction: column;
+}
+.doctorpage__holder{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 40px;
+}
+.appt__details{
+    background: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.appt__headlines{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    justify-items: flex-start;
+    width: 100%;
+}
+.doctorhomepage{
+    min-width: 100%;
+}
+.btn__upcoming{
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: lightblue;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.btn__today{
+    margin-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: lightgreen;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
 }

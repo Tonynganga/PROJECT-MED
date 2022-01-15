@@ -34,6 +34,7 @@ function PatientHomePage() {
                 </div>
                 <div className='doctorcard__holder'>
                     <DoctorCard />
+                    <DoctorCard />
                 </div>
 
             </div>
