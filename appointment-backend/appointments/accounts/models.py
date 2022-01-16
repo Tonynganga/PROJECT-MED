@@ -21,7 +21,8 @@ class User(AbstractUser):
     blood_group = models.CharField(max_length = 16,default="")
     address = models.CharField(max_length = 16,default="")
     gender = models.CharField(max_length=9,choices=GENDER_CHOICES,default=GENDER_NOTDISCLOSE)
-    date_of_birth=models.DateField(default=now)
+    #date format YYYY-MM-DD
+    date_of_birth=models.DateField()
     is_doctor = models.BooleanField('student status', default=False)
     is_patient = models.BooleanField('teacher status', default=False)
 class Profile(models.Model):

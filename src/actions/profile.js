@@ -8,6 +8,7 @@ export const getProfile = () => (dispatch, getState) => {
     .get ('http://localhost:8000/api/auth/profile', tokenConfig (getState))
     .then (res => {
       dispatch ({type: GET_PROFILE, payload: res.data});
+      dispatch ({type: USER_RELOAD, payload: res.data});
     })
     .catch (err => {
       dispatch (getErrors (err.response.data, err.response.status));
