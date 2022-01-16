@@ -7,7 +7,7 @@ export class DoctorCard extends Component {
             <div className="card">
                 <div className="card__wrapper">
                     <div className="card__image">
-                        <img src="/images/loginimage.jpg" alt="#" width="100px" height="100px" />
+                        <img src="/images/loginimage.jpg" alt="#" width="80px" height="80px" />
                     </div>
                     <div className='details__wrapper'>
                         <div className="card__details__wrapper">
