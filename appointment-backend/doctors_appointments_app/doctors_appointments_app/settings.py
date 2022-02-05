@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'accounts',
+    'appointments',
     'rest_framework',
     'knox',
     
@@ -57,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'appointments.urls'
+ROOT_URLCONF = 'doctors_appointments_app.urls'
 
 TEMPLATES = [
     {
@@ -75,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'appointments.wsgi.application'
+WSGI_APPLICATION = 'doctors_appointments_app.wsgi.application'
 
 
 # Database
