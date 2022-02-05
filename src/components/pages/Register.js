@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RegisterAction } from '../../actions/auth';
+import { errorMessage } from '../../actions/errors';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { Link, Redirect } from "react-router-dom";
@@ -20,6 +21,9 @@ import "./Main.css";
 import Footer from "../Footer";
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 
+
+
+
 function Register(props) {
   const paperStyle = { padding: 20, width: 450, margin: "0 auto" };
   const headerStyle = { margin: 0 };
@@ -30,25 +34,75 @@ function Register(props) {
   const [first_name, setFirstname] = useState("")
   const [last_name, setLastname] = useState("")
   const [email, setEmail] = useState("")
+  const [date_of_birth, setDateOfBirth] = useState("")
   const [password, setPassword] = useState("")
   const [password2, setPassword2] = useState("")
   const [is_patient, setIsPatient] = useState(false)
+  const currentDate=new Date()
+  const formValidation =()=>{    
+    
+    const mailFormat =/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
+    const containUppercase=/[A-Z]+/
+    const containNumeric=/[0-9]+/
+    const containLowercase=/[a-z]+/
+    const containSpecialChar=/[^A-Z0-9a-z]+/
+    const containUsernameInvalidChar=/^[\w.@+-]+$/
+
+    if(!containUsernameInvalidChar.test(username)){
+      props.errorMessage("invalid characters used in username")
+      return false
+    }
+
+    if(!mailFormat.test(email)){
+      props.errorMessage("Email format incorrect")
+      return false
+    }
+    
+    if(password.length<8){
+      props.errorMessage("passwords should be 8 digits long or more")
+      return false
+    } 
+    if(!containUppercase.test(password)){
+      props.errorMessage("passwords should contain at least one uppercase letter")
+      return false
+    }
+    if(!containNumeric.test(password)){
+      props.errorMessage("passwords should contain at least one digit")
+      return false
+    }
+    if(!containLowercase.test(password)){
+      props.errorMessage("passwords should contain at least one lowercase letter")
+      return false
+    }
+    if(!containSpecialChar.test(password)){
+      props.errorMessage("passwords should contain at least one special character")
+      return false
+    }
+
+    if(password!==password2){
+      props.errorMessage("passwords do not match")
+      return false
+    }
+   
+    return true
+
+  }
   const onSubmit = (e) => {
     e.preventDefault()
-    if (password === password2) {
+    if (formValidation()===true) {
       const data = {
         username,
         first_name,
         last_name,
         email,
         password,
-        is_patient
+        is_patient,
+        date_of_birth:date_of_birth.toISOString().substring(0, 10),
       }
       props.RegisterAction(data)
-
     }
-
   }
+  
   if (props.isAuthenticated) {
     if (props.user && props.user.is_patient)
       return <Redirect to="/patienthomepage" />;
@@ -124,7 +178,7 @@ function Register(props) {
                       value={email} />
                   </div>
 
-                  <div className="form-group-datepicker">
+                  <div className="form-group">
                     <label htmlFor="dateofbirth">Date of Birth:</label>
                     <div className="datepicker">
                       <DatePickerComponent
@@ -132,7 +186,12 @@ function Register(props) {
                         placeholder='Enter Date...'
                         format="dd-MMM-yy"
                         variant="none"
+                        allowEdit={false}
+                        value={date_of_birth}
+                        onChange={(e) => setDateOfBirth(e.value)}
+                        max={new Date((currentDate.getFullYear()-18), currentDate.getMonth(),currentDate.getDay())}
                       >
+                        
                       </DatePickerComponent>
                     </div>
                   </div>
@@ -190,6 +249,6 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps, { RegisterAction })(Register);
+export default connect(mapStateToProps, { RegisterAction,errorMessage})(Register);
 
 // export default Register;

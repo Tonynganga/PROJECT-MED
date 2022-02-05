@@ -48,6 +48,7 @@ import {
   };
   
   export const RegisterAction = data => dispatch => {
+    console.log(data)
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -77,6 +78,8 @@ import {
         dispatch (getErrors (err.data, err.status));
       });
   };
+
+  
 
   export const tokenConfig = getState => {
     //Get token from state
