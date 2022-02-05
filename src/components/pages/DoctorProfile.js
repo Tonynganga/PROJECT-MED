@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 // import './PatientHomePage.css';
 import './Main.css';
 import Footer from "../Footer";
@@ -7,6 +7,7 @@ import './PatientProfile.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/profile';
+import { errorMessage } from '../../actions/errors';
 import Select from 'react-select';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import {
@@ -17,10 +18,10 @@ import Select from 'react-select';
 //     faColumns
 //   } from "@fortawesome/free-solid-svg-icons";
 
-const gender = [
-    { label: "Male", value: "Male" },
-    { label: "Female", value: "Female" },
-    { label: "Others/Do not disclose", value: "Others" },
+const genders = [
+    { label: "Male", value: "M" },
+    { label: "Female", value: "F" },
+    { label: "Do not disclose", value: "D" },
 
 ];
 
@@ -28,29 +29,26 @@ function DoctorProfile(props) {
     const [usernameState, setUsername] = useState("");
     const [firstnameState, setFirstname] = useState("");
     const [lastnameState, setLastname] = useState("");
-    const [genderState, setGender] = useState("");
+    const [genderState, setGender] = useState({});
     const [phonenumberState, setPhonenumber] = useState("");
-    const [dateofbirthState, setDateofbirth] = useState("");
+    // const [dateofbirthState, setDateofbirth] = useState("");
     const [addressState, setAddress] = useState("");
-    const [bloodgroupState, setBloodgroup] = useState("");
     const [emailState, setEmail] = useState("");
     const [image, setImage] = useState(null);
-    useEffect(() => {
-        props.getProfile();
-    }, []);
+    
     useEffect(
         () => {
+            props.getProfile()
             if (props.user) {
                 const { user } = props
                 setUsername(user.username)
                 setEmail(user.email)
                 setFirstname(user.first_name)
                 setLastname(user.last_name)
-                setGender(user.gender)
+                setGender(genders.filter(gender=>gender.value===user.gender)[0])
                 setPhonenumber(user.phone_number)
                 // setDateofbirth(user.date_of_birth)
                 setAddress(user.address)
-                setBloodgroup(user.blood_group)
             }
         },
         [props.user]
@@ -66,21 +64,32 @@ function DoctorProfile(props) {
     const onChangePicture = e => {
         setImage(e.target.files[0]);
     };
+
+    const formValidation=()=>{
+        const containUsernameInvalidChar=/^[\w.@+-]+$/
+
+        if(!containUsernameInvalidChar.test(usernameState)){
+            props.errorMessage("invalid characters used in username")
+            return false
+        }
+        return true
+    }
     const onSubmit = e => {
         e.preventDefault();
-        const formData = new FormData();
+        if(formValidation()){
+            const formData = new FormData();
 
-        formData.append('username', usernameState);
-        formData.append('email', emailState);
-        formData.append('first_name', firstnameState);
-        formData.append('blood_group', bloodgroupState);
-        formData.append('phone_number', phonenumberState);
-        formData.append('gender', genderState);
-        formData.append('last_name', lastnameState);
-        //   formData.append ('date_of_birth', dateofbirthState);
-        formData.append('image', image)
-        setImage(null);
-        props.updateProfile(formData);
+            formData.append('username', usernameState);
+            formData.append('email', emailState);
+            formData.append('first_name', firstnameState);
+            formData.append('phone_number', phonenumberState);
+            formData.append('address', addressState);
+            formData.append('last_name', lastnameState);
+            formData.append ('gender', genderState.value);
+            formData.append('image', image)
+            setImage(null);
+            props.updateProfile(formData);
+        }
     };
     return (
         // const { profileImg } = this.state
@@ -98,6 +107,8 @@ function DoctorProfile(props) {
                 <div className='profile__sidebar'>
                     <SideBar2 />
                 </div>
+                <form
+                onSubmit={onSubmit}>
 
                 <div className='profile__form'>
                     <div className="uploadimage__form">
@@ -117,6 +128,7 @@ function DoctorProfile(props) {
                                 <label>Username :</label>
                             </div>
                             <input type="text" placeholder="Username..."
+                                required
                                 name="username"
                                 onChange={e => {
                                     setUsername(e.target.value);
@@ -128,6 +140,7 @@ function DoctorProfile(props) {
                                 <label>Email :</label>
                             </div>
                             <input type="text" placeholder="EmailID..."
+                                required
                                 name="email"
                                 onChange={e => {
                                     setEmail(e.target.value);
@@ -178,7 +191,13 @@ function DoctorProfile(props) {
                             <div className='label'>
                                 <label>Gender :</label>
                             </div>
-                            <Select options={gender} />
+                            <Select 
+                            onChange={e => {
+                                setGender(e);
+                            }}
+                            value={genderState} 
+                            options={genders} 
+                            />
                         </div>
                        
                     </div>
@@ -199,13 +218,13 @@ function DoctorProfile(props) {
 
                     </div>
 
-                    <input onClick={onSubmit} type="submit" value="Save Changes" />
+                    <input  type="submit" value="Save Changes" />
 
 
 
                 </div>
 
-
+            </form>
 
             </div>
 
@@ -228,4 +247,4 @@ const mapStateToProps = state => ({
     user: state.auth.user
 });
 
-export default connect(mapStateToProps, { getProfile, updateProfile })(DoctorProfile)
+export default connect(mapStateToProps, { getProfile, updateProfile,errorMessage })(DoctorProfile)

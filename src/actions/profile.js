@@ -8,7 +8,6 @@ export const getProfile = () => (dispatch, getState) => {
     .get ('http://localhost:8000/api/auth/profile', tokenConfig (getState))
     .then (res => {
       dispatch ({type: GET_PROFILE, payload: res.data});
-      dispatch ({type: USER_RELOAD, payload: res.data});
     })
     .catch (err => {
       dispatch (getErrors (err.response.data, err.response.status));
@@ -24,7 +23,7 @@ export const updateProfile = body => (dispatch, getState) => {
     config.headers['Authorization'] = `Token ${token}`;
   }
   axios
-    .post ('http://localhost:8000/api/auth/profile/', body, tokenConfig (getState))
+    .post ('http://localhost:8000/api/auth/profile', body, tokenConfig (getState))
     .then (res => {
       dispatch ({type: UPDATE_PROFILE, payload: res.data});
       dispatch ({type: USER_RELOAD, payload: res.data});

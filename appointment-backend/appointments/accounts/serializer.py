@@ -1,14 +1,21 @@
 from rest_framework import serializers
 from accounts.models import User,Profile
 from django.contrib.auth import authenticate
+import datetime
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        fields=['id','username','blood_group','phone_number','date_of_birth','gender','first_name','last_name','email','is_patient']
-class RegisterSerializer(serializers.ModelSerializer):
+        fields=['id','username','blood_group','phone_number','gender','first_name','last_name','email','is_patient','address']
+class RegisterSerializer(serializers.ModelSerializer): 
     class Meta:
         model=User
-        fields=['id','username','first_name','last_name','email','password','is_patient','is_doctor']
+        fields=['username','first_name','last_name','email','password','is_patient','is_doctor','date_of_birth']
+    def validate_date_of_birth(self,value):
+        year = datetime.date.today().year
+        year_of_birth=value.year
+        if(year-year_of_birth)<18:
+            raise serializers.ValidationError("User should be above 18")
+        return value
     def create(self, validated_data):
         if validated_data['is_patient']==True:
             patient=True
@@ -21,6 +28,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
+            date_of_birth=validated_data['date_of_birth'],
             is_patient=patient,
             is_doctor=doctor
         )
@@ -40,7 +48,7 @@ class LoginSerializer(serializers.Serializer):
         raise serializers.ValidationError("Incorrect Credentials")
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user=UserSerializer(read_only=True)
+    user=UserSerializer()
     class Meta:
         model=Profile
         fields=['user','image']

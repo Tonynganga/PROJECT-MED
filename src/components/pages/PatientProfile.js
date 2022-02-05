@@ -6,10 +6,10 @@ import PatientNavBar from '../../components/PatientNavBar';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/profile';
-import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
+import { errorMessage } from '../../actions/errors';
 import Select from 'react-select';
 
-const bloodgroup = [
+const bloodgroups = [
     { label: "A-Positive(A+)", value: "A+" },
     { label: "A-Negative(A-)", value: "A-" },
     { label: "B-Positive(B+)", value: "B+" },
@@ -25,29 +25,25 @@ const PatientProfile = props => {
     const [usernameState, setUsername] = useState("");
     const [firstnameState, setFirstname] = useState("");
     const [lastnameState, setLastname] = useState("");
-    const [genderState, setGender] = useState("");
     const [phonenumberState, setPhonenumber] = useState("");
-    const [dateofbirthState, setDateofbirth] = useState("");
     const [addressState, setAddress] = useState("");
-    const [bloodgroupState, setBloodgroup] = useState("");
+    const [bloodgroupState, setBloodgroup] = useState({});
     const [emailState, setEmail] = useState("");
     const [image, setImage] = useState(null);
-    useEffect(() => {
-        props.getProfile();
-    }, []);
+   
     useEffect(
         () => {
+            props.getProfile()
             if (props.user) {
                 const { user } = props
                 setUsername(user.username)
                 setEmail(user.email)
                 setFirstname(user.first_name)
                 setLastname(user.last_name)
-                setGender(user.gender)
+                setBloodgroup(bloodgroups.filter(bloodgroup=>bloodgroup.value===user.blood_group)[0])
                 setPhonenumber(user.phone_number)
                 // setDateofbirth(user.date_of_birth)
                 setAddress(user.address)
-                setBloodgroup(user.blood_group)
             }
         },
         [props.user]
@@ -63,21 +59,31 @@ const PatientProfile = props => {
     const onChangePicture = e => {
         setImage(e.target.files[0]);
     };
+    const formValidation=()=>{
+        const containUsernameInvalidChar=/^[\w.@+-]+$/
+
+        if(!containUsernameInvalidChar.test(usernameState)){
+            props.errorMessage("invalid characters used in username")
+            return false
+        }
+        return true
+    }
     const onSubmit = e => {
         e.preventDefault();
-        const formData = new FormData();
+        if(formValidation){
+            const formData = new FormData();
 
-        formData.append('username', usernameState);
-        formData.append('email', emailState);
-        formData.append('first_name', firstnameState);
-        formData.append('blood_group', bloodgroupState);
-        formData.append('phone_number', phonenumberState);
-        formData.append('gender', genderState);
-        formData.append('last_name', lastnameState);
-        //   formData.append ('date_of_birth', dateofbirthState);
-        formData.append('image', image)
-        setImage(null);
-        props.updateProfile(formData);
+            formData.append('username', usernameState);
+            formData.append('email', emailState);
+            formData.append('first_name', firstnameState);
+            formData.append('blood_group', bloodgroupState.value);
+            formData.append('phone_number', phonenumberState);
+            formData.append('last_name', lastnameState);
+            //   formData.append ('date_of_birth', dateofbirthState);
+            formData.append('image', image)
+            setImage(null);
+            props.updateProfile(formData);
+        }
     };
     return (
         // const { profileImg } = this.state
@@ -95,6 +101,8 @@ const PatientProfile = props => {
                 <div className='profile__sidebar'>
                     <SideBar />
                 </div>
+                <form
+                onSubmit={onSubmit}>
                 <div className='profile__form'>
                     <div className="uploadimage__form">
                         <img src={'http://localhost:8000' + props.imageUrl} id="img" alt="#" width="100px" height="100px" />
@@ -116,6 +124,7 @@ const PatientProfile = props => {
                             </div>
                             <input type="text" placeholder="FirstName..."
                                 name="username"
+                                required
                                 onChange={e => {
                                     setUsername(e.target.value);
                                 }}
@@ -127,6 +136,7 @@ const PatientProfile = props => {
                             </div>
                             <input type="text" placeholder="EmailID..."
                                 name="email"
+                                required
                                 onChange={e => {
                                     setEmail(e.target.value);
                                 }}
@@ -171,7 +181,12 @@ const PatientProfile = props => {
                             <div className='label'>
                                 <label>Blood Group :</label>
                             </div>
-                            <Select options={bloodgroup} />
+                            <Select
+                            onChange={e => {
+                                setBloodgroup(e);
+                            }}
+                            value={bloodgroupState} 
+                             options={bloodgroups} />
                         </div>
                        
                         <div className='form__data__two'>
@@ -200,8 +215,9 @@ const PatientProfile = props => {
                         </div>
 
                     </div>
-                    <input onClick={onSubmit} type="submit" value="Save Changes" />
+                    <input  type="submit" value="Save Changes" />
                 </div>
+                </form>
             </div>
             <Footer />
         </div>
@@ -220,4 +236,4 @@ const mapStateToProps = state => ({
     user: state.auth.user
 });
 
-export default connect(mapStateToProps, { getProfile, updateProfile })(PatientProfile)
+export default connect(mapStateToProps, { getProfile, updateProfile,errorMessage })(PatientProfile)

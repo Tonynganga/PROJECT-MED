@@ -5,8 +5,8 @@ import { Redirect } from "react-router-dom";
 function Logout(props) {
     useEffect(() => {  
     props.LogoutAction();  
-});  
-    return  <Redirect to="/loginsignup" />;
+},[]);  
+    return  <Redirect to="/" />;
 }
 
 export default connect (null, {LogoutAction}) (Logout);
