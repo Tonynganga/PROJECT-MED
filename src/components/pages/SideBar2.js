@@ -1,14 +1,35 @@
-import React from "react";
+import React ,{useEffect,useState}from "react";
 import "./Main.css";
 import { SidebarData2 } from "./SidebarData2";
-const SideBar2 = () => {
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getProfile } from '../../actions/profile';
+
+const SideBar2 = props => {
+  const [usernameState, setUsername] = useState("");
+  const [addressState, setAddress] = useState("");
+  const [imageState, setImage] = useState("");
+  useEffect(
+    () => {
+        props.getProfile()
+        if (props.user) {
+            const { user } = props
+            setUsername(user.username)
+            setAddress(user.address)            
+        }
+    },
+    [props.user]
+);
+useEffect(() => {
+  setImage('http://localhost:8000' + props.imageUrl)
+}, [props.imageUrl])
   return (
     <div className="sidebar">
       <div className="image__view">
-        <img src="/images/loginimage.jpg" alt="#" width="60px" height="60px" />
+      <img src={imageState} id="img" alt="#"width="60px" height="60px"/>
         <div className="name__doctor">
-          <h4 className="doctor_profilename">Your Name</h4>
-          <p className="doctor_address">Your Address</p>
+          <h4 className="doctor_profilename">{usernameState?usernameState:""}</h4>
+          <p className="doctor_address">{addressState?addressState:""}</p>
         </div>
       </div>
       <ul className="SidebarList">
@@ -29,4 +50,14 @@ const SideBar2 = () => {
   );
 };
 
-export default SideBar2;
+SideBar2.propTypes = {
+  imageUrl: propTypes.string.isRequired,
+  user: propTypes.object.isRequired,
+  getProfile: propTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+  imageUrl: state.profile.image,
+  user: state.auth.user
+});
+
+export default connect(mapStateToProps, { getProfile})(SideBar2)
