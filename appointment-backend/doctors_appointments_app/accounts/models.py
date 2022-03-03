@@ -36,7 +36,7 @@ class User(AbstractUser):
     )    
     # phoneNumberRegex = RegexValidator(regex = r"^\+?1?\d{8,15}$")
     phone_number = models.CharField(null=True,blank=True,max_length = 16)
-    blood_group = models.CharField(max_length = 16,choices=BLOOD_GROUP_CHOICES)
+    blood_group = models.CharField(max_length = 16,choices=BLOOD_GROUP_CHOICES,null=True)
     address = models.CharField(null=True,blank=True,max_length = 16)
     gender = models.CharField(max_length=9,choices=GENDER_CHOICES,default=GENDER_NOTDISCLOSE)
     #date format YYYY-MM-DD
