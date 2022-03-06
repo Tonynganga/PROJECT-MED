@@ -1,9 +1,10 @@
 .card{
     background-color: gainsboro;
     height: max-content;
-    min-width: 550px;
+    min-width: 450px;
     width: max-content;
     padding-bottom: 15px;
+    margin-top: 10px;
     border-radius: 10px;
 }
 .card__wrapper{
@@ -44,6 +45,7 @@
     margin-left: 10px;
 }
 .book__btn{
+    text-decoration: none;
     padding: 10px;
     background-color: skyblue;
     color: white;
