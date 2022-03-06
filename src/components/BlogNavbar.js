@@ -18,10 +18,13 @@ const BlogNavbar = () => (
         <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
                 <li className="nav-item active">
-                    <NavLink className="nav-link" exact to='/'>Home <span className="sr-only">(current)</span></NavLink>
+                    <NavLink className="nav-link" exact to='/bloghome'>Home <span className="sr-only">(current)</span></NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" exact to='/blog'>Blog</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" exact to='/newpost'>NewPost</NavLink>
                 </li>
             </ul>
         </div>
