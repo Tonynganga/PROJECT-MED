@@ -1,18 +1,9 @@
 import React from 'react';
 import './PatientHomePage.css';
-//import './Main.css'
 import Footer from "../Footer";
 import SideBar from "./SideBar";
 import PatientNavBar from '../../components/PatientNavBar';
 import DoctorCard from '../DoctorCard';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {
-//     faSignOutAlt,
-//     faFileMedical,
-//     faLock,
-//     faUserCog,
-//     faColumns
-//   } from "@fortawesome/free-solid-svg-icons";
 
 
 
