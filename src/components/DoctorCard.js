@@ -12,35 +12,22 @@ export class DoctorCard extends Component {
                     <div className='details__wrapper'>
                         <div className="card__details__wrapper">
                             <div className="card__details">
-                                <h3>Name of the person</h3>
+                                <h4>Name</h4>
                             </div>
                             <div className="card__details">
-                                <h3>Description</h3>
+                                <h4>Description</h4>
                             </div>
-                            <div className="card__details">
-                                <h3>Location</h3>
-                            </div>
-                            <div className="card__details">
-                                <h3>Gender</h3>
-                            </div>
-                            <div className="card__details">
-                                <h3>Phone</h3>
-                            </div>
+                           
                         </div>
                         <div className="cardbook__details__wrapper">
-                            <div className="card__details">
-                                <h3>Age</h3>
+                        <div className="card__details">
+                                <h4>Location</h4>
                             </div>
+                            
                             <div className="card__details">
-                                <h3>Day Opened</h3>
+                                <h4>Phone</h4>
                             </div>
-                            <div className="card__details">
-                                <h3>Time Opened</h3>
-                            </div>
-                            <div className="card__details">
-                                <h3>Date of Birth</h3>
-                            </div>
-                            <button className='book__btn' >BOOK APPOINTMENT</button>
+                            <a href="/appointment" className='book__btn' >BOOK APPOINTMENT</a>
                         </div>
 
                     </div>
