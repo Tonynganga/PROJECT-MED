@@ -11,7 +11,7 @@
 
 # production
 /build
-/appointment-backend/appointments/media/profile_pics
+/appointment-backend/doctors_appointments_app/media/profile_pics
 # misc
 .DS_Store
 .env.local
@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 #database
-/appointment-backend/appointments/db.sqlite3
+/appointment-backend/doctors_appointments_app/db.sqlite3
