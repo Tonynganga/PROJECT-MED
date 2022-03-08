@@ -11,6 +11,7 @@ import Select from 'react-select';
 
 const bloodgroups = [
     { label: "A-Positive(A+)", value: "A+" },
+    { label: "A-Positive(A+)", value: "A+" },
     { label: "A-Negative(A-)", value: "A-" },
     { label: "B-Positive(B+)", value: "B+" },
     { label: "B-Negative(B-)", value: "B-" },
@@ -76,7 +77,9 @@ const PatientProfile = props => {
             formData.append('username', usernameState);
             formData.append('email', emailState);
             formData.append('first_name', firstnameState);
-            formData.append('blood_group', bloodgroupState.value);
+            if(bloodgroupState){
+                formData.append('blood_group', bloodgroupState.value);
+            }            
             formData.append('phone_number', phonenumberState);
             formData.append('last_name', lastnameState);
             //   formData.append ('date_of_birth', dateofbirthState);
