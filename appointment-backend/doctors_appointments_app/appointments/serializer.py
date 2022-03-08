@@ -12,6 +12,13 @@ class Appointment_settiing_ps_Serializer(serializers.ModelSerializer):
         if value.is_doctor!=True:
             raise serializers.ValidationError("User should be a doctor")
         return value
+class Get_Available_Appointment_Serializer(serializers.ModelSerializer):
+    doctor_first_name = serializers.CharField(source='doctor_account.first_name')
+    doctor_last_name=serializers.CharField(source='doctor_account.last_name')
+    doctor_address=serializers.CharField(source='doctor_account.address',allow_null=True)
+    class Meta:
+        model=Appointment_settings_per_station
+        fields=['doctor_first_name','doctor_last_name','doctor_address','appointment_type']
 class Available_time_choice_ps_Serializer(serializers.ModelSerializer):
     class Meta:
         model=Available_time_choices_per_station
