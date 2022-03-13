@@ -7,11 +7,13 @@
 
 # testing
 /coverage
-
+/appointment-backend/doctors_appointments_app/pytest.ini
 
 # production
 /build
 /appointment-backend/doctors_appointments_app/media/profile_pics
+
+
 # misc
 .DS_Store
 .env.local
@@ -25,3 +27,5 @@ yarn-error.log*
 
 #database
 /appointment-backend/doctors_appointments_app/db.sqlite3
+
+

@@ -64,7 +64,6 @@ class Booked_appointments_Serializer(serializers.ModelSerializer):
             if Filled_date_time_choices_per_station.objects.get(booked_date=self.initial_data['appointment_date'],booked_time=value):
                 raise serializers.ValidationError(value+" time is fully booked for "+self.initial_data['appointment_date'])       
         except Filled_date_time_choices_per_station.DoesNotExist:
-            print('hello')
             pass
         return value
     

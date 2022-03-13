@@ -1,4 +1,4 @@
-from rest_framework import generics,permissions,viewsets,status
+from rest_framework import viewsets,status
 from .serializer import Appointment_settiing_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer
 from knox.models import AuthToken
 from rest_framework.response import Response
@@ -43,7 +43,6 @@ class Available_time_choice_ps_API(viewsets.ModelViewSet):
             data_list.append(item.data)
         return Response(data_list, status=status.HTTP_201_CREATED, headers=headers)
 
-'''TODO add validations '''
 class Booked_appointments_API(viewsets.ModelViewSet):
         serializer_class=Booked_appointments_Serializer
         def get_queryset(self):

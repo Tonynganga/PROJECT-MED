@@ -20,5 +20,5 @@ class TestModels(TestCase):
         except Profile.DoesNotExist:
             self.fail("profile does not exist")
             return
-        self.assertEquals(self.profile.image.name,'default.png')
+        self.assertEqual(self.profile.image.name,'default.png')
 
