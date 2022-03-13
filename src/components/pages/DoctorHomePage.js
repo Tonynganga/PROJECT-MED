@@ -6,13 +6,25 @@ import AppointmentCard from '../AppointmentCard';
 import Select from 'react-select';
 
 const doct_type = [
-    { label: "Male", value: "M" },
-    { label: "Female", value: "F" },
-    { label: "Do not disclose", value: "D" },
+    { label: "General Practitioner", value: "general practitioner" },
+    { label: "Podiatrist", value: "podiatrist" },
+    { label: "Peditrician", value: "peditrician" },
+    { label: "Endocrinologist", value: "endocrinologist" },
+    { label: "Neurologist", value: "neurologist" },
+    { label: "Rheumatologist", value: "rheumatologist" },
+    { label: "Allergist", value: "allergist" },
+    { label: "Psychiatrist", value: "psychiatrist" },
+    { label: "Nephrologist", value: "nephrologist" },
+    { label: "Surgeon", value: "surgeon" },
+    { label: "Oncologist", value: "oncologist" },
+    { label: "Dermatologist", value: "dermatologist" },
+    { label: "Radiologist", value: "radiologist" },
+    { label: "Cardiologist", value: "cardiologist" },
+    { label: "Dentist", value: "dentist" },
 
 ];
 
-const userData = [
+const hoursData = [
     { name: "7 AM - 9 AM" },
     { name: "9 AM - 11 AM" },
     { name: "11 AM - 1 PM" },
@@ -25,24 +37,24 @@ const userData = [
 
 function DoctorHomePage() {
 
-    const [users, setUsers] = useState([]);
+    const [hours, setHours] = useState([]);
 
     useEffect(() => {
-        setUsers(userData);
+        setHours(hoursData);
     }, []);
 
     const handleChange = (e) => {
         const { name, checked } = e.target;
         if (name === "allSelect") {
-            let tempUser = users.map((user) => {
-                return { ...user, isChecked: checked };
+            let tempHour = hours.map((hour) => {
+                return { ...hour, isChecked: checked };
             });
-            setUsers(tempUser);
+            setHours(tempHour);
         } else {
-            let tempUser = users.map((user) =>
-                user.name === name ? { ...user, isChecked: checked } : user
+            let tempHour = hours.map((hour) =>
+                hour.name === name ? { ...hour, isChecked: checked } : hour
             );
-            setUsers(tempUser);
+            setHours(tempHour);
         }
     };
     return (
@@ -118,23 +130,23 @@ function DoctorHomePage() {
                                             className="form-check-input"
                                             name="allSelect"
                                             checked={
-                                                users.filter((user) => user?.isChecked !== true).length < 1
+                                                hours.filter((hour) => hour?.isChecked !== true).length < 1
                                             }
-                                            checked={!users.some((user) => user?.isChecked !== true)}
+                                            checked={!hours.some((hour) => hour?.isChecked !== true)}
                                             onChange={handleChange}
                                         />
                                         <label className="form-check-label">All Select</label>
                                     </div>
-                                    {users.map((user, index) => (
+                                    {hours.map((hour, index) => (
                                         <div className="form-check" key={index}>
                                             <input
                                                 type="checkbox"
                                                 className="form-check-input"
-                                                name={user.name}
-                                                checked={user?.isChecked || false}
+                                                name={hour.name}
+                                                checked={hour?.isChecked || false}
                                                 onChange={handleChange}
                                             />
-                                            <label className="form-check-label ms-2">{user.name}</label>
+                                            <label className="form-check-label ms-2">{hour.name}</label>
 
                                         </div>
                                     ))}
