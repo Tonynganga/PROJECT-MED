@@ -1,11 +1,6 @@
-from django.urls import path,include
+from django.urls import path
 from .views import Appointment_setting_ps_API,Available_time_choice_ps_API,Booked_appointments_API,Get_available_appointments_API
-from rest_framework import routers
-from django.conf import settings
-from django.conf.urls.static import static
 
-# route=routers.DefaultRouter()
-# # route.register('auth/profile',ProfileAPI.as_view(),'profile')
 
 urlpatterns = [    
     path('appointment/add_settings',Appointment_setting_ps_API.as_view({'post':'create'})),
