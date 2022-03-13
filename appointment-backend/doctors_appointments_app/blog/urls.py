@@ -7,3 +7,4 @@ urlpatterns = [
     path('blogs/add_comment',Comment_API.as_view({'post':'create'})),
     path('blogs/get_comments/<int:blog_id>',Comment_API.as_view({'get':'list'})),
 ]
+
