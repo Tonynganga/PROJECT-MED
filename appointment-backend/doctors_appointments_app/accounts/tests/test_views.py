@@ -1,7 +1,5 @@
 
-from asyncio.windows_events import NULL
 import json
-from telnetlib import AUTHENTICATION
 from django.test import TestCase,Client
 from django.urls import reverse
 from accounts.models import User
@@ -40,8 +38,12 @@ class TestViews(TestCase):
             "username": "testuser","password": "kamikkkk"
             })
         res=json.loads(res.content.decode("UTF-8"))
-        print("Token "+res['token'])
-        # self.client.head({"Authorization":"Token "+res['token']})
-        logout_res=self.client.post(reverse('knox_logout'),None,AUTHENTICATION="Token "+res['token'])
-        print(logout_res.content)
-        self.assertEqual(logout_res.status_code,200)
+        logout_res=self.client.post(reverse('knox_logout'),HTTP_AUTHORIZATION="Token "+res['token'])
+        self.assertEqual(logout_res.status_code,204)
+    def test_profile_api(self):
+        res=self.client.post(reverse('login'),{
+            "username": "testuser","password": "kamikkkk"
+            })
+        res=json.loads(res.content.decode("UTF-8"))
+        profile_res=self.client.get(reverse('profile'),HTTP_AUTHORIZATION="Token "+res['token'])
+        self.assertEqual(profile_res.status_code,200)
