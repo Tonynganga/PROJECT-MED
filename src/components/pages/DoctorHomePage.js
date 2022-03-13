@@ -1,13 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import './PatientHomePage.css';
 import Footer from "../Footer";
 import SideBar2 from "./SideBar2";
 import AppointmentCard from '../AppointmentCard';
+import Select from 'react-select';
+
+const doct_type = [
+    { label: "Male", value: "M" },
+    { label: "Female", value: "F" },
+    { label: "Do not disclose", value: "D" },
+
+];
+
+const userData = [
+    { name: "7 AM - 9 AM" },
+    { name: "9 AM - 11 AM" },
+    { name: "11 AM - 1 PM" },
+    { name: "1 PM - 3 PM" },
+    { name: "3 PM - 5 PM" }
+];
 
 
 
 
 function DoctorHomePage() {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        setUsers(userData);
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, checked } = e.target;
+        if (name === "allSelect") {
+            let tempUser = users.map((user) => {
+                return { ...user, isChecked: checked };
+            });
+            setUsers(tempUser);
+        } else {
+            let tempUser = users.map((user) =>
+                user.name === name ? { ...user, isChecked: checked } : user
+            );
+            setUsers(tempUser);
+        }
+    };
     return (
         <div>
             <div className="doctorhomepage">
@@ -34,7 +71,7 @@ function DoctorHomePage() {
                                 <h2 className="total__app_title">Total Appointments</h2>
                             </div>
                         </div>
-                        <div className='each__appointment'>
+                        {/* <div className='each__appointment'>
                             <div className='appointment'>
                                 <div className='appt__details'>
                                 <h3>Patient Appointment</h3>
@@ -59,7 +96,66 @@ function DoctorHomePage() {
 
                             </div>
 
+                        </div> */}
+                        <div className='app__activate'>
+                            <div className="act_dropdown">
+                                <div className='label'>
+                                    <label>Category :</label>
+                                </div>
+                                <Select
+                                    options={doct_type}
+                                />
+                            </div>
+
+                            <div className="checkbox">
+                                <div className='label'>
+                                    <label>Hours Per Appointment :</label>
+                                </div>
+                                <form className="form_checkbox">
+                                    <div className="form_check">
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            name="allSelect"
+                                            checked={
+                                                users.filter((user) => user?.isChecked !== true).length < 1
+                                            }
+                                            checked={!users.some((user) => user?.isChecked !== true)}
+                                            onChange={handleChange}
+                                        />
+                                        <label className="form-check-label">All Select</label>
+                                    </div>
+                                    {users.map((user, index) => (
+                                        <div className="form-check" key={index}>
+                                            <input
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name={user.name}
+                                                checked={user?.isChecked || false}
+                                                onChange={handleChange}
+                                            />
+                                            <label className="form-check-label ms-2">{user.name}</label>
+
+                                        </div>
+                                    ))}
+                                </form>
+
+                            </div>
+
+                            <div className='app-perhour'>
+                                <div className='label'>
+                                    <label>Appointments Per Two Hours :</label>
+                                </div>
+                                <input type="text" placeholder="Appointments..."
+                                    required
+                                    name="appointments"
+                                /><br />
+                            </div>
+                            <input type="submit" value="Proceed" />
+
                         </div>
+
+
                     </div>
 
                 </div>
