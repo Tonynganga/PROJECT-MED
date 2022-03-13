@@ -6,9 +6,21 @@ import AppointmentCard from '../AppointmentCard';
 import Select from 'react-select';
 
 const doct_type = [
-    { label: "Male", value: "M" },
-    { label: "Female", value: "F" },
-    { label: "Do not disclose", value: "D" },
+    { label: "General Practitioner", value: "general practitioner" },
+    { label: "Podiatrist", value: "podiatrist" },
+    { label: "Peditrician", value: "peditrician" },
+    { label: "Endocrinologist", value: "endocrinologist" },
+    { label: "Neurologist", value: "neurologist" },
+    { label: "Rheumatologist", value: "rheumatologist" },
+    { label: "Allergist", value: "allergist" },
+    { label: "Psychiatrist", value: "psychiatrist" },
+    { label: "Nephrologist", value: "nephrologist" },
+    { label: "Surgeon", value: "surgeon" },
+    { label: "Oncologist", value: "oncologist" },
+    { label: "Dermatologist", value: "dermatologist" },
+    { label: "Radiologist", value: "radiologist" },
+    { label: "Cardiologist", value: "cardiologist" },
+    { label: "Dentist", value: "dentist" },
 
 ];
 
