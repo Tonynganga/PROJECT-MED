@@ -15,6 +15,10 @@ class RegisterSerializer(serializers.ModelSerializer):
         year_of_birth=value.year
         if(year-year_of_birth)<18:
             raise serializers.ValidationError("User should be above 18")
+        return value        
+    def validate_email(self,value):
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Email exists")
         return value
     def create(self, validated_data):
         if validated_data['is_patient']==True:

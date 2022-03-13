@@ -1,5 +1,5 @@
 from rest_framework import generics,permissions,viewsets,status
-from .serializer import Appointment_settiing_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer
+from .serializer import Appointment_settiing_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer
 from knox.models import AuthToken
 from rest_framework.response import Response
 from .models import Appointment_settings_per_station,Available_time_choices_per_station,Booked_appointments,Filled_date_time_choices_per_station
@@ -12,6 +12,9 @@ import datetime
 
 class Appointment_setting_ps_API(viewsets.ModelViewSet):
     serializer_class=Appointment_settiing_ps_Serializer
+    queryset=Appointment_settings_per_station.objects.all()
+class Get_available_appointments_API(viewsets.ModelViewSet):
+    serializer_class=Get_Available_Appointment_Serializer
     queryset=Appointment_settings_per_station.objects.all()
 
 class Available_time_choice_ps_API(viewsets.ModelViewSet):
