@@ -9,5 +9,8 @@ class Blog_API(viewsets.ModelViewSet):
     queryset=Blogs.objects.all()
 class Comment_API(viewsets.ModelViewSet):
     serializer_class=Comment_serializer
-    queryset=Comments.objects.all()
+    def get_queryset(self):
+        queryset=Comments.objects.all().filter(blog=self.kwargs['blog_id'])
+        return queryset
+
     

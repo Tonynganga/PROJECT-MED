@@ -6,8 +6,14 @@ from .models import Blogs,Comments
 class Blog_serializer(serializers.ModelSerializer):
     class Meta:
         model=Blogs
-        fields=['blogger_account','blog_title','blog_content']
+        fields=['id','blogger_account','blog_title','blog_content']
+        read_only_fields=['id']
+    def validate_blogger_account(self,value):
+        if value.is_doctor!=True:
+            raise serializers.ValidationError("User should be a doctor")
+        return value
 class Comment_serializer(serializers.ModelSerializer):
     class Meta:
         model=Comments
-        fields=['commentor_account','comment']
+        fields=['id','commentor_account','blog','comment']
+        read_only_fields=['id']
