@@ -7,7 +7,7 @@ class Appointment_settiing_ps_Serializer(serializers.ModelSerializer):
     class Meta:
         model=Appointment_settings_per_station
         fields=['id','doctor_account','frequency_of_AP_per_2hours','appointment_type']
-        read_only_fields=['id']
+        read_only_fields=['id','doctor_account']
     def validate_doctor_account(self,value):
         if value.is_doctor!=True:
             raise serializers.ValidationError("User should be a doctor")
