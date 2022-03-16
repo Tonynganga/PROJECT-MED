@@ -37,11 +37,10 @@ export const setAppointmentSetting = data => (dispatch, getState) => {
                 available_appointment_time: data.available_appointment_time
             })
             axios
-                .post('http://localhost:8000/api/appointment/set_appointment_time_list',
-                    JSON.parse({
+                .post('http://localhost:8000/api/appointment/set_appointment_time_list',{
                         aps_per_station: res.data.id,
                         available_appointment_time: data.available_appointment_time
-                    })
+                    }
                     , tokenConfig(getState))
                 .then(res => {
 
@@ -52,7 +51,7 @@ export const setAppointmentSetting = data => (dispatch, getState) => {
                 .catch(err => {
                     console.log(err)
                     dispatch(getErrors(err.data, err.status));
-                    dispatch(notify("Add setting failed", "error"))
+                    dispatch(notify("Add time setting failed", "error"))
                     dispatch({ type: ADD_APPOITMENTS_SETTINGS_FAILED });
                 });
 
