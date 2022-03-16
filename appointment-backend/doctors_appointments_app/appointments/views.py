@@ -8,11 +8,15 @@ import os
 from rest_framework.decorators import action
 import datetime
 
+class ReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.method in permissions.SAFE_METHODS
+
 # Create your views here.
 
 class Appointment_setting_ps_API(viewsets.ModelViewSet):
     permission_classes=[
-        permissions.IsAuthenticated,
+        permissions.IsAuthenticated|ReadOnly,
     ]
     serializer_class=Appointment_settiing_ps_Serializer
     queryset=Appointment_settings_per_station.objects.all()
@@ -26,8 +30,9 @@ class Appointment_setting_ps_API(viewsets.ModelViewSet):
         return Response(serializer.data)
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        serializer.initial_data['doctor_account']=request.user
         serializer.is_valid(raise_exception=True)
-        serializer.save(doctor_account=request.user)
+        serializer.save()
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
