@@ -22,6 +22,7 @@ function Blog(props) {
             let result = [];
 
             blogs.map(blogPost => {
+                console.log('hello')
                 const datePosted=new Date(blogPost.date_posted)
                 return list.push(
                     <div className="mb-4 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
@@ -91,7 +92,7 @@ function Blog(props) {
                     </div>
                 </div>
 
-                {/* {getBlogs()} */}
+                {getBlogs()}
             </div>
         </div>
 
