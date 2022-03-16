@@ -30,7 +30,7 @@ class Appointment_setting_ps_API(viewsets.ModelViewSet):
         return Response(serializer.data)
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.initial_data['doctor_account']=request.user
+        serializer.initial_data['doctor_account']=request.user.id
         serializer.is_valid(raise_exception=True)
         serializer.save()
         headers = self.get_success_headers(serializer.data)

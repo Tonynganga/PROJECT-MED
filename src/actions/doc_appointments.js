@@ -32,10 +32,7 @@ export const setAppointmentSetting = data => (dispatch, getState) => {
             }
             , tokenConfig(getState))
         .then(res => {
-            console.log({
-                aps_per_station: res.data.id,
-                available_appointment_time: data.available_appointment_time
-            })
+           
             axios
                 .post('http://localhost:8000/api/appointment/set_appointment_time_list',{
                         aps_per_station: res.data.id,

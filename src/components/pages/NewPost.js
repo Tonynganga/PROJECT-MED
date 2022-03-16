@@ -1,45 +1,23 @@
-import React, { Component } from 'react';
+import React, { useEffect,useState } from 'react';
 import propTypes from 'prop-types';
 // import {addPost, updatePost} from '../../action/posts';
 import { connect } from 'react-redux';
 import BlogNavbar from '../BlogNavbar';
+import {addBlog} from '../../actions/blogs'
 
-class NewPost extends Component {
-  // constructor (props) {
-  //   super (props);
-  //   if (props.location && props.location.state !== undefined) {
-  //     const {id, title, content} = props.location.state.post;
-  //     this.state = {title, id, content};
-  //   } else {
-  //     this.state = {
-  //       title: '',
-  //       content: '',
-  //     };
-  //   }
-  // }
+const NewPost=(props)=> {
+  const [title,setTitle]=useState("")
+  const [content,setContent]=useState("")
+  const onSubmit=(e)=>{
+    e.preventDefault()
+    const body={
+      blog_title:title,
+      blog_content:content
+    }
 
-  // onChangeHandler = e => this.setState ({[e.target.name]: e.target.value});
-  // onSubmitHandler = e => {
-  //   e.preventDefault ();
-  //   const {title, content} = this.state;
-  //   const body = JSON.stringify ({
-  //     title,
-  //     content,
-  //   });
-  //   if (this.state.id) {
-  //     this.props.updatePost (this.state.id, body);
-  //   } else {
-  //     this.props.addPost (body);
-  //     this.setState ({
-  //       title: '',
-  //       content: '',
-  //     });
-  //   }
-  // };
-  render() {
-    // if (this.props.update == true && this.props.location.state == undefined)
-    //   return <h2>404 Page not Found</h2>;
-    // const {title, content} = this.state;
+    props.addBlog(body)
+
+  }
     return (
       <div>
         <div className='blognav ml-5'>
@@ -47,7 +25,7 @@ class NewPost extends Component {
         </div>
         <div className="d-flex justify-content-center mt-5">
 
-          <form >
+          <form onSubmit={onSubmit} >
             <fieldset className="form-group">
               <legend className="border-bottom  ml-4">Blog Post</legend>
               {/* <div className="uploadimage__form">
@@ -66,8 +44,9 @@ class NewPost extends Component {
                   type="text"
                   className="form-control mt-2"
                   name="title"
-                // value={title}
-                // onChange={this.onChangeHandler}
+                value={title}
+                onChange={(e)=>setTitle(e.target.value)}
+                required
                 />
               </div>
               <div className="form-group">
@@ -76,8 +55,9 @@ class NewPost extends Component {
                   type="text"
                   className="form-control"
                   name="content"
-                // value={content}
-                // onChange={this.onChangeHandler}
+                value={content}
+                onChange={(e)=>setContent(e.target.value)}
+                required
                 />
               </div>
               <div className="form-group mt-3">
@@ -92,8 +72,9 @@ class NewPost extends Component {
 
     );
   }
-}
 
-// PostForm.propTypes = {};
+NewPost.propTypes = {
+  addBlog:propTypes.func.isRequired,
+};
 
-export default NewPost;
+export default connect(null, { addBlog })(NewPost)
