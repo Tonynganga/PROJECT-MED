@@ -146,6 +146,26 @@ function DoctorAppiontmentSettingBar(props) {
                         value={appointmentPer2hr}
                     /><br />
                 </div>
+                <div className='app-perhour'>
+                    <div className='label'>
+                        <label> Phone Number :</label>
+                    </div>
+                    <input type="text" placeholder="Phone Number..."
+                        required
+                        name="phonenumber"
+                       
+                    /><br />
+                </div>
+                <div className='app-perhour'>
+                    <div className='label'>
+                        <label> Location :</label>
+                    </div>
+                    <input type="text" placeholder="Location..."
+                        required
+                        name="location"
+                        
+                    /><br />
+                </div>
                 <input type="submit" value="Proceed" />
             </div>
         </form>
