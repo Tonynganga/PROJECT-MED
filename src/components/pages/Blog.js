@@ -28,13 +28,13 @@ function Blog(props) {
                     <div className="mb-4 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
                         <div className="p-4 col d-flex flex-column position-static">
                             {/* <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong> */}
-                            <h3 className="mb-0">{blogPost.title}</h3>
+                            <h3 className="mb-0">{blogPost.blog_title}</h3>
                             <div className="mb-1 text-muted">{datePosted.getMonth()} {datePosted.getDate()}</div>
                             {/* <p className="mb-auto card-text">{blogPost.excerpt}</p> */}
                             {/* <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link> */}
                         </div>
                         <div className="col-auto d-none d-lg-block">
-                            {/* <img width='200' height='250' src={blogPost.thumbnail} alt='thumbnail' /> */}
+                            <img width='200' height='250' src={'http://localhost:8000' + blogPost.blogger_profile_pic} alt='thumbnail' />
                         </div>
                     </div>
                 );

@@ -11,6 +11,8 @@ class Blogs(models.Model):
     last_date_modified=models.DateTimeField()
     blog_title=models.CharField(max_length=25)
     blog_content=models.CharField(max_length=200)
+    thumbnail = models.ImageField(upload_to='blog-thumbnails',null=True)
+    excerpt = models.CharField(max_length=150,null=True)
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         if not self.id:

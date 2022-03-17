@@ -25,34 +25,12 @@ export const checkIfAppointmentSettingSet = () => (dispatch, getState) => {
 export const setAppointmentSetting = data => (dispatch, getState) => {
 
     axios
-        .post('http://localhost:8000/api/appointment/add_settings',
-            {
-                appointment_type: data.appointment_type,
-                frequency_of_AP_per_2hours: data.frequency_of_AP_per_2hours
-            }
+        .post('http://localhost:8000/api/appointment/add_settings_and_requirements',
+            data
             , tokenConfig(getState))
         .then(res => {
-           
-            axios
-                .post('http://localhost:8000/api/appointment/set_appointment_time_list',{
-                        aps_per_station: res.data.id,
-                        available_appointment_time: data.available_appointment_time
-                    }
-                    , tokenConfig(getState))
-                .then(res => {
-
-                    dispatch({ type: ADD_APPOITMENTS_SETTINGS, payload: res.data });
-                    dispatch(notify("Add setting successfull", "success"))
-
-                })
-                .catch(err => {
-                    console.log(err)
-                    dispatch(getErrors(err.data, err.status));
-                    dispatch(notify("Add time setting failed", "error"))
-                    dispatch({ type: ADD_APPOITMENTS_SETTINGS_FAILED });
-                });
-
-        })
+            dispatch({ type: ADD_APPOITMENTS_SETTINGS, payload: res.data });
+            dispatch(notify("Add setting successfull", "success"))       })
         .catch(err => {
             dispatch(getErrors(err.data, err.status));
             dispatch(notify("Add setting failed", "error"))

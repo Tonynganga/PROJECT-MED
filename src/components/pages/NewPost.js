@@ -11,14 +11,25 @@ import './PatientProfile.css';
 const NewPost = (props) => {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
+  const [excrept, setExcrept] = useState("")
+  const [thumbnail, setThumbnail] = useState(null);
+
+  const [image, setImage] = useState(null);
+
+  const onChangeThumbnail = e => {
+    setImage(e.target.files[0]);
+};
+
   const onSubmit = (e) => {
     e.preventDefault()
-    const body = {
-      blog_title: title,
-      blog_content: content
-    }
-
-    props.addBlog(body)
+    const formData= new FormData()
+    formData.append('blog_title', title);
+    formData.append('blog_content', content);
+    formData.append('excerpt', excrept);
+    formData.append('thumbnail', thumbnail)
+    setThumbnail(null);
+    props.addBlog(formData);
+    
 
   }
   return (
@@ -49,7 +60,7 @@ const NewPost = (props) => {
               
               {/* <img id="img" alt="" width="0px" height="0px" /> */}
               <div className="blogupload__btn">
-                <input type="file" accept="image/*" name="image-upload" id="input" />
+                <input type="file" accept="image/*" name="image-upload" id="input"  onChange={onChangeThumbnail} />
                 <label className="image-upload" htmlFor="input">
                   <i className="material-icons">add_photo_alternate</i>
                   {'Choose file'}

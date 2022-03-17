@@ -1,4 +1,4 @@
-from rest_framework import permissions,viewsets,status
+from rest_framework import permissions,viewsets,status,serializers
 from rest_framework.response import Response
 from .serializer import Blog_serializer,Comment_serializer
 from .models import Blogs,Comments
@@ -17,9 +17,11 @@ class Blog_API(viewsets.ModelViewSet):
     queryset=Blogs.objects.all()
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.initial_data['blogger_account']=request.user.id
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        if request.user.is_doctor:
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+        else:
+            raise serializers.ValidationError("User should be a doctor")
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
