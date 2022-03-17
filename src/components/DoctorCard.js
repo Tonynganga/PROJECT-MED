@@ -12,20 +12,20 @@ export class DoctorCard extends Component {
                     <div className='details__wrapper'>
                         <div className="card__details__wrapper">
                             <div className="card__details">
-                                <h4>{this.props.appointment.doctor_first_name+" "+this.props.appointment.doctor_last_name}</h4>
+                                <h5>{this.props.appointment.doctor_first_name+" "+this.props.appointment.doctor_last_name}</h5>
                             </div>
                             <div className="card__details">
-                                <h4>{this.props.appointment.appointment_type}</h4>
+                                <h5>{this.props.appointment.appointment_type}</h5>
                             </div>
                            
                         </div>
                         <div className="cardbook__details__wrapper">
                         <div className="card__details">
-                                <h4>Location</h4>
+                                <h5>Location</h5>
                             </div>
                             
                             <div className="card__details">
-                                <h4>Phone</h4>
+                                <h5>Phone</h5>
                             </div>
                             <a href="/appointment" className='book__btn' >BOOK APPOINTMENT</a>
                         </div>

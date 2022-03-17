@@ -20,18 +20,18 @@ function AppointmentCard() {
                     <div className="appcard__details__wrapper">
                         <div className="card__imagename">
                             <img src="/images/loginimage.jpg" alt="#" width="40px" height="40px" />
-                            <h3>Tony Huu</h3>
+                            <h5>Tony Huu</h5>
                         </div>
-                        <h3>Jan 18 2021</h3>
-                        <h3>01:45</h3>
-                        <h3 className=''>500</h3>
-                        <button className='paid__amount' >Complete</button>
-                        <button className='' >Confirmed</button>
-                        <button className='' >View</button>
+                        <h5>Jan 18 2021</h5>
+                        <h5>01:45</h5>
+                        <h5 className=''>500</h5>
+                        <button type='button' className='btn btn-success' >Complete</button>
+                        <button className='btn btn-danger' >Confirmed</button>
+                        <button className='btn btn-primary' >View</button>
 
-                       
+
                     </div>
-                  
+
 
                 </div>
 

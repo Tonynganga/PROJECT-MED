@@ -58,21 +58,21 @@ function DoctorAppiontmentSettingBar(props) {
     };
     const onSubmit = e => {
         e.preventDefault();
-        let timeList=[]
-        hours.forEach((hour)=>{
-            if(hour.isChecked)
-            timeList=[...timeList,hour.value]
+        let timeList = []
+        hours.forEach((hour) => {
+            if (hour.isChecked)
+                timeList = [...timeList, hour.value]
         })
-        if(timeList.length<1){
+        if (timeList.length < 1) {
             props.errorMessage('please select appointment time')
             return
         }
         props.setAppointmentSetting({
-            appointment_type:category.value,
-            frequency_of_AP_per_2hours:appointmentPer2hr,
-            available_appointment_time:timeList
+            appointment_type: category.value,
+            frequency_of_AP_per_2hours: appointmentPer2hr,
+            available_appointment_time: timeList
         })
-        
+
     }
     return (
 
@@ -90,17 +90,17 @@ function DoctorAppiontmentSettingBar(props) {
                             setCategory(e);
                         }}
                         value={category}
-                    />                    
+                    />
                     <input
                         tabIndex={-1}
                         autoComplete="off"
-                        style={{ opacity: 0, height: 0 ,margin:0,padding:0}}
+                        style={{ opacity: 0, height: 0, margin: 0, padding: 0 }}
                         value={category}
                         required
                     />
                 </div>
                 <div className="checkbox"
-                style={{margin:0}}>
+                    style={{ margin: 0 }}>
                     <div className='label'>
                         <label>Hours Per Appointment :</label>
                     </div>
@@ -153,9 +153,9 @@ function DoctorAppiontmentSettingBar(props) {
 
 }
 
-DoctorAppiontmentSettingBar.prototype={
-    setAppointmentSetting:propTypes.func.required,
-    errorMessage:propTypes.func.required,
+DoctorAppiontmentSettingBar.prototype = {
+    setAppointmentSetting: propTypes.func.required,
+    errorMessage: propTypes.func.required,
 }
 
-export default connect(null, { setAppointmentSetting,errorMessage})(DoctorAppiontmentSettingBar)
+export default connect(null, { setAppointmentSetting, errorMessage })(DoctorAppiontmentSettingBar)

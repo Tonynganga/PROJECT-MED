@@ -10,6 +10,8 @@
 }
 .appcard__details__wrapper{
     display: flex;
+    padding-top: 5px;
+    padding-bottom: 15px;
     flex-direction: row;
     justify-content: space-around;
     justify-self: flex-start;
