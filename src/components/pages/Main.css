@@ -460,10 +460,11 @@ align-items: center;
   
   /* ===================================== MainNavBar ============================== */
   .main__navbar {
-    background: beige;
+    background: rgba(17, 219, 207,0.8);
     height: 60px;
     display: flex;
     justify-content: flex-start;
+    color: #fff;
     align-items: center;
     font-size: 1.2rem;
   }

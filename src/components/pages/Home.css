@@ -1,0 +1,136 @@
+/* .home{
+    width: 100%;
+} */
+#hero {
+    padding-top: 30px;
+    width: 100%;
+    height: 90vh;
+    background: url("../../../src/assets/images/homepage.jpg") center center;
+    background-size: cover;
+    position: relative;
+  }
+  
+  #hero .container {
+    padding-top: 80px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+  
+  #hero:before {
+    content: "";
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  #hero h1 {
+    margin: 0 0 10px 0;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 56px;
+    color: #fff;
+  }
+  
+  #hero h2 {
+    color: #eee;
+    margin-bottom: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .main-btn {
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 50px;
+    transition: 0.5s;
+    margin: 10px;
+    border: 2px solid #fff;
+    color: #fff;
+  }
+  
+   .main-btn:hover {
+    background: #11dbcf;
+    border: 2px solid #11dbcf;
+    text-decoration: none;
+    color:#fff;
+  }
+
+  /*----about -section*/
+  .about-section {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    background: transparent;
+  }
+  .container{
+      background: transparent;
+      border:none;
+  }
+  .about-heading {
+    text-transform: uppercase;
+  }
+  
+  .about-heading .about-heading-upper {
+    display: block;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .about-img{
+      border-radius: 20px;
+  }
+  
+  .about-heading .about-heading-lower {
+    display: block;
+    font-size: 38px;
+    font-weight: 100;
+  }
+  
+  .bg-faded {
+    background-color: rgba(17, 219, 207,0.8);
+  }
+
+  .about-button .btn-color{
+    background: #03a59a;
+    font-weight: bold;
+    color: #fff;
+  }
+  .about {
+    position: relative;
+  }
+  
+  @media (min-width: 992px) {
+    .about .about-img {
+      width: 75%;
+      float: right;
+    }
+    .about .about-text {
+      left: 0;
+      width: 60%;
+      margin-top: 3rem;
+      position: absolute;
+    }
+    .about .about-text .about-button {
+      width: 100%;
+      left: 0;
+      position: absolute;
+      bottom: -2rem;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .about .about-text {
+      width: 45%;
+    }
+  }
+  
