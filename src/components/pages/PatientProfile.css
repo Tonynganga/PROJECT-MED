@@ -215,6 +215,31 @@ body{
    
     
   }
+  .blog-uploadimage__form{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+
+
+  }
+  .selected{
+      margin-top: 7px;
+      margin-left: 5px;
+  }
+  .blogupload__btn{
+    padding: 1px;
+    border: none;
+    padding-right: 18px;
+    padding-left: 18px;
+    background: #00C0F0;
+    color: white;
+    margin-left: 5px;
+    margin-top: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+
+}
   @media screen and (max-width:900px){
   
       .main-contianer{

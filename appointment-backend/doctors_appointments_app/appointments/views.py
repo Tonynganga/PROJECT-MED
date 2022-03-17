@@ -1,4 +1,4 @@
-from rest_framework import generics,permissions,viewsets,status
+from rest_framework import viewsets,status,permissions
 from .serializer import Appointment_settiing_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer
 from knox.models import AuthToken
 from rest_framework.response import Response
@@ -8,24 +8,54 @@ import os
 from rest_framework.decorators import action
 import datetime
 
+class ReadOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return request.method in permissions.SAFE_METHODS
+
 # Create your views here.
 
 class Appointment_setting_ps_API(viewsets.ModelViewSet):
+    permission_classes=[
+        permissions.IsAuthenticated|ReadOnly,
+    ]
     serializer_class=Appointment_settiing_ps_Serializer
     queryset=Appointment_settings_per_station.objects.all()
+    lookup_field='doctor_account'
+    
+    def retrieve(self, request, *args, **kwargs):
+        obj = get_object_or_404(self.queryset, **{self.lookup_field:request.user.id})
+        # May raise a permission denied
+        self.check_object_permissions(self.request, obj)
+        serializer = self.get_serializer(obj)
+        return Response(serializer.data)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.initial_data['doctor_account']=request.user.id
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
+    
 class Get_available_appointments_API(viewsets.ModelViewSet):
     serializer_class=Get_Available_Appointment_Serializer
     queryset=Appointment_settings_per_station.objects.all()
 
 class Available_time_choice_ps_API(viewsets.ModelViewSet):
     serializer_class=Available_time_choice_ps_Serializer
-    def get_queryset(self):
+    queryset=Available_time_choices_per_station.objects.all()    
+    def list(self, request, *args, **kwargs):
+        self.queryset=Available_time_choices_per_station.objects.filter(aps_per_station=self.kwargs['aps_per_station'])
+        return super().list(request, *args, **kwargs)    
+    @action(detail=False, methods=['get'])
+    def list_for_date(self,request, *args, **kwargs):
         filled_time_queryset=Filled_date_time_choices_per_station.objects.filter(aps_per_station=self.kwargs['aps_per_station'],booked_date=self.kwargs['date'])
-        print(len(filled_time_queryset))
         queryset=Available_time_choices_per_station.objects.filter(aps_per_station=self.kwargs['aps_per_station'])
         for item in filled_time_queryset:
             queryset=queryset.exclude(available_appointment_time=item.booked_time)
-        return queryset
+        self.queryset=queryset
+        return super().list(request, *args, **kwargs)
+        
     @action(detail=False, methods=['post'])
     def create_from_list(self, request):
         serializer_list=[]
@@ -43,7 +73,6 @@ class Available_time_choice_ps_API(viewsets.ModelViewSet):
             data_list.append(item.data)
         return Response(data_list, status=status.HTTP_201_CREATED, headers=headers)
 
-'''TODO add validations '''
 class Booked_appointments_API(viewsets.ModelViewSet):
         serializer_class=Booked_appointments_Serializer
         def get_queryset(self):

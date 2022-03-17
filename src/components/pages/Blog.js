@@ -1,64 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BlogNavbar from '../BlogNavbar';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getBlogs} from '../../actions/blogs';
 
-function Blog() {
+function Blog(props) {
     const [blogs, setBlogs] = useState([]);
     const [featuredBlog, setFeaturedBlog] = useState([]);
+    useEffect(()=>{
+        props.getBlogs()
+        if(props.blogs.length>0){
+            setBlogs(props.blogs)
+        }
 
-    //     useEffect(() => {
-    //         const fetchData = async () => {
-    //             try {
-    //                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/blog/featured`);
-    //                 setFeaturedBlog(res.data[0]);
-    //                 console.log(res.data)
-    //             }
-    //             catch (err) {
+    },[])
 
-    //             }
-    //         }
 
-    //         fetchData();
-    //     }, []);
-
-    //     useEffect(() => {
-    //         const fetchBlogs = async () => {
-    //             try {
-    //                 const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/blog/`);
-    //                 setBlogs(res.data);
-    //             }
-    //             catch (err) {
-
-    //             }
-    //         }
-
-    //         fetchBlogs();
-    //     }, []);
-
-    //     const capitalizeFirstLetter = (word) => {
-    //         if (word)
-    //             return word.charAt(0).toUpperCase() + word.slice(1);
-    //         return '';
-    //     };
-
-    //code to retrieve all the blogs
         const getBlogs = () => {
             let list = [];
             let result = [];
 
             blogs.map(blogPost => {
+                console.log('hello')
+                const datePosted=new Date(blogPost.date_posted)
                 return list.push(
                     <div className="mb-4 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
                         <div className="p-4 col d-flex flex-column position-static">
-                            <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong>
+                            {/* <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong> */}
                             <h3 className="mb-0">{blogPost.title}</h3>
-                            <div className="mb-1 text-muted">{blogPost.month} {blogPost.day}</div>
-                            <p className="mb-auto card-text">{blogPost.excerpt}</p>
-                            <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link>
+                            <div className="mb-1 text-muted">{datePosted.getMonth()} {datePosted.getDate()}</div>
+                            {/* <p className="mb-auto card-text">{blogPost.excerpt}</p> */}
+                            {/* <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link> */}
                         </div>
                         <div className="col-auto d-none d-lg-block">
-                            <img width='200' height='250' src={blogPost.thumbnail} alt='thumbnail' />
+                            {/* <img width='200' height='250' src={blogPost.thumbnail} alt='thumbnail' /> */}
                         </div>
                     </div>
                 );
@@ -116,7 +92,7 @@ function Blog() {
                     </div>
                 </div>
 
-                {/* {getBlogs()} */}
+                {getBlogs()}
             </div>
         </div>
 
@@ -124,4 +100,13 @@ function Blog() {
     );
 }
 
-export default Blog;
+Blog.propTypes = {
+    blogs: propTypes.array.isRequired,
+    getBlogs: propTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+    blogs: state.blogs.blogs,
+});
+
+export default connect(mapStateToProps, { getBlogs })(Blog)
+

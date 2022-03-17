@@ -5,19 +5,37 @@ from django.core.exceptions  import ValidationError
 
 # Create your models here.
 
-AT_8AM="08:00"
-AT_10AM="10:00"
-AT_12AM="12:00"
-AT_2PM="14:00"
-AT_4PM="16:00"
+AT_7AM="07:00"
+AT_9AM="09:00"
+AT_11AM="11:00"
+AT_1PM="13:00"
+AT_3PM="15:00"
 
 AVAILABLE_APPOINTMENT_TIME_CHOICES=(
-    (AT_8AM,"08hours"),
-    (AT_10AM,"10hours"),
-    (AT_12AM,"12hours"),
-    (AT_2PM,"14hours"),
-    (AT_4PM,"16hours")
+    (AT_7AM,"07hours"),
+    (AT_9AM,"09hours"),
+    (AT_11AM,"11hours"),
+    (AT_1PM,"13hours"),
+    (AT_3PM,"15hours"),
 )
+
+class Appointment_choices(models.TextChoices):
+    GENERAL_PRACTITIONER='general practitioner'
+    PODIATRIS= 'podiatrist'
+    PEDITRICIAN="peditrician"
+    ENDOCRINOLOGIST="endocrinologist" 
+    NEUROLOGIST="neurologist" 
+    RHEUMATOLOGIST="rheumatologist" 
+    ALLERGIST="allergist" 
+    PSYCHIATRIST="psychiatrist" 
+    NEPHROLOGIST="nephrologist" 
+    SURGEON="surgeon" 
+    ONCOLOGIST="oncologist" 
+    DERMATOLOGIST="dermatologist"
+    RADIOLOGIST="radiologist"
+    CARDIOLOGIST= "cardiologist" 
+    DENTIST= "dentist"
+
 
 
 class Appointment_settings_per_station(models.Model): 
@@ -25,7 +43,7 @@ class Appointment_settings_per_station(models.Model):
     save appointment settings saved by a doctor for their account
     '''   
     doctor_account=models.OneToOneField(User,on_delete=models.CASCADE,related_name='aps_per_station')
-    appointment_type=models.CharField(max_length = 16,null=True)
+    appointment_type=models.CharField(max_length = 25,null=True,choices=Appointment_choices.choices)
     frequency_of_AP_per_2hours=models.IntegerField()
     # start_appointment_date=models.DateField()
    

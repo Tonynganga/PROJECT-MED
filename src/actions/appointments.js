@@ -1,5 +1,5 @@
 import {
-    AVAILABLE_APPOITMENTS,AVAILABLE_APPOITMENTS_FAILED
+    AVAILABLE_APPOITMENTS,AVAILABLE_APPOITMENTS_FAILED,
   } from './types';
   import axios from 'axios';
   import {getErrors} from './errors';
@@ -24,3 +24,4 @@ import {
         dispatch ({type: AVAILABLE_APPOITMENTS_FAILED});
       });
   };
+  
