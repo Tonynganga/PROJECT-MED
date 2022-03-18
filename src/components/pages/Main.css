@@ -502,7 +502,7 @@ align-items: center;
     margin-top: auto;
     display: flex;
     align-items: flex-start;
-    height: 60px;
+    height:inherit;
   }
   .main__navbar__menu-icon {
     color: #1888ff;
@@ -512,6 +512,7 @@ align-items: center;
   }
   .main_navbar__nav-links {
     margin: 10px;
+    height: inherit;
     color: black;
     font-size: 20px;
     text-decoration: none;

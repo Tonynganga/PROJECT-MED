@@ -9,7 +9,7 @@ import Dropdown from "./Dropdown";
 function MainNavbar() {
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
-  const [dropdown2 , setDropdown2] = useState(false);
+  const [dropdown2, setDropdown2] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -27,7 +27,7 @@ function MainNavbar() {
       setDropdown(false);
     } else {
       setDropdown(false);
-      
+
     }
   };
   const onMouseEnter2 = () => {
@@ -43,7 +43,7 @@ function MainNavbar() {
       setDropdown2(false);
     } else {
       setDropdown2(false);
-      
+
     }
   };
 
@@ -51,7 +51,7 @@ function MainNavbar() {
     <div>
       <nav className="main__navbar">
         <Link to="/" className="main__navbar__logo" onClick={closeMobileMenu}>
-          <img src="/images/logo.png" alt="Logo" height="60px" width="60px"/>
+          <img src="/images/logo.png" alt="Logo" height="60px" width="60px" />
         </Link>
         <div className="main__navbar__menu-icon" onClick={handleClick}>
           <i
@@ -71,32 +71,36 @@ function MainNavbar() {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
+            {dropdown && <Dropdown />}
             <Link
               to="/services"
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
+              
               Doctors <i className="fas fa-caret-down" />
-              {dropdown && <Dropdown />}
+              
             </Link>
-            
+
           </li>
           <li
             className="main__navbar__nav-item"
             onMouseEnter={onMouseEnter2}
             onMouseLeave={onMouseLeave2}
           >
+            {dropdown2 && <Dropdown2 />}
             <Link
               to="/services"
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
+              
               Patients <i className="fas fa-caret-down" />
-              {dropdown2 && <Dropdown2 />}
+              
             </Link>
-            
+
           </li>
-          
+
 
           <li className="main__navbar__nav-item">
             <Link
