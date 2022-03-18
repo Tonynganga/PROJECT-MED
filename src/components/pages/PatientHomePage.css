@@ -1,21 +1,27 @@
-.patienthome__page, .patienthome__containerd{
-    display: flex;
+.patienthome__page{
+    margin-top: 62px;
     flex-direction: column;
 }
-.patient__dashboard{
-    background: #00A1C9;
-    height: 60px;
-    margin-top: 0;
+.patienthome__container{
+    display: flex;
+    flex-direction: column;
+
 }
-.patient__dashboard h4{
+.patient__dashboard{
+    background: beige;
+    height: 65px;
+    padding-top: 2px;
+    padding-bottom: 5px;
+}
+.patient__dashboard h5{
     margin-left:30px;
-    color: white;
+    color: black;
 }
 .patient__dashboard p{
-    font-size: 24px;
+    font-size: 20px;
     margin-left: 30px;
-    color: white;
     font-weight: bolder;
+    color: black;
 }
 
 .patient__sidebar{
