@@ -49,7 +49,7 @@ function MainNavbar() {
 
   return (
     <div>
-      <nav className="main__navbar">
+      <nav className="main__navbar fixed-top">
         <Link to="/" className="main__navbar__logo" onClick={closeMobileMenu}>
           <img src="/images/logo.png" alt="Logo" height="60px" width="60px" />
         </Link>

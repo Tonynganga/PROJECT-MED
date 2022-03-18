@@ -76,6 +76,7 @@
   .container{
       background: transparent;
       border:none;
+      box-shadow: none;
   }
   .about-heading {
     text-transform: uppercase;
@@ -133,4 +134,145 @@
       width: 45%;
     }
   }
+
+
+
+
+.contact-box {
+    color: #000;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(65, 76, 100, 0.05);
+    padding: 20px 0 30px 0;
+    background:#11dbcf;
+    border-radius: 10px;
+  }
+  .section-title{
+    background: cornsilk;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .contact-box i {
+    font-size: 32px;
+    color: #fff;
+    border-radius: 50%;
+    padding: 8px;
+  }
+  
+  .contact-box h3 {
+    font-size: 20px;
+    color: #000;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .contact-box p {
+    padding: 0;
+    line-height: 24px;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  .contact button{
+    background: #11dbcf;
+    border: none;
+    padding: 10px;
+  }
+
+ .contact button:hover{
+   background: #00d9ff;
+   color: #fff;
+ } 
+ .form-submit{
+   border-radius: 10px;
+ }
+
+
+.review{
+  background:url("../../assets/images/homepage.jpg");
+  background-size: cover;
+  height: 90vh;
+  background-position: center;
+  background-blend-mode: multiply;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.review .heading{
+  color: royalblue;
+}
+
+.review .box-container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 5rem;
+  border: none;
+  box-shadow: none;
+}
+
+.review .box-container .box{
+  background:#fff;
+  width:20rem;
+  height: 15rem;
+  margin:2rem 1rem;
+  padding:1.5rem;
+  position: relative;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.review .box-container .box img{
+  position: absolute;
+  bottom: -7.5rem; left: -1rem;
+  height:4rem;
+  width:4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 1px;
+}
+
+.review .box-container .box p{
+  font-size: 1.4rem;
+  color:var(--black);
+}
+
+.review .box-container .box h3{
+  text-align: end;
+  color:rgba(17, 219, 207,0.8);
+}
+
+.review .box-container .box span{
+  text-align: end;
+  color:var(--black);
+  display: block;
+  font-size: 1.2rem;
+}
+
+.review .box-container .box::before{
+  content: '';
+  position: absolute;
+  bottom: -1rem; left:.4rem;
+  height:2rem;
+  width:2rem;
+  background:#fff;
+  transform: rotate(45deg);
+}
+
+ 
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.footer {
+  text-align: center;
+  font-size: 0.9rem;
+  background:rgba(17, 219, 207,0.8);
+}
+.footer .btn-back{
+  background: #fff;
+  color: #00d9ff;
+}
+.footer .text{
+  color: #000;
+}
+
   
