@@ -12,7 +12,7 @@ function Home() {
           <div class="container text-center position-relative">
             <h1>24/7 Care is available</h1>
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, deleniti.</h2>
-            <a href="#about" class="main-btn">Get Started</a>
+            <a href="/loginsignup" class="main-btn">Get Started</a>
           </div>
         </section>
 
@@ -42,9 +42,46 @@ function Home() {
           </div>
         </section>
 
+        <section class="review" id="review">
+
+          <div class="container bg-transparent">
+
+            <h1 class="heading"><span>'</span> people's review <span>'</span></h1>
+
+            <div class="box-container">
+
+              <div class="box" data-aos="fade-right">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 5, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+              <div class="box" data-aos="fade-up">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 7, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+              <div class="box" data-aos="fade-left">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 10, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+
 
         <section class="contact">
-          <div class="container">
+          <div class="container bg-transparent">
 
             <div class="section-title text-center mt-5">
               <h2>Contact</h2>
@@ -86,7 +123,7 @@ function Home() {
                   <div class="form-row">
                     <div class="col-md-6 form-group">
                       <input type="text" name="name" class="form-control" id="name"
-                        placeholder="Your Name"/>
+                        placeholder="Your Name" />
 
                     </div>
                     <div class="col-md-6 form-group">
@@ -103,7 +140,7 @@ function Home() {
                     <textarea class="form-control" name="message" rows="5"></textarea>
                   </div>
                   <div class="text-center">
-                    <button type="submit">Send Message</button></div>
+                    <button class="form-submit" type="submit">Send Message</button></div>
                 </form>
               </div>
 
@@ -113,7 +150,7 @@ function Home() {
         </section>
 
         <footer class="footer py-4 mt-5">
-          <div class="container">
+          <div class="container bg-transparent">
             <div class="row align-items-center">
               <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
               <div class="col-lg-4 my-3 my-lg-0">

@@ -33,7 +33,7 @@ function PatientNavBar() {
 
   return (
     <div>
-      <nav className="navbar">
+      <nav className="navbar fixed-top">
         <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
           EPIC
           <i class="fab fa-firstdraft" />

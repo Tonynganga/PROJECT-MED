@@ -1,5 +1,5 @@
 .navbar {
-    background: cornsilk;
+    background: rgba(17, 219, 207,0.8);
     height: 60px;
     display: flex;
     justify-content: flex-start;
@@ -10,8 +10,8 @@
   .navbar-logo {
     color: black;
     justify-self: flex-start;
-    margin-left: 0px;
-    margin-block-start: 0;
+    margin-left: 5px;
+    margin-bottom: 30px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
@@ -19,7 +19,7 @@
   
   
   .blue-color{
-    color: #1888ff;
+    color: cornsilk;
   }
   .fa-firstdraft {
     margin-left: 0.5rem;

@@ -11,43 +11,47 @@ import { getAvailableAppointments } from '../../actions/appointments';
 
 
 function PatientHomePage(props) {
-    useEffect(()=>{
+    useEffect(() => {
         props.getAvailableAppointments()
-    },[])
+    }, [])
     return (
-        <div className='patienthome__page'>
+        <div>
+
             <div className='patientnav__bar'>
                 <PatientNavBar />
             </div>
-            <div className='patient__dashboard'>
-                <h4>Home  /  Dashboard</h4>
-                <p>Dashboard</p>
-            </div>
-
-            <div className="patienthome__container">
-
-                <div className="patient__sidebar">
-                    <SideBar />
-                </div>
-                
-                <div className='doctorcard__holder'>
-                    {props.appointments.map(appointment=>(
-                        <DoctorCard appointment={appointment} />
-                    ))}                    
+            <div className='patienthome__page'>
+                <div className='patient__dashboard'>
+                    <h5>Home  /  Dashboard</h5>
+                    <h5>Dashboard</h5>
                 </div>
 
+                <div className="patienthome__container">
+
+                    <div className="patient__sidebar">
+                        <SideBar />
+                    </div>
+
+                    <div className='doctorcard__holder'>
+                        {props.appointments.map(appointment => (
+                            <DoctorCard appointment={appointment} />
+                        ))}
+                    </div>
+
+                </div>
+                <Footer />
             </div>
-            <Footer />
         </div>
+
     );
 }
 
 PatientHomePage.propTypes = {
     appointments: propTypes.array.isRequired,
-    getAvailableAppointments:propTypes.func.isRequired
+    getAvailableAppointments: propTypes.func.isRequired
 };
 const mapStateToProps = state => ({
     appointments: state.appointments
 });
 
-export default connect(mapStateToProps, {getAvailableAppointments })(PatientHomePage)
+export default connect(mapStateToProps, { getAvailableAppointments })(PatientHomePage)
