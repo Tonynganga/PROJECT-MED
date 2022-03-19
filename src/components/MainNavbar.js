@@ -71,15 +71,16 @@ function MainNavbar() {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
+            {dropdown && <Dropdown />}
             <Link
               to="/services"
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
+              
               Doctors <i className="fas fa-caret-down" />
               
             </Link>
-            {dropdown && <Dropdown />}
 
           </li>
           <li
@@ -87,15 +88,16 @@ function MainNavbar() {
             onMouseEnter={onMouseEnter2}
             onMouseLeave={onMouseLeave2}
           >
+            {dropdown2 && <Dropdown2 />}
             <Link
               to="/services"
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
+              
               Patients <i className="fas fa-caret-down" />
               
             </Link>
-            {dropdown2 && <Dropdown2 />}
 
           </li>
 

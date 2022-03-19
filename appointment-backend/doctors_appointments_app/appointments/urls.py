@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import Appointment_setting_ps_API,Available_time_choice_ps_API,Booked_appointments_API,Get_available_appointments_API
+from .views import Appointment_setting_ps_API,Available_time_choice_ps_API,Booked_appointments_API,Get_available_appointments_API,Appointment_setting_and_requirements_API
 
 
 urlpatterns = [    
     path('appointment/add_settings',Appointment_setting_ps_API.as_view({'post':'create'})),
+    path('appointment/add_settings_and_requirements',Appointment_setting_and_requirements_API.as_view()),
     path('appointment/get_setting',Appointment_setting_ps_API.as_view({'get':'retrieve'})),
     path('appointment/get_settings',Appointment_setting_ps_API.as_view({'get':'list'})),
     path('appointment/available_appointments',Get_available_appointments_API.as_view({'get':'list'})),

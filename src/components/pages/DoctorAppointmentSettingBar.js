@@ -36,6 +36,8 @@ const hoursData = [
 function DoctorAppiontmentSettingBar(props) {
     const [hours, setHours] = useState([]);
     const [category, setCategory] = useState("");
+    const [phonenumber, setPhoneNo] = useState("");
+    const [location, setLocation] = useState("");
     const [appointmentPer2hr, setAppointmentPer2hr] = useState("");
 
     useEffect(() => {
@@ -70,7 +72,9 @@ function DoctorAppiontmentSettingBar(props) {
         props.setAppointmentSetting({
             appointment_type: category.value,
             frequency_of_AP_per_2hours: appointmentPer2hr,
-            available_appointment_time: timeList
+            available_appointment_time: timeList,
+            address:location,
+            phone_number:phonenumber
         })
 
     }
@@ -153,6 +157,10 @@ function DoctorAppiontmentSettingBar(props) {
                     <input type="text" placeholder="Phone Number..."
                         required
                         name="phonenumber"
+                        onChange={e => {
+                            setPhoneNo(e.target.value);
+                        }}
+                        value={phonenumber}
                        
                     /><br />
                 </div>
@@ -163,6 +171,10 @@ function DoctorAppiontmentSettingBar(props) {
                     <input type="text" placeholder="Location..."
                         required
                         name="location"
+                        onChange={e => {
+                            setLocation(e.target.value);
+                        }}
+                        value={location}
                         
                     /><br />
                 </div>

@@ -1,12 +1,12 @@
-from rest_framework import viewsets,status,permissions
+from rest_framework import viewsets,status,permissions,generics
 from .serializer import Appointment_settiing_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer
 from knox.models import AuthToken
 from rest_framework.response import Response
 from .models import Appointment_settings_per_station,Available_time_choices_per_station,Booked_appointments,Filled_date_time_choices_per_station
 from django.shortcuts import get_object_or_404
-import os
+from django.db import transaction
 from rest_framework.decorators import action
-import datetime
+from accounts.serializer import UserSerializer
 
 class ReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -81,3 +81,33 @@ class Booked_appointments_API(viewsets.ModelViewSet):
 
 # class Filled_date_choices_ps_API(viewsets.ModelViewSet):
 #         serializer_class=Filled_date_choices_ps_Serializer
+
+class Appointment_setting_and_requirements_API(generics.GenericAPIView):
+    @transaction.atomic
+    def post(self,request):
+        serializer_list=[]
+        data_list=[]
+        appointment_setting_serializer=Appointment_settiing_ps_Serializer(
+            data={"frequency_of_AP_per_2hours":request.data["frequency_of_AP_per_2hours"],
+                "appointment_type":request.data["appointment_type"],
+                "doctor_account":request.user.id
+            })
+        appointment_setting_serializer.is_valid(raise_exception=True)
+        appointment_setting_serializer.save()
+        user_detail_serializer=UserSerializer(
+            data={"address":request.data["address"],
+            "phone_number":request.data["phone_number"]
+            },instance=request.user,partial=True
+        )
+        user_detail_serializer.is_valid(raise_exception=True)
+        user_detail_serializer.save()
+        available_appointment_time_list=request.data['available_appointment_time']
+        for time in available_appointment_time_list:
+            data={"aps_per_station":appointment_setting_serializer.data["id"],"available_appointment_time":time}    
+            serializer =Available_time_choice_ps_Serializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            serializer_list.append(serializer)
+        for item in serializer_list:
+            item.save()
+            data_list.append(item.data)
+        return Response({}, status=status.HTTP_201_CREATED)

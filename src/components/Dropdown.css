@@ -1,11 +1,13 @@
 .dropdown-menu {
-  background: cornsilk;
-  width: 150px;
-  position: absolute;
+  width: 100px;
+  height: auto;
+  position: fixed;
   top: 60px;
-  list-style: none;
+  list-style-type: none;
   text-align: start;
   margin: 0px;
+  padding:0px;
+  z-index: 2;
 
 }
 
