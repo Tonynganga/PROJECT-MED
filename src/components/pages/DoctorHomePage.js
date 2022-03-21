@@ -27,8 +27,8 @@ function DoctorHomePage(props) {
         <div>
             <div className="doctorhomepage">
                 <div className='doctor__dashboard'>
-                    <h4>Home  /  Dashboard</h4>
-                    <p>Dashboard</p>
+                    <h5>Home  /  Dashboard</h5>
+                    <h5>Dashboard</h5>
                 </div>
                 <div className='doctorhome__container'>
                     <div className="doctorhome__sidebar">
