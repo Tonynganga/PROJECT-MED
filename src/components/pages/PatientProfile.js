@@ -93,9 +93,9 @@ const PatientProfile = props => {
 
         <div className="profilemain__container">
             <PatientNavBar />
-            <div className="profile__home">
-                <h4>Home / Dashboard</h4>
-                <p>Dashboard</p>
+            <div className="patprof__dash">
+                <h5>Home / Dashboard</h5>
+                <h5>Dashboard</h5>
             </div>
             <div class="profile__header">
                 <h2>Profile</h2>
@@ -105,8 +105,8 @@ const PatientProfile = props => {
                     <SideBar />
                 </div>
                 <form
-                onSubmit={onSubmit}>
-                <div className='profile__form'>
+                onSubmit={onSubmit} className='profile__form'>
+                {/* <div className='profile__form'> */}
                     <div className="uploadimage__form">
                         <img src={'http://localhost:8000' + props.imageUrl} id="img" alt="#" width="100px" height="100px" />
                         <input type="file" accept="image/*" name="image-upload" id="input" onChange={onChangePicture} />
@@ -219,7 +219,7 @@ const PatientProfile = props => {
 
                     </div>
                     <input  type="submit" value="Save Changes" />
-                </div>
+                {/* </div> */}
                 </form>
             </div>
             <Footer />
