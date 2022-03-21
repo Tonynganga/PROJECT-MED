@@ -1,7 +1,7 @@
 from django.db import models
-from django.forms import SlugField
 from accounts.models import User
 from django.utils import timezone
+from PIL import Image
 
 # Create your models here.
 
@@ -18,7 +18,14 @@ class Blogs(models.Model):
         if not self.id:
             self.date_posted = timezone.now()
         self.last_date_modified = timezone.now()
-        return super(Blogs, self).save(*args, **kwargs)
+        super(Blogs, self).save(*args, **kwargs)
+        img=Image.open(self.thumbnail.path)
+        if img.height>500 or img.width > 500:
+            output_size=(500,500)
+            img.thumbnail(output_size)
+            img.save(self.thumbnail.path)
+        else:
+            img.save(self.thumbnail.path)
 class Comments(models.Model):
     commentor_account=models.ForeignKey(User,on_delete=models.CASCADE)
     blog=models.ForeignKey(Blogs,on_delete=models.CASCADE)
