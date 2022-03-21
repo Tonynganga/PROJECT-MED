@@ -1,22 +1,11 @@
 import React, {  useEffect, useState } from 'react';
-// import './PatientHomePage.css';
-import './Main.css';
 import Footer from "../Footer";
 import SideBar2 from "./SideBar2";
-import './PatientProfile.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/profile';
 import { errorMessage } from '../../actions/errors';
 import Select from 'react-select';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {
-//     faSignOutAlt,
-//     faFileMedical,
-//     faLock,
-//     faUserCog,
-//     faColumns
-//   } from "@fortawesome/free-solid-svg-icons";
 
 const genders = [
     { label: "Male", value: "M" },
@@ -96,9 +85,9 @@ function DoctorProfile(props) {
         // return (
         <div className="profilemain__container">
 
-            <div className="profile__home">
-                <h4>Home / Dashboard</h4>
-                <p>Dashboard</p>
+            <div className="patprof__dash">
+                <h5>Home / Dashboard</h5>
+                <h5>Dashboard</h5>
             </div>
             <div class="profile__header">
                 <h2>Profile</h2>
@@ -108,9 +97,9 @@ function DoctorProfile(props) {
                     <SideBar2 />
                 </div>
                 <form
-                onSubmit={onSubmit}>
+                onSubmit={onSubmit} className='profile__form'>
 
-                <div className='profile__form'>
+                {/* <div className='profile__form'> */}
                     <div className="uploadimage__form">
                         <img src={'http://localhost:8000' + props.imageUrl} id="img" alt="" width="100px" height="100px" />
                         <input type="file" accept="image/*" name="image-upload" id="input" onChange={onChangePicture} />
@@ -222,7 +211,7 @@ function DoctorProfile(props) {
 
 
 
-                </div>
+                {/* </div> */}
 
             </form>
 
