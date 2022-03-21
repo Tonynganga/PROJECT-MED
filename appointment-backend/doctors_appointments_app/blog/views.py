@@ -19,7 +19,7 @@ class Blog_API(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         if request.user.is_doctor:
             serializer.is_valid(raise_exception=True)
-            serializer.save()
+            serializer.save(blogger_account=request.user,thumbnail=request.FILES['thumbnail'])
         else:
             raise serializers.ValidationError("User should be a doctor")
         headers = self.get_success_headers(serializer.data)

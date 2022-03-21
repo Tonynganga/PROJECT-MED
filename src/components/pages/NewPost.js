@@ -14,10 +14,9 @@ const NewPost = (props) => {
   const [excrept, setExcrept] = useState("")
   const [thumbnail, setThumbnail] = useState(null);
 
-  const [image, setImage] = useState(null);
 
   const onChangeThumbnail = e => {
-    setImage(e.target.files[0]);
+    setThumbnail(e.target.files[0]);
 };
 
   const onSubmit = (e) => {
@@ -63,10 +62,10 @@ const NewPost = (props) => {
                 <input type="file" accept="image/*" name="image-upload" id="input"  onChange={onChangeThumbnail} />
                 <label className="image-upload" htmlFor="input">
                   <i className="material-icons">add_photo_alternate</i>
-                  {'Choose file'}
+                  {thumbnail ? thumbnail.name : 'Choose file'}
                 </label>
               </div>
-              <h6 className='selected mt-2'>No file Selected</h6>
+              <h6 className='selected mt-2'>{thumbnail ? "" : 'No file Selected'}</h6>
             </div>
             <div className="form-group  mt-0">
               <label>Excerpt</label>
@@ -74,9 +73,9 @@ const NewPost = (props) => {
                 type="text"
                 placeholder='Excerpt'
                 className="form-control"
-                name="title"
-                // value={title}
-                // onChange={(e)=>setTitle(e.target.value)}
+                name="excrept"
+                value={excrept}
+                onChange={(e)=>setExcrept(e.target.value)}
                 required
               />
             </div>
