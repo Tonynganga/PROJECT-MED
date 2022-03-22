@@ -6,7 +6,7 @@ from .models import Blogs,Comments
 class Blog_serializer(serializers.ModelSerializer):
     class Meta:
         model=Blogs
-        fields=['id','blogger_account','blog_title','blog_content','excerpt','date_posted','thumbnail']
+        fields=['id','blog_title','blog_content','excerpt','date_posted','thumbnail']
         read_only_fields=['id','date_posted','thumbnail']
     def validate_blogger_account(self,value):
         if value.is_doctor!=True:
