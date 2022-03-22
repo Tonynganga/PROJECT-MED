@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
 import MainNavbar from '../../components/MainNavbar';
+import ReviewModal from '../ReviewModal';
+
+
+
+const BUTTON_WRAPPER_STYLES = {
+  position: 'relative',
+  zIndex: 1
+}
+
+const OTHER_CONTENT_STYLES = {
+  position: 'relative',
+  zIndex: 2,
+  backgroundColor: 'red',
+  padding: '10px'
+}
+
+
 function Home() {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <div>
       <div className='home__navbar'>
@@ -15,6 +34,16 @@ function Home() {
             <a href="/loginsignup" class="main-btn">Get Started</a>
           </div>
         </section>
+
+        <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+          <button onClick={() => setIsOpen(true)}>Open Modal</button>
+
+          <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
+            Fancy Modal
+          </ReviewModal>
+        </div>
+
+        <div style={OTHER_CONTENT_STYLES}>Other Content</div>
 
 
         <section className="about-section clearfix py-5">
@@ -147,7 +176,11 @@ function Home() {
             </div>
 
           </div>
+
         </section>
+
+
+
 
         <footer class="footer py-4 mt-5">
           <div class="container bg-transparent">
@@ -167,6 +200,10 @@ function Home() {
             </div>
           </div>
         </footer>
+
+
+
+
 
       </div>
 
