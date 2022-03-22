@@ -5,8 +5,12 @@ import './pages/Main.css';
 // import './MainNavbar.css';
 import Dropdown2 from "./Dropdown2";
 import Dropdown from "./Dropdown";
+import Modal from "./ReviewModal";
 
 function MainNavbar() {
+
+  const [modalOpen, setModalOpen] = useState(false);
+
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const [dropdown2, setDropdown2] = useState(false);
@@ -77,9 +81,9 @@ function MainNavbar() {
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
-              
+
               Doctors <i className="fas fa-caret-down" />
-              
+
             </Link>
 
           </li>
@@ -94,9 +98,9 @@ function MainNavbar() {
               className="main_navbar__nav-links"
               onClick={closeMobileMenu}
             >
-              
+
               Patients <i className="fas fa-caret-down" />
-              
+
             </Link>
 
           </li>
@@ -115,11 +119,15 @@ function MainNavbar() {
             <Link
               to="/contact-us"
               className="main_navbar__nav-links"
-              onClick={closeMobileMenu}
+
             >
               Contact Us
             </Link>
+
           </li>
+
+
+
           <li>
             <Link
               to="/loginsignup"
@@ -134,7 +142,7 @@ function MainNavbar() {
           <Button />
         </div>
       </nav>
-    </div>
+    </div >
   );
 }
 
