@@ -3,58 +3,70 @@ import { Link } from 'react-router-dom';
 import BlogNavbar from '../BlogNavbar';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getBlogs} from '../../actions/blogs';
+import { getBlogs } from '../../actions/blogs';
+
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
+
+const capitalizeFirstLetter = (word) => {
+    if (word)
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    return '';
+};
 
 function Blog(props) {
     const [blogs, setBlogs] = useState([]);
     const [featuredBlog, setFeaturedBlog] = useState([]);
-    useEffect(()=>{
-        props.getBlogs()
-        if(props.blogs.length>0){
+    useEffect(() => {
+            props.getBlogs()
+    }, [])
+    useEffect(() => {
+        if (props.blogs.length > 0) {
+            setFeaturedBlog(props.blogs[props.blogs.length - 1])
             setBlogs(props.blogs)
         }
+    }, [props.blogs])
 
-    },[])
 
+    const getBlogs = () => {
+        let list = [];
+        let result = [];
 
-        const getBlogs = () => {
-            let list = [];
-            let result = [];
-
-            blogs.map(blogPost => {
-                console.log('hello')
-                const datePosted=new Date(blogPost.date_posted)
-                return list.push(
-                    <div className="mb-4 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
-                        <div className="p-4 col d-flex flex-column position-static">
-                            {/* <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong> */}
-                            <h3 className="mb-0">{blogPost.blog_title}</h3>
-                            <div className="mb-1 text-muted">{datePosted.getMonth()} {datePosted.getDate()}</div>
-                            {/* <p className="mb-auto card-text">{blogPost.excerpt}</p> */}
-                            {/* <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link> */}
-                        </div>
-                        <div className="col-auto d-none d-lg-block">
-                            <img width='200' height='250' src={'http://localhost:8000' + blogPost.blogger_profile_pic} alt='thumbnail' />
-                        </div>
+        blogs.map(blogPost => {
+            console.log('hello')
+            const datePosted = new Date(blogPost.date_posted)
+            return list.push(
+                <div className="mb-4 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
+                    <div className="p-4 col d-flex flex-column position-static">
+                        {/* <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong> */}
+                        <h3 className="mb-2 d-inline-block text-primary">{capitalizeFirstLetter(blogPost.blog_title)}</h3>
+                        <div className="mb-1 text-muted">{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</div>
+                        <p className="mb-auto card-text">{blogPost.excerpt}</p>
+                        <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link>
                     </div>
-                );
-            });
-
-            for (let i = 0; i < list.length; i += 2) {
-                result.push(
-                    <div key={i} className='mb-2 row'>
-                        <div className='col-md-6'>
-                            {list[i]}
-                        </div>
-                        <div className='col-md-6'>
-                            {list[i+1] ? list[i+1] : null}
-                        </div>
+                    <div className="col-auto d-none d-lg-block">
+                        <img width='200' height='250' src={blogPost.thumbnail} alt='thumbnail' />
                     </div>
-                )
-            }
+                </div>
+            );
+        });
 
-            return result;
-        };
+        for (let i = 0; i < list.length; i += 2) {
+            result.push(
+                <div key={i} className='mb-2 row'>
+                    <div className='col-md-6'>
+                        {list[i]}
+                    </div>
+                    <div className='col-md-6'>
+                        {list[i + 1] ? list[i + 1] : null}
+                    </div>
+                </div>
+            )
+        }
+
+        return result;
+    };
 
     return (
         <div>
@@ -82,10 +94,10 @@ function Blog(props) {
 
                 <div className="p-4 text-white rounded jumbotron p-md-5 bg-dark">
                     <div className="px-0 col-md-6">
-                        <h1 className="display-4 font-italic">{featuredBlog.title}</h1>
+                        <h1 className="display-4 font-italic">{capitalizeFirstLetter(featuredBlog.title)}</h1>
                         <p className="my-3 lead">{featuredBlog.excerpt}</p>
                         <p className="mb-0 lead">
-                            <Link to={`/blog/${featuredBlog.slug}`} className="text-white font-weight-bold">
+                            <Link to={`/blog`} className="text-white font-weight-bold">
                                 Continue reading...
                             </Link>
                         </p>

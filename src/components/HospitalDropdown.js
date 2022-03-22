@@ -13,7 +13,16 @@ function HospitalDropdown() {
     <div>
       <ul
         onClick={handleClick}
-        className={click ? 'dropdown-menu clicked' : 'dropdown-menu'}
+        className={click ? 'dropdown-menu-1 clicked' : 'dropdown-menu-1'}
+        // style={{
+        //   width: "100px",
+        //   height: "auto",
+        //   position: "absolute",
+        //   top: "50px",
+        //   listStyle: "none",
+        //   textAlign: "left",
+        //   zIndex: 2,
+        // }}
       >
         {HospitalItems.map((item, index) => {
           return (

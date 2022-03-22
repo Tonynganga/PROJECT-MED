@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MenuItems2 } from './MenuItems2';
-import './pages/Main.css';
+import './Dropdown.css';
 import { Link } from 'react-router-dom';
 
 function Dropdown2() {
@@ -12,18 +12,19 @@ function Dropdown2() {
     <div>
       <ul
         onClick={handleClick}
-        style={{
-          // background: "cornsilk",
-          width: "100px",
-          height: "auto",
-          position: "fixed",
-          top: "50px",
-          listStyle: "none",
-          textAlign: "start",
-          padding:"0px",
-          margin: "0px",
-          zIndex: 2,
-        }}
+        className={click ? 'dropdown-menu-1 clicked' : 'dropdown-menu-1'}
+        // style={{
+        //   // background: "cornsilk",
+        //   width: "100px",
+        //   height: "auto",
+        //   position: "fixed",
+        //   top: "50px",
+        //   listStyle: "none",
+        //   textAlign: "start",
+        //   padding:"0px",
+        //   margin: "0px",
+        //   zIndex: 2,
+        // }}
       >
         {MenuItems2.map((item, index) => {
           return (

@@ -1,4 +1,4 @@
-.dropdown-menu {
+.dropdown-menu-1 {
     background: white;
     border-radius: 20px;
     width: auto;
@@ -6,7 +6,8 @@
     list-style: none;
     text-align: start;
     margin: 0px;
-    
+    z-index: 2;
+    position: absolute;
   
   }
   

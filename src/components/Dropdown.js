@@ -15,19 +15,19 @@ function Dropdown() {
     >
       <ul
       onClick={handleClick}
-        // class="dropdown-menu"
-        style={{
-          // background: "cornsilk",
-          width: "100px",
-          height: "auto",
-          position: "absolute",
-          top: "50px",
-          listStyle: "none",
-          textAlign: "start",
-          padding:"0px",
-          margin: "0px",
-          zIndex: 2,
-        }}
+      className={click ? 'dropdown-menu-1 clicked' : 'dropdown-menu-1'}
+        // style={{
+        //   // background: "cornsilk",
+        //   width: "100px",
+        //   height: "auto",
+        //   position: "absolute",
+        //   top: "50px",
+        //   listStyle: "none",
+        //   textAlign: "start",
+        //   padding:"0px",
+        //   margin: "0px",
+        //   zIndex: 2,
+        // }}
 
       >
         {MenuItems.map((item, index) => {

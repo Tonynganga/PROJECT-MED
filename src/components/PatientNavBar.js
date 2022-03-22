@@ -8,6 +8,7 @@ import HospitalDropdown from "./HospitalDropdown";
 function PatientNavBar() {
   const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
+  
  
 
   const handleClick = () => setClick(!click);
@@ -66,16 +67,13 @@ function PatientNavBar() {
           </li>
           <li
             className="nav-item"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
           >
             <Link
               to="/services"
               className="nav-links"
               onClick={closeMobileMenu}
             >
-              Search <i className="fas fa-caret-down" />
-              {dropdown && <HospitalDropdown />}
+              Search 
             </Link>
             
           </li>

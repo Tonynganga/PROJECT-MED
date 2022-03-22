@@ -15,6 +15,7 @@ __pycache__
 # production
 /build
 /appointment-backend/doctors_appointments_app/media/profile_pics
+/appointment-backend/doctors_appointments_app/media/profile_pics/blog-thumbnails
 
 
 # misc
