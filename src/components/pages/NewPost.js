@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 // import {addPost, updatePost} from '../../action/posts';
+import {EditorState} from 'draft-js'
 import { connect } from 'react-redux';
 import BlogNavbar from '../BlogNavbar';
 import { addBlog } from '../../actions/blogs'
-import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import './PatientProfile.css';
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 
 const NewPost = (props) => {
@@ -13,22 +15,23 @@ const NewPost = (props) => {
   const [content, setContent] = useState("")
   const [excrept, setExcrept] = useState("")
   const [thumbnail, setThumbnail] = useState(null);
+  const [editorState,setEditorState]=useState(EditorState.createEmpty())
 
 
   const onChangeThumbnail = e => {
     setThumbnail(e.target.files[0]);
-};
+  };
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const formData= new FormData()
+    const formData = new FormData()
     formData.append('blog_title', title);
     formData.append('blog_content', content);
     formData.append('excerpt', excrept);
     formData.append('thumbnail', thumbnail)
     setThumbnail(null);
     props.addBlog(formData);
-    
+
 
   }
   return (
@@ -56,10 +59,10 @@ const NewPost = (props) => {
             </div>
             <label className='label mt--2'>Thumbnail</label>
             <div className="blog-uploadimage__form">
-              
+
               {/* <img id="img" alt="" width="0px" height="0px" /> */}
               <div className="blogupload__btn">
-                <input type="file" accept="image/*" name="image-upload" id="input"  onChange={onChangeThumbnail} />
+                <input type="file" accept="image/*" name="image-upload" id="input" onChange={onChangeThumbnail} />
                 <label className="image-upload" htmlFor="input">
                   <i className="material-icons">add_photo_alternate</i>
                   {thumbnail ? thumbnail.name : 'Choose file'}
@@ -75,22 +78,30 @@ const NewPost = (props) => {
                 className="form-control"
                 name="excrept"
                 value={excrept}
-                onChange={(e)=>setExcrept(e.target.value)}
+                onChange={(e) => setExcrept(e.target.value)}
                 required
               />
             </div>
-            
+
             <div className="form-group mt--2">
               <label>Content</label>
-              <textarea
+              {/* <textarea
                 type="text"
                 className="form-control"
                 name="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 required
+              /> */}
+              <Editor
+                editorState={editorState}
+                toolbarClassName="toolbarClassName"
+                wrapperClassName="wrapperClassName"
+                editorClassName="editorClassName"
+                onEditorStateChange={(e) => setContent(setEditorState(e))}
               />
             </div>
+            {editorState.getCurrentContent().getCurrentContent}
 
             <div className="form-group mt-1">
               <button type="submit" className="btn btn btn-outline-info">

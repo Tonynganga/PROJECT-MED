@@ -21,7 +21,7 @@ export class DoctorCard extends Component {
                         </div>
                         <div className="cardbook__details__wrapper">
                         <div className="card__details">
-                                <h5>Location</h5>
+                                <h5>Location</h5> 
                             </div>
                             
                             <div className="card__details">
