@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 // import {addPost, updatePost} from '../../action/posts';
-import {EditorState} from 'draft-js'
+import {EditorState,convertToRaw} from 'draft-js'
 import { connect } from 'react-redux';
 import BlogNavbar from '../BlogNavbar';
 import { addBlog } from '../../actions/blogs'
 import './PatientProfile.css';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+// import { convertToHTML } from 'draft-convert';
+import draftToHtml from 'draftjs-to-html';
 
 
 const NewPost = (props) => {
@@ -21,6 +23,12 @@ const NewPost = (props) => {
   const onChangeThumbnail = e => {
     setThumbnail(e.target.files[0]);
   };
+
+  const onEditorStateChange=(e)=>{
+    setEditorState(e)
+    let currentContentAsHTML =draftToHtml(convertToRaw(e.getCurrentContent()))
+    setContent(currentContentAsHTML)
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -95,14 +103,20 @@ const NewPost = (props) => {
               /> */}
               <Editor
                 editorState={editorState}
-                toolbarClassName="toolbarClassName"
                 wrapperClassName="wrapperClassName"
                 editorClassName="editorClassName"
-                onEditorStateChange={(e) => setContent(setEditorState(e))}
+                onEditorStateChange={onEditorStateChange}
+                toolbar={{
+                  options: ['inline', 'blockType', 'fontSize','list','colorPicker','textAlign',  'link', 'emoji','history'],
+                  inline: { inDropdown: true },
+                  list: { inDropdown: true },
+                  textAlign: { inDropdown: true },
+                  link: { inDropdown: false, defaultTargetOption: '_blank' },
+                  history: { inDropdown: true },
+              }}
+          
               />
             </div>
-            {editorState.getCurrentContent().getCurrentContent}
-
             <div className="form-group mt-1">
               <button type="submit" className="btn btn btn-outline-info">
                 Post
