@@ -105,6 +105,40 @@ function Home() {
           </div>
 
         </section>
+        <section class="review" id="review">
+
+          <div class="container bg-transparent">
+
+            <h1 class="heading"><span>'</span> people's review <span>'</span></h1>
+
+            <div class="box-container">
+
+              <div class="box" data-aos="fade-right">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 5, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+              <div class="box" data-aos="fade-up">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 7, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+              <div class="box" data-aos="fade-left">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 10, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
 
 
 
