@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 // import {addPost, updatePost} from '../../action/posts';
-import {EditorState,convertToRaw} from 'draft-js'
+import {EditorState,convertToRaw,convertFromHTML,ContentState} from 'draft-js'
 import { connect } from 'react-redux';
 import BlogNavbar from '../BlogNavbar';
 import { addBlog } from '../../actions/blogs'
@@ -10,14 +10,24 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 // import { convertToHTML } from 'draft-convert';
 import draftToHtml from 'draftjs-to-html';
+// import {stateFromHTML} from 'draft-js-import-html';
+import htmlToDraft from 'html-to-draftjs';
+
+
 
 
 const NewPost = (props) => {
-  const [title, setTitle] = useState("")
+  const editorStateSession=(item)=>{
+    const contentBlock = htmlToDraft(item);
+    const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+    return EditorState.createWithContent(contentState);
+  
+  }
+  const [title, setTitle] = useState(sessionStorage.getItem('title')?sessionStorage.getItem('title'):"")
   const [content, setContent] = useState("")
-  const [excrept, setExcrept] = useState("")
+  const [excrept, setExcrept] = useState(sessionStorage.getItem('excrept')?sessionStorage.getItem('excrept'):"")
   const [thumbnail, setThumbnail] = useState(null);
-  const [editorState,setEditorState]=useState(EditorState.createEmpty())
+  const [editorState,setEditorState]=useState(sessionStorage.getItem('content')?editorStateSession(sessionStorage.getItem('content')):EditorState.createEmpty())
 
 
   const onChangeThumbnail = e => {
@@ -27,6 +37,7 @@ const NewPost = (props) => {
   const onEditorStateChange=(e)=>{
     setEditorState(e)
     let currentContentAsHTML =draftToHtml(convertToRaw(e.getCurrentContent()))
+    sessionStorage.setItem('content',currentContentAsHTML)
     setContent(currentContentAsHTML)
   }
 
@@ -61,7 +72,7 @@ const NewPost = (props) => {
                 placeholder='Title'
                 name="title"
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => {setTitle(e.target.value);sessionStorage.setItem('title',e.target.value)}}
                 required
               />
             </div>
@@ -86,7 +97,7 @@ const NewPost = (props) => {
                 className="form-control"
                 name="excrept"
                 value={excrept}
-                onChange={(e) => setExcrept(e.target.value)}
+                onChange={(e) => {setExcrept(e.target.value);sessionStorage.setItem('excrept',e.target.value)}}
                 required
               />
             </div>
