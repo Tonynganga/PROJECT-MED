@@ -11,3 +11,7 @@ django-test-accounts:
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test accounts
 django-shell:
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py shell
+setup-env-python3:
+	python3 -m virtualenv env && source ./env/bin/activate && python3 -m pip install -r requirements.txt && mv env ./appointment-backend
+setup-env-python:
+	python -m virtualenv env && source ./env/bin/activate && python -m pip install -r requirements.txt && mv env ./appointment-backend
