@@ -42,9 +42,9 @@ const PatientProfile = props => {
                 setFirstname(user.first_name)
                 setLastname(user.last_name)
                 setBloodgroup(bloodgroups.filter(bloodgroup=>bloodgroup.value===user.blood_group)[0])
-                setPhonenumber(user.phone_number)
+                setPhonenumber(user.phone_number?user.phone_number:"")
                 // setDateofbirth(user.date_of_birth)
-                setAddress(user.address)
+                setAddress(user.address?user.address:"")
             }
         },
         [props.user]

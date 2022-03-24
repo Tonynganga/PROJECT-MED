@@ -20,7 +20,6 @@ function DoctorProfile(props) {
     const [lastnameState, setLastname] = useState("");
     const [genderState, setGender] = useState({});
     const [phonenumberState, setPhonenumber] = useState("");
-    // const [dateofbirthState, setDateofbirth] = useState("");
     const [addressState, setAddress] = useState("");
     const [emailState, setEmail] = useState("");
     const [image, setImage] = useState(null);
@@ -29,15 +28,15 @@ function DoctorProfile(props) {
         () => {
             props.getProfile()
             if (props.user) {
-                const { user } = props
-                setUsername(user.username)
-                setEmail(user.email)
-                setFirstname(user.first_name)
-                setLastname(user.last_name)
-                setGender(genders.filter(gender=>gender.value===user.gender)[0])
-                setPhonenumber(user.phone_number)
+                const { username,email,first_name,last_name,phone_number,address } = props.user
+                setUsername(username)
+                setEmail(email)
+                setFirstname(first_name)
+                setLastname(last_name)
+                setGender(genders.filter(gender=>gender.value===gender)[0])
+                setPhonenumber(phone_number?phone_number:"")
                 // setDateofbirth(user.date_of_birth)
-                setAddress(user.address)
+                setAddress(address?address:"")
             }
         },
         [props.user]

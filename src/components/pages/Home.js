@@ -1,25 +1,13 @@
 import React, { useState } from 'react';
 import './Home.css';
 import MainNavbar from '../../components/MainNavbar';
-import ReviewModal from '../ReviewModal';
 
 
 
-const BUTTON_WRAPPER_STYLES = {
-  position: 'relative',
-  zIndex: 1
-}
-
-const OTHER_CONTENT_STYLES = {
-  position: 'relative',
-  zIndex: 2,
-  backgroundColor: 'red',
-  padding: '10px'
-}
 
 
 function Home() {
-  const [isOpen, setIsOpen] = useState(false)
+  
 
   return (
     <div>
@@ -34,17 +22,6 @@ function Home() {
             <a href="/loginsignup" class="main-btn">Get Started</a>
           </div>
         </section>
-
-        <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-          <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-          <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
-            Fancy Modal
-          </ReviewModal>
-        </div>
-
-        <div style={OTHER_CONTENT_STYLES}>Other Content</div>
-
 
         <section className="about-section clearfix py-5">
           <div className="container bg-transparent">
@@ -71,6 +48,40 @@ function Home() {
           </div>
         </section>
 
+        <section class="review" id="review">
+
+          <div class="container bg-transparent">
+
+            <h1 class="heading"><span>'</span> people's review <span>'</span></h1>
+
+            <div class="box-container">
+
+              <div class="box" data-aos="fade-right">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 5, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+              <div class="box" data-aos="fade-up">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 7, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+              <div class="box" data-aos="fade-left">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
+                <h3>someone's name</h3>
+                <span>jan 10, 2021</span>
+                <img src="images/aboutimage.jpg" alt="" />
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
         <section class="review" id="review">
 
           <div class="container bg-transparent">

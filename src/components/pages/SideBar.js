@@ -5,6 +5,7 @@ import propTypes from 'prop-types';
 import { SidebarData } from "./SidebarData";
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
+import {NavLink} from 'react-router-dom'
 
 const SideBar = props => {
   const [usernameState, setUsername] = useState("");
@@ -37,15 +38,18 @@ useEffect(() => {
       <div className="sidebar__list">
         <ul className="SidebarList">
           {SidebarData.map((val, key) => {
-            return (<li
+            return (
+              <NavLink style={{ textDecoration: 'none' }} exact to={val.link}>
+            <li
               key={key}
               className="row"
               id={window.location.pathname === val.link ? "active" : ""}
-              onClick={() => { window.location.pathname = val.link }}>
+              >
 
               <div id="icon">{val.icon}</div>
               <div id="title">{val.title}</div>
             </li>
+            </NavLink>
             );
           })}
         </ul>

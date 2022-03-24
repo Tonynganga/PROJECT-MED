@@ -28,6 +28,9 @@ export const addBlog = body => (dispatch,getState) => {
     .then (res => {
       dispatch ({type: ADD_BLOG});
       dispatch(notify("Added blog successfuly","success"))
+      sessionStorage.setItem('title',"")
+      sessionStorage.setItem('excrept',"")
+      sessionStorage.setItem('content',"")
     })
     .catch (err => {
       dispatch ({type: ADD_BLOG_FAILED});
