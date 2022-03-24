@@ -9,6 +9,13 @@ import { getProfile, updateProfile } from '../../actions/profile';
 import { errorMessage } from '../../actions/errors';
 import Select from 'react-select';
 
+const genders = [
+    { label: "Male", value: "M" },
+    { label: "Female", value: "F" },
+    { label: "Do not disclose", value: "D" },
+
+];
+
 const bloodgroups = [
     { label: "A-Positive(A+)", value: "A+" },
     { label: "A-Positive(A+)", value: "A+" },
@@ -215,6 +222,15 @@ const PatientProfile = props => {
                                     setAddress(e.target.value);
                                 }}
                                 value={addressState} /><br />
+                        </div>
+
+                        <div className="dropdown">
+                            <div className='label'>
+                                <label>Gender :</label>
+                            </div>
+                            <Select
+                            options={genders} 
+                            />
                         </div>
 
                     </div>

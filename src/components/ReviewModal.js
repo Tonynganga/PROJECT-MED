@@ -41,27 +41,12 @@ function ReviewModal({ open, children, onClose }) {
       <div style={OVERLAY_STYLES} />
       <div style={MODAL_STYLES}>
         <div className="modal-content-div">
-          <div className="col-lg-6" >
+          <div className="col-lg-9" >
             <form>
             <h3 className="review__heading">REVIEW</h3>
-              <div className="form-row">
-                <div className="col-md-6 form-group">
-                  <input type="text" name="name" className="form-control" id="name"
-                    placeholder="Your Name" />
-
-                </div>
-                <div className="col-md-6 form-group">
-                  <input type="email" className="form-control" name="email"
-                    id="email" placeholder="Your Email" />
-
-                </div>
-              </div>
-
-              <div className="form-group">
-                <textarea className="form-control" name="message" rows="5"></textarea>
-              </div>
+              
               <div>
-                <Typography component="legend"></Typography>
+                <Typography component="legend">Rating</Typography>
                 <Rating
                   name="simple-controlled"
                   value={value}
@@ -70,7 +55,11 @@ function ReviewModal({ open, children, onClose }) {
                   }}
                 />
               </div>
-              <div className="text-center">
+
+              <div className="form-group-textarea">
+                <textarea className="form-control" name="message" rows="5" cols="40"></textarea>
+              </div>
+              <div className="review-buttons">
                 <button className="review-form-submit btn btn-success" type="submit">Submit</button>
                 <button className="btn btn-danger" onClick={onClose}>Close</button>
                 </div>
