@@ -1,25 +1,13 @@
 import React, { useState } from 'react';
 import './Home.css';
 import MainNavbar from '../../components/MainNavbar';
-import ReviewModal from '../ReviewModal';
 
 
 
-const BUTTON_WRAPPER_STYLES = {
-  position: 'relative',
-  zIndex: 1
-}
-
-const OTHER_CONTENT_STYLES = {
-  position: 'relative',
-  zIndex: 2,
-  backgroundColor: 'red',
-  padding: '10px'
-}
 
 
 function Home() {
-  const [isOpen, setIsOpen] = useState(false)
+  
 
   return (
     <div>
@@ -34,17 +22,6 @@ function Home() {
             <a href="/loginsignup" class="main-btn">Get Started</a>
           </div>
         </section>
-
-        <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-          <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-          <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
-            Fancy Modal
-          </ReviewModal>
-        </div>
-
-        <div style={OTHER_CONTENT_STYLES}>Other Content</div>
-
 
         <section className="about-section clearfix py-5">
           <div className="container bg-transparent">
