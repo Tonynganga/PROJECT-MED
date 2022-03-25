@@ -33,7 +33,7 @@ function DoctorProfile(props) {
                 setEmail(email)
                 setFirstname(first_name)
                 setLastname(last_name)
-                setGender(genders.filter(gender=>gender.value===gender)[0])
+                setGender(genders.filter(gender=>gender.value===props.user.gender)[0])
                 setPhonenumber(phone_number?phone_number:"")
                 // setDateofbirth(user.date_of_birth)
                 setAddress(address?address:"")

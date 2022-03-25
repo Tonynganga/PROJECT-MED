@@ -1,6 +1,6 @@
 import React from "react"
 import './DoctorCard.css';
-import {connect} from 'react-redux'
+
 
 const DoctorCard=(props)=> {
     
