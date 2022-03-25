@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useState} from "react";
 import "./PatientNavBar.css";
 import ReactDom from 'react-dom';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-
+import propTypes from 'prop-types';
+import { connect } from "react-redux";
+import { addReview } from "../actions/reviews";
 
 const MODAL_STYLES = {
   position: 'fixed',
@@ -28,12 +30,21 @@ const OVERLAY_STYLES = {
   zIndex: 1000,
 }
 
-function ReviewModal({ open, children, onClose }) {
+function ReviewModal(props) {
 
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = useState(2);
+  const [message,setMessage]=useState("")
 
-  if (!open) return null
+  if (!props.open) return null
 
+  const onSubmit=(e)=>{
+    e.preventDefault()
+    const body={
+      star:value,
+      message
+    }
+    props.addReview(body)
+  }
 
 
   return ReactDom.createPortal(
@@ -42,7 +53,7 @@ function ReviewModal({ open, children, onClose }) {
       <div style={MODAL_STYLES}>
         <div className="modal-content-div">
           <div className="col-lg-9" >
-            <form>
+            <form onSubmit={onSubmit}>
             <h3 className="review__heading">REVIEW</h3>
               
               <div>
@@ -57,11 +68,19 @@ function ReviewModal({ open, children, onClose }) {
               </div>
 
               <div className="form-group-textarea">
-                <textarea className="form-control" name="message" rows="5" cols="40"></textarea>
+                <textarea 
+                className="form-control" 
+                name="message"
+                rows="5" 
+                cols="40"
+                value={message}
+                  onChange={(e) => 
+                    setMessage(e.target.value)
+                  }/>
               </div>
               <div className="review-buttons">
                 <button className="review-form-submit btn btn-success" type="submit">Submit</button>
-                <button className="btn btn-danger" onClick={onClose}>Close</button>
+                <button className="btn btn-danger" onClick={props.onClose}>Close</button>
                 </div>
             </form>
           </div>
@@ -76,4 +95,7 @@ function ReviewModal({ open, children, onClose }) {
     document.getElementById('portal')
   )
 }
-export default ReviewModal;
+ReviewModal.propTypes={
+  addReview:propTypes.func.isRequired
+}
+export default connect(null,{addReview})(ReviewModal);

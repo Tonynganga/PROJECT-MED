@@ -31,5 +31,5 @@ yarn-error.log*
 
 #database
 /appointment-backend/doctors_appointments_app/db.sqlite3
-
+migrations
 
