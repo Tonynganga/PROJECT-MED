@@ -98,6 +98,9 @@
     display: flex;
     flex-direction: row;
 }
+.appointment{
+    margin-left: 60px;
+}
 .appointment__bar{
     height: 50px;
     background-color: white;
