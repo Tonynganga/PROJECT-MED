@@ -23,7 +23,7 @@ import Blog from './components/pages/Blog';
 import BlogHome from './components/pages/BlogHome';
 import NewPost from './components/pages/NewPost';
 import DoctorAppointmentSettingBar from './components/pages/DoctorAppointmentSettingBar';
-
+import AppointmentCard from './components/AppointmentCard';
 function App() {
   setUpNotifications({
     defaultProps: {
@@ -57,6 +57,8 @@ function App() {
         <Route path= '/bloghome' exact component={BlogHome}/>
         <Route path= '/newpost' exact component={NewPost}/>
         <Route path= '/settings' exact component={DoctorAppointmentSettingBar}/>
+        <Route path= '/app_card' exact component={AppointmentCard}/>
+        
         </div>
       
       
