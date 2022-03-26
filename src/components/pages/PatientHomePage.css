@@ -227,3 +227,8 @@
     cursor: pointer;
     margin-left: 15px;
 }
+.b-savecoment{
+    background-color: blue;
+    padding: 5px;
+    border-radius: 10px;
+}
