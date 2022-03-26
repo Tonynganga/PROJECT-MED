@@ -27,3 +27,9 @@ class Reviews_API(viewsets.ModelViewSet):
         instance = self.queryset.filter(reviewer=request.user).first()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+    def update(self, request, *args, **kwargs):
+        instance =self.queryset.filter(reviewer=request.user).first()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)

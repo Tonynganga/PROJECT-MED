@@ -1,11 +1,17 @@
 import {
     GET_REVIEWS,
     GET_REVIEWS_FAILED,
+    GET_USER_REVIEW,
+    GET_USER_REVIEW_FAILED,
+    LOGOUT,
+    UPDATE_REVIEW,
+    UPDATE_REVIEW_FAILED,
   } from '../actions/types';
 
 
 const initialState={
     reviews:[],
+    review:{}
 }
 
 
@@ -17,6 +23,18 @@ export default function(state=initialState,action){
             return {
                 ...state,
                 reviews:[]
+            }
+        case GET_USER_REVIEW:
+        case UPDATE_REVIEW:
+            return {
+                ...state,
+                review:action.payload
+            }
+        case GET_USER_REVIEW_FAILED:
+        case LOGOUT:
+            return {
+                ...state,
+                review:{}
             }
         default:
             return state
