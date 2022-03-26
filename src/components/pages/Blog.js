@@ -4,6 +4,54 @@ import BlogNavbar from '../BlogNavbar';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getBlogs } from '../../actions/blogs';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Avatar,
+    Grid,
+    Typography,
+    TablePagination,
+    TableFooter,
+    makeStyles,
+    Button
+} from '@material-ui/core';
+
+
+const useStyles = makeStyles((theme) => ({
+    avatar: {
+        width: 60,
+        height: 60,
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.getContrastText(theme.palette.primary.light)
+    },
+    name: {
+        fontWeight: 'bold',
+        color: theme.palette.secondary.dark
+    },
+    status: {
+        fontWeight: 'bold',
+        fontSize: '0.75rem',
+        color: 'white',
+        backgroundColor: 'grey',
+        borderRadius: 8,
+        padding: '3px 10px',
+        display: 'inline-block'
+    },
+    payment: {
+        fontWeight: 'bold',
+        fontSize: '0.75rem',
+        color: 'white',
+        backgroundColor: 'grey',
+        borderRadius: 8,
+        padding: '3px 10px',
+        display: 'inline-block'
+    }
+}));
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -16,10 +64,11 @@ const capitalizeFirstLetter = (word) => {
 };
 
 function Blog(props) {
+    const classes = useStyles();
     const [blogs, setBlogs] = useState([]);
     const [featuredBlog, setFeaturedBlog] = useState([]);
     useEffect(() => {
-            props.getBlogs()
+        props.getBlogs()
     }, [])
     useEffect(() => {
         if (props.blogs.length > 0) {
@@ -37,8 +86,13 @@ function Blog(props) {
             console.log('hello')
             const datePosted = new Date(blogPost.date_posted)
             return list.push(
-                <div className="mb-4 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
-                    <div className="p-4 col d-flex flex-column position-static">
+                <div className="mb-4 mt-2 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
+                    <div className="p-3 col d-flex flex-column position-static">
+                        <Grid item lg={2}>
+                            <Avatar src='.' className={classes.avatar} />
+                            <Typography className={classes.name}>Blogger</Typography>
+                        </Grid>
+                       
                         {/* <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong> */}
                         <h3 className="mb-2 d-inline-block text-primary">{capitalizeFirstLetter(blogPost.blog_title)}</h3>
                         <div className="mb-1 text-muted">{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</div>
@@ -46,7 +100,7 @@ function Blog(props) {
                         <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link>
                     </div>
                     <div className="col-auto d-none d-lg-block">
-                        <img width='200' height='250' src={blogPost.thumbnail} alt='thumbnail' />
+                        <img width='200' height='240' src={blogPost.thumbnail} alt='thumbnail' />
                     </div>
                 </div>
             );
