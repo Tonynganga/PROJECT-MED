@@ -2,7 +2,11 @@ from rest_framework import serializers
 from .models import Reviews
 
 class Reviews_serializer(serializers.ModelSerializer):
+    reviewer_first_name=serializers.CharField(source='reviewer.first_name')
+    reviewer_last_name=serializers.CharField(source='reviewer.last_name')
+    reviewer_profile_pic=serializers.URLField(source='reviewer.profile.image.url')
     class Meta:
         model=Reviews
-        fields=['id','star','message']
-        read_only_fields=['id']
+        read_only_fields=['id','reviewer_first_name','reviewer_last_name','date_posted','reviewer_profile_pic']
+        fields=['id','reviewer_first_name','reviewer_last_name','star','message','date_posted','reviewer_profile_pic']
+

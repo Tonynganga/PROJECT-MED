@@ -15,7 +15,7 @@ class Reviews_API(viewsets.ModelViewSet):
     serializer_class=Reviews_serializer
     queryset=Reviews.objects.all()
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data=request.data,partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save(reviewer=request.user)
         headers = self.get_success_headers(serializer.data)
