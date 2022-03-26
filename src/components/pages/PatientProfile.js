@@ -38,6 +38,7 @@ const PatientProfile = props => {
     const [bloodgroupState, setBloodgroup] = useState({});
     const [emailState, setEmail] = useState("");
     const [image, setImage] = useState(null);
+    const [genderState, setGender] = useState({});
    
     useEffect(
         () => {
@@ -48,6 +49,7 @@ const PatientProfile = props => {
                 setEmail(user.email)
                 setFirstname(user.first_name)
                 setLastname(user.last_name)
+                setGender(genders.filter(gender=>gender.value===user.gender)[0])
                 setBloodgroup(bloodgroups.filter(bloodgroup=>bloodgroup.value===user.blood_group)[0])
                 setPhonenumber(user.phone_number?user.phone_number:"")
                 // setDateofbirth(user.date_of_birth)
@@ -87,6 +89,7 @@ const PatientProfile = props => {
             if(bloodgroupState){
                 formData.append('blood_group', bloodgroupState.value);
             }            
+            formData.append ('gender', genderState.value);
             formData.append('phone_number', phonenumberState);
             formData.append('last_name', lastnameState);
             //   formData.append ('date_of_birth', dateofbirthState);
@@ -229,6 +232,10 @@ const PatientProfile = props => {
                                 <label>Gender :</label>
                             </div>
                             <Select
+                             onChange={e => {
+                                setGender(e);
+                            }}
+                            value={genderState} 
                             options={genders} 
                             />
                         </div>

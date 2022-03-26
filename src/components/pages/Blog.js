@@ -89,15 +89,20 @@ function Blog(props) {
                 <div className="mb-4 mt-2 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
                     <div className="p-3 col d-flex flex-column position-static">
                         <Grid item lg={2}>
-                            <Avatar src='.' className={classes.avatar} />
-                            <Typography className={classes.name}>Blogger</Typography>
+                            <Avatar src={'http://localhost:8000' + blogPost.blogger_profile_pic} className={classes.avatar} />
+                            <Typography className={classes.name}>{blogPost.blogger_first_name} {blogPost.blogger_last_name}</Typography>
                         </Grid>
-                       
+
                         {/* <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong> */}
                         <h3 className="mb-2 d-inline-block text-primary">{capitalizeFirstLetter(blogPost.blog_title)}</h3>
                         <div className="mb-1 text-muted">{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</div>
                         <p className="mb-auto card-text">{blogPost.excerpt}</p>
-                        <Link to={`/blog/${blogPost.slug}`} className="stretched-link">Continue reading</Link>
+                        <Link to={{
+                            pathname: '/blog_details',
+                            state: {
+                                post: blogPost,
+                            },
+                        }} className="stretched-link">Continue reading</Link>
                     </div>
                     <div className="col-auto d-none d-lg-block">
                         <img width='200' height='240' src={blogPost.thumbnail} alt='thumbnail' />
@@ -151,7 +156,12 @@ function Blog(props) {
                         <h1 className="display-4 font-italic">{capitalizeFirstLetter(featuredBlog.title)}</h1>
                         <p className="my-3 lead">{featuredBlog.excerpt}</p>
                         <p className="mb-0 lead">
-                            <Link to={`/blog`} className="text-white font-weight-bold">
+                            <Link to={{
+                                pathname: '/blog_details',
+                                state: {
+                                    post: featuredBlog,
+                                },
+                            }} className="text-white font-weight-bold">
                                 Continue reading...
                             </Link>
                         </p>

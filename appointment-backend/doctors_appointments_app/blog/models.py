@@ -10,7 +10,7 @@ class Blogs(models.Model):
     date_posted=models.DateTimeField()
     last_date_modified=models.DateTimeField()
     blog_title=models.CharField(max_length=25)
-    blog_content=models.CharField(max_length=200)
+    blog_content=models.CharField(max_length=2000)
     thumbnail = models.ImageField(upload_to='blog-thumbnails',null=True)
     excerpt = models.CharField(max_length=150,null=True)
     def save(self, *args, **kwargs):

@@ -5,7 +5,6 @@ import {
     GET_USER_REVIEW_FAILED,
     LOGOUT,
     UPDATE_REVIEW,
-    UPDATE_REVIEW_FAILED,
   } from '../actions/types';
 
 

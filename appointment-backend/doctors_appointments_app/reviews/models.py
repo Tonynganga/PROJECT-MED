@@ -15,7 +15,7 @@ class Reviews(models.Model):
         STAR_5=5
     reviewer=models.OneToOneField(User,on_delete=models.CASCADE)
     star=models.IntegerField(choices=rate_choices.choices)
-    message=models.CharField(max_length=250)
+    message=models.CharField(max_length=2000)
     date_posted=models.DateTimeField()
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
