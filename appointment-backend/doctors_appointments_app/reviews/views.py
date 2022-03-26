@@ -1,7 +1,9 @@
+from django.utils.decorators import method_decorator
 from rest_framework import viewsets,status,permissions,generics
 from .serializer import Reviews_serializer
 from .models import Reviews
 from rest_framework.response import Response
+from django.contrib.auth.decorators import login_required
 
 class ReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -20,3 +22,8 @@ class Reviews_API(viewsets.ModelViewSet):
         serializer.save(reviewer=request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    @method_decorator(login_required)
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.queryset.filter(reviewer=request.user).first()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
