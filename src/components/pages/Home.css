@@ -211,29 +211,34 @@
 }
 
 .review .box-container .box{
-  background:#fff;
+  background:beige;
   width:20rem;
   height: 15rem;
-  margin:2rem 1rem;
-  padding:1.5rem;
+  margin:2rem 0rem;
+  padding:0.5rem;
   position: relative;
   border-top-left-radius: 30px;
   border-bottom-right-radius: 30px;
 }
 
+.box{
+  flex-wrap: wrap;
+}
 .review .box-container .box img{
   position: absolute;
-  bottom: -7.5rem; left: -1rem;
+  bottom: -5.5rem; left: -1rem;
   height:4rem;
   width:4rem;
   border-radius: 50%;
   object-fit: cover;
-  margin-top: 1px;
+  margin-top: 0px;
 }
+
 
 .review .box-container .box p{
   font-size: 1.4rem;
   color:var(--black);
+  flex-wrap: wrap;
 }
 
 .review .box-container .box h3{

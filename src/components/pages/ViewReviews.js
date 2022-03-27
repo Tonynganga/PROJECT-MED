@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getReviews } from '../../actions/reviews'
 import propTypes from 'prop-types'
-
+// import './Home.css';
 const ViewReviews = (props) => {
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -24,8 +24,8 @@ const ViewReviews = (props) => {
             setReviewDisplays([...(props.reviews.map(review => {
                 const datePosted = new Date(review.date_posted)
                 return (
-                    <div key={review.id} class="box" data-aos="fade-right">
-                        <p style={{ height: 'inherit', width: 'inherit', padding: '0px', margin: '0px' }}>{review.message}</p>
+                    <div key={review.id} className="box" data-aos="fade-right">
+                        <p style={{ height: 'inherit', width: 'inherit', padding: '0.5rem', margin: '0px' }}>{review.message}</p>
                         <h3>{review.reviewer_first_name + " " + review.reviewer_last_name}</h3>
                         <span>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</span>
                         <img src={'http://localhost:8000' + review.reviewer_profile_pic} alt="" />
