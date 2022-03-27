@@ -8,7 +8,7 @@ import PatientNavBar from '../../components/PatientNavBar';
 
 function PatientHomePage() {
     return (
-        <div className='patienthome__page'>
+        <div className='patientchangepass__page'>
             <div className='patientnav__bar'>
                 <PatientNavBar />
                 <div className='patient__dashboard'>

@@ -9,6 +9,7 @@ import { getProfile, updateProfile } from '../../actions/profile';
 import { errorMessage } from '../../actions/errors';
 import Select from 'react-select';
 
+
 const genders = [
     { label: "Male", value: "M" },
     { label: "Female", value: "F" },
@@ -39,7 +40,7 @@ const PatientProfile = props => {
     const [emailState, setEmail] = useState("");
     const [image, setImage] = useState(null);
     const [genderState, setGender] = useState({});
-   
+
     useEffect(
         () => {
             props.getProfile()
@@ -49,11 +50,11 @@ const PatientProfile = props => {
                 setEmail(user.email)
                 setFirstname(user.first_name)
                 setLastname(user.last_name)
-                setGender(genders.filter(gender=>gender.value===user.gender)[0])
-                setBloodgroup(bloodgroups.filter(bloodgroup=>bloodgroup.value===user.blood_group)[0])
-                setPhonenumber(user.phone_number?user.phone_number:"")
+                setGender(genders.filter(gender => gender.value === user.gender)[0])
+                setBloodgroup(bloodgroups.filter(bloodgroup => bloodgroup.value === user.blood_group)[0])
+                setPhonenumber(user.phone_number ? user.phone_number : "")
                 // setDateofbirth(user.date_of_birth)
-                setAddress(user.address?user.address:"")
+                setAddress(user.address ? user.address : "")
             }
         },
         [props.user]
@@ -69,10 +70,10 @@ const PatientProfile = props => {
     const onChangePicture = e => {
         setImage(e.target.files[0]);
     };
-    const formValidation=()=>{
-        const containUsernameInvalidChar=/^[\w.@+-]+$/
+    const formValidation = () => {
+        const containUsernameInvalidChar = /^[\w.@+-]+$/
 
-        if(!containUsernameInvalidChar.test(usernameState)){
+        if (!containUsernameInvalidChar.test(usernameState)) {
             props.errorMessage("invalid characters used in username")
             return false
         }
@@ -80,16 +81,16 @@ const PatientProfile = props => {
     }
     const onSubmit = e => {
         e.preventDefault();
-        if(formValidation){
+        if (formValidation) {
             const formData = new FormData();
 
             formData.append('username', usernameState);
             formData.append('email', emailState);
             formData.append('first_name', firstnameState);
-            if(bloodgroupState){
+            if (bloodgroupState) {
                 formData.append('blood_group', bloodgroupState.value);
-            }            
-            formData.append ('gender', genderState.value);
+            }
+            formData.append('gender', genderState.value);
             formData.append('phone_number', phonenumberState);
             formData.append('last_name', lastnameState);
             //   formData.append ('date_of_birth', dateofbirthState);
@@ -115,8 +116,8 @@ const PatientProfile = props => {
                     <SideBar />
                 </div>
                 <form
-                onSubmit={onSubmit} className='profile__form'>
-                {/* <div className='profile__form'> */}
+                    onSubmit={onSubmit} className='profile__form'>
+                    {/* <div className='profile__form'> */}
                     <div className="uploadimage__form">
                         <img src={'http://localhost:8000' + props.imageUrl} id="img" alt="#" width="100px" height="100px" />
                         <input type="file" accept="image/*" name="image-upload" id="input" onChange={onChangePicture} />
@@ -155,11 +156,11 @@ const PatientProfile = props => {
                                 }}
                                 value={emailState} /><br />
                         </div>
-                        
-                        
+
+
                     </div>
                     <div className='form__data'>
-                    <div className='form__data__two'>
+                        <div className='form__data__two'>
                             <div className='label'>
                                 <label>FirstName :</label>
                             </div>
@@ -173,7 +174,7 @@ const PatientProfile = props => {
                             /><br />
                         </div>
 
-                    <div className='form__data__two'>
+                        <div className='form__data__two'>
                             <div className='label'>
                                 <label>LastName :</label>
                             </div>
@@ -184,24 +185,24 @@ const PatientProfile = props => {
                                 }}
                                 value={lastnameState} /><br />
                         </div>
-                    
-                    
-                        
+
+
+
                     </div>
                     <div className='form__data'>
 
-                    <div className="dropdown">
+                        <div className="dropdown">
                             <div className='label'>
                                 <label>Blood Group :</label>
                             </div>
                             <Select
-                            onChange={e => {
-                                setBloodgroup(e);
-                            }}
-                            value={bloodgroupState} 
-                             options={bloodgroups} />
+                                onChange={e => {
+                                    setBloodgroup(e);
+                                }}
+                                value={bloodgroupState}
+                                options={bloodgroups} />
                         </div>
-                       
+
                         <div className='form__data__two'>
                             <div className='label'>
                                 <label>Mobile :</label>
@@ -232,17 +233,17 @@ const PatientProfile = props => {
                                 <label>Gender :</label>
                             </div>
                             <Select
-                             onChange={e => {
-                                setGender(e);
-                            }}
-                            value={genderState} 
-                            options={genders} 
+                                onChange={e => {
+                                    setGender(e);
+                                }}
+                                value={genderState}
+                                options={genders}
                             />
                         </div>
 
                     </div>
-                    <input  type="submit" value="Save Changes" />
-                {/* </div> */}
+                    <input type="submit" value="Save Changes" />
+                    {/* </div> */}
                 </form>
             </div>
             <Footer />
@@ -262,4 +263,4 @@ const mapStateToProps = state => ({
     user: state.auth.user
 });
 
-export default connect(mapStateToProps, { getProfile, updateProfile,errorMessage })(PatientProfile)
+export default connect(mapStateToProps, { getProfile, updateProfile, errorMessage })(PatientProfile)

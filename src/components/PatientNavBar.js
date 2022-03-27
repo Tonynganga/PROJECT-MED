@@ -33,7 +33,7 @@ function PatientNavBar() {
 
 
   return (
-    <div>
+    <div innerWidth='auto'>
       <nav className="navbar fixed-top">
         <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
           EPIC

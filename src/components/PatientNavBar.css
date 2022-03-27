@@ -3,6 +3,7 @@
     height: 60px;
     display: flex;
     justify-content: flex-start;
+    width: auto;
     align-items: center;
     font-size: 1.0rem;
   }
