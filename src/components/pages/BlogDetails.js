@@ -34,16 +34,16 @@ function BlogDetails(props) {
 
     
 
-    if (props.location.state&&props.location.state.post) {
-        const { post } = props.location.state        
-        const datePosted = new Date(post.date_posted)
+    if (props.location.state&&props.location.state.blog) {
+        const {  blog } = props.location.state        
+        const datePosted = new Date(blog.date_posted)
         const createBlog = () => {
-            return { __html: post.blog_content }
+            return { __html: blog.blog_content }
         };
         return (
             
                 <div className='container mt-3'>
-                    <h3 className='display-5'>{capitalizeFirstLetter(post.blog_title)}</h3>
+                    <h3 className='display-5'>{capitalizeFirstLetter(blog.blog_title)}</h3>
                     <h4>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</h4>
                     {/* use the below div to retrieve the blog content */}
                     <div className='mt-5 mb-5' dangerouslySetInnerHTML={createBlog()} />
@@ -56,7 +56,7 @@ function BlogDetails(props) {
                     <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
                         <button onClick={() => setIsOpen(true)} className='b-savecoment' cursor='pointer'>Comment</button>
 
-                        <BlogCommentModal open={isOpen} onClose={() => setIsOpen(false)}>
+                        <BlogCommentModal blogId={blog.id} open={isOpen} onClose={() => setIsOpen(false)}>
                             Fancy Modal
 
                         </BlogCommentModal>

@@ -11,12 +11,9 @@ class Blog_serializer(serializers.ModelSerializer):
         model=Blogs
         fields=['id','blog_title','blog_content','excerpt','date_posted','thumbnail','blogger_profile_pic','blogger_first_name','blogger_last_name']
         read_only_fields=['id','date_posted','thumbnail']
-    def validate_blogger_account(self,value):
-        if value.is_doctor!=True:
-            raise serializers.ValidationError("User should be a doctor")
-        return value
+    
 class Comment_serializer(serializers.ModelSerializer):
     class Meta:
         model=Comments
-        fields=['id','commentor_account','blog','comment']
+        fields=['id','blog','comment']
         read_only_fields=['id']

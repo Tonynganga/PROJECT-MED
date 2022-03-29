@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDom  from 'react-dom';
 import "./PatientNavBar.css";
 import Typography from '@mui/material/Typography';
+import { connect } from 'react-redux';
+import { addComment } from '../actions/blogs';
 
 
 
@@ -27,29 +29,42 @@ const MODAL_STYLES = {
     zIndex: 1000,
   }
   
-  function BlogCommentModal({ open, children, onClose }) {
+  function BlogCommentModal(props) {
   
-    const [value, setValue] = React.useState(2);
+    const [message, setMessage] = React.useState("");
   
-    if (!open) return null
-  
-  
-  
+    if (!props.open) return null
+
+    const onSubmit=(e)=>{
+      e.preventDefault()
+      const body={
+        blog:props.blogId,
+        comment:message
+      }
+      props.addComment(body)
+    }
+    
     return ReactDom.createPortal(
       <>
         <div style={OVERLAY_STYLES} />
         <div style={MODAL_STYLES}>
           <div className="modal-content-div">
             <div className="col-lg-9" >
-              <form>
+              <form onSubmit={onSubmit}>
               <h3 className="review__heading">Comment</h3>
   
                 <div className="form-group-textarea">
-                  <textarea className="form-control" name="message" placeholder='Write Your Comment' rows="5" cols="40"></textarea>
+                  <textarea 
+                  className="form-control" 
+                  name="message" 
+                  placeholder='Write Your Comment' 
+                  rows="5" 
+                  cols="40"
+                  onChange={(e)=>setMessage(e.target.value)}></textarea>
                 </div>
                 <div className="review-buttons">
                   <button className="review-form-submit btn btn-success" type="submit">Post</button>
-                  <button className="btn btn-danger" onClick={onClose}>Close</button>
+                  <button className="btn btn-danger" onClick={props.onClose}>Close</button>
                   </div>
               </form>
             </div>
@@ -64,4 +79,4 @@ const MODAL_STYLES = {
       document.getElementById('commentportal')
     )
   }
-  export default BlogCommentModal;
+  export default connect(null,{addComment})(BlogCommentModal);

@@ -29,16 +29,15 @@ class Blog_API(viewsets.ModelViewSet):
 class Comment_API(viewsets.ModelViewSet):
     serializer_class=Comment_serializer
     permission_classes=[
-        permissions.IsAuthenticated,
+        permissions.IsAuthenticated|ReadOnly,
     ]
     def get_queryset(self):
         queryset=Comments.objects.all().filter(blog=self.kwargs['blog_id'])
         return queryset
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.initial_data['commentor_account']=request.user.id
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer.save(commentor_account=request.user)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     

@@ -86,7 +86,7 @@ function Blog(props) {
             console.log('hello')
             const datePosted = new Date(blogPost.date_posted)
             return list.push(
-                <div className="mb-4 mt-2 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
+                <div key={blogPost.id} className="mb-4 mt-2 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
                     <div className="p-3 col d-flex flex-column position-static">
                         <Grid item lg={2}>
                             <Avatar src={'http://localhost:8000' + blogPost.blogger_profile_pic} className={classes.avatar} />
@@ -100,7 +100,7 @@ function Blog(props) {
                         <Link to={{
                             pathname: '/blog_details',
                             state: {
-                                post: blogPost,
+                                blog: blogPost,
                             },
                         }} className="stretched-link">Continue reading</Link>
                     </div>
@@ -159,7 +159,7 @@ function Blog(props) {
                             <Link to={{
                                 pathname: '/blog_details',
                                 state: {
-                                    post: featuredBlog,
+                                    blog: featuredBlog,
                                 },
                             }} className="text-white font-weight-bold">
                                 Continue reading...

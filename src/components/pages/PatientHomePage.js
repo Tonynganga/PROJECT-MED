@@ -50,19 +50,42 @@ const OTHER_CONTENT_STYLES = {
 
 
 function PatientHomePage(props) {
-
+    const genders = [
+        { label: "Male", value: "M" },
+        { label: "Female", value: "F" },
+        { label: "Do not disclose", value: "D" },
+    
+    ];
+    const [category, setCategory] = useState("");
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         props.getAvailableAppointments()
     }, [])
+    const [filteredAppointments,setFilteredAppointments]=useState([])
+    useEffect(()=>{
+        if(props.appointments.length>0){
+            setFilteredAppointments(props.appointments)
+        }
+    },[props.appointments])
+    const onSearch=()=>{
+        let tempList
+        if(props.appointments.length>0){
+        tempList=props.appointments.filter(appointment=>appointment.doctor_gender===gender)
+        if(location.length>1)
+        tempList=tempList.filter(appointment=>appointment.doctor_address.toLowerCase()===location.toLowerCase())
+        if(category.value.length>1)
+        tempList=tempList.filter(appointment=>appointment.appointment_type===category.value)
+        setFilteredAppointments(tempList)
+        }
+    }
 
 
-    const [value, setValue] = React.useState('female');
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
+    const [gender, setGender] = React.useState('F');
+    const [location, setLocation] = React.useState("");
+
+    
     return (
         <div>
 
@@ -89,7 +112,7 @@ function PatientHomePage(props) {
                     </div>
 
                     <div className='doctorcard__holder'>
-                        {props.appointments.map(appointment => (
+                        {filteredAppointments.map(appointment => (
                             <DoctorCard appointment={appointment} />
                         ))}
                     </div>
@@ -105,6 +128,8 @@ function PatientHomePage(props) {
                                     <input type="text" placeholder="Enter Location..."
                                         name="username"
                                         required
+                                        value={location}
+                                        onChange={(e)=>setLocation(e.target.value)}
                                     /><br />
                                 </div>
                                 <div className='ds-form__data__two'>
@@ -116,11 +141,11 @@ function PatientHomePage(props) {
                                             aria-labelledby='demo-radio-buttons-groub-label'
                                             defaultValue="male"
                                             name="radio-buttons-group"
-                                            value={value}
-                                            onChange={handleChange}>
-                                            <FormControlLabel value='male' control={<Radio />} label='Male' />
-                                            <FormControlLabel value='female' control={<Radio />} label='Female' />
-                                            <FormControlLabel value='other' control={<Radio />} label='Other' />
+                                            value={gender}
+                                            onChange={(e)=>setGender(e.target.value)}>
+                                            <FormControlLabel value='M' control={<Radio />} label='Male' />
+                                            <FormControlLabel value='F' control={<Radio />} label='Female' />
+                                            <FormControlLabel value='D' control={<Radio />} label='Other' />
                                         </RadioGroup>
                                     </FormControl>
                                 </div>
@@ -130,10 +155,15 @@ function PatientHomePage(props) {
                                         <label>Select Specialist :</label>
                                     </div>
                                     <Select
-                                    options={doct_type}/>
+                                    options={doct_type}
+                                    onChange={e => {
+                                        setCategory(e);
+                                    }}
+                                    value={category}
+                                    />
                                 </div>
                                 <div className='ds-search-btn'>
-                                    <a href="/appointment" className='ds-book__btn' >Search</a>
+                                    <a href="#" onClick={onSearch} className='ds-book__btn' >Search</a>
                                 </div>
 
                             </div>
