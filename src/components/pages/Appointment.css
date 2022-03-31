@@ -39,7 +39,7 @@
 .Bapp_form{
     width: 90%;
 }
-.Bapp__appdate__edt {
+.Bapp__appdate__edt, .Bapp__apptime__edt {
     margin-top: 30px;
     margin-right: 25px;
     max-width: 50%;
