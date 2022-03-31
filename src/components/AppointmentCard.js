@@ -139,8 +139,7 @@ function AppointmentCard() {
                                     style={{
                                         backgroundColor:
                                             ((row.status === 'Active' && 'green') ||
-                                                (row.status === 'Pending' && 'blue') ||
-                                                (row.status === 'Blocked' && 'orange'))
+                                                (row.status === 'Pending' && 'blue'))
                                     }}
                                 >{row.status}</Typography>
                             </TableCell>

@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Appointment.css';
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -9,17 +9,36 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import Stack from '@mui/material/Stack';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import TimePicker from '@mui/lab/TimePicker';
-// import './Main.css';
 import Footer from "../Footer";
 import SideBar2 from "./SideBar2";
 import PatientNavBar from '../PatientNavBar';
 import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from '@material-ui/core'
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 
-
+const hoursData = [
+    { isChecked: false, name: "7 AM - 9 AM", value: "07:00" },
+    { isChecked: false, name: "9 AM - 11 AM", value: "09:00" },
+    { isChecked: false, name: "11 AM - 1 PM", value: "11:00" },
+    { isChecked: false, name: "1 PM - 3 PM", value: "13:00" },
+    { isChecked: false, name: "3 PM - 5 PM", value: "15:00" }
+];
 
 function Appointment() {
+    const [hours, setHours] = useState([]);
     const [value, setValue] = useState(new Date('2018-01-01T00:00:00.000Z'));
+
+    useEffect(() => {
+        setHours(hoursData);
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, checked } = e.target;
+            let tempHour = hours.map((hour) =>
+                hour.name === name ? { ...hour, isChecked: checked } : hour
+            );
+            setHours(tempHour);
+        
+    }
 
     return (
         <div>
@@ -60,21 +79,26 @@ function Appointment() {
 
                                 </div>
                             </div>
-                            <div className='Bapp__apptime'>
-                                <div className='Bapp__label'>
-                                    <label>Enter Appointment Time</label>
+                            <div className="appoint-checkbox">
+                                <div className='label'>
+                                    <label>Pick Time Duration :</label>
                                 </div>
-                                <div className='Bapp__appdate__edt'>
-                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                        <Stack spacing={3}>
-                                            <TimePicker
-                                                placeholder='Pick Time'
-                                                value={value}
-                                                onChange={setValue}
-                                                renderInput={(params) => <TextField{...params} />} />
-                                        </Stack>
-                                    </LocalizationProvider>
-                                </div>
+                                <form className="checkbox-form">
+                                    {hours.map((hour, index) => (
+                                        <div className="form-check" key={index}>
+                                            <input
+                                                type="checkbox"
+                                                className="form-check-input"
+                                                name={hour.name}
+                                                checked={hour?.isChecked || false}
+                                                onChange={handleChange}
+                                            />
+                                            <label className="form-check-label">{hour.name}</label>
+
+                                        </div>
+                                    ))}
+                                </form>
+
 
                             </div>
                             <div className='submit'>
