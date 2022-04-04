@@ -288,6 +288,9 @@
     margin-top: 60px;
     min-width: 100%;
 }
+.mypatients_hpage{
+    margin-top: 0px;
+}
 .btn__upcoming{
     padding-right: 10px;
     padding-left: 10px;
@@ -315,4 +318,28 @@
     background-color: blue;
     padding: 5px;
     border-radius: 10px;
+}
+.mpatients__header{
+    text-align: center;
+    margin-top:60px;
+}
+
+
+
+
+.myp_holder{
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+    padding-right: 25px;
+    width: 350px;
+    background-color: blue;
+    justify-content: center;
+    align-items: center;
+}
+.image__view1{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

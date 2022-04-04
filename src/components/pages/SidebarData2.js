@@ -22,7 +22,7 @@ export const SidebarData2 = [
     {
         title: "My Patients",
         icon: <PersonIcon/>,
-        link:"/doctorpatients"
+        link:"/my_patients"
     },
     {
         title: "Profile Settings",
