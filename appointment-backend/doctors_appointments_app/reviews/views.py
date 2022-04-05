@@ -1,5 +1,6 @@
 from django.utils.decorators import method_decorator
-from rest_framework import viewsets,status,permissions,generics
+from rest_framework import viewsets,status,permissions
+from rest_framework.decorators import action
 from .serializer import Reviews_serializer
 from .models import Reviews
 from rest_framework.response import Response
