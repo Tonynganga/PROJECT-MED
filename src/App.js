@@ -27,6 +27,7 @@ import AppointmentCard from './components/AppointmentCard';
 import BlogDetails from './components/pages/BlogDetails';
 import MyPatients from './components/pages/MyPatients';
 import MyPatientCard from './components/MyPatientCard';
+import PageNotFound from './components/pages/PageNotFound';
 function App() {
   setUpNotifications({
     defaultProps: {
@@ -63,7 +64,7 @@ function App() {
         <Route path= '/app_card' exact component={AppointmentCard}/>
         <Route path= '/blog_details' exact component={BlogDetails}/>
         <Route path= '/my_patients' exact component={MyPatients}/>
-
+        <Route path='/*' exact component={PageNotFound}/>
         
         </div>
       

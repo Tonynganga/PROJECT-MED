@@ -343,3 +343,7 @@
     align-items: center;
     justify-content: center;
 }
+
+.pageNotFound{
+    text-align: center;
+  }
