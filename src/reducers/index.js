@@ -4,7 +4,7 @@ import errors from './errors';
 import profile from './profile';
 import appointments from './appointments';
 import reviews from './reviews';
-import doc_appointments from './doc_appointments';
+import docAppointments from './docAppointments';
 import blogs from './blogs'
 import { persistReducer } from 'redux-persist'; 
 import {reducer as notificationsReducer} from 'reapop'
@@ -17,7 +17,7 @@ const persistConfig={
 }
 
 const rootReducer=combineReducers({
-    auth,errors,profile,blogs,reviews,appointments,doc_appointments,notifications: notificationsReducer()
+    auth,errors,profile,blogs,reviews,appointments,docAppointments,notifications: notificationsReducer()
 })
 
 export default persistReducer (persistConfig,rootReducer);

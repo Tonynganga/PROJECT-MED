@@ -6,7 +6,7 @@ import AppointmentCard from '../AppointmentCard';
 import Select from 'react-select';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { checkIfAppointmentSettingSet } from '../../actions/doc_appointments';
+import { checkIfAppointmentSettingSet } from '../../actions/docAppointments';
 import DoctorAppiontmentsBar from "./DoctorAppointmentsBar";
 import DoctorAppiontmentSettingBar from "./DoctorAppointmentSettingBar";
 
@@ -51,7 +51,7 @@ DoctorHomePage.propTypes = {
     checkIfAppointmentSettingSet: propTypes.func.isRequired,    
 };
 const mapStateToProps = state => ({
-    appointmentSettingSet: state.doc_appointments.appointmentSettingSet,
+    appointmentSettingSet: state.docAppointments.appointmentSettingSet,
 });
 
 export default connect(mapStateToProps, { checkIfAppointmentSettingSet })(DoctorHomePage)

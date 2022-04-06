@@ -6,6 +6,10 @@ import { SidebarData } from "./SidebarData";
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
 import {NavLink} from 'react-router-dom'
+import {capitalizeFirstLetter} from '../../utils'
+
+
+
 
 const SideBar = props => {
   const [usernameState, setUsername] = useState("");
@@ -31,7 +35,7 @@ useEffect(() => {
       <div className="image__view">
       <img src={imageState} id="img" alt="#"width="60px" height="60px"/>
         <div className="name__patient">
-        <h4 >{usernameState?usernameState:""}</h4>
+        <h4 className="patient_profilename">{capitalizeFirstLetter(usernameState)}</h4>
           <p>{addressState?addressState:""}</p>
         </div>
       </div>

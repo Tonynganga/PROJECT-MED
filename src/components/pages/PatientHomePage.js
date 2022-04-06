@@ -188,7 +188,7 @@ PatientHomePage.propTypes = {
     getAvailableAppointments: propTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-    appointments: state.appointments
+    appointments: state.appointments.appointmentList
 });
 
 export default connect(mapStateToProps, { getAvailableAppointments })(PatientHomePage)

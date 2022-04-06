@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import faker from 'faker';
 import './AppointmentCard.css';
 import { Link } from 'react-router-dom';
@@ -19,6 +19,11 @@ import {
     Button
 } from '@material-ui/core';
 import { palette } from '@mui/system';
+import { connect } from 'react-redux';
+import { errorMessage } from '../actions/errors';
+import { getDoctorAppointments } from '../actions/docAppointments';
+import propTypes from 'prop-types';
+import {capitalizeFirstLetter} from '../utils'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -80,10 +85,14 @@ for (let i = 0; i < 7; i++) {
     }
 }
 
-function AppointmentCard() {
+const AppointmentCard=(props)=> {
     const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    useEffect(()=>{
+        props.getDoctorAppointments()
+    },[])
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -108,21 +117,21 @@ function AppointmentCard() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {USERS.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                        <TableRow key={row.name}>
+                    {props.docAppointmentsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                        <TableRow key={row.id}>
                             <TableCell>
                                 <Grid container>
                                     <Grid item lg={2}>
-                                        <Avatar alt={row.name} src='.' className={classes.avatar} />
+                                        <Avatar alt={capitalizeFirstLetter(row.patient_first_name)} src='.' className={classes.avatar} />
                                     </Grid>
                                     <Grid item lg={10}>
-                                        <Typography className={classes.name}>{row.name}</Typography>
-                                        <Typography color="textSecondary" variant="body2">{row.email}</Typography>
-                                        <Typography color="textSecondary" variant="body2">{row.phone}</Typography>
+                                        <Typography className={classes.name}>{capitalizeFirstLetter(row.patient_first_name)+' '+capitalizeFirstLetter(row.patient_last_name)}</Typography>
+                                        <Typography color="textSecondary" variant="body2">{row.patient_email}</Typography>
+                                        <Typography color="textSecondary" variant="body2">{row.patient_phone_no?row.patient_phone_no:""}</Typography>
                                     </Grid>
                                 </Grid>
                             </TableCell>
-                            <TableCell>{row.joinDate}</TableCell>
+                            <TableCell>{row.appointment_date}</TableCell>
                             <TableCell>
                                 <Typography
                                     className={classes.payment}
@@ -131,7 +140,7 @@ function AppointmentCard() {
                                             ((row.payment === 'Paid' && 'green') ||
                                                 (row.payment === 'Unpaid' && 'red'))
                                     }}
-                                >{row.payment}</Typography>
+                                >Paid</Typography>
                             </TableCell>
                             <TableCell>
                                 <Typography
@@ -141,7 +150,7 @@ function AppointmentCard() {
                                             ((row.status === 'Active' && 'green') ||
                                                 (row.status === 'Pending' && 'blue'))
                                     }}
-                                >{row.status}</Typography>
+                                >Active</Typography>
                             </TableCell>
 
                             <TableCell>
@@ -158,7 +167,7 @@ function AppointmentCard() {
                     <TablePagination
                         rowsPerPageOptions={[5, 10, 15]}
                         component="div"
-                        count={USERS.length}
+                        count={props.docAppointmentsList.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onChangePage={handleChangePage}
@@ -170,4 +179,14 @@ function AppointmentCard() {
     );
 }
 
-export default AppointmentCard;
+
+AppointmentCard.prototype = {
+    getDoctorAppointments: propTypes.func.isRequired,
+    errorMessage: propTypes.func.isRequired,
+}
+
+const mapStateToProps = state => ({
+    docAppointmentsList: state.docAppointments.docAppointments,
+});
+
+export default connect(mapStateToProps, {getDoctorAppointments,errorMessage })(AppointmentCard)

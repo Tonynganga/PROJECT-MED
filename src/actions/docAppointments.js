@@ -1,6 +1,6 @@
 import {
     GET_APPOITMENTS_SETTINGS, GET_APPOITMENTS_SETTINGS_FAILED,
-    ADD_APPOITMENTS_SETTINGS, ADD_APPOITMENTS_SETTINGS_FAILED
+    ADD_APPOITMENTS_SETTINGS, ADD_APPOITMENTS_SETTINGS_FAILED, GET_DOC_APPOITMENTS, GET_DOC_APPOITMENTS_FAILED
 } from './types';
 import axios from 'axios';
 import { getErrors } from './errors';
@@ -22,6 +22,21 @@ export const checkIfAppointmentSettingSet = () => (dispatch, getState) => {
         });
 };
 
+export const getDoctorAppointments = () => (dispatch, getState) => {
+
+    axios
+        .get('http://localhost:8000/api/appointment/get_booked_appointments', tokenConfig(getState))
+        .then(res => {
+            dispatch({ type: GET_DOC_APPOITMENTS, payload: res.data });
+            // dispatch(notify("registeration successfull","success"))
+        })
+        .catch(err => {
+            dispatch(getErrors(err.data, err.status));
+            // dispatch(notify("Failed to get appointment","error"))
+            dispatch({ type: GET_DOC_APPOITMENTS_FAILED });
+        });
+};
+
 export const setAppointmentSetting = data => (dispatch, getState) => {
 
     axios
@@ -37,3 +52,4 @@ export const setAppointmentSetting = data => (dispatch, getState) => {
             dispatch({ type: ADD_APPOITMENTS_SETTINGS_FAILED });
         });
 };
+

@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404
 from django.db import transaction
 from rest_framework.decorators import action
 from accounts.serializer import UserSerializer
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 class ReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -21,7 +23,6 @@ class Appointment_setting_ps_API(viewsets.ModelViewSet):
     serializer_class=Appointment_settiing_ps_Serializer
     queryset=Appointment_settings_per_station.objects.all()
     lookup_field='doctor_account'
-    
     def retrieve(self, request, *args, **kwargs):
         obj = get_object_or_404(self.queryset, **{self.lookup_field:request.user.id})
         # May raise a permission denied
@@ -74,10 +75,20 @@ class Available_time_choice_ps_API(viewsets.ModelViewSet):
         return Response(data_list, status=status.HTTP_201_CREATED, headers=headers)
 
 class Booked_appointments_API(viewsets.ModelViewSet):
+        permission_classes=[
+            permissions.IsAuthenticated,
+        ]
         serializer_class=Booked_appointments_Serializer
         def get_queryset(self):
-            queryset=Booked_appointments.objects.all().filter(doctor_account=self.kwargs['doctor_account'])
+            queryset=Booked_appointments.objects.all().filter(doctor_account=self.request.user)
             return queryset
+        def create(self, request, *args, **kwargs):
+            aps_query=Appointment_settings_per_station.objects.get(id=request.data['appointment_id'])
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(patient_account=request.user,doctor_account=aps_query.doctor_account)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 # class Filled_date_choices_ps_API(viewsets.ModelViewSet):
 #         serializer_class=Filled_date_choices_ps_Serializer

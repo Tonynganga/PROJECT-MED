@@ -5,6 +5,8 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
 import { Link, NavLink } from 'react-router-dom';
+import {capitalizeFirstLetter} from '../../utils'
+
 
 const SideBar2 = props => {
   const [usernameState, setUsername] = useState("");
@@ -29,7 +31,7 @@ const SideBar2 = props => {
       <div className="image__view">
         <img src={imageState} id="img" alt="#" width="60px" height="60px" />
         <div className="name__doctor">
-          <h4 className="doctor_profilename">{usernameState ? usernameState : ""}</h4>
+          <h4 className="doctor_profilename">{capitalizeFirstLetter(usernameState)}</h4>
           <p className="doctor_address">{addressState ? addressState : ""}</p>
         </div>
       </div>

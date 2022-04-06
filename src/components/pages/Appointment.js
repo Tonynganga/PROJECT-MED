@@ -5,40 +5,96 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 // import TextField from '@mui/material/TextField';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import Stack from '@mui/material/Stack';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import TimePicker from '@mui/lab/TimePicker';
+// import AdapterDateFns from '@mui/lab/AdapterDateFns';
+// import Stack from '@mui/material/Stack';
+// import LocalizationProvider from '@mui/lab/LocalizationProvider';
+// import TimePicker from '@mui/lab/TimePicker';
 import Footer from "../Footer";
 import SideBar2 from "./SideBar2";
 import PatientNavBar from '../PatientNavBar';
 import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from '@material-ui/core'
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
+import { connect } from 'react-redux';
+import { errorMessage } from '../../actions/errors';
+import { setAppointment,getAppointmentTimePerDate } from '../../actions/appointments';
+import propTypes from 'prop-types';
 
 const hoursData = [
-    { isChecked: false, name: "7 AM - 9 AM", value: "07:00" },
-    { isChecked: false, name: "9 AM - 11 AM", value: "09:00" },
-    { isChecked: false, name: "11 AM - 1 PM", value: "11:00" },
-    { isChecked: false, name: "1 PM - 3 PM", value: "13:00" },
-    { isChecked: false, name: "3 PM - 5 PM", value: "15:00" }
+    { isChecked: false, name: "7 AM - 9 AM", value: "07:00:00" },
+    { isChecked: false, name: "9 AM - 11 AM", value: "09:00:00" },
+    { isChecked: false, name: "11 AM - 1 PM", value: "11:00:00" },
+    { isChecked: false, name: "1 PM - 3 PM", value: "13:00:00" },
+    { isChecked: false, name: "3 PM - 5 PM", value: "15:00:00" }
 ];
 
-function Appointment() {
+function Appointment(props) {
     const [hours, setHours] = useState([]);
-    const [value, setValue] = useState(new Date('2018-01-01T00:00:00.000Z'));
+    const [appointmentDate, setAppointmentDate] = useState("");
+    const [appointmentID, setAppointmentID] = useState("");
+
+    if (props.location.state&&props.location.state.appointmentId) {
+        // setAppointmentID(props.location.state.appointmentId)
+    }
 
     useEffect(() => {
-        setHours(hoursData);
-    }, []);
+        let resultArray=[]
+        if(props.availableAppointmentTime.length>0){
+            props.availableAppointmentTime.forEach(elem=>{
+                let tempArr=hoursData.filter(data=>data.value==elem)
+                resultArray=[...resultArray,...tempArr]
+            })  
+
+        }else
+        resultArray=hoursData
+        setHours(resultArray);
+    }, [props.availableAppointmentTime]);
+
+    
+   
 
     const handleChange = (e) => {
         const { name, checked } = e.target;
             let tempHour = hours.map((hour) =>
-                hour.name === name ? { ...hour, isChecked: checked } : hour
+                hour.name === name ? { ...hour, isChecked: checked } : { ...hour, isChecked: false }
             );
             setHours(tempHour);
         
     }
+
+    const handleDateChange=(e)=>{
+        setAppointmentDate(e.value)
+        props.getAppointmentTimePerDate({
+            appiontmentID:props.location.state.appointmentId,
+            appiontmentDate:e.value.toISOString().substring(0, 10)
+        })        
+    }
+
+    const onSubmit=(e)=>{
+        e.preventDefault()
+        let appointmentTime
+        hours.forEach((hour) => {
+            if (hour.isChecked)
+            appointmentTime = [hour.value]
+        })
+        if(appointmentDate==""){
+            props.errorMessage('please select appointment date')
+            return
+        }
+
+        if (appointmentTime.length < 1) {
+            props.errorMessage('please select appointment time')
+            return
+        }
+      const data = {
+        appointment_id:props.location.state.appointmentId,
+        appointment_time:appointmentTime[0],
+        appointment_date:appointmentDate.toISOString().substring(0, 10),
+      }
+      props.setAppointment(data)
+
+    }
+
+    
 
     return (
         <div>
@@ -58,7 +114,7 @@ function Appointment() {
                         <div className='Bapp__header'>
                             <h2>Book Appointment</h2>
                         </div>
-                        <div className='Bapp_form'>
+                        <form onSubmit={onSubmit} className='Bapp_form'>
 
                             <div className='Bapp__appdate'>
                                 <div className='Bapp__label'>
@@ -71,8 +127,12 @@ function Appointment() {
                                         placeholder='Enter Date...'
                                         fullWidth
                                         color='#00000'
-                                        variant='outlined'
-                                        format="dd-MMM-yy"
+                                        variant='none'
+                                        format="dd-MMM-yy" 
+                                        allowEdit={false}
+                                        value={appointmentDate}
+                                        onChange={handleDateChange}
+                                        min={new Date()}
                                     >
 
                                     </DatePickerComponent>
@@ -83,7 +143,7 @@ function Appointment() {
                                 <div className='label'>
                                     <label>Pick Time Duration :</label>
                                 </div>
-                                <form className="checkbox-form">
+                                <div className="checkbox-form">
                                     {hours.map((hour, index) => (
                                         <div className="form-check" key={index}>
                                             <input
@@ -97,7 +157,7 @@ function Appointment() {
 
                                         </div>
                                     ))}
-                                </form>
+                                </div>
 
 
                             </div>
@@ -105,7 +165,7 @@ function Appointment() {
                                 <input type="submit" value="Proceed to Pay" />
                             </div>
 
-                        </div>
+                        </form>
                         <div className='Bapp__personalinfo'>
                             <div className='Bapp__personalinf__edt'>
                                 <TextField
@@ -310,4 +370,14 @@ function Appointment() {
 
 
 
-export default Appointment;
+Appointment.prototype = {
+    setAppointment: propTypes.func.isRequired,
+    errorMessage: propTypes.func.isRequired,
+    getAppointmentTimePerDate:propTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    availableAppointmentTime: state.appointments.availableAppointmentTime,
+});
+
+export default connect(mapStateToProps, {setAppointment,getAppointmentTimePerDate,  errorMessage })(Appointment)

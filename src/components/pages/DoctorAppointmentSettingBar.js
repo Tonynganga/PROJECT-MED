@@ -3,7 +3,7 @@ import Select from 'react-select';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { errorMessage } from '../../actions/errors';
-import { setAppointmentSetting } from '../../actions/doc_appointments';
+import { setAppointmentSetting } from '../../actions/docAppointments';
 
 const doct_type = [
     { label: "General Practitioner", value: "general practitioner" },

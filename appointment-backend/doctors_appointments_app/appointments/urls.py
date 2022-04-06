@@ -13,6 +13,6 @@ urlpatterns = [
     path('appointment/set_appointment_time',Available_time_choice_ps_API.as_view({'post':'create'})),
     path('appointment/set_appointment_time_list',Available_time_choice_ps_API.as_view({'post':'create_from_list'})),
     path('appointment/add_booked_appointments',Booked_appointments_API.as_view({'post':'create'})),
-    path('appointment/get_booked_appointments/<int:doctor_account>',Booked_appointments_API.as_view({'get':'list'})),
+    path('appointment/get_booked_appointments',Booked_appointments_API.as_view({'get':'list'})),
     
 ]

@@ -1,5 +1,7 @@
 import {
-    AVAILABLE_APPOITMENTS,AVAILABLE_APPOITMENTS_FAILED,
+  ADD_APPOITMENT,
+    ADD_APPOITMENT_FAILED,
+    AVAILABLE_APPOITMENTS,AVAILABLE_APPOITMENTS_FAILED, GET_AVAILABLE_APPOITMENTS_TIME, GET_AVAILABLE_APPOITMENTS_TIME_FAILED,
   } from './types';
   import axios from 'axios';
   import {getErrors} from './errors';
@@ -24,4 +26,31 @@ import {
         dispatch ({type: AVAILABLE_APPOITMENTS_FAILED});
       });
   };
-  
+  export const setAppointment = data => (dispatch, getState) => {
+
+    axios
+        .post('http://localhost:8000/api/appointment/add_booked_appointments',
+            data
+            , tokenConfig(getState))
+        .then(res => {
+            dispatch({ type: ADD_APPOITMENT, payload: res.data });
+            dispatch(notify("Add appointment successfull", "success"))       })
+        .catch(err => {
+            dispatch(getErrors(err.data, err.status));
+            dispatch(notify("Add appointment failed", "error"))
+            dispatch({ type: ADD_APPOITMENT_FAILED });
+        });
+};
+
+export const getAppointmentTimePerDate = data => dispatch=> {
+
+  axios
+      .get(`http://localhost:8000/api/appointment/get_appointment_time/${data.appiontmentID}/${data.appiontmentDate}`)
+    .then(res => {
+          dispatch({ type: GET_AVAILABLE_APPOITMENTS_TIME, payload: res.data });
+           })
+      .catch(err => {
+          dispatch(getErrors(err.data, err.status));
+          dispatch({ type: GET_AVAILABLE_APPOITMENTS_TIME_FAILED });
+      });
+};

@@ -4,6 +4,7 @@ import BlogNavbar from '../BlogNavbar';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getBlogs } from '../../actions/blogs';
+import {capitalizeFirstLetter} from '../../utils'
 import {
     Table,
     TableBody,
@@ -57,11 +58,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 
-const capitalizeFirstLetter = (word) => {
-    if (word)
-        return word.charAt(0).toUpperCase() + word.slice(1);
-    return '';
-};
+
 
 function Blog(props) {
     const classes = useStyles();
