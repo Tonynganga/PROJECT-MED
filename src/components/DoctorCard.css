@@ -1,14 +1,14 @@
 .card{
     background-color: gainsboro;
     height: max-content;
-    min-width: 450px;
-    width: max-content;
+    min-width: max-content;
     padding-bottom: 15px;
     margin-top: 10px;
     border-radius: 10px;
 }
 .card__wrapper{
     display: flex;
+    max-width: 700px;
     flex-direction: row;
     padding: 10px;
     margin-top: 15px;
@@ -30,6 +30,7 @@
 }
 .card__details__wrapper{
     background-color: details__wrapper;
+    max-width: 200px;
     padding: 10px;
     margin-left: 10px;
 }
