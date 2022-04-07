@@ -8,7 +8,7 @@ export default function PageNotFound() {
             <div className='pageNotFound'>
                 <h1>Ooops..! Page Not Found</h1>
                 <p>Looks like you came to wrong page on our server</p>
-                <img src='../assets/images/pagenotfound.jpg' height="500" width="500" alt="not found"/>
+                <img src='/images/pagenotfound.jpg' height="500" width="500" alt="not found"/>
             </div>
         </Switch>
     </Router>
