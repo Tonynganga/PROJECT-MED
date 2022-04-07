@@ -5,11 +5,11 @@ from django.core.exceptions  import ValidationError
 
 # Create your models here.
 
-AT_7AM="07:00"
-AT_9AM="09:00"
-AT_11AM="11:00"
-AT_1PM="13:00"
-AT_3PM="15:00"
+AT_7AM="07:00:00"
+AT_9AM="09:00:00"
+AT_11AM="11:00:00"
+AT_1PM="13:00:00"
+AT_3PM="15:00:00"
 
 AVAILABLE_APPOINTMENT_TIME_CHOICES=(
     (AT_7AM,"07hours"),

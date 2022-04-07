@@ -30,13 +30,13 @@ import {
 
     axios
         .post('http://localhost:8000/api/appointment/add_booked_appointments',
-            data
+        JSON.stringify (data)
             , tokenConfig(getState))
         .then(res => {
             dispatch({ type: ADD_APPOITMENT, payload: res.data });
             dispatch(notify("Add appointment successfull", "success"))       })
         .catch(err => {
-            dispatch(getErrors(err.data, err.status));
+            dispatch(getErrors(err, err.status));
             dispatch(notify("Add appointment failed", "error"))
             dispatch({ type: ADD_APPOITMENT_FAILED });
         });
