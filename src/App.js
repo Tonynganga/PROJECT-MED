@@ -64,7 +64,7 @@ function App() {
         <Route path= '/app_card' exact component={AppointmentCard}/>
         <Route path= '/blog_details' exact component={BlogDetails}/>
         <Route path= '/my_patients' exact component={MyPatients}/>
-        <Route path='/*' exact component={PageNotFound}/>
+        <Route path='/pagenotfound' exact component={PageNotFound}/>
         
         </div>
       
