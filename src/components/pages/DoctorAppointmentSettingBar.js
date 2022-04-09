@@ -25,11 +25,11 @@ const doct_type = [
 ];
 
 const hoursData = [
-    { isChecked: false, name: "7 AM - 9 AM", value: "07:00" },
-    { isChecked: false, name: "9 AM - 11 AM", value: "09:00" },
-    { isChecked: false, name: "11 AM - 1 PM", value: "11:00" },
-    { isChecked: false, name: "1 PM - 3 PM", value: "13:00" },
-    { isChecked: false, name: "3 PM - 5 PM", value: "15:00" }
+    { isChecked: false, name: "7 AM - 9 AM", value: "07:00:00" },
+    { isChecked: false, name: "9 AM - 11 AM", value: "09:00:00" },
+    { isChecked: false, name: "11 AM - 1 PM", value: "11:00:00" },
+    { isChecked: false, name: "1 PM - 3 PM", value: "13:00:00" },
+    { isChecked: false, name: "3 PM - 5 PM", value: "15:00:00" }
 ];
 
 

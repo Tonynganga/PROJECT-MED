@@ -1,5 +1,5 @@
 from rest_framework import viewsets,status,permissions,generics
-from .serializer import Appointment_settiing_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer
+from .serializer import Appointment_setting_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer
 from knox.models import AuthToken
 from rest_framework.response import Response
 from .models import Appointment_settings_per_station,Available_time_choices_per_station,Booked_appointments,Filled_date_time_choices_per_station
@@ -20,7 +20,7 @@ class Appointment_setting_ps_API(viewsets.ModelViewSet):
     permission_classes=[
         permissions.IsAuthenticated|ReadOnly,
     ]
-    serializer_class=Appointment_settiing_ps_Serializer
+    serializer_class=Appointment_setting_ps_Serializer
     queryset=Appointment_settings_per_station.objects.all()
     lookup_field='doctor_account'
     def retrieve(self, request, *args, **kwargs):
@@ -98,7 +98,7 @@ class Appointment_setting_and_requirements_API(generics.GenericAPIView):
     def post(self,request):
         serializer_list=[]
         data_list=[]
-        appointment_setting_serializer=Appointment_settiing_ps_Serializer(
+        appointment_setting_serializer=Appointment_setting_ps_Serializer(
             data={"frequency_of_AP_per_2hours":request.data["frequency_of_AP_per_2hours"],
                 "appointment_type":request.data["appointment_type"],
                 "doctor_account":request.user.id
@@ -113,7 +113,7 @@ class Appointment_setting_and_requirements_API(generics.GenericAPIView):
         user_detail_serializer.is_valid(raise_exception=True)
         user_detail_serializer.save()
         available_appointment_time_list=request.data['available_appointment_time']
-        for time in available_appointment_time_list:
+        for time in available_appointment_time_list:            
             data={"aps_per_station":appointment_setting_serializer.data["id"],"available_appointment_time":time}    
             serializer =Available_time_choice_ps_Serializer(data=data)
             serializer.is_valid(raise_exception=True)
