@@ -4,6 +4,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import LockIcon from '@material-ui/icons/Lock';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import CommentIcon from '@material-ui/icons/Comment';
 
 export const SidebarData = [
 
@@ -26,6 +27,11 @@ export const SidebarData = [
         title: "Change Password",
         icon: <LockIcon/>,
         link:"/patientchangepass"
+    },
+    {
+        title: "Blog",
+        icon: <CommentIcon/>,
+        link: "/bloghome"
     },
     {
         title: "LogOut",

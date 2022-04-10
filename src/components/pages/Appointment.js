@@ -10,7 +10,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 // import LocalizationProvider from '@mui/lab/LocalizationProvider';
 // import TimePicker from '@mui/lab/TimePicker';
 import Footer from "../Footer";
-import SideBar2 from "./SideBar2";
+import SideBar from "./SideBar";
 import PatientNavBar from '../PatientNavBar';
 import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from '@material-ui/core'
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
@@ -108,7 +108,7 @@ function Appointment(props) {
                 </div>
                 <div className="Bapp__container">
                     <div className="Bapp__sidebar">
-                        <SideBar2 />
+                        <SideBar/>
                     </div>
                     <div className='Bapp__wrapper'>
                         <div className='Bapp__header'>
