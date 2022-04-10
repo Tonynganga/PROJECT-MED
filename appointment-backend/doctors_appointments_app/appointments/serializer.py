@@ -3,7 +3,7 @@ from .models import Appointment_settings_per_station,Available_time_choices_per_
 from django.contrib.auth import authenticate
 import datetime
 from django.core.exceptions  import ValidationError
-class Appointment_settiing_ps_Serializer(serializers.ModelSerializer):
+class Appointment_setting_ps_Serializer(serializers.ModelSerializer):
     class Meta:
         model=Appointment_settings_per_station
         fields=['id','doctor_account','frequency_of_AP_per_2hours','appointment_type']
@@ -25,7 +25,7 @@ class Get_Available_Appointment_Serializer(serializers.ModelSerializer):
 class Available_time_choice_ps_Serializer(serializers.ModelSerializer):
     class Meta:
         model=Available_time_choices_per_station
-        fields=['available_appointment_time']
+        fields=['aps_per_station','available_appointment_time']
     def validate_available_appointment_time(self,value):
         try:
             if Available_time_choices_per_station.objects.get(available_appointment_time=value,aps_per_station=self.initial_data['aps_per_station']):
