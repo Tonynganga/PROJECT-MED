@@ -3,6 +3,7 @@ from rest_framework import permissions,viewsets,status,serializers
 from rest_framework.response import Response
 from .serializer import Blog_serializer,Comment_serializer
 from .models import Blogs,Comments
+from django.utils.datastructures import MultiValueDictKeyError
 
 class ReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -20,7 +21,10 @@ class Blog_API(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data,partial=True)
         if request.user.is_doctor:
             serializer.is_valid(raise_exception=True)
-            serializer.save(blogger_account=request.user,thumbnail=request.FILES['thumbnail'])
+            try:
+                serializer.save(blogger_account=request.user,thumbnail=request.FILES['thumbnail'])
+            except MultiValueDictKeyError:
+                serializer.save(blogger_account=request.user)
         else:
             raise serializers.ValidationError("User should be a doctor")
         headers = self.get_success_headers(serializer.data)

@@ -19,13 +19,14 @@ class Blogs(models.Model):
             self.date_posted = timezone.now()
         self.last_date_modified = timezone.now()
         super(Blogs, self).save(*args, **kwargs)
-        img=Image.open(self.thumbnail.path)
-        if img.height>500 or img.width > 500:
-            output_size=(500,500)
-            img.thumbnail(output_size)
-            img.save(self.thumbnail.path)
-        else:
-            img.save(self.thumbnail.path)
+        if self.thumbnail:
+            img=Image.open(self.thumbnail.path)        
+            if img.height>500 or img.width > 500:
+                output_size=(500,500)
+                img.thumbnail(output_size)
+                img.save(self.thumbnail.path)
+            else:
+                img.save(self.thumbnail.path)
 class Comments(models.Model):
     commentor_account=models.ForeignKey(User,on_delete=models.CASCADE)
     blog=models.ForeignKey(Blogs,on_delete=models.CASCADE)
