@@ -25,6 +25,7 @@ import NewPost from './components/pages/NewPost';
 import DoctorAppointmentSettingBar from './components/pages/DoctorAppointmentSettingBar';
 import AppointmentCard from './components/AppointmentCard';
 import BlogDetails from './components/pages/BlogDetails';
+import BlogComment from './components/pages/BlogComment';
 import MyPatients from './components/pages/MyPatients';
 import MyPatientCard from './components/MyPatientCard';
 import PageNotFound from './components/pages/PageNotFound';
@@ -65,6 +66,7 @@ function App() {
         <Route path= '/blog_details' exact component={BlogDetails}/>
         <Route path= '/my_patients' exact component={MyPatients}/>
         <Route path='/pagenotfound' exact component={PageNotFound}/>
+        <Route path='/blog_comment' exact component={BlogComment}/>
         
         </div>
       
