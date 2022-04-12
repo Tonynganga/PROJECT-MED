@@ -1,6 +1,9 @@
 import CommentForm from "./CommentForm";
 import './Appointment.css';
 import { getComments } from '../../actions/blogs';
+import propTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
