@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import './pages/Main.css';
-// import './MainNavbar.css';
+import '../components/pages/Home.js';
 import Dropdown2 from "./Dropdown2";
 import Dropdown from "./Dropdown";
-import Modal from "./ReviewModal";
 
 function MainNavbar() {
 
@@ -106,6 +105,7 @@ function MainNavbar() {
           </li>
 
 
+{/* to be looked upon */}
           <li className="main__navbar__nav-item">
             <Link
               to="/appointment"
@@ -117,7 +117,7 @@ function MainNavbar() {
           </li>
           <li className="main__navbar__nav-item">
             <Link
-              to="/contact-us"
+              to="/:contactus"
               className="main_navbar__nav-links"
 
             >
