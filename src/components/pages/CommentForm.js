@@ -1,40 +1,34 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import './Appointment.css';
-const CommentForm = ({
-  handleSubmit,
-  submitLabel,
-  hasCancelButton = false,
-  handleCancel,
-  initialText = "",
-}) => {
-  const [text, setText] = useState(initialText);
-  const isTextareaDisabled = text.length === 0;
-  const onSubmit = (event) => {
-    event.preventDefault();
-    handleSubmit(text);
-    setText("");
-  };
+import { connect } from 'react-redux';
+import { addComment } from '../../actions/blogs';
+
+const CommentForm = (props) => {
+  const [message, setMessage] = useState("");
+  
+
+  const onSubmit=(e)=>{
+    e.preventDefault()
+    const body={
+      blog:props.blogId,
+      comment:message
+    }
+    props.addComment(body)
+  }
+  
   return (
     <form className='comment-form'onSubmit={onSubmit}>
       <textarea
         className="comment-form-textarea"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
       />
-      <button className="comment-form-button" disabled={isTextareaDisabled}>
-        {submitLabel}
+      <button className="comment-form-button" disabled={0}>
+        Submit
       </button>
-      {hasCancelButton && (
-        <button
-          type="button"
-          className="comment-form-button comment-form-cancel-button"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
-      )}
+      
     </form>
   );
 };
 
-export default CommentForm;
+export default connect(null,{addComment})(CommentForm);

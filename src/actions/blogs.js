@@ -1,7 +1,7 @@
 import {ADD_BLOG,ADD_BLOG_FAILED,ADD_COMMENTS,ADD_COMMENTS_FAILED,GET_BLOGS,GET_BLOGS_FAILED, GET_COMMENTS, GET_COMMENTS_FAILED} from './types';
 import axios from 'axios';
 import {tokenConfig} from './auth';
-import {getErrors} from './errors';
+import {getErrors} from './auth';
 import {notify} from 'reapop'
 
 export const getBlogs = () => dispatch => {

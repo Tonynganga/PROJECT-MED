@@ -1,7 +1,7 @@
 import {GET_PROFILE, UPDATE_PROFILE,USER_RELOAD} from './types';
 import axios from 'axios';
 import {tokenConfig} from './auth';
-import {getErrors} from './errors';
+import {getErrors} from './auth';
 import {notify} from 'reapop'
 
 export const getProfile = () => (dispatch, getState) => {

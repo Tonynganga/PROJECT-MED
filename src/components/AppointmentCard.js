@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core';
 import { palette } from '@mui/system';
 import { connect } from 'react-redux';
-import { errorMessage } from '../actions/errors';
+import { errorMessage } from '../actions/notifyPopUp';
 import { getDoctorAppointments } from '../actions/docAppointments';
 import propTypes from 'prop-types';
 import {capitalizeFirstLetter} from '../utils'

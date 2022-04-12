@@ -3,7 +3,7 @@ import {
     ADD_APPOITMENTS_SETTINGS, ADD_APPOITMENTS_SETTINGS_FAILED, GET_DOC_APPOITMENTS, GET_DOC_APPOITMENTS_FAILED
 } from './types';
 import axios from 'axios';
-import { getErrors } from './errors';
+import { getErrors } from './auth';
 import { notify } from 'reapop'
 import { tokenConfig } from './auth';
 

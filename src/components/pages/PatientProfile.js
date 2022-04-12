@@ -6,7 +6,7 @@ import PatientNavBar from '../../components/PatientNavBar';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/profile';
-import { errorMessage } from '../../actions/errors';
+import { errorMessage } from '../../actions/notifyPopUp';
 import Select from 'react-select';
 
 

@@ -15,7 +15,7 @@ import PatientNavBar from '../PatientNavBar';
 import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from '@material-ui/core'
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { connect } from 'react-redux';
-import { errorMessage } from '../../actions/errors';
+import { errorMessage } from '../../actions/notifyPopUp';
 import { setAppointment,getAppointmentTimePerDate } from '../../actions/appointments';
 import propTypes from 'prop-types';
 

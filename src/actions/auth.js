@@ -4,9 +4,9 @@ import {
     REGISTER_FAIL,
     REGISTER_SUCCESS,
     LOGOUT,
+    GET_ERRORS,
   } from './types';
   import axios from 'axios';
-  import {getErrors} from './errors';
   import {notify} from 'reapop'
 
   // export const loadUser = () => (dispatch, getState) => {
@@ -20,6 +20,10 @@ import {
   //       dispatch ({type: LOADED_FAILED});
   //     });
   // };
+  export const getErrors = (error, status) => ({
+    type: GET_ERRORS,
+    payload: {error, status},
+  });
 
   export const LoginAction = (username, password) => dispatch => {
     const body = {
@@ -96,3 +100,5 @@ import {
     }
     return config;
   };
+
+  

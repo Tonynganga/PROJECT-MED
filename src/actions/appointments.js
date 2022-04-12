@@ -4,7 +4,7 @@ import {
     AVAILABLE_APPOITMENTS,AVAILABLE_APPOITMENTS_FAILED, GET_AVAILABLE_APPOITMENTS_TIME, GET_AVAILABLE_APPOITMENTS_TIME_FAILED,
   } from './types';
   import axios from 'axios';
-  import {getErrors} from './errors';
+  import {getErrors} from './auth';
   import {notify} from 'reapop'
   import {tokenConfig} from './auth';
 

@@ -12,7 +12,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from 'draftjs-to-html';
 // import {stateFromHTML} from 'draft-js-import-html';
 import htmlToDraft from 'html-to-draftjs';
-import { errorMessage } from '../../actions/errors';
+import { errorMessage } from '../../actions/notifyPopUp';
 
 
 

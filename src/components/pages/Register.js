@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RegisterAction } from '../../actions/auth';
-import { errorMessage } from '../../actions/errors';
+import { errorMessage } from '../../actions/notifyPopUp';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { Link, Redirect } from "react-router-dom";

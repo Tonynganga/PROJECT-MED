@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import BlogCommentModal from '../BlogCommentModal';
+import BlogComment from './BlogComment';
 import CommentForm from './CommentForm';
 
 const BUTTON_WRAPPER_STYLES = {
@@ -66,7 +66,8 @@ function BlogDetails(props) {
 
                 </div> */}
                 <div className="comment-form-title">Write comment</div>
-                    <CommentForm submitLabel="Write" />
+                    <CommentForm blogId={blog.id} submitLabel="Write" />
+                    <BlogComment/>
             </div>
 
         );

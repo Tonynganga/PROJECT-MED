@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from 'react-select';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { errorMessage } from '../../actions/errors';
+import { errorMessage } from '../../actions/notifyPopUp';
 import { setAppointmentSetting } from '../../actions/docAppointments';
 
 const doct_type = [
