@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import BlogComment from './BlogComment';
 import CommentForm from './CommentForm';
+import './Appointment.css'
 
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
@@ -10,20 +11,13 @@ const BUTTON_WRAPPER_STYLES = {
     variant: 'contained'
 }
 
-const OTHER_CONTENT_STYLES = {
-    position: 'relative',
-    zIndex: 2,
-    backgroundColor: 'red',
-    padding: '10px'
-}
+
 
 function BlogDetails(props) {
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
 
-
-    const [isOpen, setIsOpen] = useState(false);
 
 
     const capitalizeFirstLetter = (word) => {
@@ -65,9 +59,12 @@ function BlogDetails(props) {
 
 
                 </div> */}
+                <div className='comment_bucket'>
                 <div className="comment-form-title">Write comment</div>
                     <CommentForm blogId={blog.id} submitLabel="Write" />
                     <BlogComment blogId={blog.id}/>
+                </div>
+                
             </div>
 
         );

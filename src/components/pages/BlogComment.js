@@ -6,20 +6,20 @@ import { connect } from 'react-redux';
 
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+  "July", "August", "September", "October", "November", "December"
 ];
 
 const BlogComment = (props) => {
   const [comments, setComments] = useState([]);
   useEffect(() => {
-    if(props.blogId)
+    if (props.blogId)
       props.getComments(props.blogId)
-}, [])
-useEffect(() => {
-  if (props.comments.length > 0) {
-    setComments(props.comments)
-  }
-}, [props.comments])
+  }, [])
+  useEffect(() => {
+    if (props.comments.length > 0) {
+      setComments(props.comments)
+    }
+  }, [props.comments])
 
 
   return (
@@ -29,9 +29,14 @@ useEffect(() => {
       </div>
       <div className="comment-right-part">
         <div className="comment-content">
-          <div className="comment-author">James</div>
-          <div>Date Created</div>
-          <div className="comment-text">{'comment body'}</div>
+          <div className='author-date'>
+            <div className="comment-author">James</div>
+            <div>Date Created</div>
+          </div>
+          <div className='body__comment'>
+            <div className="comment-text">Comment Body</div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -47,4 +52,4 @@ const mapStateToProps = state => ({
   comments: state.blogs.comments,
 });
 
-export default connect(mapStateToProps,{getComments})(BlogComment);
+export default connect(mapStateToProps, { getComments })(BlogComment);

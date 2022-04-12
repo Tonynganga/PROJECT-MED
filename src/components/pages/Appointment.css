@@ -215,7 +215,8 @@
   }
   
   .comment-image-container {
-    margin-right: 12px;
+    margin-left: 120px;
+    margin-right: 2px;
   }
   
   .comment-image-container img {
@@ -228,12 +229,21 @@
   
   .comment-content {
     display: flex;
+    flex-direction: column;
   }
-  
+  .author-date{
+    display: flex;
+    flex-direction: row;
+  }
   .comment-author {
     margin-right: 8px;
     font-size: 20px;
+    margin-left: 10px;
     color: rgb(59, 130, 246);
+  }
+  .body__comment{
+    text-align: start;
+    margin-left: 10px;
   }
   
   .comment-text {
@@ -258,5 +268,9 @@
   
   .replies {
     margin-top: 20px;
+  }
+
+  .comment_bucket{
+    margin-top: 30px;
   }
 
