@@ -9,7 +9,7 @@ import SendEmail from './SendEmail';
 
 
 function Home() {
-   
+
 
   return (
     <div>
@@ -52,7 +52,7 @@ function Home() {
 
         <section class="review" id="review">
 
-          <ViewReviews/>
+          <ViewReviews />
 
         </section>
 
@@ -64,7 +64,7 @@ function Home() {
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, accusamus.</p>
             </div>
 
-            <div class="row">
+            <div class="row" id='contactus'>
 
               <div class="col-lg-6">
 
@@ -94,7 +94,7 @@ function Home() {
 
               </div>
               <div class="col-lg-6">
-              <SendEmail/>
+                <SendEmail />
               </div>
 
             </div>

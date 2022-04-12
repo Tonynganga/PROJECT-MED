@@ -1,22 +1,22 @@
 export const MenuItems = [
   {
-    title: 'Marketing',
-    path: '/marketing',
+    title: 'Appointments',
+    path: '/doctorhomepage',
     cName: 'dropdown-link'
   },
   {
-    title: 'Consulting',
-    path: '/consulting',
+    title: 'LogIn',
+    path: '/loginsignup',
     cName: 'dropdown-link'
   },
   {
-    title: 'Design',
-    path: '/design',
+    title: 'Register',
+    path: '/register',
     cName: 'dropdown-link'
   },
   {
-    title: 'Development',
-    path: '/development',
+    title: 'Patients',
+    path: '/my_patients',
     cName: 'dropdown-link'
   }
 ];
