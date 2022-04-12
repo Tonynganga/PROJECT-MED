@@ -30,4 +30,5 @@ class Blogs(models.Model):
 class Comments(models.Model):
     commentor_account=models.ForeignKey(User,on_delete=models.CASCADE)
     blog=models.ForeignKey(Blogs,on_delete=models.CASCADE)
+    date_posted=models.DateTimeField(auto_now_add=True)
     comment=models.CharField(max_length=200)

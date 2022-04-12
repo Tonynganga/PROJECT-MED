@@ -1,6 +1,10 @@
 import CommentForm from "./CommentForm";
 import './Appointment.css';
+import { getComments } from '../../actions/blogs';
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
 
 const BlogComment = ({
   comment,
@@ -59,4 +63,9 @@ const BlogComment = ({
   );
 };
 
-export default BlogComment;
+
+BlogComment.propTypes = {
+  getComments: propTypes.func.isRequired,
+};
+
+export default connect(null,{getComments})(BlogComment);

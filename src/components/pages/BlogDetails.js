@@ -67,7 +67,7 @@ function BlogDetails(props) {
                 </div> */}
                 <div className="comment-form-title">Write comment</div>
                     <CommentForm blogId={blog.id} submitLabel="Write" />
-                    <BlogComment/>
+                    <BlogComment blogId={blog.id}/>
             </div>
 
         );
