@@ -1,0 +1,349 @@
+.patienthome__page{
+    margin-top: 62px;
+    flex-direction: column;
+}
+.patienthome__container{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+.patient__dashboard{
+    background: beige;
+    height: 65px;
+    padding-top: 2px;
+    padding-bottom: 5px;
+}
+.patient__dashboard h5{
+    margin-left:30px;
+    color: black;
+}
+.patient__dashboard p{
+    font-size: 20px;
+    margin-left: 30px;
+    font-weight: bolder;
+    color: black;
+}
+
+.patient__sidebar{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin: 20px;
+}
+
+/* Doctor Search Div Container */
+.doctor_search_box{
+    width: 100%;
+    margin-top: 30px;
+    margin-right: 20px;
+    height: fit-content;
+    border-radius: 10px;
+}
+.doctor_search{
+    border-radius: 10px;
+}
+.d-search-form{
+    border-radius: 10px;
+    width: 300px;
+   justify-content: flex-start;
+   margin-right: 40px;
+   background-color: beige;
+   padding-bottom: 20px;
+   padding-top: 20px;
+   margin-bottom: 10px;
+
+}
+.filter-h{
+    text-align: center;
+}
+.ds-search-btn{
+    margin-top: 70px;
+    margin-left: 90px;
+}
+
+.ds-form__data__two{
+    width: 100%;
+    align-content: stretch;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    margin-top: 0px;
+    display: flexbox;
+    padding-right: 18px;
+        
+}
+.ds-form__data__two input {
+    text-decoration-color: black;
+    min-width: 100%;
+    height: 37px;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: inset 0px 0px 25px 0px #fff;
+  }
+  .ds-dropdown{
+    width: 100%;
+    padding: 10px 10px;
+    padding-left: 15px;
+    margin: -1px 0;
+    margin-left: -3px;
+    border: none;
+    border-radius: 15px;
+    font-size: 15px;
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    height: 37px; 
+} 
+.ds-label{
+    margin: 4px;
+}
+.ds-book__btn{
+    text-decoration: none;
+    padding: 10px;
+    background-color: skyblue;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+/* End */
+
+.dashboard{
+    display: flexbox;
+    margin-top: 30px;
+    margin-left: 20px;
+    align-items: flex-start;
+    background-color: white;
+    width: 250px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.dashboardname{
+    margin: 25px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+}
+.icons{
+    margin-right: 10px;
+    color: grey;
+   
+}
+.home{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    background: #283593;
+    height: 60px;
+}
+
+.home > h2{
+    color: white;
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+.home > p{
+    margin-left: 20px;
+    color: white;
+    font-size: 25px;
+}
+.doctor__dashboard{
+    background: beige;
+    height: 60px;
+    padding-top: 5px;
+}
+.doctor__dashboard h5{
+    margin-top: 2px;
+    margin-left:30px;
+    color: black;
+}
+.doctor__dashboard p{
+    font-size: 24px;
+    margin-left: 30px;
+    margin-bottom: 5px;
+    color: black;
+    font-weight: bolder;
+}
+.doctor__sidebar{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin: 20px;
+}
+.doctorhome__sidebar{
+    display: flex;
+    flex-direction: row;
+}
+.appointment{
+    margin-left: 60px;
+}
+.appointment__bar{
+    height: 50px;
+    background-color: white;
+    width: 100%;
+    margin-top: 20px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 5px;
+    align-items: initial;
+    margin-left: 0px;
+    
+}
+.today__app_title, .pending__app_title, .total__app_title{
+    cursor: pointer;
+    margin-right: 90px;
+}
+
+.doctorcard__holder{
+    margin-top: 25px;
+}
+.doctorhome__container{
+    display: flex;
+    flex-direction: row;
+    
+}
+.app__activate{
+    margin-top: 40px;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.checkbox{
+    margin-top: 40px;
+}
+.app-perhour{
+    align-content: stretch;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    margin-top: 0px;
+    display: flexbox;
+    margin-top: 20px;
+        
+}
+.app-perhour input {
+    text-decoration-color: black;
+    width: 100%;
+    height: 37px;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: inset 0px 0px 25px 0px #fff;
+  } 
+  .app__activate input[type=submit] {
+    background-color: rgba(4, 101, 212, 0.603);
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+    max-width: max-content;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 22px;
+  }  
+.each__appointment{
+    display: flex;
+    flex-direction: column;
+}
+.doctorpage__holder{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 40px;
+}
+.appt__details{
+    background: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.appt__headlines{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 10px;
+    justify-items: flex-start;
+    width: 90%;
+}
+.doctorhomepage{
+    margin-top: 60px;
+    min-width: 100%;
+}
+.mypatients_hpage{
+    margin-top: 0px;
+}
+.btn__upcoming{
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: lightblue;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.btn__today{
+    margin-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: lightgreen;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+}
+.b-savecoment{
+    background-color: blue;
+    padding: 5px;
+    border-radius: 10px;
+}
+.mpatients__header{
+    text-align: center;
+    margin-top:60px;
+}
+
+
+
+
+.myp_holder{
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+    padding-right: 25px;
+    width: 350px;
+    background-color: blue;
+    justify-content: center;
+    align-items: center;
+}
+.image__view1{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pageNotFound{
+    text-align: center;
+  }

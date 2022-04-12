@@ -1,0 +1,260 @@
+
+body{
+    background-color: cadetblue;
+    
+  }
+.profilemain__container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+.profile__container{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.profile__form{
+    margin-top: 10px;
+    width: 70%;
+    margin-left: 30px;
+}
+.form__data{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+
+
+.patprof__dash{
+    margin-top: 60px;
+    background: beige;
+    height: 60px;
+    
+}
+.patprof__dash h5{
+    margin-left:20px;
+    color: black;
+}
+.profile__home h5{
+    font-size: 20px;
+    margin-left: 30px;
+    color: black;
+    font-weight: bolder;
+}
+.profile__header{
+    text-align: center;
+    margin-top: 20px;
+}
+.profile__sidebar{
+    margin-top: 20px;
+
+}
+
+
+.profile__form input{
+    min-width: 8em;
+    font-size: 18px;
+    margin-left: 10px;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.form__data__two{
+    width: 100%;
+    align-content: stretch;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    margin-top: 0px;
+    display: flexbox;
+        
+}
+.form__data__two input {
+    text-decoration-color: black;
+    min-width: 100%;
+    height: 37px;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 15px;
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: inset 0px 0px 25px 0px #fff;
+  } 
+
+.form__data__two input::selection{
+    border: 1px solid skyblue;
+}  
+.dropdown{
+    width: 100%;
+    padding: 10px 10px;
+    padding-left: 15px;
+    margin: -1px 0;
+    border: none;
+    border-radius: 15px;
+    font-size: 15px;
+    color: rgb(10, 10, 10);
+    font-family: Arial, Helvetica, sans-serif;
+    height: 37px;
+    
+   
+}
+
+.datepicker{
+  min-width: 18em;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  border: 1px solid lightgray;
+  margin-top: 5px;
+  padding-left: 0px;
+  margin-bottom: 25px;
+  transition: all 250ms ease-in-out;
+  width: 100%;
+  height: 37px;
+  border-radius: 5px;
+  /* box-shadow: inset 0px 0px 25px 0px #888; */
+  /* border: none; */
+  outline: none;
+  background-color: #fff;
+  bottom: none;
+}
+.form-group-datepicker{
+  margin-top: 8px;
+  margin-left: 10px;
+  width: 100%;
+}
+.form-group-datepicker label{
+    font-size: 18px;
+}
+.dropdown label{
+    margin: 2px;
+}
+
+.label{
+    margin: 4px;
+}
+  h1{
+    font-size: 38px;
+  }
+
+.btn__submit{
+      width: fit-content;
+      background: cyan;
+      height: fit-content;
+}
+.submit{
+    min-width: 10em;
+}
+.upload__btn{
+    padding: 5px;
+    border: none;
+    padding-right: 18px;
+    padding-left: 18px;
+    background: #00C0F0;
+    color: white;
+    margin-left: 5px;
+    margin-top: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+
+}
+.image-upload{
+    cursor: pointer;
+}
+#input[type="file"] {
+	display: none;
+}
+.jpg{
+    margin-left: 25px;
+    font-size: 14px;
+    margin-top: 10px;
+    font-style: normal;
+}
+.uploadimage__form{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    align-items: flex-start;
+}
+.uploadimage__form img{
+    border-radius: 30px;
+}
+
+
+  .profile__form input[type=submit] {
+    background-color: rgba(4, 101, 212, 0.603);
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 15px;
+    max-width: 40px;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 22px;
+  }
+  
+    
+  
+  .container{
+    background-color: antiquewhite;
+    border-style: hidden;
+    border-radius: 15px;
+    padding:18px;
+    text-align: center;
+    box-shadow: 0 8px 6px -6px black;
+    
+   
+    
+  }
+  .blog-uploadimage__form{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+
+
+  }
+  .selected{
+      margin-top: 7px;
+      margin-left: 5px;
+  }
+  .blogupload__btn{
+    padding: 1px;
+    border: none;
+    padding-right: 18px;
+    padding-left: 18px;
+    background: #00C0F0;
+    color: white;
+    margin-left: 5px;
+    margin-top: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+
+}
+  @media screen and (max-width:900px){
+  
+      .main-contianer{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-evenly; 
+        
+      }
+    
+    }
+  

@@ -1,0 +1,40 @@
+.app__card{
+    background: beige;
+    border-radius: 5px;
+}
+.appcard__wrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+.appcard__details__wrapper{
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    flex-direction: row;
+    justify-content: space-around;
+    justify-self: flex-start;
+    margin-top: 15px;
+    width: 100%;
+    margin-left: -20px;
+    
+    
+
+
+}
+.card__imagename{
+    margin-left: -10px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.card__imagename img{
+    border-radius: 20px;
+    margin-right: 0px;
+    margin-top: -5px;
+}
+.paid__amount{
+    padding-left: 10px;
+    padding-right: 10px;
+}
