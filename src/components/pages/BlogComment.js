@@ -1,4 +1,4 @@
-import CommentForm from "./CommentForm";
+import React, { useState, useEffect } from 'react';
 import './Appointment.css';
 import { getComments } from '../../actions/blogs';
 import propTypes from 'prop-types';
@@ -9,33 +9,19 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 ];
 
-const BlogComment = ({
-  comment,
-//   replies,
-//   setActiveComment,
-  activeComment,
-//   updateComment,
-//   deleteComment,
-//   addComment,
-//   parentId = null,
-//   currentUserId,
-}) => {
-  const isEditing =
-    activeComment &&
-    activeComment.id === comment.id &&
-    activeComment.type === "editing";
-//   const isReplying =
-//     activeComment &&
-//     activeComment.id === comment.id &&
-//     activeComment.type === "replying";
-//   const fiveMinutes = 300000;
-//   const timePassed = new Date() - new Date(comment.createdAt) > fiveMinutes;
-//   const canDelete =
-//     currentUserId === comment.userId && replies.length === 0 && !timePassed;
-//   const canReply = Boolean(currentUserId);
-//   const canEdit = currentUserId === comment.userId && !timePassed;
-//   const replyId = parentId ? parentId : comment.id;
-//   const createdAt = new Date(comment.createdAt).toLocaleDateString();
+const BlogComment = (props) => {
+  const [comments, setComments] = useState([]);
+  useEffect(() => {
+    if(props.blogId)
+      props.getComments(props.blogId)
+}, [])
+useEffect(() => {
+  if (props.comments.length > 0) {
+    setComments(props.comments)
+  }
+}, [props.comments])
+
+
   return (
     <div className="comment">
       <div className="comment-image-container">
@@ -45,22 +31,8 @@ const BlogComment = ({
         <div className="comment-content">
           <div className="comment-author">James</div>
           <div>Date Created</div>
+          <div className="comment-text">{'comment body'}</div>
         </div>
-          {!isEditing && <div className="comment-text">{'comment body'}</div>}
-        {/* {isEditing && (
-          <CommentForm
-            submitLabel="Update"
-            hasCancelButton
-            initialText={'comment body'}
-
-            handleCancel={() => {
-              setActiveComment(null);
-            }}
-          />
-        )}  */}
-       
-        
-       
       </div>
     </div>
   );
@@ -71,4 +43,8 @@ BlogComment.propTypes = {
   getComments: propTypes.func.isRequired,
 };
 
-export default connect(null,{getComments})(BlogComment);
+const mapStateToProps = state => ({
+  comments: state.blogs.comments,
+});
+
+export default connect(mapStateToProps,{getComments})(BlogComment);
