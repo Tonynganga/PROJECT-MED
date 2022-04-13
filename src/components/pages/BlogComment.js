@@ -3,7 +3,7 @@ import './Appointment.css';
 import { getComments } from '../../actions/blogs';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import {capitalizeFirstLetter} from '../../utils'
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -21,24 +21,30 @@ const BlogComment = (props) => {
     }
   }, [props.comments])
 
-
-  return (
-    <div className="comment">
+  const dispComments=()=>{
+   return comments.map(elem=>{const datePosted = new Date(elem.date_posted);return(<div className="comment">
       <div className="comment-image-container">
-        <img src="/user-icon.png" />
+        <img src={'http://localhost:8000' + elem.commentor_profile_pic} width="40px" height="40px" />
       </div>
       <div className="comment-right-part">
-        <div className="comment-content">
+       <div className="comment-content">
           <div className='author-date'>
-            <div className="comment-author">James</div>
-            <div>Date Created</div>
+            <div className="comment-author">{capitalizeFirstLetter(elem.commentor_first_name)} {capitalizeFirstLetter(elem.commentor_last_name)}</div>
+            <div>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</div>
           </div>
           <div className='body__comment'>
-            <div className="comment-text">Comment Body</div>
+            <div className="comment-text">{elem.comment}</div>
           </div>
 
         </div>
       </div>
+    </div>)})
+  }
+
+
+  return (
+  <div>
+    {dispComments()}
     </div>
   );
 };

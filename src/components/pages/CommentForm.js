@@ -2,7 +2,7 @@ import React,{ useState } from "react";
 import './Appointment.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addComment } from '../../actions/blogs';
+import { addComment,getComments } from '../../actions/blogs';
 
 const CommentForm = (props) => {
   const [message, setMessage] = useState("");
@@ -35,4 +35,4 @@ CommentForm.propTypes = {
   addComment: propTypes.func.isRequired,
 };
 
-export default connect(null,{addComment})(CommentForm);
+export default connect(null,{addComment,getComments})(CommentForm);

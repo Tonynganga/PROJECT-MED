@@ -10,10 +10,13 @@ class Blog_serializer(serializers.ModelSerializer):
     class Meta:
         model=Blogs
         fields=['id','blog_title','blog_content','excerpt','date_posted','thumbnail','blogger_profile_pic','blogger_first_name','blogger_last_name']
-        read_only_fields=['id','date_posted','thumbnail']
+        read_only_fields=['id','date_posted','thumbnail','blogger_profile_pic','blogger_first_name','blogger_last_name']
     
 class Comment_serializer(serializers.ModelSerializer):
+    commentor_profile_pic=serializers.URLField(source='commentor_account.profile.image.url')
+    commentor_first_name=serializers.CharField(source='commentor_account.first_name')
+    commentor_last_name=serializers.CharField(source='commentor_account.last_name')
     class Meta:
         model=Comments
-        fields=['id','blog','comment']
-        read_only_fields=['id']
+        fields=['id','blog','comment','date_posted','commentor_profile_pic','commentor_first_name','commentor_last_name']
+        read_only_fields=['id','date_posted','commentor_profile_pic','commentor_first_name','commentor_last_name']
