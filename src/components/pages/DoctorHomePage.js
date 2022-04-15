@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './PatientHomePage.css';
-import Footer from "../Footer";
 import SideBar2 from "./SideBar2";
-import AppointmentCard from '../AppointmentCard';
-import Select from 'react-select';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkIfAppointmentSettingSet } from '../../actions/docAppointments';
@@ -20,10 +17,10 @@ function DoctorHomePage(props) {
     useEffect(() => {
         props.checkIfAppointmentSettingSet()
     }, []);
-    
 
-    
-    return  (
+
+
+    return (
         <div>
             <div className="doctorhomepage">
                 <div className='doctor__dashboard'>
@@ -38,7 +35,7 @@ function DoctorHomePage(props) {
                         </div>
                     </div>
                     <div className='doctorpage__holder'>
-                    {props.appointmentSettingSet?(<DoctorAppiontmentsBar/>):(<DoctorAppiontmentSettingBar/>)}
+                        {props.appointmentSettingSet ? (<DoctorAppiontmentsBar />) : (<DoctorAppiontmentSettingBar />)}
                     </div>
                 </div>
             </div>
@@ -47,8 +44,8 @@ function DoctorHomePage(props) {
 }
 
 DoctorHomePage.propTypes = {
-    appointmentSettingSet: propTypes.bool.isRequired,    
-    checkIfAppointmentSettingSet: propTypes.func.isRequired,    
+    appointmentSettingSet: propTypes.bool.isRequired,
+    checkIfAppointmentSettingSet: propTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
     appointmentSettingSet: state.docAppointments.appointmentSettingSet,

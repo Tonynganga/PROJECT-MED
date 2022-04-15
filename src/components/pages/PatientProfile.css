@@ -12,7 +12,7 @@ body{
     margin-left: 20px;
     margin-bottom: 20px;
     width: auto;
-    margin-top: 10px;
+    margin-top: -3px;
     display: flex;
     flex-direction: row;
 }
@@ -48,7 +48,7 @@ body{
 }
 .profile__header{
     text-align: center;
-    margin-top: 20px;
+    margin-top: 60px;
 }
 .profile__sidebar{
     margin-top: 20px;

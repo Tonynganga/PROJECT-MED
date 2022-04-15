@@ -42,23 +42,21 @@ function BlogDetails(props) {
                 <h4>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</h4>
                 {/* use the below div to retrieve the blog content */}
                 <div className='mt-5 mb-5' dangerouslySetInnerHTML={createBlog()} />
+                <div className="mainblog-comment-actions">
+                {/* {canReply && ( */}
+                {/* Main blog actions --edit & delete */}
+                  <div
+                    className="main-comment-action">
+                    Edit
+                  </div>
+                  <div
+                    className="comment-action">
+                    Delete
+                  </div>
+              </div>
                 <hr />
                 <p className='lead mb-5'><Link to='/blog' className='font-weight-bold'>Back to Blogs</Link></p>
-                {/* <Button component={Link} variant="contained" color="primary" cursor="pointer"
-                    onClick={() => setIsOpen(true)}>
-                    Comment
-                </Button> */}
-                {/* <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-                    <button onClick={() => setIsOpen(true)} className='b-savecoment' cursor='pointer'>Comment</button>
-
-                    <BlogCommentModal blogId={blog.id} open={isOpen} onClose={() => setIsOpen(false)}>
-                        Fancy Modal
-
-                    </BlogCommentModal>
-                   
-
-
-                </div> */}
+                
                 <div className='comment_bucket'>
                 <div className="comment-form-title">Write comment</div>
                     <CommentForm blogId={blog.id} submitLabel="Write" />

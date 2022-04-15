@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/profile';
 import { errorMessage } from '../../actions/notifyPopUp';
 import Select from 'react-select';
+import PatientNavBar from '../PatientNavBar';
+import './PatientProfile.css'
+
 
 const genders = [
     { label: "Male", value: "M" },
@@ -82,12 +85,11 @@ function DoctorProfile(props) {
     return (
         // const { profileImg } = this.state
         // return (
-        <div className="profilemain__container">
-
-            <div className="patprof__dash">
-                <h5>Home / Dashboard</h5>
-                <h5>Dashboard</h5>
+            <div>
+                <div className='patientnav__bar'>
+                <PatientNavBar />
             </div>
+            <div className="profilemain__container">
             <div class="profile__header">
                 <h2>Profile</h2>
             </div>
@@ -98,7 +100,6 @@ function DoctorProfile(props) {
                 <form
                 onSubmit={onSubmit} className='profile__form'>
 
-                {/* <div className='profile__form'> */}
                     <div className="uploadimage__form">
                         <img src={'http://localhost:8000' + props.imageUrl} id="img" alt="" width="100px" height="100px" />
                         <input type="file" accept="image/*" name="image-upload" id="input" onChange={onChangePicture} />
@@ -208,10 +209,6 @@ function DoctorProfile(props) {
 
                     <input  type="submit" value="Save Changes" />
 
-
-
-                {/* </div> */}
-
             </form>
 
             </div>
@@ -222,6 +219,8 @@ function DoctorProfile(props) {
 
             <Footer />
         </div>
+            </div>
+        
     );
 }
 
