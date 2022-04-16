@@ -10,7 +10,6 @@ import PatientHomePage from './components/pages/PatientHomePage';
 import DoctorHomePage from './components/pages/DoctorHomePage';
 import {setUpNotifications} from 'reapop'
 import Alerts from './components/Alerts';
-import PrivateRoute from './components/PrivateRoute';
 import Logout from './components/pages/Logout';
 import {PersistGate} from 'redux-persist/integration/react'
 import PatientProfile from './components/pages/PatientProfile';
@@ -25,9 +24,7 @@ import NewPost from './components/pages/NewPost';
 import DoctorAppointmentSettingBar from './components/pages/DoctorAppointmentSettingBar';
 import AppointmentCard from './components/AppointmentCard';
 import BlogDetails from './components/pages/BlogDetails';
-import BlogComment from './components/pages/BlogComment';
 import MyPatients from './components/pages/MyPatients';
-import MyPatientCard from './components/MyPatientCard';
 import PageNotFound from './components/pages/PageNotFound';
 function App() {
   setUpNotifications({
@@ -65,9 +62,7 @@ function App() {
         <Route path= '/app_card' exact component={AppointmentCard}/>
         <Route path= '/blog_details' exact component={BlogDetails}/>
         <Route path= '/my_patients' exact component={MyPatients}/>
-        <Route path='/pagenotfound' exact component={PageNotFound}/>
-        <Route path='/blog_comment' exact component={BlogComment}/>
-        
+        <Route path='/pagenotfound' exact component={PageNotFound}/>        
         </div>
       
       

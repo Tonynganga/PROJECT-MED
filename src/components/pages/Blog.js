@@ -80,7 +80,6 @@ function Blog(props) {
         let result = [];
 
         blogs.map(blogPost => {
-            console.log('hello')
             const datePosted = new Date(blogPost.date_posted)
             return list.push(
                 <div key={blogPost.id} className="mb-4 mt-2 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">

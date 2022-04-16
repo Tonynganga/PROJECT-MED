@@ -1,4 +1,5 @@
 from django.db import models
+from django.template import Origin
 from accounts.models import User
 from django.utils import timezone
 from PIL import Image
@@ -32,3 +33,9 @@ class Comments(models.Model):
     blog=models.ForeignKey(Blogs,on_delete=models.CASCADE)
     date_posted=models.DateTimeField(auto_now_add=True)
     comment=models.CharField(max_length=200)
+class Comments_for_comments(models.Model):
+    commentor_account=models.ForeignKey(User,on_delete=models.CASCADE)
+    parent_comment=models.ForeignKey(Comments,on_delete=models.CASCADE)
+    date_posted=models.DateTimeField(auto_now_add=True)
+    comment=models.CharField(max_length=200)
+    from_original=models.BooleanField(default=False)

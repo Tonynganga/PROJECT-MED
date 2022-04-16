@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import BlogComment from './BlogComment';
 import CommentForm from './CommentForm';
 import './Appointment.css'
+import DisplayComment from './DisplayComment';
 
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
@@ -59,8 +59,8 @@ function BlogDetails(props) {
                 
                 <div className='comment_bucket'>
                 <div className="comment-form-title">Write comment</div>
-                    <CommentForm blogId={blog.id} submitLabel="Write" />
-                    <BlogComment blogId={blog.id}/>
+                    <CommentForm blogId={blog.id} isEnclosed={false} />
+                    <DisplayComment forBlogs={true} Id={blog.id}/>
                 </div>
                 
             </div>
