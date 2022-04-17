@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import CommentForm from './CommentForm';
 import './Appointment.css'
 import DisplayComment from './DisplayComment';
+import { connect } from 'react-redux';
+import { deleteBlog } from '../../actions/blogs';
+import propTypes from 'prop-types';
+import {capitalizeFirstLetter} from '../../utils'
+
 
 const BUTTON_WRAPPER_STYLES = {
     position: 'relative',
@@ -11,34 +16,27 @@ const BUTTON_WRAPPER_STYLES = {
     variant: 'contained'
 }
 
-
-
-function BlogDetails(props) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
+const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
 
-
-
-    const capitalizeFirstLetter = (word) => {
-        if (word)
-            return word.charAt(0).toUpperCase() + word.slice(1);
-        return '';
-    };
-
-
-
-
-    if (props.location.state && props.location.state.blog) {
-        const { blog } = props.location.state
-        const datePosted = new Date(blog.date_posted)
+function BlogDetails(props) {
+    const [blogPost,setBlogPost]= useState({})
+    const { blog,index } = props.location.state
+        useEffect(()=>{
+            if(props.stateBlogPost)
+            setBlogPost(props.stateBlogPost)
+            else setBlogPost(blog)
+        },[props.stateBlogPost])        
+        
+        const datePosted = new Date(blogPost.date_posted)
         const createBlog = () => {
-            return { __html: blog.blog_content }
+            return { __html: blogPost.blog_content }
         };
         return (
 
             <div className='container mt-3'>
-                <h3 className='display-5'>{capitalizeFirstLetter(blog.blog_title)}</h3>
+                <h3 className='display-5'>{capitalizeFirstLetter(blogPost.blog_title)}</h3>
                 <h4>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</h4>
                 {/* use the below div to retrieve the blog content */}
                 <div className='mt-5 mb-5' dangerouslySetInnerHTML={createBlog()} />
@@ -50,7 +48,8 @@ function BlogDetails(props) {
                     Edit
                   </div>
                   <div
-                    className="comment-action">
+                    className="comment-action"
+                    onClick={()=>{props.deleteBlog(index,blogPost.id);props.history.goBack()}}>
                     Delete
                   </div>
               </div>
@@ -59,15 +58,25 @@ function BlogDetails(props) {
                 
                 <div className='comment_bucket'>
                 <div className="comment-form-title">Write comment</div>
-                    <CommentForm blogId={blog.id} isEnclosed={false} />
-                    <DisplayComment forBlogs={true} Id={blog.id}/>
+                    <CommentForm blogId={blogPost.id} isEnclosed={false} />
+                    <DisplayComment forBlogs={true} Id={blogPost.id}/>
                 </div>
                 
             </div>
 
         );
-    } else {
-        return <h2>404 Page not Found</h2>;
-    }
+   
 }
-export default BlogDetails;
+
+BlogDetails.propTypes = {
+    deleteBlog: propTypes.func.isRequired,
+    
+};
+const mapStateToProps = (state, ownProps) => {
+    
+    return {
+        stateBlogPost: state.blogs.blogs[ownProps.index],
+    }
+};
+
+export default connect(mapStateToProps, { deleteBlog})(BlogDetails);

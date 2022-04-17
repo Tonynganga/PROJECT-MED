@@ -29,6 +29,8 @@ export const ADD_BLOG = 'ADD_BLOG';
 export const ADD_BLOG_FAILED = 'ADD_BLOG_FAILED';
 export const GET_BLOGS = 'GET_BLOGS';
 export const GET_BLOGS_FAILED = 'GET_BLOGS_FAILED';
+export const DELETE_BLOG = 'DELETE_BLOG';
+export const DELETE_BLOG_FAILED = 'DELETE_BLOG_FAILED';
 
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_REVIEWS_FAILED = 'GET_REVIEWS_FAILED';

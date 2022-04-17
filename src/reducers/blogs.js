@@ -29,6 +29,11 @@ export default function (state = initialState, action) {
                 ...state,
                 blogs: action.payload,
             };
+        case DELETE_COMMENTS:
+            state.blogs=state.blogs.filter((_,index)=>{
+                return index!=action.payload
+            })
+            return state
         case GET_COMMENTS:
         case GET_COMMENTS_FOR_COMMENTS:
             return {

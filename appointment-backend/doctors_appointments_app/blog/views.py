@@ -11,6 +11,7 @@ class ReadOnly(permissions.BasePermission):
         return request.method in permissions.SAFE_METHODS
 
 
+
 # Create your views here.
 class Blog_API(viewsets.ModelViewSet):
     permission_classes=[
@@ -30,7 +31,17 @@ class Blog_API(viewsets.ModelViewSet):
             raise serializers.ValidationError("User should be a doctor")
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.blogger_account!=request.user:
+           return Response({"detail":"Unauthorized user"},status=status.HTTP_401_UNAUTHORIZED)
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.blogger_account!=request.user:
+           return Response({"detail":"Unauthorized user"},status=status.HTTP_401_UNAUTHORIZED)
+        return super().update(request, *args, partial=True)
 class Comment_API(viewsets.ModelViewSet):
     serializer_class=Comment_serializer
     permission_classes=[

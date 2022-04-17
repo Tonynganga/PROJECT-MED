@@ -9,11 +9,7 @@ import {
   import {tokenConfig} from './auth';
 
   export const getAvailableAppointments = () => (dispatch,getState) => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+    
     axios
       .get ('http://localhost:8000/api/appointment/available_appointments', tokenConfig (getState))
       .then (res => {

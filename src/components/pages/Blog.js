@@ -79,7 +79,7 @@ function Blog(props) {
         let list = [];
         let result = [];
 
-        blogs.map(blogPost => {
+        blogs.map((blogPost,index) => {
             const datePosted = new Date(blogPost.date_posted)
             return list.push(
                 <div key={blogPost.id} className="mb-4 mt-2 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
@@ -97,6 +97,7 @@ function Blog(props) {
                             pathname: '/blog_details',
                             state: {
                                 blog: blogPost,
+                                index
                             },
                         }} className="stretched-link">Continue reading</Link>
                     </div>
@@ -156,6 +157,7 @@ function Blog(props) {
                                 pathname: '/blog_details',
                                 state: {
                                     blog: featuredBlog,
+                                    index:props.blogs.length - 1,
                                 },
                             }} className="text-white font-weight-bold">
                                 Continue reading...
