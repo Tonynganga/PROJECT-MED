@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Appointment.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addComment, addCommentForComment } from '../../actions/blogs';
+import { addComment, addCommentForComment, updateComment, updateCommentForComment } from '../../actions/blogs';
 
 const CommentForm = (props) => {
   const [message, setMessage] = useState("");
@@ -14,20 +14,25 @@ const CommentForm = (props) => {
 
 
   const onSubmit = (e) => {
-    e.preventDefault()    
-    if (props.elem) {
-
-    } else if (props.commentId) {
-      const body = {
+    e.preventDefault()
+    let body = {
+      comment: message,
+    }
+    if (props.elem && props.elem.blog != null)
+      props.updateComment(props.index,props.elem.id, body)
+    else if (props.elem && props.elem.blog == null)
+      props.updateCommentForComment(props.index,props.elem.id, body, props.fromOriginal)
+    else if (props.commentId) {
+      body = {
         parent_comment: props.commentId,
-        comment: message,
-        from_original:props.fromOriginal
+        from_original: props.fromOriginal,
+        ...body
       }
-      props.addCommentForComment(body,props.fromOriginal)
+      props.addCommentForComment(body, props.fromOriginal)
     } else {
-      const body = {
+      body = {
         blog: props.blogId,
-        comment: message
+        ...body
       }
       props.addComment(body)
     }
@@ -53,4 +58,4 @@ CommentForm.propTypes = {
   addComment: propTypes.func.isRequired,
 };
 
-export default connect(null, { addComment, addCommentForComment })(CommentForm);
+export default connect(null, { addComment, addCommentForComment, updateComment, updateCommentForComment })(CommentForm);

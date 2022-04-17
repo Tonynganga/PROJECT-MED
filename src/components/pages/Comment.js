@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommentForm from './CommentForm';
 import { capitalizeFirstLetter } from '../../utils'
 import DisplayComment from "./DisplayComment";
@@ -14,33 +14,40 @@ const Comment = (props) => {
     const [reply, setReply] = useState(false)
     const [edit, setEdit] = useState(false)
     const [viewReplies, setViewReplies] = useState(false)
-    const datePosted = new Date(props.elem.date_posted);
-    const handleViewReplies=(e)=>{
-        if(viewReplies){
-            props.clearComments(props.elem.id,props.elem.from_original==null)
+    const [comment,setComment]=useState({})
+    
+    useEffect(()=>{
+        if(props.comment)
+        setComment(props.comment)
+        else setComment(props.elem)
+    },[props.comment])
+    const handleViewReplies = (e) => {
+        if (viewReplies) {
+            props.clearComments(comment.id, comment.from_original == null)
         }
         setViewReplies(!viewReplies)
     }
+    const datePosted = new Date(props.elem.date_posted);
     return (
-        <div  className="comment">
+        <div className="comment">
             <div className="comment-image-container">
-                <img src={'http://localhost:8000' + props.elem.commentor_profile_pic} width="40px" height="40px" />
+                <img src={'http://localhost:8000' + comment.commentor_profile_pic} width="40px" height="40px" />
             </div>
             <div className="comment-right-part">
                 <div className="comment-content">
-                    {edit ? <CommentForm elem={props.elem} isEnclosed={true} >
+                    {edit ? <CommentForm index={props.index} elem={comment} isEnclosed={true} fromOriginal={comment.from_original == null} >
                         <button className="comment-form-button btn-danger" disabled={0}
                             onClick={() => setEdit(false)}>
                             Close
                         </button>
                     </CommentForm> : <div><div className='author-date'>
-                        <div className="comment-author">{capitalizeFirstLetter(props.elem.commentor_first_name)} {capitalizeFirstLetter(props.elem.commentor_last_name)}</div>
+                        <div className="comment-author">{capitalizeFirstLetter(comment.commentor_first_name)} {capitalizeFirstLetter(comment.commentor_last_name)}</div>
                         <div>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</div>
                     </div>
                         <div className='body__comment'>
-                            <div className="comment-text">{props.elem.comment}</div>
+                            <div className="comment-text">{comment.comment}</div>
                         </div>
-                        {props.elem.commentor_username == props.user.username ?
+                        {comment.commentor_username == props.user.username ?
                             <div className="comment-actions">
                                 <div
                                     className="comment-action"
@@ -68,8 +75,8 @@ const Comment = (props) => {
                     </div>
                     {reply ? <CommentForm
                         isEnclosed={true}
-                        commentId={props.elem.id}
-                        fromOriginal={props.elem.from_original==null}
+                        commentId={comment.id}
+                        fromOriginal={comment.from_original == null}
                     > <button className="comment-form-button btn-danger" disabled={0}
                         onClick={() => setReply(false)}>
                             Close
@@ -82,7 +89,7 @@ const Comment = (props) => {
                             {viewReplies ? "Hide Replies" : "View Replies"}
                         </div>
                     </div>
-                    {viewReplies ? <DisplayComment fromOriginal={props.elem.from_original==null} Id={props.elem.id}/> : ""}
+                    {viewReplies ? <DisplayComment fromOriginal={comment.from_original == null} Id={comment.id} /> : ""}
                 </div>
             </div>
         </div>
@@ -91,6 +98,16 @@ const Comment = (props) => {
 
 
 Comment.propTypes = {
-    addComment: propTypes.func.isRequired,
-  };
-export default connect(null, { clearComments })(Comment);
+    clearComments: propTypes.func.isRequired,
+};
+const mapStateToProps = (state, ownProps) => {
+    let Id
+    if (ownProps.elem.from_original == null) Id = 0
+    else if (ownProps.elem.from_original != null&&ownProps.elem.from_original === true) Id = '0' + ownProps.elem.parent_comment
+    else Id = ownProps.elem.parent_comment
+    return {
+        comment: state.blogs.comments[Id][ownProps.index],
+    }
+};
+
+export default connect(mapStateToProps, { clearComments })(Comment);

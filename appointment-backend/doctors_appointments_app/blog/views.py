@@ -59,7 +59,7 @@ class Comments_for_comments_API(viewsets.ModelViewSet):
         permissions.IsAuthenticated|ReadOnly,
     ]
     def get_queryset(self):
-        queryset=Comments_for_comments.objects.all().filter(parent_comment=self.kwargs['comment_id'])
+        queryset=Comments_for_comments.objects.all().filter(from_original=False,parent_comment=self.kwargs['comment_id'])
         return queryset
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data,partial=True)
@@ -86,3 +86,6 @@ class Comments_for_comments_API(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
+    

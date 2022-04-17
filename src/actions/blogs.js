@@ -91,18 +91,8 @@ export const addComment = body => (dispatch, getState) => {
   axios
     .post('http://localhost:8000/api/blogs/add_comment', body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: ADD_COMMENTS });
+      dispatch({ type: ADD_COMMENTS,payload:res.data });
       dispatch(notify("Added Comment successfuly", "success"))
-      axios
-        .get(`http://localhost:8000/api/blogs/get_comments/${body.blog}`, tokenConfig(getState))
-        .then(res => {
-          dispatch({ type: GET_COMMENTS, payload: { 0: res.data } });
-        })
-        .catch(err => {
-          dispatch(notify("Failed to get comments", "error"))
-          dispatch({ type: GET_COMMENTS_FAILED, payload: { 0: [] } });
-        });
-
     })
     .catch(err => {
       dispatch({ type: ADD_COMMENTS_FAILED });
@@ -115,32 +105,12 @@ export const addCommentForComment = (body, fromOriginal) => (dispatch, getState)
   axios
     .post('http://localhost:8000/api/blogs/add_comment_for_comment', body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: ADD_COMMENTS_FOR_COMMENTS });
+      let key
+      if (fromOriginal) 
+        key='0'+res.data.parent_comment
+      else key=res.data.parent_comment
+      dispatch({ type: ADD_COMMENTS_FOR_COMMENTS, payload:{key,data:res.data} });
       dispatch(notify("Added Comment successfuly", "success"))
-
-      if (fromOriginal === true) {
-        axios
-          .get(`http://localhost:8000/api/blogs/get_comments_for_original_comment/${body.parent_comment}`, tokenConfig(getState))
-          .then(res => {
-            dispatch({ type: GET_COMMENTS_FOR_COMMENTS, payload: { ['0' + body.parent_comment]: res.data } });
-          })
-          .catch(() => {
-            dispatch(notify("Failed to get comments", "error"))
-            dispatch({ type: GET_COMMENTS_FOR_COMMENTS_FAILED, payload: { ['0' + body.parent_comment]: [] } });
-          });
-
-      } else {
-
-        axios
-          .get(`http://localhost:8000/api/blogs/get_comments_for_comment/${body.parent_comment}`, tokenConfig(getState))
-          .then(res => {
-            dispatch({ type: GET_COMMENTS_FOR_COMMENTS, payload: { [body.parent_comment]: res.data } });
-          })
-          .catch(err => {
-            dispatch(notify("Failed to get comments", "error"))
-            dispatch({ type: GET_COMMENTS_FOR_COMMENTS_FAILED, payload: { [body.parent_comment]: [] } });
-          });
-      }
 
     })
     .catch(() => {
@@ -156,11 +126,11 @@ export const clearComments = (Id, fromOriginal) => dispatch => {
 
 }
 
-export const updateComment = (body) => (dispatch, getState) => {
+export const updateComment = (index,Id,body) => (dispatch, getState) => {
   axios
-    .put(`http://localhost:8000/api/blogs/update_comment/${body.id}`, body, tokenConfig(getState))
+    .put(`http://localhost:8000/api/blogs/update_comment/${Id}`, body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: UPDATE_COMMENTS, payload: res.data });
+      dispatch({ type: UPDATE_COMMENTS, payload: {index,data:res.data} });
       dispatch(notify("Update Comment successfuly", "success"))
     })
     .catch(() => {
@@ -170,16 +140,16 @@ export const updateComment = (body) => (dispatch, getState) => {
 
 }
 
-export const updateCommentForComment = (body, fromOriginal) => (dispatch, getState) => {
+export const updateCommentForComment = (index,Id,body, fromOriginal) => (dispatch, getState) => {
 
   axios
-    .put('http://localhost:8000/api/blogs/update_comment_for_comment', body, tokenConfig(getState))
+    .put(`http://localhost:8000/api/blogs/update_comment_for_comment/${Id}`, body, tokenConfig(getState))
     .then(res => {
       let key
       if (fromOriginal) 
         key='0'+res.data.parent_comment
       else key=res.data.parent_comment
-      dispatch({ type: UPDATE_COMMENT_FOR_COMMENT, payload: {key,data:res.data} });
+      dispatch({ type: UPDATE_COMMENT_FOR_COMMENT, payload: {key,index,data:res.data} });
       dispatch(notify("Update Comment successfuly", "success"))
     })
     .catch(() => {
