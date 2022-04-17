@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_BLOG_FAILED, ADD_COMMENTS, ADD_COMMENTS_FAILED, ADD_COMMENTS_FOR_COMMENTS, ADD_COMMENTS_FOR_COMMENTS_FAILED, CLEAR_COMMENTS, GET_BLOGS, GET_BLOGS_FAILED, GET_COMMENTS, GET_COMMENTS_FAILED, GET_COMMENTS_FOR_COMMENTS, GET_COMMENTS_FOR_COMMENTS_FAILED, UPDATE_COMMENTS, UPDATE_COMMENTS_FAILED, UPDATE_COMMENT_FOR_COMMENT, UPDATE_COMMENT_FOR_COMMENT_FAILED } from './types';
+import { ADD_BLOG, ADD_BLOG_FAILED, ADD_COMMENTS, ADD_COMMENTS_FAILED, ADD_COMMENTS_FOR_COMMENTS, ADD_COMMENTS_FOR_COMMENTS_FAILED, CLEAR_COMMENTS, DELETE_COMMENTS, DELETE_COMMENTS_FAILED, DELETE_COMMENT_FOR_COMMENT, DELETE_COMMENT_FOR_COMMENT_FAILED, GET_BLOGS, GET_BLOGS_FAILED, GET_COMMENTS, GET_COMMENTS_FAILED, GET_COMMENTS_FOR_COMMENTS, GET_COMMENTS_FOR_COMMENTS_FAILED, UPDATE_COMMENTS, UPDATE_COMMENTS_FAILED, UPDATE_COMMENT_FOR_COMMENT, UPDATE_COMMENT_FOR_COMMENT_FAILED } from './types';
 import axios from 'axios';
 import { tokenConfig } from './auth';
 import { getErrors } from './auth';
@@ -84,6 +84,8 @@ export const getCommentsForComments = (commentId, fromOriginal) => dispatch => {
         dispatch({ type: GET_COMMENTS_FOR_COMMENTS_FAILED, payload: { [commentId]: [] } });
       });
   }
+
+
 };
 
 export const addComment = body => (dispatch, getState) => {
@@ -91,7 +93,7 @@ export const addComment = body => (dispatch, getState) => {
   axios
     .post('http://localhost:8000/api/blogs/add_comment', body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: ADD_COMMENTS,payload:res.data });
+      dispatch({ type: ADD_COMMENTS, payload: res.data });
       dispatch(notify("Added Comment successfuly", "success"))
     })
     .catch(err => {
@@ -106,10 +108,10 @@ export const addCommentForComment = (body, fromOriginal) => (dispatch, getState)
     .post('http://localhost:8000/api/blogs/add_comment_for_comment', body, tokenConfig(getState))
     .then(res => {
       let key
-      if (fromOriginal) 
-        key='0'+res.data.parent_comment
-      else key=res.data.parent_comment
-      dispatch({ type: ADD_COMMENTS_FOR_COMMENTS, payload:{key,data:res.data} });
+      if (fromOriginal)
+        key = '0' + res.data.parent_comment
+      else key = res.data.parent_comment
+      dispatch({ type: ADD_COMMENTS_FOR_COMMENTS, payload: { key, data: res.data } });
       dispatch(notify("Added Comment successfuly", "success"))
 
     })
@@ -126,11 +128,11 @@ export const clearComments = (Id, fromOriginal) => dispatch => {
 
 }
 
-export const updateComment = (index,Id,body) => (dispatch, getState) => {
+export const updateComment = (index, Id, body) => (dispatch, getState) => {
   axios
     .put(`http://localhost:8000/api/blogs/update_comment/${Id}`, body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: UPDATE_COMMENTS, payload: {index,data:res.data} });
+      dispatch({ type: UPDATE_COMMENTS, payload: { index, data: res.data } });
       dispatch(notify("Update Comment successfuly", "success"))
     })
     .catch(() => {
@@ -140,21 +142,53 @@ export const updateComment = (index,Id,body) => (dispatch, getState) => {
 
 }
 
-export const updateCommentForComment = (index,Id,body, fromOriginal) => (dispatch, getState) => {
+export const updateCommentForComment = (index, Id, body, fromOriginal) => (dispatch, getState) => {
 
   axios
     .put(`http://localhost:8000/api/blogs/update_comment_for_comment/${Id}`, body, tokenConfig(getState))
     .then(res => {
       let key
-      if (fromOriginal) 
-        key='0'+res.data.parent_comment
-      else key=res.data.parent_comment
-      dispatch({ type: UPDATE_COMMENT_FOR_COMMENT, payload: {key,index,data:res.data} });
+      if (fromOriginal)
+        key = '0' + res.data.parent_comment
+      else key = res.data.parent_comment
+      dispatch({ type: UPDATE_COMMENT_FOR_COMMENT, payload: { key, index, data: res.data } });
       dispatch(notify("Update Comment successfuly", "success"))
     })
     .catch(() => {
       dispatch({ type: UPDATE_COMMENT_FOR_COMMENT_FAILED });
       dispatch(notify("Failed to Update comment", "error"))
+    });
+
+}
+
+export const deleteComment = (index, Id) => (dispatch, getState) => {
+  axios
+    .delete(`http://localhost:8000/api/blogs/delete_comment/${Id}`, tokenConfig(getState))
+    .then(() => {
+      dispatch({ type: DELETE_COMMENTS, payload: index });
+      dispatch(notify("Delete Comment successfuly", "success"))
+    })
+    .catch(() => {
+      dispatch({ type: DELETE_COMMENTS_FAILED });
+      dispatch(notify("Failed to Delete comment", "error"))
+    });
+
+}
+
+export const deleteCommentForComment = (index, key, fromOriginal, Id) => (dispatch, getState) => {
+  axios
+    .delete(`http://localhost:8000/api/blogs/delete_comment_for_comment/${Id}`, tokenConfig(getState))
+    .then(() => {
+      if (fromOriginal)
+        key = '0' + key
+      else key = key
+
+      dispatch({ type: DELETE_COMMENT_FOR_COMMENT, payload: { index, key } });
+      dispatch(notify("Delete Comment successfuly", "success"))
+    })
+    .catch(() => {
+      dispatch({ type: DELETE_COMMENT_FOR_COMMENT_FAILED });
+      dispatch(notify("Failed to Delete comment", "error"))
     });
 
 }

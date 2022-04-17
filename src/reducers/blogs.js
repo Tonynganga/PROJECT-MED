@@ -11,7 +11,9 @@ import {
     UPDATE_COMMENTS_FAILED,
     UPDATE_COMMENT_FOR_COMMENT,
     ADD_COMMENTS,
-    ADD_COMMENTS_FOR_COMMENTS
+    ADD_COMMENTS_FOR_COMMENTS,
+    DELETE_COMMENTS,
+    DELETE_COMMENT_FOR_COMMENT
 } from '../actions/types';
 
 const initialState = {
@@ -54,6 +56,17 @@ export default function (state = initialState, action) {
             return state
         case UPDATE_COMMENT_FOR_COMMENT:
             state.comments[action.payload.key][action.payload.index] = action.payload.data
+            return state
+        case DELETE_COMMENTS:
+            // delete state.comments[0][action.payload]
+            state.comments[0]=state.comments[0].filter((_,index)=>{
+                return index!=action.payload
+            })
+            return state
+        case DELETE_COMMENT_FOR_COMMENT:
+            state.comments[action.payload.key]=state.comments[action.payload.key].filter((_,index)=>{
+                return index!=action.payload.index
+            })
             return state
         case GET_BLOGS_FAILED:
             return {

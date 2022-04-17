@@ -53,6 +53,12 @@ class Comment_API(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
+    def destroy(self, request, *args, **kwargs):
+        instance = Comments.objects.get(pk=self.kwargs['pk'])
+        if instance.commentor_account!=request.user:
+           return Response({"detail":"Unauthorized user"},status=status.HTTP_401_UNAUTHORIZED)
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 class Comments_for_comments_API(viewsets.ModelViewSet):
     serializer_class=Comments_for_comments_serializer
     permission_classes=[
@@ -80,12 +86,15 @@ class Comments_for_comments_API(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         instance = Comments_for_comments.objects.get(pk=self.kwargs['pk'])
         if instance.commentor_account!=request.user:
-           print(instance.commentor_account.id,request.user.id)
            return Response({"detail":"Unauthorized user"},status=status.HTTP_401_UNAUTHORIZED)
         serializer = self.get_serializer(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
     def destroy(self, request, *args, **kwargs):
-        return super().destroy(request, *args, **kwargs)
+        instance = Comments_for_comments.objects.get(pk=self.kwargs['pk'])
+        if instance.commentor_account!=request.user:
+           return Response({"detail":"Unauthorized user"},status=status.HTTP_401_UNAUTHORIZED)
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
