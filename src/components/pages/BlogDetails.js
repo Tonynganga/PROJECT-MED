@@ -20,13 +20,12 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
 
-function BlogDetails(props) {
-    const [blogPost,setBlogPost]= useState({})
+const BlogDetails=(props)=> {
     const { blog,index } = props.location.state
-        useEffect(()=>{
+    const [blogPost,setBlogPost]= useState(blog)    
+        useEffect(()=>{          
             if(props.stateBlogPost)
             setBlogPost(props.stateBlogPost)
-            else setBlogPost(blog)
         },[props.stateBlogPost])        
         
         const datePosted = new Date(blogPost.date_posted)
@@ -70,12 +69,12 @@ function BlogDetails(props) {
 
 BlogDetails.propTypes = {
     deleteBlog: propTypes.func.isRequired,
+    stateBlogPost:propTypes.object.isRequired
     
 };
-const mapStateToProps = (state, ownProps) => {
-    
+const mapStateToProps = (state, ownProps) => {    
     return {
-        stateBlogPost: state.blogs.blogs[ownProps.index],
+        stateBlogPost: state.blogs.blogs[ownProps.location.state.index],
     }
 };
 
