@@ -35,7 +35,7 @@ class Comments(models.Model):
     comment=models.CharField(max_length=200)
 class Comments_for_comments(models.Model):
     commentor_account=models.ForeignKey(User,on_delete=models.CASCADE)
-    parent_comment=models.ForeignKey(Comments,on_delete=models.CASCADE)
+    parent_comment=models.IntegerField()
     date_posted=models.DateTimeField(auto_now_add=True)
     comment=models.CharField(max_length=200)
     from_original=models.BooleanField(default=False)

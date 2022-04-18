@@ -44,7 +44,14 @@ const BlogDetails=(props)=> {
                 {/* Main blog actions --edit & delete */}
                   <div
                     className="main-comment-action">
-                    Edit
+                        <Link to={{
+                            pathname: '/newpost',
+                            state: {
+                                blog: blogPost,
+                                index
+                            },
+                        }} className="stretched-link">Edit</Link>
+                    
                   </div>
                   <div
                     className="comment-action"

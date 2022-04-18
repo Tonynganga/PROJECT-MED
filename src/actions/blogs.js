@@ -42,7 +42,7 @@ export const updateBlog = (index,body) => (dispatch, getState) => {
   axios
     .post('http://localhost:8000/api/blogs/update_blog/', body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: ADD_BLOG.replace, payload:{index,data:res.data} });
+      dispatch({ type: ADD_BLOG, payload:{index,data:res.data} });
       dispatch(notify("Added blog successfuly", "success"))
       sessionStorage.setItem('title', "")
       sessionStorage.setItem('excrept', "")
@@ -212,7 +212,7 @@ export const deleteBlog = (index, Id) => (dispatch, getState) => {
   axios
     .delete(`http://localhost:8000/api/blogs/delete_blog/${Id}`, tokenConfig(getState))
     .then(() => {
-      dispatch({ type: DELETE_BLOG, payload: index });
+      dispatch({ type: DELETE_BLOG });
       dispatch(notify("Delete blog successfuly", "success"))
     })
     .catch(() => {
