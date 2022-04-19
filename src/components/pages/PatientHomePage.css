@@ -293,6 +293,22 @@
 }
 .mypatients_hpage{
     margin-top: 0px;
+    max-width: 100%;
+
+}
+.mypatients__container{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+.patientcard{
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 20px;
+    align-items: center;
 }
 .btn__upcoming{
     padding-right: 10px;
