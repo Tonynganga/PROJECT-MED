@@ -39,26 +39,32 @@ const BlogDetails=(props)=> {
                 <h4>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</h4>
                 {/* use the below div to retrieve the blog content */}
                 <div className='mt-5 mb-5' dangerouslySetInnerHTML={createBlog()} />
-                <div className="mainblog-comment-actions">
                 {/* {canReply && ( */}
                 {/* Main blog actions --edit & delete */}
+                  {blogPost.blogger_username == props.user.username?
+                  <div className='mainblog-comment-actions'>
                   <div
-                    className="main-comment-action">
+                    className="main-comment-action"
+                    >                        
                         <Link to={{
                             pathname: '/newpost',
                             state: {
                                 blog: blogPost,
                                 index
                             },
-                        }} className="stretched-link">Edit</Link>
+                        }}>Edit</Link>
                     
                   </div>
                   <div
                     className="comment-action"
-                    onClick={()=>{props.deleteBlog(index,blogPost.id);props.history.goBack()}}>
-                    Delete
+                    >
+                    <Link 
+                    onClick={()=>{{props.deleteBlog(index,blogPost.id)}}}
+                    to={{
+                            pathname: '/blog',                            
+                        }}>Delete</Link>
                   </div>
-              </div>
+                  </div>:""}
                 <hr />
                 <p className='lead mb-5'><Link to='/blog' className='font-weight-bold'>Back to Blogs</Link></p>
                 
@@ -82,6 +88,7 @@ BlogDetails.propTypes = {
 const mapStateToProps = (state, ownProps) => {    
     return {
         stateBlogPost: state.blogs.blogs[ownProps.location.state.index],
+        user: state.auth.user
     }
 };
 
