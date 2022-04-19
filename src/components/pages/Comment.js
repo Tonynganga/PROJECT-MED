@@ -3,8 +3,9 @@ import CommentForm from './CommentForm';
 import { capitalizeFirstLetter } from '../../utils'
 import DisplayComment from "./DisplayComment";
 import { connect } from 'react-redux';
-import { clearComments,deleteComment,deleteCommentForComment } from '../../actions/blogs';
+import { clearComments, deleteComment, deleteCommentForComment } from '../../actions/blogs';
 import propTypes from 'prop-types';
+import './CssMain.css';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -14,23 +15,23 @@ const Comment = (props) => {
     const [reply, setReply] = useState(false)
     const [edit, setEdit] = useState(false)
     const [viewReplies, setViewReplies] = useState(false)
-    const [comment,setComment]=useState({})
-    
-    useEffect(()=>{
-        if(props.comment)
-        setComment(props.comment)
+    const [comment, setComment] = useState({})
+
+    useEffect(() => {
+        if (props.comment)
+            setComment(props.comment)
         else setComment(props.elem)
-    },[props.comment])
+    }, [props.comment])
     const handleViewReplies = () => {
         if (viewReplies) {
             props.clearComments(comment.id, comment.from_original == null)
         }
         setViewReplies(!viewReplies)
     }
-    const handelDelete=()=>{
-        if(comment.blog!=null)
-        props.deleteComment(props.index,comment.id)
-        else props.deleteCommentForComment(props.index,comment.parent_comment,comment.from_original,comment.id)
+    const handelDelete = () => {
+        if (comment.blog != null)
+            props.deleteComment(props.index, comment.id)
+        else props.deleteCommentForComment(props.index, comment.parent_comment, comment.from_original, comment.id)
     }
     const datePosted = new Date(props.elem.date_posted);
     return (
@@ -82,7 +83,7 @@ const Comment = (props) => {
                     {reply ? <CommentForm
                         isEnclosed={true}
                         commentId={comment.id}
-                        fromOriginal={comment.from_original==null}
+                        fromOriginal={comment.from_original == null}
                     > <button className="comment-form-button btn-danger" disabled={0}
                         onClick={() => setReply(false)}>
                             Close
@@ -95,7 +96,7 @@ const Comment = (props) => {
                             {viewReplies ? "Hide Replies" : "View Replies"}
                         </div>
                     </div>
-                    {viewReplies ? <DisplayComment fromOriginal={comment.from_original==null} Id={comment.id} /> : ""}
+                    {viewReplies ? <DisplayComment fromOriginal={comment.from_original == null} Id={comment.id} /> : ""}
                 </div>
             </div>
         </div>
@@ -111,11 +112,11 @@ Comment.propTypes = {
 const mapStateToProps = (state, ownProps) => {
     let Id
     if (ownProps.elem.from_original == null) Id = 0
-    else if (ownProps.elem.from_original != null&&ownProps.elem.from_original === true) Id = '0' + ownProps.elem.parent_comment
+    else if (ownProps.elem.from_original != null && ownProps.elem.from_original === true) Id = '0' + ownProps.elem.parent_comment
     else Id = ownProps.elem.parent_comment
     return {
         comment: state.blogs.comments[Id][ownProps.index],
     }
 };
 
-export default connect(mapStateToProps, { clearComments,deleteComment,deleteCommentForComment })(Comment);
+export default connect(mapStateToProps, { clearComments, deleteComment, deleteCommentForComment })(Comment);

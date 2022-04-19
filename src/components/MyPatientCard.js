@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import '././pages/PatientHomePage';
+import '././pages/PatientHomePage.css';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 
 function MyPatientCard(props) {
 
@@ -42,7 +41,7 @@ function MyPatientCard(props) {
 
                     <input type="text" placeholder="Email"
                         name="email"
-                        required
+                        disabled
                     /><br />
                 </div>
                 <div className='form__data__two'>

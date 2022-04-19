@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-import './Appointment.css';
+import './CssMain.css';
 import { getComments, getCommentsForComments } from '../../actions/blogs';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';

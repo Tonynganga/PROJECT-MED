@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './Appointment.css';
+import './CssMain.css';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment, addCommentForComment, updateComment, updateCommentForComment } from '../../actions/blogs';

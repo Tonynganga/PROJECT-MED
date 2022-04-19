@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Home.css';
+import './CssMain.css';
 import MainNavbar from '../../components/MainNavbar';
 import ViewReviews from './ViewReviews';
 import SendEmail from './SendEmail';

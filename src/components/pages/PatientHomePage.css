@@ -275,6 +275,9 @@
     display: flex;
     flex-direction: column;
 }
+.appt__details h4{
+    text-align: center;
+}
 .appt__headlines{
     margin-top: 30px;
     display: flex;
@@ -333,7 +336,7 @@
     padding: 5px;
     padding-right: 25px;
     width: 350px;
-    background-color: blue;
+    background-color: beige;
     justify-content: center;
     align-items: center;
 }

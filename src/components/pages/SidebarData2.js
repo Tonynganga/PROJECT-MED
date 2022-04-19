@@ -14,11 +14,7 @@ export const SidebarData2 = [
         icon: <DashboardIcon/>,
         link:"/doctorhomepage"
     },
-    {
-        title: "Appointments",
-        icon: <EventAvailableIcon/>,
-        link:"/doctorappointments"
-    },
+   
     {
         title: "My Patients",
         icon: <PersonIcon/>,

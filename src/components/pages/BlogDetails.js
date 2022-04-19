@@ -1,8 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 import CommentForm from './CommentForm';
-import './Appointment.css'
+import './CssMain.css'
 import DisplayComment from './DisplayComment';
 import { connect } from 'react-redux';
 import { deleteBlog } from '../../actions/blogs';
