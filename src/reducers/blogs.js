@@ -13,7 +13,9 @@ import {
     ADD_COMMENTS,
     ADD_COMMENTS_FOR_COMMENTS,
     DELETE_COMMENTS,
-    DELETE_COMMENT_FOR_COMMENT
+    DELETE_COMMENT_FOR_COMMENT,
+    DELETE_BLOG,
+    UPDATE_BLOG
 } from '../actions/types';
 
 const initialState = {
@@ -29,9 +31,16 @@ export default function (state = initialState, action) {
                 ...state,
                 blogs: action.payload,
             };
-        case DELETE_COMMENTS:
+        case DELETE_BLOG:
             state.blogs=state.blogs.filter((_,index)=>{
                 return index!=action.payload
+            })
+            return state
+        case UPDATE_BLOG:
+            state.blogs=state.blogs.map((elem,index)=>{
+                if(index==action.payload.index)
+                    return action.payload.data
+                return elem
             })
             return state
         case GET_COMMENTS:
