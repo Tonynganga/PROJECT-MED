@@ -1,6 +1,8 @@
 import {
     GET_APPOITMENTS_SETTINGS, GET_APPOITMENTS_SETTINGS_FAILED,
-    ADD_APPOITMENTS_SETTINGS, ADD_APPOITMENTS_SETTINGS_FAILED, GET_DOC_APPOITMENTS, GET_DOC_APPOITMENTS_FAILED
+    ADD_APPOITMENTS_SETTINGS, ADD_APPOITMENTS_SETTINGS_FAILED,
+    GET_DOC_APPOITMENTS, GET_DOC_APPOITMENTS_FAILED,
+    GET_PATIENT_DETAILS_FOR_DOC,GET_PATIENT_DETAILS_FOR_DOC_FAILED
 } from './types';
 import axios from 'axios';
 import { getErrors } from './auth';
@@ -34,6 +36,21 @@ export const getDoctorAppointments = () => (dispatch, getState) => {
             dispatch(getErrors(err.data, err.status));
             // dispatch(notify("Failed to get appointment","error"))
             dispatch({ type: GET_DOC_APPOITMENTS_FAILED });
+        });
+};
+
+export const getPatientDetailsForDoctor = () => (dispatch, getState) => {
+
+    axios
+        .get('http://localhost:8000/api/appointment/get_patient_details_for_booked_appointments', tokenConfig(getState))
+        .then(res => {
+            dispatch({ type: GET_PATIENT_DETAILS_FOR_DOC, payload: res.data });
+            // dispatch(notify("registeration successfull","success"))
+        })
+        .catch(err => {
+            dispatch(getErrors(err.data, err.status));
+            // dispatch(notify("Failed to get appointment","error"))
+            dispatch({ type: GET_PATIENT_DETAILS_FOR_DOC_FAILED });
         });
 };
 

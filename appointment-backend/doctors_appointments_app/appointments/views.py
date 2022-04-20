@@ -1,8 +1,9 @@
 from rest_framework import viewsets,status,permissions,generics
-from .serializer import Appointment_setting_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer
+from .serializer import Appointment_setting_ps_Serializer,Available_time_choice_ps_Serializer,Booked_appointments_Serializer,Get_Available_Appointment_Serializer,Patient_Details_For_Booked_appointments_Serializer
 from knox.models import AuthToken
 from rest_framework.response import Response
 from .models import Appointment_settings_per_station,Available_time_choices_per_station,Booked_appointments,Filled_date_time_choices_per_station
+from accounts.models import User
 from django.shortcuts import get_object_or_404
 from django.db import transaction
 from rest_framework.decorators import action
@@ -89,7 +90,19 @@ class Booked_appointments_API(viewsets.ModelViewSet):
             serializer.save(patient_account=request.user,doctor_account=aps_query.doctor_account)
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
+class Patient_Details_For_Booked_appointments_API(viewsets.ModelViewSet):
+        permission_classes=[
+            permissions.IsAuthenticated,
+        ]
+        serializer_class=Patient_Details_For_Booked_appointments_Serializer
+        def get_queryset(self):       
+            temp_queryset=Booked_appointments.objects.filter(doctor_account=self.request.user)
+            temp_queryset=temp_queryset.values_list('patient_account',flat=True).distinct()
+            queryset=User.objects.none()
+            for i in temp_queryset:
+                queryset=queryset|User.objects.filter(id=i)
+            return queryset
+            
 # class Filled_date_choices_ps_API(viewsets.ModelViewSet):
 #         serializer_class=Filled_date_choices_ps_Serializer
 

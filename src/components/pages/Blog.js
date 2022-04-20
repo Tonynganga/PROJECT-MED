@@ -4,7 +4,7 @@ import BlogNavbar from '../BlogNavbar';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getBlogs } from '../../actions/blogs';
-import {capitalizeFirstLetter} from '../../utils'
+import {capitalizeFirstLetter,monthNames} from '../../utils'
 import {
     Table,
     TableBody,
@@ -54,9 +54,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
+
 
 
 

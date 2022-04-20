@@ -1,8 +1,9 @@
-import {GET_APPOITMENTS_SETTINGS,GET_APPOITMENTS_SETTINGS_FAILED,ADD_APPOITMENTS_SETTINGS, GET_DOC_APPOITMENTS, GET_DOC_APPOITMENTS_FAILED} from '../actions/types';
+import {GET_APPOITMENTS_SETTINGS,GET_APPOITMENTS_SETTINGS_FAILED,ADD_APPOITMENTS_SETTINGS, GET_DOC_APPOITMENTS, GET_DOC_APPOITMENTS_FAILED, GET_PATIENT_DETAILS_FOR_DOC} from '../actions/types';
 
 const initialState = {
     appointmentSettingSet:false,
     docAppointments:[],
+    patientDetailForDoc:[],
 };
 
 export default function (state = initialState, action) {
@@ -16,6 +17,8 @@ export default function (state = initialState, action) {
       return {...state,docAppointments:action.payload}
     case GET_DOC_APPOITMENTS_FAILED:
       return {...state,docAppointments:[]}
+    case GET_PATIENT_DETAILS_FOR_DOC:
+      return {...state,patientDetailForDoc:action.payload}
     default:
       return state;
   }

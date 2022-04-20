@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Appointment_settings_per_station,Available_time_choices_per_station,Booked_appointments,Filled_date_time_choices_per_station
+from accounts.models import User
 from django.contrib.auth import authenticate
 import datetime
 from django.core.exceptions  import ValidationError
@@ -41,28 +42,16 @@ class Booked_appointments_Serializer(serializers.ModelSerializer):
     patient_first_name=serializers.CharField(source='patient_account.first_name',required=False)
     patient_last_name=serializers.CharField(source='patient_account.last_name',required=False)
     patient_email=serializers.CharField(source='patient_account.email',required=False)
-    patient_phone_no=serializers.CharField(source='patient_account.phone_number',required=False)
-    patient_profile_pic=serializers.URLField(source='patient_account.profile.image.url',required=False)    
+    
     class Meta:
         model=Booked_appointments
-        fields=['id',"appointment_time","appointment_date",'patient_first_name','patient_last_name','patient_email','patient_phone_no','patient_profile_pic']
-        read_only_fields=['id','patient_first_name','patient_last_name','patient_phone_no','patient_profile_pic','patient_email']
-    # def validate_doctor_account(self,value):
-    #     if value.is_doctor!=True:
-    #         raise serializers.ValidationError("Enter a valid doctor account")
-    #     try:    
-    #         if value.aps_per_station is not None:
-    #             pass
-    #     except Appointment_settings_per_station.DoesNotExist:
-    #         raise serializers.ValidationError("doctor_account must have Appointment_settings_per_station instance ")    
-    #     return value
-    
+        fields=['id',"appointment_time","appointment_date",'patient_first_name','patient_last_name','patient_email']
+        read_only_fields=['id','patient_first_name','patient_last_name','patient_email']
     def validate_appointment_date(self,value):
         today_date = datetime.date.today()
         if today_date>value:
             raise serializers.ValidationError("appointments are made after today")
         return value
-
     def validate_appointment_time(self,value):
         try:
             if Filled_date_time_choices_per_station.objects.get(booked_date=self.initial_data['appointment_date'],booked_time=value):
@@ -70,4 +59,10 @@ class Booked_appointments_Serializer(serializers.ModelSerializer):
         except Filled_date_time_choices_per_station.DoesNotExist:
             pass
         return value
-    
+
+class Patient_Details_For_Booked_appointments_Serializer(serializers.ModelSerializer):   
+    profile_pic=serializers.URLField(source='profile.image.url',read_only=True)        
+    class Meta:
+        model=User
+        fields=['first_name','last_name','email','phone_number','profile_pic','blood_group','address','gender','date_of_birth']
+        read_only_fields=['first_name','last_name','email','phone_number','blood_group','address','gender','date_of_birth']

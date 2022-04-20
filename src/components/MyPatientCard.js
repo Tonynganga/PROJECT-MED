@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import '././pages/PatientHomePage.css';
 import Avatar from '@mui/material/Avatar';
+import {capitalizeFirstLetter,monthNames} from '../utils'
 
 function MyPatientCard(props) {
 
     const [imageState, setImage] = useState("");
+
+    const name =capitalizeFirstLetter(props.details.first_name)+' '+capitalizeFirstLetter(props.details.last_name)
+    const date = new Date(props.details.date_of_birth)
+    const dateOfBirth=monthNames[date.getMonth()]+" "+date.getDate()+" "+date.getFullYear()
+    const bloodGroup=props.details.blood_group==""||props.details.blood_group==null?"not provided":props.details.blood_group
 
     const ColoredLine = ({ color }) => (
         <hr
@@ -15,6 +21,8 @@ function MyPatientCard(props) {
             }}
         />
     );
+
+    const datePosted = new Date(props.details.patient_date_of_birth)
 
     useEffect(() => {
         setImage('http://localhost:8000' + props.imageUrl)
@@ -33,14 +41,16 @@ function MyPatientCard(props) {
 
                 <div className='form__data__two'>
 
-                    <input type="text" placeholder="Name"
+                    <input type="text" placeholder="Name" value={name}
                         name="name"
+                        disabled
                     /><br />
                 </div>
                 <div className='form__data__two'>
 
                     <input type="text" placeholder="Email"
                         name="email"
+                        value={props.details.email}
                         disabled
                     /><br />
                 </div>
@@ -48,18 +58,22 @@ function MyPatientCard(props) {
 
                     <input type="text" placeholder="Location"
                         name="location"
+                        value={props.details.address?props.details.address:"not provided"}
                         required
+                        disabled
                     /><br />
                 </div>
 
                 <ColoredLine color="red" />
 
                 <div className='form__data__two'>
-                    <div className='label'>
+                    <div className='label' >
                         <label>Phone :</label>
                     </div>
                     <input type="text" placeholder="Phone"
                         name="phone"
+                        value={props.details.phone_no?props.details.phone_no:"not provided"}
+                        disabled
                     /><br />
                 </div>
                 <div className='form__data__two'>
@@ -68,6 +82,8 @@ function MyPatientCard(props) {
                     </div>
                     <input type="text" placeholder="Date of Birth"
                         name="dob"
+                        value={dateOfBirth}
+                        disabled
                     /><br />
                 </div>
                 <div className='form__data__two'>
@@ -76,6 +92,8 @@ function MyPatientCard(props) {
                     </div>
                     <input type="text" placeholder="bloodgroup"
                         name="bloodgroup"
+                        value={bloodGroup}
+                        disabled
                     /><br />
                 </div>
             </div>
