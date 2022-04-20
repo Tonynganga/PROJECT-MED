@@ -30,8 +30,8 @@ const MyPatients=(props)=>{
                 <h2>My Patients</h2>
             </div>
             <div className='mypatients_hpage'>
-            
-                <div className="doctorhome__sidebar">
+
+                <div className="mypatients__container">
 
                     <div className="doctor__sidebar">
                         <SideBar2 />
