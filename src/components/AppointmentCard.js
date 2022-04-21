@@ -89,10 +89,19 @@ const AppointmentCard=(props)=> {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [appointmentList,setAppointmentList]=useState([])
+    const [filteredList,setFilteredList]=useState([])
 
     useEffect(()=>{
         props.getDoctorAppointments()
     },[])
+
+    useEffect(()=>{
+        if(props.docAppointmentsList){
+            setAppointmentList(props.docAppointmentsList)
+            setFilteredList(props.docAppointmentsList)
+        }
+    },[props.docAppointmentsList])
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -103,7 +112,44 @@ const AppointmentCard=(props)=> {
         setPage(0);
     };
 
+    const filterAll=()=>{
+        setFilteredList(appointmentList)
+    }
+
+    const filterToday=()=>{
+        const tempList=appointmentList.filter(elem=>{
+            return elem.appointment_date==new Date().toISOString().slice(0, 10)
+        })
+        setFilteredList(tempList)
+    }
+
+    const filterPending=()=>{
+        const todayDate=new Date()
+        const tempList=appointmentList.filter(elem=>{
+            const appointmentDate = new Date(elem.appointment_date)
+            let parts = elem.appointment_time.match(/(\d+)[:](\d+)[:](\d+)/);
+            appointmentDate.setHours(parseInt(parts[1], 10)+2,0,0)
+            console.log(todayDate,"today date")
+            console.log(appointmentDate,"set date")
+            return appointmentDate>=todayDate
+        })
+        setFilteredList(tempList)
+        
+    }
+
     return (
+        <div className='each__appointment'>
+                <div className='appointment'>
+                    <div className='appt__details'>
+                        <h4>Patient Appointment</h4>
+                        <div className='appt__btns'>
+                            <button onClick={filterAll} className='btn__upcoming' >All</button>
+                            <button onClick={filterToday} className='btn__today' >Today</button>
+                            <button onClick={filterPending} className='btn__today' >Pending</button>
+                        </div>
+                    </div>
+                    
+                
         <TableContainer component={Paper} className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
@@ -117,7 +163,7 @@ const AppointmentCard=(props)=> {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.docAppointmentsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                    {filteredList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                         <TableRow key={row.id}>
                             <TableCell>
                                 <Grid container>
@@ -176,6 +222,8 @@ const AppointmentCard=(props)=> {
                 </TableFooter>
             </Table>
         </TableContainer>
+        </div>
+            </div>
     );
 }
 
