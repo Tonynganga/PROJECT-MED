@@ -13,7 +13,7 @@ import Alerts from './components/Alerts';
 import Logout from './components/pages/Logout';
 import {PersistGate} from 'redux-persist/integration/react'
 import PatientProfile from './components/pages/PatientProfile';
-import PatientChangePass from './components/pages/PatientChangePass';
+import ChangePass from './components/pages/ChangePass';
 import DoctorProfile from './components/pages/DoctorProfile';
 import SearchDoctor from './components/pages/SearchDoctor';
 import Appointment from './components/pages/Appointment';
@@ -50,7 +50,7 @@ function App() {
         <Route path='/patienthomepage' exact component={PatientHomePage}/>
         <Route path='/doctorhomepage' exact component={DoctorHomePage}/>
         <Route path='/patientprofile' exact component={PatientProfile}/>
-        <Route path='/patientchangepass' exact component={PatientChangePass}/>
+        <Route path='/changepass' exact component={ChangePass}/>
         <Route path='/doctorprofile' exact component={DoctorProfile}/>
         <Route path='/search_doctor' exact component={SearchDoctor}/>
         <Route path='/appointment' exact component={Appointment}/>

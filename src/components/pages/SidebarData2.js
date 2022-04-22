@@ -33,7 +33,7 @@ export const SidebarData2 = [
     {
         title: "Change Password",
         icon: <LockIcon/>,
-        link:"/patientchangepass"
+        link:"/changepass"
     },
     {
         title: "LogOut",

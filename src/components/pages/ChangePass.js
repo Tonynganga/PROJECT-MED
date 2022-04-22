@@ -3,7 +3,7 @@ import './PatientChangePass.css';
 import Footer from "../Footer";
 
 
-function PatientChangePass() {
+function ChangePass() {
     return (
         <div className='patientchangepass__page'>
             <div className="patienthome__container">
@@ -47,4 +47,4 @@ function PatientChangePass() {
     );
 }
 
-export default PatientChangePass;
+export default ChangePass;
