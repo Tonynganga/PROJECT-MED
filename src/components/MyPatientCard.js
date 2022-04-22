@@ -33,7 +33,7 @@ function MyPatientCard(props) {
                 <div className="image__view1">
                     <Avatar
                         alt={imageState}
-                        src="/src/assets/images/homepage.jpg"
+                        src={'http://localhost:8000' + props.details.profile_pic}
                         sx={{ width: 90, height: 90 }}
                     />
 
@@ -72,7 +72,7 @@ function MyPatientCard(props) {
                     </div>
                     <input type="text" placeholder="Phone"
                         name="phone"
-                        value={props.details.phone_no?props.details.phone_no:"not provided"}
+                        value={props.details.phone_number?props.details.phone_number:"not provided"}
                         disabled
                     /><br />
                 </div>

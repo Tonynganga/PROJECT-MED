@@ -92,6 +92,7 @@ const PatientProfile = props => {
             }
             formData.append('gender', genderState.value);
             formData.append('phone_number', phonenumberState);
+            formData.append('address', addressState);
             formData.append('last_name', lastnameState);
             //   formData.append ('date_of_birth', dateofbirthState);
             formData.append('image', image)
