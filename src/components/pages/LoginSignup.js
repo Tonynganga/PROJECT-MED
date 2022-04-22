@@ -1,8 +1,8 @@
-import React , { useState } from "react";
-import {LoginAction} from '../../actions/auth';
-import {connect} from 'react-redux';
+import React, { useState } from "react";
+import { LoginAction } from '../../actions/auth';
+import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { Link ,Redirect} from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -17,6 +17,14 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 import "./Main.css"
 import Footer from "../Footer";
+import ResetPassModal from '../ResetPassModal';
+
+const BUTTON_WRAPPER_STYLES = {
+  position: 'relative',
+  zIndex: 1
+}
+
+
 
 
 function LoginSignup(props) {
@@ -30,30 +38,34 @@ function LoginSignup(props) {
   const [password, setPassword] = useState("");
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "8px 0" };
-  const onSubmit = ()=> {    
-    
-    props.LoginAction (username, password);
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  const onSubmit = () => {
+
+    props.LoginAction(username, password);
   };
 
-    if (props.isAuthenticated) {
+  if (props.isAuthenticated) {
 
-      //for later use
-      // const nextComponent=JSON.parse(localStorage.getItem("next"))
-      // console.log('hello',nextComponent)
-      // if (nextComponent){        
-      //   return <Redirect to={nextComponent.props.location.pathname} />
-      // }
+    //for later use
+    // const nextComponent=JSON.parse(localStorage.getItem("next"))
+    // console.log('hello',nextComponent)
+    // if (nextComponent){        
+    //   return <Redirect to={nextComponent.props.location.pathname} />
+    // }
 
-      
-      if(props.user&&props.user.is_patient){     
-      return <Redirect to="/patienthomepage" />;}
-      else return <Redirect to="/doctorhomepage" />;
-    }else return(
+
+    if (props.user && props.user.is_patient) {
+      return <Redirect to="/patienthomepage" />;
+    }
+    else return <Redirect to="/doctorhomepage" />;
+  } else return (
     <div className="loginpage" >
-       
+
       <div className="login__grid-outline">
         <div className="divloginimage">
-          <img src="/images/loginimage.jpg" alt="#"/>
+          <img src="/images/loginimage.jpg" alt="#" />
         </div>
         <div className="grid">
           <Grid>
@@ -65,24 +77,24 @@ function LoginSignup(props) {
                 <h2>Sign In</h2>
               </Grid>
               <div className="form">
-                  <div className="sign-form-group">
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" name="username" placeholder="username"
-                      required
-                      onChange={(e)=>setUsername(e.target.value)}
-                value={username}
-                       />
-                  </div>
-                  <div className="sign-form-group">
-                    <label htmlFor="firstname">Password:</label>
-                    <input type="password" name="password" placeholder="Password"
-                      required
-                      onChange={(e)=>setPassword(e.target.value)}
-                value={password}
-                       />
-                  </div>
-                  </div>
-             
+                <div className="sign-form-group">
+                  <label htmlFor="username">Username:</label>
+                  <input type="text" name="username" placeholder="username"
+                    required
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                  />
+                </div>
+                <div className="sign-form-group">
+                  <label htmlFor="firstname">Password:</label>
+                  <input type="password" name="password" placeholder="Password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                  />
+                </div>
+              </div>
+
               <FormControlLabel
                 control={<Checkbox name="checkedB" color="primary" />}
                 label="Remember me"
@@ -93,36 +105,46 @@ function LoginSignup(props) {
                 variant="contained"
                 style={btnstyle}
                 fullWidth
-                onClick={()=>onSubmit()}
+                onClick={() => onSubmit()}
               >
                 Sign in
               </Button>
-              <Typography>
-                <Link href="#" to="/patienthomepage">Forgot password ?</Link>
+              <Typography style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+                <Link onClick={() => setIsOpen(true)}>Forgot password ?</Link>
+                <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
+                  Fancy Modal
+                </ResetPassModal>
               </Typography>
               <Typography>
                 {" "}
                 Do you have an account ?<Link href="#" to="/register">Sign Up</Link>
               </Typography>
             </Paper>
+            <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+              <button onClick={() => setIsOpen(true)}>Open Modal</button>
+
+              <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
+                Fancy Modal
+              </ResetPassModal>
+            </div>
           </Grid>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
 
-    
+
   );
 }
 LoginSignup.propTypes = {
   LoginAction: propTypes.func.isRequired,
   isAuthenticated: propTypes.bool.isRequired,
-  user:propTypes.object.isRequired
+  user: propTypes.object.isRequired
 };
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user:state.auth.user
+  user: state.auth.user
 });
 
-export default connect (mapStateToProps, {LoginAction}) (LoginSignup);
+export default connect(mapStateToProps, { LoginAction })(LoginSignup);
 // export default LoginSignup;

@@ -188,3 +188,13 @@
 .form-group-textarea{
   margin-top: 30px;
 }
+/* .r-modal-content-div{
+  background-color: #1888ff;
+} */
+.overlaystyles{
+  border-radius: 10px;
+}
+
+.reset-form{
+  width: 350px;
+}
