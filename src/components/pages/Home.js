@@ -17,11 +17,11 @@ function Home() {
         <MainNavbar />
       </div>
       <div className='main__home'>
-        <section id="hero" class="d-flex align-items-center">
+        <section id="hero" className="d-flex align-items-center">
           <div className="container text-center position-relative">
             <h1>24/7 Care is available</h1>
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, deleniti.</h2>
-            <a href="/loginsignup" class="main-btn">Get Started</a>
+            <a href="/loginsignup" className="main-btn">Get Started</a>
           </div>
         </section>
 
@@ -50,42 +50,42 @@ function Home() {
           </div>
         </section>
 
-        <section class="review" id="review">
+        <section className="review" id="review">
 
           <ViewReviews />
 
         </section>
 
-        <section class="contact">
-          <div class="container bg-transparent">
+        <section className="contact">
+          <div className="container bg-transparent">
 
-            <div class="section-title text-center mt-5">
+            <div className="section-title text-center mt-5">
               <h2>Contact</h2>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, accusamus.</p>
             </div>
 
-            <div class="row" id='contactus'>
+            <div className="row" id='contactus'>
 
-              <div class="col-lg-6">
+              <div className="col-lg-6">
 
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="contact-box">
-                      <i class="fas fa-map-signs"></i>
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="contact-box">
+                      <i className="fas fa-map-signs"></i>
                       <h3>Address</h3>
                       <p>Lorem Brasilia Zip code: 45687 </p>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="contact-box mt-4">
-                      <i class="fas fa-envelope"></i>
+                  <div className="col-md-6">
+                    <div className="contact-box mt-4">
+                      <i className="fas fa-envelope"></i>
                       <h3>Email Us</h3>
                       <p>test@example.com<br />contact@example.com</p>
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="contact-box mt-4">
-                      <i class="fas fa-phone"></i>
+                  <div className="col-md-6">
+                    <div className="contact-box mt-4">
+                      <i className="fas fa-phone"></i>
                       <h3>Call Us</h3>
                       <p>+55 61 1234 789 <br />+55 61 123 4567</p>
                     </div>
@@ -93,7 +93,7 @@ function Home() {
                 </div>
 
               </div>
-              <div class="col-lg-6">
+              <div className="col-lg-6">
                 <SendEmail />
               </div>
 
@@ -106,21 +106,21 @@ function Home() {
 
 
 
-        <footer class="footer py-4 mt-5">
-          <div class="container bg-transparent">
-            <div class="row align-items-center">
-              <div class="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
-              <div class="col-lg-4 my-3 my-lg-0">
-                <a class="btn btn-back btn-social mx-2" href="#!">
-                  <i class="fab fa-twitter"></i></a>
-                <a class="btn btn-back btn-social mx-2" href="#!">
-                  <i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-back btn-social mx-2" href="#!">
-                  <i class="fab fa-linkedin-in"></i></a>
+        <footer className="footer py-4 mt-5">
+          <div className="container bg-transparent">
+            <div className="row align-items-center">
+              <div className="col-lg-4 text-lg-left">Copyright © Your Website 2020</div>
+              <div className="col-lg-4 my-3 my-lg-0">
+                <a className="btn btn-back btn-social mx-2" href="#!">
+                  <i className="fab fa-twitter"></i></a>
+                <a className="btn btn-back btn-social mx-2" href="#!">
+                  <i className="fab fa-facebook-f"></i></a>
+                <a className="btn btn-back btn-social mx-2" href="#!">
+                  <i className="fab fa-linkedin-in"></i></a>
               </div>
-              <div class="col-lg-4 text-lg-right">
-                <a class="mr-3 text" href="#!">Privacy Policy</a>
-                <a href="#!" class="text">Terms of Use</a></div>
+              <div className="col-lg-4 text-lg-right">
+                <a className="mr-3 text" href="#!">Privacy Policy</a>
+                <a href="#!" className="text">Terms of Use</a></div>
             </div>
           </div>
         </footer>

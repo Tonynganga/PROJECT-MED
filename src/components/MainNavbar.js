@@ -138,7 +138,7 @@ function MainNavbar() {
             </Link>
           </li>
         </ul>
-        <div className="main__navbar__button-signup" onClick>
+        <div className="main__navbar__button-signup">
           <Button />
         </div>
       </nav>
