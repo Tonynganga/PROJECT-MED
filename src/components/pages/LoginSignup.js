@@ -109,24 +109,24 @@ function LoginSignup(props) {
               >
                 Sign in
               </Button>
-              <Typography style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-                <Link onClick={() => setIsOpen(true)}>Forgot password ?</Link>
+              <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+                <Link to="#" onClick={() => setIsOpen(true)}>Forgot password ?</Link>
                 <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
                   Fancy Modal
                 </ResetPassModal>
-              </Typography>
+              </div>
               <Typography>
                 {" "}
                 Do you have an account ?<Link href="#" to="/register">Sign Up</Link>
               </Typography>
             </Paper>
-            <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+            {/* <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
               <button onClick={() => setIsOpen(true)}>Open Modal</button>
 
               <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
                 Fancy Modal
               </ResetPassModal>
-            </div>
+            </div> */}
           </Grid>
         </div>
       </div>
