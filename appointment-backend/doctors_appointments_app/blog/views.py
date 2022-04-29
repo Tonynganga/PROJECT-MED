@@ -30,7 +30,8 @@ class Blog_API(viewsets.ModelViewSet):
         else:
             raise serializers.ValidationError("User should be a doctor")
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        print(serializer.data)
+        return Response(serializer.data,status=status.HTTP_201_CREATED, headers=headers)
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance.blogger_account!=request.user:
@@ -41,7 +42,13 @@ class Blog_API(viewsets.ModelViewSet):
         instance = self.get_object()
         if instance.blogger_account!=request.user:
            return Response({"detail":"Unauthorized user"},status=status.HTTP_401_UNAUTHORIZED)
-        return super().update(request, *args, partial=True)
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        try:
+            serializer.save(thumbnail=request.FILES['thumbnail'])
+        except MultiValueDictKeyError:
+            serializer.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 class Comment_API(viewsets.ModelViewSet):
     serializer_class=Comment_serializer
     permission_classes=[

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import BlogNavbar from '../BlogNavbar';
 import propTypes from 'prop-types';
@@ -21,6 +21,7 @@ import {
     makeStyles,
     Button
 } from '@material-ui/core';
+import { WebSocketService } from '../../websocket';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -62,8 +63,10 @@ function Blog(props) {
     const classes = useStyles();
     const [blogs, setBlogs] = useState([]);
     const [featuredBlog, setFeaturedBlog] = useState([]);
+    const ws = useContext(WebSocketService);
     useEffect(() => {
-        props.getBlogs()
+        // props.getBlogs()
+        ws.sendMessage('get_blogs',{})
     }, [])
     useEffect(() => {
         if (props.blogs.length > 0) {
@@ -88,7 +91,14 @@ function Blog(props) {
                         </Grid>
 
                         {/* <strong className="mb-2 d-inline-block text-primary">{blogPost.category.charAt(0).toUpperCase() + blogPost.category.slice(1)}</strong> */}
-                        <h3 className="mb-2 d-inline-block text-primary">{capitalizeFirstLetter(blogPost.blog_title)}</h3>
+                        <h3 className="mb-2 d-inline-block text-primary">
+                        <Link to={{
+                            pathname: '/blog_details',
+                            state: {
+                                blog: blogPost,
+                                index
+                            },
+                        }} style={{textDecoration:"none"}} >{capitalizeFirstLetter(blogPost.blog_title)}</Link></h3>
                         <div className="mb-1 text-muted">{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</div>
                         <p className="mb-auto card-text">{blogPost.excerpt}</p>
                         <Link to={{
@@ -100,7 +110,7 @@ function Blog(props) {
                         }} className="stretched-link">Continue reading</Link>
                     </div>
                     <div className="col-auto d-none d-lg-block">
-                        <img width='200' height='240' src={blogPost.thumbnail} alt='thumbnail' />
+                        <img width='200' height='240' src={'http://localhost:8000' + blogPost.thumbnail} alt='thumbnail' />
                     </div>
                 </div>
             );

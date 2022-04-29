@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import propTypes from 'prop-types';
 // import {addPost, updatePost} from '../../action/posts';
 import { EditorState, convertToRaw, convertFromHTML, ContentState } from 'draft-js'
 import { connect } from 'react-redux';
 import BlogNavbar from '../BlogNavbar';
-import { addBlog,updateBlog } from '../../actions/blogs'
+import { addBlog, updateBlog } from '../../actions/blogs'
 import './PatientProfile.css';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -13,11 +13,11 @@ import draftToHtml from 'draftjs-to-html';
 // import {stateFromHTML} from 'draft-js-import-html';
 import htmlToDraft from 'html-to-draftjs';
 import { errorMessage } from '../../actions/notifyPopUp';
-
-
+import { WebSocketService } from '../../websocket';
 
 
 const NewPost = (props) => {
+  const ws = useContext(WebSocketService);
 
   // const { blog,index } = props.location.state
   const editorStateSession = (item) => {
@@ -26,22 +26,25 @@ const NewPost = (props) => {
     return EditorState.createWithContent(contentState);
 
   }
-  useEffect(()=>{
-    if(props.location&&props.location.state&&props.location.state.blog){
+  const [title, setTitle] = useState(sessionStorage.getItem('title') ? sessionStorage.getItem('title') : "")
+  const [content, setContent] = useState(sessionStorage.getItem('content') ? sessionStorage.getItem('content') : "")
+  const [excrept, setExcrept] = useState(sessionStorage.getItem('excrept') ? sessionStorage.getItem('excrept') : "")
+  const [thumbnail, setThumbnail] = useState();
+  const [editorState, setEditorState] = useState(sessionStorage.getItem('content') ? editorStateSession(sessionStorage.getItem('content')) : EditorState.createEmpty())
+  useEffect(() => {
+    if (props.location && props.location.state && props.location.state.blog) {
       console.log(props.location.state.blog)
       const { blog } = props.location.state
-      sessionStorage.setItem('title',blog.blog_title)
-      sessionStorage.setItem('excrept',blog.excerpt)
-      sessionStorage.setItem('content',blog.blog_content)
-
+      setTitle(blog.blog_title)
+      sessionStorage.setItem('title', blog.blog_title)
+      setExcrept(blog.excerpt)
+      sessionStorage.setItem('excrept', blog.excerpt)
+      setContent(blog.blog_content)
+      sessionStorage.setItem('content', blog.blog_content)
     }
 
-  },[])
-  const [title, setTitle] = useState(sessionStorage.getItem('title') ? sessionStorage.getItem('title') : "")
-  const [content, setContent] = useState(sessionStorage.getItem('content')?sessionStorage.getItem('content'):"")
-  const [excrept, setExcrept] = useState(sessionStorage.getItem('excrept') ? sessionStorage.getItem('excrept') : "")
-  const [thumbnail, setThumbnail] = useState(null);
-  const [editorState, setEditorState] = useState(sessionStorage.getItem('content') ? editorStateSession(sessionStorage.getItem('content')) : EditorState.createEmpty())
+  }, [])
+
 
 
   const onChangeThumbnail = e => {
@@ -73,20 +76,24 @@ const NewPost = (props) => {
         formData.append('thumbnail', thumbnail)
         setThumbnail(null);
       }
-      if(props.location&&props.location.state&&props.location.state.blog&&props.location.state.index){
-        const { blog,index } = props.location.state
-        props.updateBlog(index, blog.id,formData)
+      if (props.location && props.location.state && props.location.state.blog ) {
+        const { blog } = props.location.state
+        props.updateBlog(blog.id, formData, ws)
       }
-      else
-      props.addBlog(formData);
+      else {
+        props.addBlog(formData, ws);
+        // console.log(formData.entries())
+
+      }
     }
 
   }
   return (
     <div>
-      <div className='blognav ml-5'>
-        <BlogNavbar />
-      </div>
+      {props.location && props.location.state && props.location.state.blog ? "" :
+        <div className='blognav ml-5'>
+          <BlogNavbar />
+        </div>}
       <div className="d-flex justify-content-center mt-5">
 
         <form onSubmit={onSubmit} >
@@ -110,7 +117,7 @@ const NewPost = (props) => {
 
               {/* <img id="img" alt="" width="0px" height="0px" /> */}
               <div className="blogupload__btn">
-                <input type="file" accept="image/*" value={thumbnail} name="image-upload" id="input" onChange={onChangeThumbnail} />
+                <input type="file" accept="image/*"  name="image-upload" id="input" onChange={onChangeThumbnail} />
                 <label className="image-upload" htmlFor="input">
                   <i className="material-icons">add_photo_alternate</i>
                   {thumbnail ? thumbnail.name : 'Choose file'}
@@ -172,8 +179,8 @@ const NewPost = (props) => {
 
 NewPost.propTypes = {
   addBlog: propTypes.func.isRequired,
-  updateBlog:propTypes.func.isRequired,
-  errorMessage:propTypes.func.isRequired
+  updateBlog: propTypes.func.isRequired,
+  errorMessage: propTypes.func.isRequired
 };
 
-export default connect(null, { addBlog,updateBlog, errorMessage })(NewPost)
+export default connect(null, { addBlog, updateBlog, errorMessage })(NewPost)

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
 import './CssMain.css'
@@ -6,7 +6,8 @@ import DisplayComment from './DisplayComment';
 import { connect } from 'react-redux';
 import { deleteBlog } from '../../actions/blogs';
 import propTypes from 'prop-types';
-import {capitalizeFirstLetter} from '../../utils'
+import {capitalizeFirstLetter,monthNames} from '../../utils'
+import { WebSocketService } from '../../websocket';
 
 
 const BUTTON_WRAPPER_STYLES = {
@@ -15,11 +16,8 @@ const BUTTON_WRAPPER_STYLES = {
     variant: 'contained'
 }
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-
 const BlogDetails=(props)=> {
+    const ws = useContext(WebSocketService);
     const { blog,index } = props.location.state
     const [blogPost,setBlogPost]= useState(blog)    
         useEffect(()=>{          
@@ -58,7 +56,7 @@ const BlogDetails=(props)=> {
                     className="comment-action"
                     >
                     <Link 
-                    onClick={()=>{{props.deleteBlog(index,blogPost.id)}}}
+                    onClick={()=>{{props.deleteBlog(blogPost.id,ws)}}}
                     to={{
                             pathname: '/blog',                            
                         }}>Delete</Link>

@@ -33,6 +33,8 @@ AUTH_USER_MODEL = 'accounts.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'djangochannelsrestframework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -79,6 +81,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'doctors_appointments_app.wsgi.application'
+ASGI_APPLICATION = 'doctors_appointments_app.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ['redis://localhost:6379/4']
+        }
+    },
+}
 
 
 # Database

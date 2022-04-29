@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_BLOG_FAILED, ADD_COMMENTS, ADD_COMMENTS_FAILED, ADD_COMMENTS_FOR_COMMENTS, ADD_COMMENTS_FOR_COMMENTS_FAILED, CLEAR_COMMENTS, DELETE_BLOG, DELETE_BLOG_FAILED, DELETE_COMMENTS, DELETE_COMMENTS_FAILED, DELETE_COMMENT_FOR_COMMENT, DELETE_COMMENT_FOR_COMMENT_FAILED, GET_BLOGS, GET_BLOGS_FAILED, GET_COMMENTS, GET_COMMENTS_FAILED, GET_COMMENTS_FOR_COMMENTS, GET_COMMENTS_FOR_COMMENTS_FAILED, UPDATE_BLOG, UPDATE_BLOG_FAILED, UPDATE_COMMENTS, UPDATE_COMMENTS_FAILED, UPDATE_COMMENT_FOR_COMMENT, UPDATE_COMMENT_FOR_COMMENT_FAILED } from './types';
+import { ADD_BLOG_FAILED, ADD_COMMENTS, ADD_COMMENTS_FAILED, ADD_COMMENTS_FOR_COMMENTS, ADD_COMMENTS_FOR_COMMENTS_FAILED, CLEAR_COMMENTS, DELETE_BLOG, DELETE_BLOG_FAILED, DELETE_COMMENTS, DELETE_COMMENTS_FAILED, DELETE_COMMENT_FOR_COMMENT, DELETE_COMMENT_FOR_COMMENT_FAILED, GET_BLOGS, GET_BLOGS_FAILED, GET_COMMENTS, GET_COMMENTS_FAILED, GET_COMMENTS_FOR_COMMENTS, GET_COMMENTS_FOR_COMMENTS_FAILED, UPDATE_BLOG, UPDATE_BLOG_FAILED, UPDATE_COMMENTS, UPDATE_COMMENTS_FAILED, UPDATE_COMMENT_FOR_COMMENT, UPDATE_COMMENT_FOR_COMMENT_FAILED } from './types';
 import axios from 'axios';
 import { tokenConfig } from './auth';
 import { notify } from 'reapop'
@@ -20,13 +20,14 @@ export const getBlogs = () => dispatch => {
     });
 };
 
-export const addBlog = body => (dispatch, getState) => {
+export const addBlog = (body,ws) => (dispatch, getState) => {
 
   axios
     .post('http://localhost:8000/api/blogs/post_blog', body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: ADD_BLOG });
-      dispatch(notify("Added blog successfuly", "success"))
+      // dispatch({ type: ADD_BLOG });
+      ws.sendMessage("add_blog",{id:res.data.id})
+      dispatch(notify("Added blog successfuly", "success"))      
       sessionStorage.setItem('title', "")
       sessionStorage.setItem('excrept', "")
       sessionStorage.setItem('content', "")
@@ -37,13 +38,13 @@ export const addBlog = body => (dispatch, getState) => {
     });
 };
 
-export const updateBlog = (index,id,body) => (dispatch, getState) => {
+export const updateBlog = (id,body,ws) => (dispatch, getState) => {
 
   axios
     .put(`http://localhost:8000/api/blogs/update_blog/${id}`, body, tokenConfig(getState))
     .then(res => {
-      dispatch({ type: UPDATE_BLOG, payload:{index,data:res.data} });
-      dispatch(notify("updated blog successfuly", "success"))
+      ws.sendMessage("update_blog",{id})
+      dispatch(notify("updated blog successfuly", "success"))      
       sessionStorage.setItem('title', "")
       sessionStorage.setItem('excrept', "")
       sessionStorage.setItem('content', "")
@@ -208,21 +209,24 @@ export const deleteCommentForComment = (index, key, fromOriginal, Id) => (dispat
 
 }
 
-export const deleteBlog = (index, Id) => (dispatch, getState) => {
+export const deleteBlog = (id,ws) => (dispatch, getState) => {
   axios
-    .delete(`http://localhost:8000/api/blogs/delete_blog/${Id}`, tokenConfig(getState))
+    .delete(`http://localhost:8000/api/blogs/delete_blog/${id}`, tokenConfig(getState))
     .then(() => {
-      axios
-      .get('http://localhost:8000/api/blogs/get_blogs', tokenConfig(getState))
-      .then(res => {
-        dispatch({ type: GET_BLOGS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch(notify("Failed to get blogs", "error"))
-        dispatch({ type: GET_BLOGS_FAILED });
-      });
-      dispatch({ type: DELETE_BLOG, payload: index });
+      // axios
+      // .get('http://localhost:8000/api/blogs/get_blogs', tokenConfig(getState))
+      // .then(res => {
+      //   dispatch({ type: GET_BLOGS, payload: res.data });
+        
+      // })
+      // .catch(err => {
+      //   dispatch(notify("Failed to get blogs", "error"))
+      //   dispatch({ type: GET_BLOGS_FAILED });
+      // });
+      // dispatch({ type: DELETE_BLOG, payload: index });
+      ws.sendMessage("delete_blog",{id})
       dispatch(notify("Delete blog successfuly", "success"))
+      
     })
     .catch(() => {
       dispatch({ type: DELETE_BLOG_FAILED });

@@ -26,6 +26,7 @@ import AppointmentCard from './components/AppointmentCard';
 import BlogDetails from './components/pages/BlogDetails';
 import MyPatients from './components/pages/MyPatients';
 import PageNotFound from './components/pages/PageNotFound';
+import WebSocketProvider from './websocket';
 function App() {
   setUpNotifications({
     defaultProps: {
@@ -39,6 +40,7 @@ function App() {
     <Provider store={store}>
       <Alerts/>
       <PersistGate persistor={persistor}> 
+      <WebSocketProvider>
     <Router>
      
       <Switch>
@@ -70,6 +72,7 @@ function App() {
       </Switch>
 
       </Router>
+      </WebSocketProvider>
       </PersistGate>
       
     </Provider>

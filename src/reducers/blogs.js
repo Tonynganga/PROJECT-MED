@@ -1,5 +1,6 @@
 import {
     CLEAR_COMMENTS,
+    ADD_BLOG,
     GET_BLOGS,
     GET_BLOGS_FAILED,
     GET_COMMENTS,
@@ -24,25 +25,27 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-
+    let tempBlogs
     switch (action.type) {
         case GET_BLOGS:
             return {
                 ...state,
                 blogs: action.payload,
             };
+        case ADD_BLOG:
+            return {...state,blogs:[...state.blogs,action.payload]}
         case DELETE_BLOG:
-            state.blogs=state.blogs.filter((_,index)=>{
-                return index!=action.payload
+            tempBlogs=state.blogs.filter((elem)=>{
+                return elem.id!=action.payload
             })
-            return state
+            return {...state,blogs:[...tempBlogs]}
         case UPDATE_BLOG:
-            state.blogs=state.blogs.map((elem,index)=>{
-                if(index==action.payload.index)
-                    return action.payload.data
+            tempBlogs=state.blogs.map((elem)=>{
+                if(elem.id==action.payload.id)
+                    return action.payload
                 return elem
             })
-            return state
+            return {...state,blogs:tempBlogs}
         case GET_COMMENTS:
         case GET_COMMENTS_FOR_COMMENTS:
             return {
