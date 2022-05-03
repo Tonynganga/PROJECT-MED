@@ -26,7 +26,7 @@ const BlogDetails=(props)=> {
         },[props.stateBlogPost])        
         
         const datePosted = new Date(blogPost.date_posted)
-        const createBlog = () => {
+        const blogContent = () => {
             return { __html: blogPost.blog_content }
         };
         return (
@@ -35,7 +35,7 @@ const BlogDetails=(props)=> {
                 <h3 className='display-5'>{capitalizeFirstLetter(blogPost.blog_title)}</h3>
                 <h4>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</h4>
                 {/* use the below div to retrieve the blog content */}
-                <div className='mt-5 mb-5' dangerouslySetInnerHTML={createBlog()} />
+                <div className='mt-5 mb-5' dangerouslySetInnerHTML={blogContent()} />
                 {/* {canReply && ( */}
                 {/* Main blog actions --edit & delete */}
                   {blogPost.blogger_username == props.user.username?

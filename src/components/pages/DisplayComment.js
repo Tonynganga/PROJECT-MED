@@ -1,19 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import './CssMain.css';
 import { getComments, getCommentsForComments } from '../../actions/blogs';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Comment from './Comment';
-
+import { WebSocketService } from '../../websocket';
 
 const DisplayComment = (props) => {
-
+  const ws = useContext(WebSocketService);
   const [comments, setComments] = useState([]);
   useEffect(() => {
+    ws.connectWsComments()
     if (props.Id) {
       if (props.forBlogs)
-        props.getComments(props.Id)
-      else props.getCommentsForComments(props.Id, props.fromOriginal)
+        ws.sendMessage('get_comments', {'blog_id': props.Id}, 'comments')
+      // props.getComments(props.Id)
+      else {
+        if (props.fromOriginal)
+          ws.sendMessage('get_comments_for_comments', {
+            'comment_id': props.Id,
+            'from_original': true,
+          }, '0' + props.Id)
+        else
+          ws.sendMessage('get_comments_for_comments', {
+            'comment_id': props.Id,
+            'from_original': false
+          }, ''+props.Id)
+      }
     }
   }, [])
   useEffect(() => {
@@ -23,7 +36,7 @@ const DisplayComment = (props) => {
   }, [props.comments])
 
   const dispComments = () => {
-    return comments.map((elem,index) => {
+    return comments.map((elem, index) => {
       return (<Comment key={index} index={index} elem={elem} user={props.user} />)
     })
   }

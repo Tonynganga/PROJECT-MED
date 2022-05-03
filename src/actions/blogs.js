@@ -55,6 +55,32 @@ export const updateBlog = (id,body,ws) => (dispatch, getState) => {
     });
 };
 
+export const deleteBlog = (id,ws) => (dispatch, getState) => {
+  axios
+    .delete(`http://localhost:8000/api/blogs/delete_blog/${id}`, tokenConfig(getState))
+    .then(() => {
+      // axios
+      // .get('http://localhost:8000/api/blogs/get_blogs', tokenConfig(getState))
+      // .then(res => {
+      //   dispatch({ type: GET_BLOGS, payload: res.data });
+        
+      // })
+      // .catch(err => {
+      //   dispatch(notify("Failed to get blogs", "error"))
+      //   dispatch({ type: GET_BLOGS_FAILED });
+      // });
+      // dispatch({ type: DELETE_BLOG, payload: index });
+      ws.sendMessage("delete_blog",{id})
+      dispatch(notify("Delete blog successfuly", "success"))
+      
+    })
+    .catch(() => {
+      dispatch({ type: DELETE_BLOG_FAILED });
+      dispatch(notify("Failed to Delete blog", "error"))
+    });
+
+}
+
 export const getComments = (blogId) => dispatch => {
   const config = {
     headers: {
@@ -209,28 +235,3 @@ export const deleteCommentForComment = (index, key, fromOriginal, Id) => (dispat
 
 }
 
-export const deleteBlog = (id,ws) => (dispatch, getState) => {
-  axios
-    .delete(`http://localhost:8000/api/blogs/delete_blog/${id}`, tokenConfig(getState))
-    .then(() => {
-      // axios
-      // .get('http://localhost:8000/api/blogs/get_blogs', tokenConfig(getState))
-      // .then(res => {
-      //   dispatch({ type: GET_BLOGS, payload: res.data });
-        
-      // })
-      // .catch(err => {
-      //   dispatch(notify("Failed to get blogs", "error"))
-      //   dispatch({ type: GET_BLOGS_FAILED });
-      // });
-      // dispatch({ type: DELETE_BLOG, payload: index });
-      ws.sendMessage("delete_blog",{id})
-      dispatch(notify("Delete blog successfuly", "success"))
-      
-    })
-    .catch(() => {
-      dispatch({ type: DELETE_BLOG_FAILED });
-      dispatch(notify("Failed to Delete blog", "error"))
-    });
-
-}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import CommentForm from './CommentForm';
 import { capitalizeFirstLetter } from '../../utils'
 import DisplayComment from "./DisplayComment";
@@ -6,12 +6,13 @@ import { connect } from 'react-redux';
 import { clearComments, deleteComment, deleteCommentForComment } from '../../actions/blogs';
 import propTypes from 'prop-types';
 import './CssMain.css';
+import { WebSocketService } from '../../websocket';
+import {monthNames} from '../../utils'
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
+
 
 const Comment = (props) => {
+    const ws = useContext(WebSocketService);
     const [reply, setReply] = useState(false)
     const [edit, setEdit] = useState(false)
     const [viewReplies, setViewReplies] = useState(false)
@@ -24,14 +25,27 @@ const Comment = (props) => {
     }, [props.comment])
     const handleViewReplies = () => {
         if (viewReplies) {
-            props.clearComments(comment.id, comment.from_original == null)
+            console.log(comment.from_original)
+            props.clearComments(comment.id, comment.from_original==null)
+            // comments from blog have no attribute from_original
+            if( comment.from_original==null)
+            ws.sendMessage('remove_from_group', {}, '0'+comment.id)
+            else
+            ws.sendMessage('remove_from_group', {}, ''+comment.id)
         }
         setViewReplies(!viewReplies)
     }
     const handelDelete = () => {
         if (comment.blog != null)
-            props.deleteComment(props.index, comment.id)
-        else props.deleteCommentForComment(props.index, comment.parent_comment, comment.from_original, comment.id)
+            // props.deleteComment(props.index, comment.id)
+            ws.sendMessage('delete_comment', {id:comment.id}, 'comments')
+        else {
+            if( comment.from_original)
+            ws.sendMessage('delete_comment_for_comment', {id:comment.id}, '0'+comment.parent_comment)
+            else
+            ws.sendMessage('delete_comment_for_comment', {id:comment.id}, ''+comment.parent_comment)
+            // props.deleteCommentForComment(props.index, comment.parent_comment, comment.from_original, comment.id)
+        }
     }
     const datePosted = new Date(props.elem.date_posted);
     return (

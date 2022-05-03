@@ -60,12 +60,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Blog(props) {
+    const ws = useContext(WebSocketService);
     const classes = useStyles();
     const [blogs, setBlogs] = useState([]);
     const [featuredBlog, setFeaturedBlog] = useState([]);
-    const ws = useContext(WebSocketService);
+    
     useEffect(() => {
         // props.getBlogs()
+        ws.connectWsBlog()
         ws.sendMessage('get_blogs',{})
     }, [])
     useEffect(() => {

@@ -1,4 +1,6 @@
 import React, { createContext, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
+import { notify } from 'reapop'
 import {
     ADD_BLOG, ADD_BLOG_FAILED,
     ADD_COMMENTS, ADD_COMMENTS_FAILED,
@@ -21,13 +23,16 @@ const WebSocketService = createContext(null)
 export { WebSocketService }
 
 export default ({ children }) => {
+    const token = useSelector(state => state.auth.token)
     const dispatch = useDispatch();
     let limitRecursion = 0
-    let socketRef 
+    const socketRef = useRef()
+    const currentUrl = useRef()
     let ws
 
-    const connect = () => {
-        const path = `ws://127.0.0.1:8000/ws/socket-server/?token=79cf2fbf16151b74e01667faa1db07f201ae08fd9b061dbf7d4c0129833baad9`;
+    const connect = (url) => {
+        currentUrl.current = url
+        const path = `ws://127.0.0.1:8000/${url}?token=${token}`;
         const socket = new WebSocket(path);
         socket.onopen = () => {
             console.log('WebSocket open');
@@ -42,13 +47,40 @@ export default ({ children }) => {
         socket.onclose = () => {
 
             console.log("WebSocket closed let's reopen");
-            if(limitRecursion<=5)
-            connect()
-            limitRecursion+=1
+            if (limitRecursion <= 5)
+                connect(url)
+            limitRecursion += 1
         };
         return socket
     }
-    socketRef = connect()
+
+    const connectWsComments = () => {
+        if (socketRef.current && socketRef.current.readyState === 1)
+            if (currentUrl.current != "comments/") {
+                // socketRef.current.close()
+                socketRef.current = connect("comments/")
+            }
+            else return
+        socketRef.current = connect("comments/")
+    }
+
+    const connectWsBlog = () => {
+
+        if (socketRef.current && socketRef.current.readyState === 1)
+            if (currentUrl.current != "blogs/") {
+                // socketRef.current.close()
+                socketRef.current = connect("blogs/")
+            }
+            else return
+        socketRef.current = connect("blogs/")
+
+
+
+    }
+    // useEffect(() => {
+    //     socketRef.current = connect()
+    // }, [])
+
     // const instance = null;
     // const callbacks = {};
 
@@ -75,10 +107,12 @@ export default ({ children }) => {
     //     }
     // }
 
-
+    /** 
+     * TODO handle backend errors 
+     * **/
     const socketNewMessage = (data) => {
         const parsedData = JSON.parse(data);
-        const command = parsedData.command;
+        // const command = parsedData.command;
         console.log(parsedData)
         if (parsedData.type === 'get_blogs')
             dispatch({ type: GET_BLOGS, payload: parsedData.data })
@@ -88,6 +122,34 @@ export default ({ children }) => {
             dispatch({ type: DELETE_BLOG, payload: parsedData.id });
         else if (parsedData.type === 'update_for_added_blog')
             dispatch({ type: ADD_BLOG, payload: parsedData.data });
+        else if (parsedData.type === 'get_comments')
+            dispatch({ type: GET_COMMENTS, payload: { 0: parsedData.data } });
+        else if (parsedData.type === 'add_comment') {
+            dispatch({ type: ADD_COMMENTS, payload: parsedData.data });
+            dispatch(notify("Added Comment successfuly", "success"));
+        }
+        else if (parsedData.type === 'update_comment') {
+            dispatch({ type: UPDATE_COMMENTS, payload: parsedData.data });
+            dispatch(notify("updated Comment successfuly", "success"));
+        }
+        else if (parsedData.type === 'delete_comment') {
+            dispatch({ type: DELETE_COMMENTS, payload: parsedData.id });
+            dispatch(notify("deleted Comment successfuly", "success"));
+        }
+        else if (parsedData.type === 'get_comments_for_comments')
+            dispatch({ type: GET_COMMENTS_FOR_COMMENTS, payload: { [parsedData.room_id]: parsedData.data } });
+        else if (parsedData.type === 'add_comment_for_comment') {
+            dispatch({ type: ADD_COMMENTS_FOR_COMMENTS, payload: { key: parsedData.room_id, data: parsedData.data } });
+            dispatch(notify("Added Comment successfuly", "success"));
+        }
+        else if (parsedData.type === 'update_comment_for_comment') {
+            dispatch({ type: UPDATE_COMMENT_FOR_COMMENT, payload: { key: parsedData.room_id, data: parsedData.data } });
+            dispatch(notify("Update Comment successfuly", "success"));
+        }
+        else if (parsedData.type === 'delete_comment_for_comment') {
+            dispatch({ type: DELETE_COMMENT_FOR_COMMENT, payload: { key: parsedData.room_id, id: parsedData.id } });
+            dispatch(notify("deleted Comment successfuly", "success"));
+        }
 
         // if (Object.keys(this.callbacks).length === 0) {
         //     return;
@@ -108,13 +170,17 @@ export default ({ children }) => {
         this.sendMessage({ command: 'fetch_messages', username: username });
     }
 
-    const sendMessage = (type, data) => {
+    const sendMessage = (type, data, roomId) => {
         waitForSocketConnection(() => {
+            const sendData = {
+                "command": type,
+                "data": data,
+            }
+            if (roomId != null)
+                sendData["room_id"] = roomId
+
             try {
-                socketRef.send(JSON.stringify({
-                    "command": type,
-                    "data": data,
-                }));
+                socketRef.current.send(JSON.stringify(sendData));
             }
             catch (err) {
                 console.log(err.message);
@@ -123,14 +189,14 @@ export default ({ children }) => {
         )
     }
 
-    
+
 
     const waitForSocketConnection = (callback) => {
-        const socket = socketRef;
+        const socket = socketRef.current;
         const recursion = waitForSocketConnection;
         setTimeout(
             function () {
-                if (socket.readyState === 1) {
+                if (socket && socket.readyState === 1) {
                     console.log("Connection is made")
                     if (callback != null) {
                         callback();
@@ -139,15 +205,16 @@ export default ({ children }) => {
 
                 } else {
                     console.log("wait for connection...")
+                    // socketRef=connect()
                     recursion(callback);
                 }
             }, 1000); // wait 5 milisecond for the connection...
     }
 
     ws = {
-        socketRef,
         sendMessage,
-
+        connectWsComments,
+        connectWsBlog,
     }
 
 

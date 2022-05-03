@@ -26,6 +26,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     let tempBlogs
+    let tempComments
     switch (action.type) {
         case GET_BLOGS:
             return {
@@ -45,7 +46,7 @@ export default function (state = initialState, action) {
                     return action.payload
                 return elem
             })
-            return {...state,blogs:tempBlogs}
+            return {...state,blogs:[...tempBlogs]}
         case GET_COMMENTS:
         case GET_COMMENTS_FOR_COMMENTS:
             return {
@@ -69,20 +70,30 @@ export default function (state = initialState, action) {
             delete state.comments[action.payload]
             return state
         case UPDATE_COMMENTS:
-            state.comments[0][action.payload.index] = action.payload.data
+            tempComments=state.comments[0].map((elem)=>{
+                if(elem.id==action.payload.id)
+                    return action.payload
+                return elem
+            })
+            state.comments[0]=tempComments
             return state
         case UPDATE_COMMENT_FOR_COMMENT:
-            state.comments[action.payload.key][action.payload.index] = action.payload.data
+            tempComments=state.comments[action.payload.key].map((elem)=>{
+                if(elem.id==action.payload.data.id)
+                    return action.payload.data
+                return elem
+            })
+            state.comments[action.payload.key]=tempComments
             return state
         case DELETE_COMMENTS:
             // delete state.comments[0][action.payload]
-            state.comments[0]=state.comments[0].filter((_,index)=>{
-                return index!=action.payload
+            state.comments[0]=state.comments[0].filter((elem)=>{
+                return elem.id!=action.payload
             })
             return state
         case DELETE_COMMENT_FOR_COMMENT:
-            state.comments[action.payload.key]=state.comments[action.payload.key].filter((_,index)=>{
-                return index!=action.payload.index
+            state.comments[action.payload.key]=state.comments[action.payload.key].filter((elem)=>{
+                return elem.id!=action.payload.id
             })
             return state
         case GET_BLOGS_FAILED:
