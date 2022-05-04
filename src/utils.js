@@ -7,6 +7,6 @@ export const monthNames = ["January", "February", "March", "April", "May", "June
 "July", "August", "September", "October", "November", "December"
 ];
 
-export const WS_API_PATH = 'ws://192.168.100.56:8000/';
-export const HTTP_API_PATH='http://192.168.100.56:8000';
+export const WS_API_PATH = 'ws://localhost:8000/';
+export const HTTP_API_PATH='http://localhost:8000';
 
