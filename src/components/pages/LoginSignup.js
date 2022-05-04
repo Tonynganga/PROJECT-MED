@@ -3,21 +3,15 @@ import { LoginAction } from '../../actions/auth';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { Link, Redirect } from "react-router-dom";
-import {
-  Grid,
-  Paper,
-  Avatar,
-  TextField,
-  Button,
-  Typography,
-} from "@material-ui/core";
+import MainNavbar from "../MainNavbar";
+import "./Main.css"
+import Footer from "../Footer";
+import ResetPassModal from '../ResetPassModal';
+import { Grid, Paper, Avatar, Button, Typography, } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-import "./Main.css"
-import Footer from "../Footer";
-import ResetPassModal from '../ResetPassModal';
 
 const BUTTON_WRAPPER_STYLES = {
   position: 'relative',
@@ -61,78 +55,84 @@ function LoginSignup(props) {
     }
     else return <Redirect to="/doctorhomepage" />;
   } else return (
-    <div className="loginpage" >
-
-      <div className="login__grid-outline">
-        <div className="divloginimage">
-          <img src="/images/loginimage.jpg" alt="#" />
-        </div>
-        <div className="grid">
-          <Grid>
-            <Paper elevation={10} style={paperStyle}>
-              <Grid align="center">
-                <Avatar style={avatarStyle}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <h2>Sign In</h2>
-              </Grid>
-              <div className="form">
-                <div className="sign-form-group">
-                  <label htmlFor="username">Username:</label>
-                  <input type="text" name="username" placeholder="username"
-                    required
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username}
-                  />
-                </div>
-                <div className="sign-form-group">
-                  <label htmlFor="firstname">Password:</label>
-                  <input type="password" name="password" placeholder="Password"
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                  />
-                </div>
-              </div>
-
-              <FormControlLabel
-                control={<Checkbox name="checkedB" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                color="primary"
-                variant="contained"
-                style={btnstyle}
-                fullWidth
-                onClick={() => onSubmit()}
-              >
-                Sign in
-              </Button>
-              <Typography style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-                <Link onClick={() => setIsOpen(true)}>Forgot password ?</Link>
-                <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
-                  Fancy Modal
-                </ResetPassModal>
-              </Typography>
-              <Typography>
-                {" "}
-                Do you have an account ?<Link href="#" to="/register">Sign Up</Link>
-              </Typography>
-            </Paper>
-            <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-              <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-              <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
-                Fancy Modal
-              </ResetPassModal>
-            </div>
-          </Grid>
-        </div>
+    <div>
+      <div className='home__navbar'>
+        <MainNavbar />
       </div>
-      <Footer />
-    </div>
+      <div className="loginpage" >
 
+        <div className="login__grid-outline">
+          <div className="divloginimage">
+            <img src="/images/loginimage.jpg" alt="#" />
+          </div>
+          <div className="grid">
+            <Grid>
+              <Paper elevation={10} style={paperStyle}>
+                <Grid align="center">
+                  <Avatar style={avatarStyle}>
+                    <LockOutlinedIcon />
+                  </Avatar>
+                  <h2>Sign In</h2>
+                </Grid>
+                <div className="form">
+                  <div className="sign-form-group">
+                    <label htmlFor="username">Username:</label>
+                    <input type="text" name="username" placeholder="username"
+                      required
+                      onChange={(e) => setUsername(e.target.value)}
+                      value={username}
+                    />
+                  </div>
+                  <div className="sign-form-group">
+                    <label htmlFor="firstname">Password:</label>
+                    <input type="password" name="password" placeholder="Password"
+                      required
+                      onChange={(e) => setPassword(e.target.value)}
+                      value={password}
+                    />
+                  </div>
+                </div>
+
+                <FormControlLabel
+                  control={<Checkbox name="checkedB" color="primary" />}
+                  label="Remember me"
+                />
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  style={btnstyle}
+                  fullWidth
+                  onClick={() => onSubmit()}
+                >
+                  Sign in
+                </Button>
+                <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+                  <Link to="#" onClick={() => setIsOpen(true)}>Forgot password ?</Link>
+                  <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
+                    Fancy Modal
+                  </ResetPassModal>
+                </div>
+                <Typography>
+                  {" "}
+                  Do you have an account ?<Link href="#" to="/register">Sign Up</Link>
+                </Typography>
+              </Paper>
+              {/* <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+        <button onClick={() => setIsOpen(true)}>Open Modal</button>
+
+        <ResetPassModal open={isOpen} onClose={() => setIsOpen(false)}>
+          Fancy Modal
+        </ResetPassModal>
+      </div> */}
+            </Grid>
+          </div>
+        </div>
+        <Footer />
+      </div>
+
+
+    </div>
 
   );
 }
@@ -147,4 +147,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { LoginAction })(LoginSignup);
-// export default LoginSignup;
+

@@ -67,33 +67,33 @@ const ViewReviews = (props) => {
 
 
     return (
-        <div class="container bg-transparent carousel slide" data-ride="carousel" >
-            <a class="carousel-control-prev" onClick={toPrevious} role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" ></span>
-                <span class="sr-only">Previous</span>
+        <div className="container bg-transparent carousel slide" data-ride="carousel" >
+            <a className="carousel-control-prev" onClick={toPrevious} role="button" data-slide="prev">
+                <span className="carousel-control-prev-icon" ></span>
+                <span className="sr-only">Previous</span>
             </a>
 
-            <h1 class="heading"><span>'</span> people's review <span>'</span></h1>
+            <h1 className="heading"><span>'</span> people's review <span>'</span></h1>
 
-            <div class="box-container">
+            <div className="box-container">
 
                 {sectionDisplays}
 
-                {/* <div class="box" data-aos="fade-right">
+                {/* <div className="box" data-aos="fade-right">
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
                     <h3>someone's name</h3>
                     <span>jan 5, 2021</span>
                     <img src="images/aboutimage.jpg" alt="" />
                 </div> */}
 
-                {/* <div class="box" data-aos="fade-up">
+                {/* <div className="box" data-aos="fade-up">
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
                     <h3>someone's name</h3>
                     <span>jan 7, 2021</span>
                     <img src="images/aboutimage.jpg" alt="" />
                 </div> */}
 
-                {/* <div class="box" data-aos="fade-left">
+                {/* <div className="box" data-aos="fade-left">
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur accusantium error numquam dolore atque. Atque totam ad sint ducimus! Maxime!</p>
                     <h3>someone's name</h3>
                     <span>jan 10, 2021</span>
@@ -102,9 +102,9 @@ const ViewReviews = (props) => {
 
             </div>
 
-            <a class="carousel-control-next" onClick={toNext} role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
+            <a className="carousel-control-next" onClick={toNext} role="button" data-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="sr-only">Next</span>
             </a>
 
         </div>

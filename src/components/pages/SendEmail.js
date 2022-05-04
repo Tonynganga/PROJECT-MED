@@ -32,27 +32,27 @@ const onSubmit=(e)=>{
     return(
         
                 <form ref={form} onSubmit={onSubmit} >
-                  <div class="form-row">
-                    <div class="col-md-6 form-group">
-                      <input type="text" name="fullname" class="form-control" id="fullname"
+                  <div className="form-row">
+                    <div className="col-md-6 form-group">
+                      <input type="text" name="fullname" className="form-control" id="fullname"
                         placeholder="Your Name" onChange={handleChange} />
 
                     </div>
-                    <div class="col-md-6 form-group">
-                      <input type="email" class="form-control" name="email"
+                    <div className="col-md-6 form-group">
+                      <input type="email" className="form-control" name="email"
                         id="email" placeholder="Your Email" onChange={handleChange}/>
 
                     </div>
                   </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="subject"
+                  <div className="form-group">
+                    <input type="text" className="form-control" name="subject"
                       id="subject" placeholder="Subject" onChange={handleChange} />
                   </div>
-                  <div class="form-group">
-                    <textarea class="form-control" name="message" rows="5" onChange={handleChange}></textarea>
+                  <div className="form-group">
+                    <textarea className="form-control" name="message" rows="5" onChange={handleChange}></textarea>
                   </div>
-                  <div class="text-center">
-                    <button class="form-submit" type="submit">Send Message</button></div>
+                  <div className="text-center">
+                    <button className="form-submit" type="submit">Send Message</button></div>
                 </form>
                 
             
