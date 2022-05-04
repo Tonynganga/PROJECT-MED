@@ -7,7 +7,7 @@ import { clearComments, deleteComment, deleteCommentForComment } from '../../act
 import propTypes from 'prop-types';
 import './CssMain.css';
 import { WebSocketService } from '../../websocket';
-import {monthNames} from '../../utils'
+import {monthNames,HTTP_API_PATH} from '../../utils'
 
 
 
@@ -51,7 +51,7 @@ const Comment = (props) => {
     return (
         <div className="comment">
             <div className="comment-image-container">
-                <img src={'http://localhost:8000' + comment.commentor_profile_pic} width="40px" height="40px" />
+                <img src={HTTP_API_PATH + comment.commentor_profile_pic} width="40px" height="40px" />
             </div>
             <div className="comment-right-part">
                 <div className="comment-content">

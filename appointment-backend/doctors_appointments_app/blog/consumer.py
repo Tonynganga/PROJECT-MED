@@ -10,7 +10,7 @@ from asgiref.sync import async_to_sync
 from django.http import QueryDict
 
 class ModifiedWebsocketConsumer(WebsocketConsumer):
-    command=dict()
+    commands=dict()
     room_group_name=""
     def receive(self, text_data):
         data = json.loads(text_data)

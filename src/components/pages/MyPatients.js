@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import {getPatientDetailsForDoctor} from '../../actions/docAppointments'
 import MyPatientCard from '../MyPatientCard';
 import PatientNavBar from '../PatientNavBar';
@@ -6,13 +6,17 @@ import './PatientHomePage.css';
 import SideBar2 from './SideBar2';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { WebSocketService } from '../../websocket';
 
 
 
 const MyPatients=(props)=>{
+    const ws = useContext(WebSocketService);
     const[details,setDetails]=useState([])
     useEffect(() => {
-        props.getPatientDetailsForDoctor()
+        ws.connectWsMyPatientsDetails()
+        ws.sendMessage('get_my_patients_details',{})
+        // props.getPatientDetailsForDoctor()
     }, [])
     useEffect(() => {
         if (props.patientDetails.length > 0) {

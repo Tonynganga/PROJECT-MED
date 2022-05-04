@@ -8,6 +8,7 @@ import {
   } from './types';
   import axios from 'axios';
   import {notify} from 'reapop'
+  import {HTTP_API_PATH} from '../utils'
 
   // export const loadUser = () => (dispatch, getState) => {
   //   axios
@@ -37,7 +38,7 @@ import {
       },
     };
     axios
-      .post ('http://localhost:8000/api/auth/login', JSON.stringify (body), config)
+      .post (HTTP_API_PATH+'/api/auth/login', JSON.stringify (body), config)
       .then (res => {
         dispatch ({type: LOGIN_SUCCCES, payload: res.data});
         dispatch(notify("login successfull","success"))
@@ -59,7 +60,7 @@ import {
       },
     };
     axios
-      .post ('http://localhost:8000/api/auth/register', data, config)
+      .post (HTTP_API_PATH+'/api/auth/register', data, config)
       .then (res => {
         dispatch ({type: REGISTER_SUCCESS, payload: res.data});
         dispatch(notify("registeration successfull","success"))
@@ -73,7 +74,7 @@ import {
 
   export const LogoutAction = () => (dispatch, getState) => {
     axios
-      .post ('http://localhost:8000/api/auth/logout', null, tokenConfig (getState))
+      .post (HTTP_API_PATH+'/api/auth/logout', null, tokenConfig (getState))
       .then (res => {
         dispatch ({type: LOGOUT});
       })

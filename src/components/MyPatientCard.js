@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '././pages/PatientHomePage.css';
 import Avatar from '@mui/material/Avatar';
-import {capitalizeFirstLetter,monthNames} from '../utils'
+import {capitalizeFirstLetter,monthNames,HTTP_API_PATH} from '../utils'
 
 function MyPatientCard(props) {
 
@@ -25,7 +25,7 @@ function MyPatientCard(props) {
     const datePosted = new Date(props.details.patient_date_of_birth)
 
     useEffect(() => {
-        setImage('http://localhost:8000' + props.imageUrl)
+        setImage(HTTP_API_PATH + props.imageUrl)
     }, [props.imageUrl])
     return (
         <div className="myp__card">
@@ -33,7 +33,7 @@ function MyPatientCard(props) {
                 <div className="image__view1">
                     <Avatar
                         alt={imageState}
-                        src={'http://localhost:8000' + props.details.profile_pic}
+                        src={HTTP_API_PATH + props.details.profile_pic}
                         sx={{ width: 90, height: 90 }}
                     />
 

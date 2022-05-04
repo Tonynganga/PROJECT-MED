@@ -1,6 +1,6 @@
 import React from "react"
 import './DoctorCard.css';
-import {capitalizeFirstLetter} from '../utils'
+import {capitalizeFirstLetter,HTTP_API_PATH} from '../utils'
 import { Link } from 'react-router-dom';
 
 
@@ -10,7 +10,7 @@ const DoctorCard=(props)=> {
             <div key={props.appointment.id} className="card">
                 <div className="card__wrapper">
                     <div className="card__image">
-                        <img src={'http://localhost:8000' + props.appointment.doctor_profile_pic} id="img" alt="#" width="80px" height="80px" />
+                        <img src={HTTP_API_PATH + props.appointment.doctor_profile_pic} id="img" alt="#" width="80px" height="80px" />
                     </div>
                     <div className='details__wrapper'>
                         <div className="card__details__wrapper">

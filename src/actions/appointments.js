@@ -7,11 +7,12 @@ import {
   import {getErrors} from './auth';
   import {notify} from 'reapop'
   import {tokenConfig} from './auth';
+  import {HTTP_API_PATH} from '../utils'
 
   export const getAvailableAppointments = () => (dispatch,getState) => {
     
     axios
-      .get ('http://localhost:8000/api/appointment/available_appointments', tokenConfig (getState))
+      .get (HTTP_API_PATH+'/api/appointment/available_appointments', tokenConfig (getState))
       .then (res => {
         dispatch ({type: AVAILABLE_APPOITMENTS, payload: res.data});
         // dispatch(notify("registeration successfull","success"))
@@ -25,7 +26,7 @@ import {
   export const setAppointment = data => (dispatch, getState) => {
 
     axios
-        .post('http://localhost:8000/api/appointment/add_booked_appointments',
+        .post(HTTP_API_PATH+'/api/appointment/add_booked_appointments',
         JSON.stringify (data)
             , tokenConfig(getState))
         .then(res => {
@@ -41,7 +42,7 @@ import {
 export const getAppointmentTimePerDate = data => dispatch=> {
 
   axios
-      .get(`http://localhost:8000/api/appointment/get_appointment_time/${data.appiontmentID}/${data.appiontmentDate}`)
+      .get(`${HTTP_API_PATH}/api/appointment/get_appointment_time/${data.appiontmentID}/${data.appiontmentDate}`)
     .then(res => {
           dispatch({ type: GET_AVAILABLE_APPOITMENTS_TIME, payload: res.data });
            })

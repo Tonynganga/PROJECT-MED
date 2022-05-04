@@ -8,6 +8,7 @@ import { errorMessage } from '../../actions/notifyPopUp';
 import Select from 'react-select';
 import PatientNavBar from '../PatientNavBar';
 import './PatientProfile.css'
+import {HTTP_API_PATH} from '../../utils'
 
 
 const genders = [
@@ -101,7 +102,7 @@ function DoctorProfile(props) {
                 onSubmit={onSubmit} className='profile__form'>
 
                     <div className="uploadimage__form">
-                        <img src={'http://localhost:8000' + props.imageUrl} id="img" alt="" width="100px" height="100px" />
+                        <img src={HTTP_API_PATH + props.imageUrl} id="img" alt="" width="100px" height="100px" />
                         <input type="file" accept="image/*" name="image-upload" id="input" onChange={onChangePicture} />
                         <div className="upload__btn">
                             <label className="image-upload" htmlFor="input">

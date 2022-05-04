@@ -2,6 +2,7 @@ import { ADD_BLOG_FAILED, ADD_COMMENTS, ADD_COMMENTS_FAILED, ADD_COMMENTS_FOR_CO
 import axios from 'axios';
 import { tokenConfig } from './auth';
 import { notify } from 'reapop'
+import {HTTP_API_PATH} from '../utils'
 
 export const getBlogs = () => dispatch => {
   const config = {
@@ -10,7 +11,7 @@ export const getBlogs = () => dispatch => {
     },
   };
   axios
-    .get('http://localhost:8000/api/blogs/get_blogs', config)
+    .get(HTTP_API_PATH+'/api/blogs/get_blogs', config)
     .then(res => {
       dispatch({ type: GET_BLOGS, payload: res.data });
     })
@@ -23,7 +24,7 @@ export const getBlogs = () => dispatch => {
 export const addBlog = (body,ws) => (dispatch, getState) => {
 
   axios
-    .post('http://localhost:8000/api/blogs/post_blog', body, tokenConfig(getState))
+    .post(HTTP_API_PATH+'/api/blogs/post_blog', body, tokenConfig(getState))
     .then(res => {
       // dispatch({ type: ADD_BLOG });
       ws.sendMessage("add_blog",{id:res.data.id})
@@ -41,7 +42,7 @@ export const addBlog = (body,ws) => (dispatch, getState) => {
 export const updateBlog = (id,body,ws) => (dispatch, getState) => {
 
   axios
-    .put(`http://localhost:8000/api/blogs/update_blog/${id}`, body, tokenConfig(getState))
+    .put(`${HTTP_API_PATH}/api/blogs/update_blog/${id}`, body, tokenConfig(getState))
     .then(res => {
       ws.sendMessage("update_blog",{id})
       dispatch(notify("updated blog successfuly", "success"))      
@@ -57,7 +58,7 @@ export const updateBlog = (id,body,ws) => (dispatch, getState) => {
 
 export const deleteBlog = (id,ws) => (dispatch, getState) => {
   axios
-    .delete(`http://localhost:8000/api/blogs/delete_blog/${id}`, tokenConfig(getState))
+    .delete(`${HTTP_API_PATH}/api/blogs/delete_blog/${id}`, tokenConfig(getState))
     .then(() => {
       // axios
       // .get('http://localhost:8000/api/blogs/get_blogs', tokenConfig(getState))
@@ -88,7 +89,7 @@ export const getComments = (blogId) => dispatch => {
     },
   };
   axios
-    .get(`http://localhost:8000/api/blogs/get_comments/${blogId}`, config)
+    .get(`${HTTP_API_PATH}/api/blogs/get_comments/${blogId}`, config)
     .then(res => {
       dispatch({ type: GET_COMMENTS, payload: { 0: res.data } });
     })
@@ -106,7 +107,7 @@ export const getCommentsForComments = (commentId, fromOriginal) => dispatch => {
   };
   if (fromOriginal === true) {
     axios
-      .get(`http://localhost:8000/api/blogs/get_comments_for_original_comment/${commentId}`, config)
+      .get(`${HTTP_API_PATH}/api/blogs/get_comments_for_original_comment/${commentId}`, config)
       .then(res => {
         dispatch({ type: GET_COMMENTS_FOR_COMMENTS, payload: { ['0' + commentId]: res.data } });
       })
@@ -118,7 +119,7 @@ export const getCommentsForComments = (commentId, fromOriginal) => dispatch => {
   } else {
 
     axios
-      .get(`http://localhost:8000/api/blogs/get_comments_for_comment/${commentId}`, config)
+      .get(`${HTTP_API_PATH}/api/blogs/get_comments_for_comment/${commentId}`, config)
       .then(res => {
         dispatch({ type: GET_COMMENTS_FOR_COMMENTS, payload: { [commentId]: res.data } });
       })
@@ -134,7 +135,7 @@ export const getCommentsForComments = (commentId, fromOriginal) => dispatch => {
 export const addComment = body => (dispatch, getState) => {
 
   axios
-    .post('http://localhost:8000/api/blogs/add_comment', body, tokenConfig(getState))
+    .post(HTTP_API_PATH+'/api/blogs/add_comment', body, tokenConfig(getState))
     .then(res => {
       dispatch({ type: ADD_COMMENTS, payload: res.data });
       dispatch(notify("Added Comment successfuly", "success"))
@@ -148,7 +149,7 @@ export const addComment = body => (dispatch, getState) => {
 export const addCommentForComment = (body, fromOriginal) => (dispatch, getState) => {
 
   axios
-    .post('http://localhost:8000/api/blogs/add_comment_for_comment', body, tokenConfig(getState))
+    .post(HTTP_API_PATH+'/api/blogs/add_comment_for_comment', body, tokenConfig(getState))
     .then(res => {
       let key
       if (fromOriginal)
@@ -173,7 +174,7 @@ export const clearComments = (Id, fromOriginal) => dispatch => {
 
 export const updateComment = (index, Id, body) => (dispatch, getState) => {
   axios
-    .put(`http://localhost:8000/api/blogs/update_comment/${Id}`, body, tokenConfig(getState))
+    .put(`${HTTP_API_PATH}/api/blogs/update_comment/${Id}`, body, tokenConfig(getState))
     .then(res => {
       dispatch({ type: UPDATE_COMMENTS, payload: { index, data: res.data } });
       dispatch(notify("Update Comment successfuly", "success"))
@@ -188,7 +189,7 @@ export const updateComment = (index, Id, body) => (dispatch, getState) => {
 export const updateCommentForComment = (index, Id, body, fromOriginal) => (dispatch, getState) => {
 
   axios
-    .put(`http://localhost:8000/api/blogs/update_comment_for_comment/${Id}`, body, tokenConfig(getState))
+    .put(`${HTTP_API_PATH}/api/blogs/update_comment_for_comment/${Id}`, body, tokenConfig(getState))
     .then(res => {
       let key
       if (fromOriginal)
@@ -206,7 +207,7 @@ export const updateCommentForComment = (index, Id, body, fromOriginal) => (dispa
 
 export const deleteComment = (index, Id) => (dispatch, getState) => {
   axios
-    .delete(`http://localhost:8000/api/blogs/delete_comment/${Id}`, tokenConfig(getState))
+    .delete(`${HTTP_API_PATH}/api/blogs/delete_comment/${Id}`, tokenConfig(getState))
     .then(() => {
       dispatch({ type: DELETE_COMMENTS, payload: index });
       dispatch(notify("Delete Comment successfuly", "success"))
@@ -220,7 +221,7 @@ export const deleteComment = (index, Id) => (dispatch, getState) => {
 
 export const deleteCommentForComment = (index, key, fromOriginal, Id) => (dispatch, getState) => {
   axios
-    .delete(`http://localhost:8000/api/blogs/delete_comment_for_comment/${Id}`, tokenConfig(getState))
+    .delete(`${HTTP_API_PATH}/api/blogs/delete_comment_for_comment/${Id}`, tokenConfig(getState))
     .then(() => {
       if (fromOriginal)
         key = '0' + key

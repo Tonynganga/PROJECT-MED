@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getReviews } from '../../actions/reviews'
 import propTypes from 'prop-types'
+import {HTTP_API_PATH} from '../../utils'
 // import './Home.css';
 const ViewReviews = (props) => {
 
@@ -28,7 +29,7 @@ const ViewReviews = (props) => {
                         <p style={{ height: 'inherit', width: 'inherit', padding: '0.5rem', margin: '0px' }}>{review.message}</p>
                         <h3>{review.reviewer_first_name + " " + review.reviewer_last_name}</h3>
                         <span>{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</span>
-                        <img src={'http://localhost:8000' + review.reviewer_profile_pic} alt="" />
+                        <img src={HTTP_API_PATH + review.reviewer_profile_pic} alt="" />
                     </div>
                 )
             }))]);

@@ -2,6 +2,7 @@ import {GET_REVIEWS, GET_REVIEWS_FAILED, GET_USER_REVIEW, POST_REVIEW, POST_REVI
 import axios from 'axios';
 import {tokenConfig} from './auth';
 import {notify} from 'reapop'
+import {HTTP_API_PATH} from '../utils'
 
 export const getReviews = () => dispatch => {
     const config = {
@@ -10,7 +11,7 @@ export const getReviews = () => dispatch => {
         },
       };
   axios
-    .get ('http://localhost:8000/api/reviews/get_reviews', config)
+    .get (HTTP_API_PATH+'/api/reviews/get_reviews', config)
     .then (res => {
       dispatch ({type: GET_REVIEWS, payload: res.data});
     })
@@ -23,7 +24,7 @@ export const getReviews = () => dispatch => {
 export const addReview = body => (dispatch,getState) => {
  
     axios
-      .post ('http://localhost:8000/api/reviews/post_review', body, tokenConfig (getState))
+      .post (HTTP_API_PATH+'/api/reviews/post_review', body, tokenConfig (getState))
       .then (res => {
         dispatch ({type: POST_REVIEW});
         dispatch(notify("Added review successfuly","success"))
@@ -37,7 +38,7 @@ export const addReview = body => (dispatch,getState) => {
   export const updateUserReview = body => (dispatch,getState) => {
  
     axios
-      .put ('http://localhost:8000/api/reviews/update_review', body, tokenConfig (getState))
+      .put (HTTP_API_PATH+'/api/reviews/update_review', body, tokenConfig (getState))
       .then (res => {
         dispatch ({type: UPDATE_REVIEW, payload: res.data});
         dispatch(notify("update review successfuly","success"))
@@ -52,7 +53,7 @@ export const addReview = body => (dispatch,getState) => {
 
   export const getUserReview = () => (dispatch,getState) => {
      axios
-      .get ('http://localhost:8000/api/reviews/get_review', tokenConfig (getState))
+      .get (HTTP_API_PATH+'/api/reviews/get_review', tokenConfig (getState))
       .then (res => {
         dispatch ({type: GET_USER_REVIEW, payload: res.data});       
       })

@@ -8,11 +8,12 @@ import axios from 'axios';
 import { getErrors } from './auth';
 import { notify } from 'reapop'
 import { tokenConfig } from './auth';
+import {HTTP_API_PATH} from '../utils'
 
 export const checkIfAppointmentSettingSet = () => (dispatch, getState) => {
 
     axios
-        .get('http://localhost:8000/api/appointment/get_setting', tokenConfig(getState))
+        .get(HTTP_API_PATH+'/api/appointment/get_setting', tokenConfig(getState))
         .then(res => {
             dispatch({ type: GET_APPOITMENTS_SETTINGS, payload: res.data });
             // dispatch(notify("registeration successfull","success"))
@@ -27,7 +28,7 @@ export const checkIfAppointmentSettingSet = () => (dispatch, getState) => {
 export const getDoctorAppointments = () => (dispatch, getState) => {
 
     axios
-        .get('http://localhost:8000/api/appointment/get_booked_appointments', tokenConfig(getState))
+        .get(HTTP_API_PATH+'/api/appointment/get_booked_appointments', tokenConfig(getState))
         .then(res => {
             dispatch({ type: GET_DOC_APPOITMENTS, payload: res.data });
             // dispatch(notify("registeration successfull","success"))
@@ -42,7 +43,7 @@ export const getDoctorAppointments = () => (dispatch, getState) => {
 export const getPatientDetailsForDoctor = () => (dispatch, getState) => {
 
     axios
-        .get('http://localhost:8000/api/appointment/get_patient_details_for_booked_appointments', tokenConfig(getState))
+        .get(HTTP_API_PATH+'/api/appointment/get_patient_details_for_booked_appointments', tokenConfig(getState))
         .then(res => {
             dispatch({ type: GET_PATIENT_DETAILS_FOR_DOC, payload: res.data });
             // dispatch(notify("registeration successfull","success"))
@@ -57,7 +58,7 @@ export const getPatientDetailsForDoctor = () => (dispatch, getState) => {
 export const setAppointmentSetting = data => (dispatch, getState) => {
 
     axios
-        .post('http://localhost:8000/api/appointment/add_settings_and_requirements',
+        .post(HTTP_API_PATH+'/api/appointment/add_settings_and_requirements',
             data
             , tokenConfig(getState))
         .then(res => {

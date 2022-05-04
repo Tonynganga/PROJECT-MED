@@ -6,7 +6,7 @@ import { SidebarData } from "./SidebarData";
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
 import {NavLink} from 'react-router-dom'
-import {capitalizeFirstLetter} from '../../utils'
+import {capitalizeFirstLetter,HTTP_API_PATH} from '../../utils'
 
 
 
@@ -27,7 +27,7 @@ const SideBar = props => {
     [props.user]
 );
 useEffect(() => {
-  setImage('http://localhost:8000' + props.imageUrl)
+  setImage(HTTP_API_PATH + props.imageUrl)
 }, [props.imageUrl])
   return (
     <div className="sidebar">

@@ -8,7 +8,8 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 """
 
 import os
-from blog import routing
+from blog import routing as blog_routing
+from appointments import routing as appointments_routing
 
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
@@ -23,7 +24,7 @@ application = ProtocolTypeRouter({
     'http': get_asgi_application(),
     'websocket': TokenAuthMiddleware(AuthMiddlewareStack(
         URLRouter(
-            routing.websocket_urlpatterns
+            blog_routing.websocket_urlpatterns+appointments_routing.websocket_urlpatterns
         )
     )
     )

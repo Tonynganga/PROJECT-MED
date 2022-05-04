@@ -22,6 +22,7 @@ import {
     Button
 } from '@material-ui/core';
 import { WebSocketService } from '../../websocket';
+import {HTTP_API_PATH} from '../../utils'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,7 +89,7 @@ function Blog(props) {
                 <div key={blogPost.id} className="mb-4 mt-2 overflow-hidden border rounded shadow-sm row no-gutters flex-md-row h-md-250 position-relative">
                     <div className="p-3 col d-flex flex-column position-static">
                         <Grid item lg={2}>
-                            <Avatar src={'http://localhost:8000' + blogPost.blogger_profile_pic} className={classes.avatar} />
+                            <Avatar src={HTTP_API_PATH + blogPost.blogger_profile_pic} className={classes.avatar} />
                             <Typography className={classes.name}>{blogPost.blogger_first_name} {blogPost.blogger_last_name}</Typography>
                         </Grid>
 
@@ -112,7 +113,7 @@ function Blog(props) {
                         }} className="stretched-link">Continue reading</Link>
                     </div>
                     <div className="col-auto d-none d-lg-block">
-                        <img width='200' height='240' src={'http://localhost:8000' + blogPost.thumbnail} alt='thumbnail' />
+                        <img width='200' height='240' src={HTTP_API_PATH + blogPost.thumbnail} alt='thumbnail' />
                     </div>
                 </div>
             );

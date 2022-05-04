@@ -3,10 +3,11 @@ import axios from 'axios';
 import {tokenConfig} from './auth';
 import {getErrors} from './auth';
 import {notify} from 'reapop'
+import {HTTP_API_PATH} from '../utils'
 
 export const getProfile = () => (dispatch, getState) => {
   axios
-    .get ('http://localhost:8000/api/auth/profile', tokenConfig (getState))
+    .get (HTTP_API_PATH+'/api/auth/profile', tokenConfig (getState))
     .then (res => {
       dispatch ({type: GET_PROFILE, payload: res.data});
       
@@ -26,7 +27,7 @@ export const updateProfile = body => (dispatch, getState) => {
     config.headers['Authorization'] = `Token ${token}`;
   }
   axios
-    .post ('http://localhost:8000/api/auth/profile', body, tokenConfig (getState))
+    .post (HTTP_API_PATH+'/api/auth/profile', body, tokenConfig (getState))
     .then (res => {
       dispatch ({type: UPDATE_PROFILE, payload: res.data});
       dispatch ({type: USER_RELOAD, payload: res.data});

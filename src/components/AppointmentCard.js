@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useContext} from 'react';
 import faker from 'faker';
 import './AppointmentCard.css';
 import { Link } from 'react-router-dom';
@@ -24,6 +24,7 @@ import { errorMessage } from '../actions/notifyPopUp';
 import { getDoctorAppointments } from '../actions/docAppointments';
 import propTypes from 'prop-types';
 import {capitalizeFirstLetter} from '../utils'
+import { WebSocketService } from '../websocket';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -86,6 +87,7 @@ for (let i = 0; i < 7; i++) {
 }
 
 const AppointmentCard=(props)=> {
+    const ws = useContext(WebSocketService);
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -93,7 +95,9 @@ const AppointmentCard=(props)=> {
     const [filteredList,setFilteredList]=useState([])
 
     useEffect(()=>{
-        props.getDoctorAppointments()
+        ws.connectWsBookedAppointments()
+        ws.sendMessage('get_booked_appointments',{})
+        // getDoctorAppointments()
     },[])
 
     useEffect(()=>{

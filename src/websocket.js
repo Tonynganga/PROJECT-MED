@@ -1,10 +1,12 @@
-import React, { createContext, useEffect, useRef } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { notify } from 'reapop'
 import {
     ADD_BLOG, ADD_BLOG_FAILED,
     ADD_COMMENTS, ADD_COMMENTS_FAILED,
     ADD_COMMENTS_FOR_COMMENTS, ADD_COMMENTS_FOR_COMMENTS_FAILED,
+    GET_DOC_APPOITMENTS,
+    GET_PATIENT_DETAILS_FOR_DOC,
     CLEAR_COMMENTS, DELETE_BLOG,
     DELETE_BLOG_FAILED, DELETE_COMMENTS,
     DELETE_COMMENTS_FAILED, DELETE_COMMENT_FOR_COMMENT,
@@ -17,6 +19,7 @@ import {
     UPDATE_COMMENT_FOR_COMMENT_FAILED
 } from './actions/types';
 import { useDispatch } from 'react-redux'
+import { WS_API_PATH } from './utils'
 const WebSocketService = createContext(null)
 
 
@@ -24,6 +27,7 @@ export { WebSocketService }
 
 export default ({ children }) => {
     const token = useSelector(state => state.auth.token)
+    // const [newConnection,setNewConnection]=useState(false)
     const dispatch = useDispatch();
     let limitRecursion = 0
     const socketRef = useRef()
@@ -32,7 +36,7 @@ export default ({ children }) => {
 
     const connect = (url) => {
         currentUrl.current = url
-        const path = `ws://127.0.0.1:8000/${url}?token=${token}`;
+        const path = `${WS_API_PATH}${url}?token=${token}`;
         const socket = new WebSocket(path);
         socket.onopen = () => {
             console.log('WebSocket open');
@@ -73,102 +77,122 @@ export default ({ children }) => {
             }
             else return
         socketRef.current = connect("blogs/")
+    }
 
+    const connectWsBookedAppointments = () => {
 
+        if (socketRef.current && socketRef.current.readyState === 1)
+            if (currentUrl.current != "booked_appointments/") {
+                // socketRef.current.close()
+                socketRef.current = connect("booked_appointments/")
+            }
+            else return
+        socketRef.current = connect("booked_appointments/")
+    }
+
+    const connectWsMyPatientsDetails = () => {
+
+        if (socketRef.current && socketRef.current.readyState === 1)
+            if (currentUrl.current != "my_patient_details/") {
+                // socketRef.current.close()
+                socketRef.current = connect("my_patient_details/")
+            }
+            else return
+        socketRef.current = connect("my_patient_details/")
+    }
+
+    const handleBlogWs = (parsedData) => {
+        switch (parsedData.type) {
+            case 'get_blogs':
+                dispatch({ type: GET_BLOGS, payload: parsedData.data })
+                break
+            case 'update_blog':
+                dispatch({ type: UPDATE_BLOG, payload: parsedData.data });
+                break
+            case 'delete_blog':
+                dispatch({ type: DELETE_BLOG, payload: parsedData.id });
+                break
+            case 'update_for_added_blog':
+                dispatch({ type: ADD_BLOG, payload: parsedData.data });
+                break
+            default:
+                break;
+        }
+    }
+
+    const handleBookedAppointmentsWs = (parsedData) => {
+        switch (parsedData.type) {
+            case 'get_booked_appointments':
+                dispatch({ type: GET_DOC_APPOITMENTS, payload: parsedData.data });
+                dispatch(notify("received", "success"));
+                break
+        }
+    }
+
+    const handleMyPatientDetailsWs = (parsedData) => {
+        switch (parsedData.type) {
+            case 'get_my_patients_details':
+                dispatch({ type: GET_PATIENT_DETAILS_FOR_DOC, payload: parsedData.data });
+                dispatch(notify("received", "success"));
+                break
+        }
+    }
+
+    const handleCommentWs = (parsedData) => {
+        switch (parsedData.type) {
+            case 'get_comments':
+                dispatch({ type: GET_COMMENTS, payload: { 0: parsedData.data } });
+                break
+            case 'add_comment':
+                dispatch({ type: ADD_COMMENTS, payload: parsedData.data });
+                // dispatch(notify("Added Comment successfuly", "success"));
+                break
+            case 'update_comment':
+                dispatch({ type: UPDATE_COMMENTS, payload: parsedData.data });
+                // dispatch(notify("updated Comment successfuly", "success"));
+                break
+            case 'delete_comment':
+                dispatch({ type: DELETE_COMMENTS, payload: parsedData.id });
+                // dispatch(notify("deleted Comment successfuly", "success"));
+                break
+            case 'get_comments_for_comments':
+                dispatch({ type: GET_COMMENTS_FOR_COMMENTS, payload: { [parsedData.room_id]: parsedData.data } });
+                break
+            case 'add_comment_for_comment':
+                dispatch({ type: ADD_COMMENTS_FOR_COMMENTS, payload: { key: parsedData.room_id, data: parsedData.data } });
+                // dispatch(notify("Added Comment successfuly", "success"));
+                break
+            case 'update_comment_for_comment':
+                dispatch({ type: UPDATE_COMMENT_FOR_COMMENT, payload: { key: parsedData.room_id, data: parsedData.data } });
+                // dispatch(notify("Update Comment successfuly", "success"));
+                break
+            case 'delete_comment_for_comment':
+                dispatch({ type: DELETE_COMMENT_FOR_COMMENT, payload: { key: parsedData.room_id, id: parsedData.id } });
+                // dispatch(notify("deleted Comment successfuly", "success"));
+                break
+            default:
+                break;
+        }
 
     }
-    // useEffect(() => {
-    //     socketRef.current = connect()
-    // }, [])
-
-    // const instance = null;
-    // const callbacks = {};
-
-    // const getInstance = () => {
-    //     if (!WebSocketService.instance) {
-    //         WebSocketService.instance = new WebSocketService();
-    //     }
-    //     return WebSocketService.instance;
-    // }
-
-    // const constructor = () => {
-    //     this.socketRef = null;
-    // }
-    // const sendMessage = (data) => {
-    //     console.log(data)
-    //     try {
-    //         socketRef.send(JSON.stringify({
-    //             'command': type,
-    //             'data': data,
-    //         }));
-    //     }
-    //     catch (err) {
-    //         console.log(err.message);
-    //     }
-    // }
 
     /** 
      * TODO handle backend errors 
      * **/
     const socketNewMessage = (data) => {
         const parsedData = JSON.parse(data);
-        // const command = parsedData.command;
-        console.log(parsedData)
-        if (parsedData.type === 'get_blogs')
-            dispatch({ type: GET_BLOGS, payload: parsedData.data })
-        else if (parsedData.type === 'update_blog')
-            dispatch({ type: UPDATE_BLOG, payload: parsedData.data });
-        else if (parsedData.type === 'delete_blog')
-            dispatch({ type: DELETE_BLOG, payload: parsedData.id });
-        else if (parsedData.type === 'update_for_added_blog')
-            dispatch({ type: ADD_BLOG, payload: parsedData.data });
-        else if (parsedData.type === 'get_comments')
-            dispatch({ type: GET_COMMENTS, payload: { 0: parsedData.data } });
-        else if (parsedData.type === 'add_comment') {
-            dispatch({ type: ADD_COMMENTS, payload: parsedData.data });
-            dispatch(notify("Added Comment successfuly", "success"));
-        }
-        else if (parsedData.type === 'update_comment') {
-            dispatch({ type: UPDATE_COMMENTS, payload: parsedData.data });
-            dispatch(notify("updated Comment successfuly", "success"));
-        }
-        else if (parsedData.type === 'delete_comment') {
-            dispatch({ type: DELETE_COMMENTS, payload: parsedData.id });
-            dispatch(notify("deleted Comment successfuly", "success"));
-        }
-        else if (parsedData.type === 'get_comments_for_comments')
-            dispatch({ type: GET_COMMENTS_FOR_COMMENTS, payload: { [parsedData.room_id]: parsedData.data } });
-        else if (parsedData.type === 'add_comment_for_comment') {
-            dispatch({ type: ADD_COMMENTS_FOR_COMMENTS, payload: { key: parsedData.room_id, data: parsedData.data } });
-            dispatch(notify("Added Comment successfuly", "success"));
-        }
-        else if (parsedData.type === 'update_comment_for_comment') {
-            dispatch({ type: UPDATE_COMMENT_FOR_COMMENT, payload: { key: parsedData.room_id, data: parsedData.data } });
-            dispatch(notify("Update Comment successfuly", "success"));
-        }
-        else if (parsedData.type === 'delete_comment_for_comment') {
-            dispatch({ type: DELETE_COMMENT_FOR_COMMENT, payload: { key: parsedData.room_id, id: parsedData.id } });
-            dispatch(notify("deleted Comment successfuly", "success"));
-        }
-
-        // if (Object.keys(this.callbacks).length === 0) {
-        //     return;
-        // }
-        // if (command === 'messages') {
-        //     // this.callbacks[command](parsedData.messages);
-        // }
-        // if (command === 'new_message') {
-        //     // this.callbacks[command](parsedData.message);
-        // }
+        if (currentUrl.current === "blogs/")
+            handleBlogWs(parsedData)
+        else if (currentUrl.current === "comments/")
+            handleCommentWs(parsedData)
+        else if (currentUrl.current === "booked_appointments/")
+            handleBookedAppointmentsWs(parsedData)
+            else if (currentUrl.current === "my_patient_details/")
+            handleMyPatientDetailsWs(parsedData)
+        // console.log(parsedData)
     }
 
-    const initChatUser = (username) => {
-        this.sendMessage({ command: 'init_chat', username: username });
-    }
 
-    const fetchMessages = (username) => {
-        this.sendMessage({ command: 'fetch_messages', username: username });
-    }
 
     const sendMessage = (type, data, roomId) => {
         waitForSocketConnection(() => {
@@ -215,31 +239,11 @@ export default ({ children }) => {
         sendMessage,
         connectWsComments,
         connectWsBlog,
+        connectWsBookedAppointments,
+        connectWsMyPatientsDetails,
     }
 
 
-
-    //   state() {
-    //     return this.socketRef.readyState;
-    //   }
-
-    //    waitForSocketConnection(callback){
-    //     const socket = this.socketRef;
-    //     const recursion = this.waitForSocketConnection;
-    //     setTimeout(
-    //       function () {
-    //         if (socket.readyState === 1) {
-    //           console.log("Connection is made")
-    //           if(callback != null){
-    //             callback();
-    //           }
-    //           return;
-
-    //         } else {
-    //           console.log("wait for connection...")
-    //           recursion(callback);
-    //         }
-    //       }, 1); // wait 5 milisecond for the connection...
     return (
         <WebSocketService.Provider value={ws}>
 
