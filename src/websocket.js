@@ -28,6 +28,7 @@ export { WebSocketService }
 export default ({ children }) => {
     const token = useSelector(state => state.auth.token)
     // const [newConnection,setNewConnection]=useState(false)
+    let newConnection=false
     const dispatch = useDispatch();
     let limitRecursion = 0
     const socketRef = useRef()
@@ -50,10 +51,10 @@ export default ({ children }) => {
         };
         socket.onclose = () => {
 
-            console.log("WebSocket closed let's reopen");
-            if (limitRecursion <= 5)
-                connect(url)
-            limitRecursion += 1
+            // console.log("WebSocket closed let's reopen");
+            // if (limitRecursion <= 5)
+            //     connect(url)
+            // limitRecursion += 1
         };
         return socket
     }
@@ -61,7 +62,7 @@ export default ({ children }) => {
     const connectWsComments = () => {
         if (socketRef.current && socketRef.current.readyState === 1)
             if (currentUrl.current != "comments/") {
-                // socketRef.current.close()
+                socketRef.current.close()
                 socketRef.current = connect("comments/")
             }
             else return
@@ -72,7 +73,7 @@ export default ({ children }) => {
 
         if (socketRef.current && socketRef.current.readyState === 1)
             if (currentUrl.current != "blogs/") {
-                // socketRef.current.close()
+                socketRef.current.close()
                 socketRef.current = connect("blogs/")
             }
             else return
@@ -83,7 +84,7 @@ export default ({ children }) => {
 
         if (socketRef.current && socketRef.current.readyState === 1)
             if (currentUrl.current != "booked_appointments/") {
-                // socketRef.current.close()
+                socketRef.current.close()
                 socketRef.current = connect("booked_appointments/")
             }
             else return
@@ -94,7 +95,7 @@ export default ({ children }) => {
 
         if (socketRef.current && socketRef.current.readyState === 1)
             if (currentUrl.current != "my_patient_details/") {
-                // socketRef.current.close()
+                socketRef.current.close()
                 socketRef.current = connect("my_patient_details/")
             }
             else return
@@ -124,7 +125,6 @@ export default ({ children }) => {
         switch (parsedData.type) {
             case 'get_booked_appointments':
                 dispatch({ type: GET_DOC_APPOITMENTS, payload: parsedData.data });
-                dispatch(notify("received", "success"));
                 break
         }
     }
@@ -133,7 +133,6 @@ export default ({ children }) => {
         switch (parsedData.type) {
             case 'get_my_patients_details':
                 dispatch({ type: GET_PATIENT_DETAILS_FOR_DOC, payload: parsedData.data });
-                dispatch(notify("received", "success"));
                 break
         }
     }

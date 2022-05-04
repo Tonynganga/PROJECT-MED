@@ -22,10 +22,8 @@ class ModifiedWebsocketConsumer(WebsocketConsumer):
         )
         
     def send_message(self, event):
-        # print(event['type'])
         self.send_json(event['data'])
     def send_json(self, message):
-        print(message['type'])
         self.send(text_data=json.dumps(message))
     def disconnect(self, close_code):
         # leave group room
