@@ -3,6 +3,8 @@ start-react-server:
 	npm run start
 start-django-server:
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver
+python-install-dep:
+	source ./appointment-backend/env/bin/activate && pip3 install -r requirements.txt
 start-django-server-network:
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver 192.168.100.56:8000
 django-makemigrations:
