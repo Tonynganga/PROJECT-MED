@@ -51,13 +51,28 @@ export default ({ children }) => {
             console.log(e.message);
         };
         socket.onclose = () => {
-
+            recoverLostConnection()
             // console.log("WebSocket closed let's reopen");
             // if (limitRecursion <= 5)
             //     connect(url)
             // limitRecursion += 1
         };
         return socket
+    }
+
+    const recoverLostConnection = () => {
+        let prevUrl = currentUrl.current
+        setTimeout(
+            function () {
+                if (socketRef.current && socketRef.current.readyState !== 1) {
+                    if (prevUrl === currentUrl.current) { 
+                        connect(currentUrl.current) 
+                        console.log('hello world')
+                    }else
+                        console.log('hello')
+                }
+            }, 100); // wait 100 milisecond to recover connection
+
     }
 
     const connectWsComments = () => {
@@ -223,7 +238,7 @@ export default ({ children }) => {
 
     }
 
-    
+
 
 
 
