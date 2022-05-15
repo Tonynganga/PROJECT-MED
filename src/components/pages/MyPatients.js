@@ -17,11 +17,9 @@ const MyPatients=(props)=>{
         ws.connectWsMyPatientsDetails()
         ws.sendMessage('get_my_patients_details',{})
         // props.getPatientDetailsForDoctor()
-    }, [])
+    }, [props.user])
     useEffect(() => {
-        if (props.patientDetails.length > 0) {
             setDetails(props.patientDetails)
-        }
     }, [props.patientDetails])
     
     
@@ -54,6 +52,7 @@ MyPatients.propTypes = {
 };
 const mapStateToProps = state => ({
     patientDetails: state.docAppointments.patientDetailForDoc,
+    user:state.auth.user
 });
 
 export default connect(mapStateToProps, { getPatientDetailsForDoctor })(MyPatients)

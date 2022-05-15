@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from 'react';
+import React,{useState,useEffect,useContext, useRef} from 'react';
 import faker from 'faker';
 import './AppointmentCard.css';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ import {
 import { palette } from '@mui/system';
 import { connect } from 'react-redux';
 import { errorMessage } from '../actions/notifyPopUp';
-import { getDoctorAppointments } from '../actions/docAppointments';
+// import { getDoctorAppointments } from '../actions/docAppointments';
 import propTypes from 'prop-types';
 import {capitalizeFirstLetter} from '../utils'
 import { WebSocketService } from '../websocket';
@@ -93,6 +93,8 @@ const AppointmentCard=(props)=> {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [appointmentList,setAppointmentList]=useState([])
     const [filteredList,setFilteredList]=useState([])
+    const filterState = useRef('all')
+
 
     useEffect(()=>{
         ws.connectWsBookedAppointments()
@@ -101,10 +103,8 @@ const AppointmentCard=(props)=> {
     },[])
 
     useEffect(()=>{
-        if(props.docAppointmentsList){
             setAppointmentList(props.docAppointmentsList)
             setFilteredList(props.docAppointmentsList)
-        }
     },[props.docAppointmentsList])
 
     const handleChangePage = (event, newPage) => {
@@ -233,12 +233,13 @@ const AppointmentCard=(props)=> {
 
 
 AppointmentCard.prototype = {
-    getDoctorAppointments: propTypes.func.isRequired,
+    // getDoctorAppointments: propTypes.func.isRequired,
     errorMessage: propTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     docAppointmentsList: state.docAppointments.docAppointments,
+    user:state.auth.user,
 });
 
-export default connect(mapStateToProps, {getDoctorAppointments,errorMessage })(AppointmentCard)
+export default connect(mapStateToProps, {errorMessage })(AppointmentCard)

@@ -5,6 +5,7 @@ import {
     REGISTER_SUCCESS,
     LOGOUT,
     USER_RELOAD,
+    RESET_DATA,
   } from '../actions/types';
   
   const initialState = {
@@ -41,6 +42,8 @@ import {
           ...state,
           user:action.payload.user,
         };
+      case RESET_DATA:
+        return initialState;
       default:
         return state;
     }

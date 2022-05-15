@@ -16,7 +16,8 @@ import {
     DELETE_COMMENTS,
     DELETE_COMMENT_FOR_COMMENT,
     DELETE_BLOG,
-    UPDATE_BLOG
+    UPDATE_BLOG,
+    RESET_DATA
 } from '../actions/types';
 
 const initialState = {
@@ -34,19 +35,19 @@ export default function (state = initialState, action) {
                 blogs: action.payload,
             };
         case ADD_BLOG:
-            return {...state,blogs:[...state.blogs,action.payload]}
+            return { ...state, blogs: [...state.blogs, action.payload] }
         case DELETE_BLOG:
-            tempBlogs=state.blogs.filter((elem)=>{
-                return elem.id!=action.payload
+            tempBlogs = state.blogs.filter((elem) => {
+                return elem.id != action.payload
             })
-            return {...state,blogs:[...tempBlogs]}
+            return { ...state, blogs: [...tempBlogs] }
         case UPDATE_BLOG:
-            tempBlogs=state.blogs.map((elem)=>{
-                if(elem.id==action.payload.id)
+            tempBlogs = state.blogs.map((elem) => {
+                if (elem.id == action.payload.id)
                     return action.payload
                 return elem
             })
-            return {...state,blogs:[...tempBlogs]}
+            return { ...state, blogs: [...tempBlogs] }
         case GET_COMMENTS:
         case GET_COMMENTS_FOR_COMMENTS:
             return {
@@ -55,11 +56,11 @@ export default function (state = initialState, action) {
             };
         case ADD_COMMENTS:
             tempComments = [...state.comments[0], action.payload]
-            return {...state,comments:{0:tempComments}}
+            return { ...state, comments: { 0: tempComments } }
         case ADD_COMMENTS_FOR_COMMENTS:
             // if (state.comments[action.payload.key])
             tempComments = [...state.comments[action.payload.key], action.payload.data]
-            return {...state,comments:{[action.payload.key]:tempComments}}
+            return { ...state, comments: { [action.payload.key]: tempComments } }
         case GET_COMMENTS_FAILED:
         case GET_COMMENTS_FOR_COMMENTS_FAILED:
             return {
@@ -70,32 +71,32 @@ export default function (state = initialState, action) {
             delete state.comments[action.payload]
             return state
         case UPDATE_COMMENTS:
-            tempComments=state.comments[0].map((elem)=>{
-                if(elem.id==action.payload.id)
+            tempComments = state.comments[0].map((elem) => {
+                if (elem.id == action.payload.id)
                     return action.payload
                 return elem
             })
             // state.comments[0]=tempComments
-            return {...state,comments:{0:tempComments}}
+            return { ...state, comments: { 0: tempComments } }
         case UPDATE_COMMENT_FOR_COMMENT:
-            tempComments=state.comments[action.payload.key].map((elem)=>{
-                if(elem.id==action.payload.data.id)
+            tempComments = state.comments[action.payload.key].map((elem) => {
+                if (elem.id == action.payload.data.id)
                     return action.payload.data
                 return elem
             })
             // state.comments[action.payload.key]=tempComments
-            return  {...state,comments:{[action.payload.key]:tempComments}}
+            return { ...state, comments: { [action.payload.key]: tempComments } }
         case DELETE_COMMENTS:
             // delete state.comments[0][action.payload]
-            tempComments=state.comments[0].filter((elem)=>{
-                return elem.id!=action.payload
+            tempComments = state.comments[0].filter((elem) => {
+                return elem.id != action.payload
             })
-            return {...state,comments:{0:tempComments}}
+            return { ...state, comments: { 0: tempComments } }
         case DELETE_COMMENT_FOR_COMMENT:
-            tempComments=state.comments[action.payload.key].filter((elem)=>{
-                return elem.id!=action.payload.id
+            tempComments = state.comments[action.payload.key].filter((elem) => {
+                return elem.id != action.payload.id
             })
-            return {...state,comments:{[action.payload.key]:tempComments}}
+            return { ...state, comments: { [action.payload.key]: tempComments } }
         case GET_BLOGS_FAILED:
             return {
                 ...state,
@@ -108,6 +109,8 @@ export default function (state = initialState, action) {
                 blogs: [],
             };
         case UPDATE_COMMENTS_FAILED:
+        case RESET_DATA:
+            return initialState;
         default:
             return state;
     }

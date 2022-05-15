@@ -1,4 +1,4 @@
-import {GET_ERRORS} from '../actions/types';
+import { GET_ERRORS, RESET_DATA } from '../actions/types';
 const initialState = {
   errors: {},
 };
@@ -10,6 +10,8 @@ export default function (state = initialState, action) {
         ...state,
         errors: action.payload,
       };
+    case RESET_DATA:
+      return initialState;
     default:
       return state;
   }

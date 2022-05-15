@@ -1,4 +1,4 @@
-import {AVAILABLE_APPOITMENTS,AVAILABLE_APPOITMENTS_FAILED, GET_AVAILABLE_APPOITMENTS_TIME, GET_AVAILABLE_APPOITMENTS_TIME_FAILED} from '../actions/types';
+import {AVAILABLE_APPOITMENTS,AVAILABLE_APPOITMENTS_FAILED, GET_AVAILABLE_APPOITMENTS_TIME, GET_AVAILABLE_APPOITMENTS_TIME_FAILED,RESET_DATA} from '../actions/types';
 
 const initialState ={
   appointmentList:[],
@@ -19,7 +19,9 @@ export default function (state = initialState, action) {
       return {...state,availableAppointmentTime:timeArray}
     case GET_AVAILABLE_APPOITMENTS_TIME_FAILED:
       return {...state,availableAppointmentTime:[]}
-    default:
+    case RESET_DATA:
+      return initialState;
+    default:    
       return state;
   }
 }

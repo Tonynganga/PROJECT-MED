@@ -5,36 +5,39 @@ import {
     GET_USER_REVIEW_FAILED,
     LOGOUT,
     UPDATE_REVIEW,
-  } from '../actions/types';
+    RESET_DATA,
+} from '../actions/types';
 
 
-const initialState={
-    reviews:[],
-    review:{}
+const initialState = {
+    reviews: [],
+    review: {}
 }
 
 
-export default function(state=initialState,action){
-    switch(action.type){
+export default function (state = initialState, action) {
+    switch (action.type) {
         case GET_REVIEWS:
-            return {...state,reviews:action.payload}
+            return { ...state, reviews: action.payload }
         case GET_REVIEWS_FAILED:
             return {
                 ...state,
-                reviews:[]
+                reviews: []
             }
         case GET_USER_REVIEW:
         case UPDATE_REVIEW:
             return {
                 ...state,
-                review:action.payload
+                review: action.payload
             }
         case GET_USER_REVIEW_FAILED:
         case LOGOUT:
             return {
                 ...state,
-                review:{}
+                review: {}
             }
+        case RESET_DATA:
+            return initialState;
         default:
             return state
     }

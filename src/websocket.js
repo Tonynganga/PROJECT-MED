@@ -2,21 +2,22 @@ import React, { createContext, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { notify } from 'reapop'
 import {
-    ADD_BLOG, ADD_BLOG_FAILED,
-    ADD_COMMENTS, ADD_COMMENTS_FAILED,
-    ADD_COMMENTS_FOR_COMMENTS, ADD_COMMENTS_FOR_COMMENTS_FAILED,
+    ADD_BLOG,
+    ADD_COMMENTS,
+    ADD_COMMENTS_FOR_COMMENTS,
     GET_DOC_APPOITMENTS,
     GET_PATIENT_DETAILS_FOR_DOC,
-    CLEAR_COMMENTS, DELETE_BLOG,
-    DELETE_BLOG_FAILED, DELETE_COMMENTS,
-    DELETE_COMMENTS_FAILED, DELETE_COMMENT_FOR_COMMENT,
-    DELETE_COMMENT_FOR_COMMENT_FAILED, GET_BLOGS,
-    GET_BLOGS_FAILED, GET_COMMENTS,
-    GET_COMMENTS_FAILED, GET_COMMENTS_FOR_COMMENTS,
-    GET_COMMENTS_FOR_COMMENTS_FAILED, UPDATE_BLOG,
-    UPDATE_BLOG_FAILED, UPDATE_COMMENTS,
-    UPDATE_COMMENTS_FAILED, UPDATE_COMMENT_FOR_COMMENT,
-    UPDATE_COMMENT_FOR_COMMENT_FAILED
+    DELETE_BLOG,
+    DELETE_COMMENTS,
+    DELETE_COMMENT_FOR_COMMENT,
+    GET_BLOGS,
+    GET_COMMENTS,
+    GET_COMMENTS_FOR_COMMENTS,
+    UPDATE_BLOG,
+    UPDATE_COMMENTS,
+    UPDATE_COMMENT_FOR_COMMENT,
+    RESET_DATA
+
 } from './actions/types';
 import { useDispatch } from 'react-redux'
 import { WS_API_PATH } from './utils'
@@ -28,7 +29,7 @@ export { WebSocketService }
 export default ({ children }) => {
     const token = useSelector(state => state.auth.token)
     // const [newConnection,setNewConnection]=useState(false)
-    let newConnection=false
+    let newConnection = false
     const dispatch = useDispatch();
     let limitRecursion = 0
     const socketRef = useRef()
@@ -64,6 +65,7 @@ export default ({ children }) => {
             if (currentUrl.current != "comments/") {
                 socketRef.current.close()
                 socketRef.current = connect("comments/")
+                return
             }
             else return
         socketRef.current = connect("comments/")
@@ -75,6 +77,7 @@ export default ({ children }) => {
             if (currentUrl.current != "blogs/") {
                 socketRef.current.close()
                 socketRef.current = connect("blogs/")
+                return
             }
             else return
         socketRef.current = connect("blogs/")
@@ -86,6 +89,7 @@ export default ({ children }) => {
             if (currentUrl.current != "booked_appointments/") {
                 socketRef.current.close()
                 socketRef.current = connect("booked_appointments/")
+                return
             }
             else return
         socketRef.current = connect("booked_appointments/")
@@ -97,6 +101,7 @@ export default ({ children }) => {
             if (currentUrl.current != "my_patient_details/") {
                 socketRef.current.close()
                 socketRef.current = connect("my_patient_details/")
+                return
             }
             else return
         socketRef.current = connect("my_patient_details/")
@@ -186,7 +191,7 @@ export default ({ children }) => {
             handleCommentWs(parsedData)
         else if (currentUrl.current === "booked_appointments/")
             handleBookedAppointmentsWs(parsedData)
-            else if (currentUrl.current === "my_patient_details/")
+        else if (currentUrl.current === "my_patient_details/")
             handleMyPatientDetailsWs(parsedData)
         // console.log(parsedData)
     }
@@ -211,6 +216,14 @@ export default ({ children }) => {
         }
         )
     }
+
+    const closeWsConnection = () => {
+        socketRef.current.close()
+        dispatch({ type: RESET_DATA });
+
+    }
+
+    
 
 
 
@@ -240,6 +253,7 @@ export default ({ children }) => {
         connectWsBlog,
         connectWsBookedAppointments,
         connectWsMyPatientsDetails,
+        closeWsConnection,
     }
 
 

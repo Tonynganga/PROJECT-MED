@@ -1,12 +1,15 @@
-import React ,{useEffect} from 'react';
-import {connect} from 'react-redux';
-import {LogoutAction} from '../../actions/auth';
+import React, { useEffect,useContext } from 'react';
+import { connect } from 'react-redux';
+import { LogoutAction } from '../../actions/auth';
 import { Redirect } from "react-router-dom";
+import { WebSocketService } from '../../websocket';
 function Logout(props) {
-    useEffect(() => {  
-    props.LogoutAction();  
-},[]);  
-    return  <Redirect to="/" />;
+    const ws = useContext(WebSocketService);
+    useEffect(() => {
+        ws.closeWsConnection()
+        props.LogoutAction();
+    }, []);
+    return <Redirect to="/" />;
 }
 
-export default connect (null, {LogoutAction}) (Logout);
+export default connect(null, { LogoutAction })(Logout);
