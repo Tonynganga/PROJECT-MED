@@ -241,6 +241,7 @@ function Register(props) {
 }
 Register.propTypes = {
   RegisterAction: propTypes.func.isRequired,
+  errorMessage: propTypes.func.isRequired,
   isAuthenticated: propTypes.bool.isRequired,
   user: propTypes.object.isRequired,
 };

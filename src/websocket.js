@@ -233,8 +233,9 @@ export default ({ children }) => {
     }
 
     const closeWsConnection = () => {
-        socketRef.current.close()
-        dispatch({ type: RESET_DATA });
+        if(socketRef.current)
+        {socketRef.current.close()
+        dispatch({ type: RESET_DATA });}
 
     }
 
