@@ -47,8 +47,14 @@ export const LoginAction = (username, password) => dispatch => {
       // setTimeout(() => { dismissNotifications(); }, 2000);
     })
     .catch(err => {
+      console.log("hello"+err.response.data)
       dispatch(getErrors(err, err.status));
-      dispatch(notify("login unsuccessfull", "error"))
+      if (err.response.data['non_field_errors']) {
+        err.response.data['non_field_errors'].forEach(element => {
+          dispatch(notify(element, "error"))
+        });
+        
+      }else dispatch(notify("login unsuccessfull", "error"))
       // setTimeout(() => { dismissNotifications(); }, 2000);
       dispatch({ type: LOGIN_FAIL });
     });
@@ -101,7 +107,7 @@ export const ChangePassword = (password, token) => (dispatch, getState) => {
         .then(res => {
           dispatch(notify("link is now expired and can not be reused", "info"))
         })
-        
+
     })
     .catch(err => {
       dispatch(notify("Failed to change password", "error"))
