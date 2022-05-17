@@ -47,14 +47,13 @@ export const LoginAction = (username, password) => dispatch => {
       // setTimeout(() => { dismissNotifications(); }, 2000);
     })
     .catch(err => {
-      console.log("hello"+err.response.data)
       dispatch(getErrors(err, err.status));
       if (err.response.data['non_field_errors']) {
         err.response.data['non_field_errors'].forEach(element => {
           dispatch(notify(element, "error"))
         });
-        
-      }else dispatch(notify("login unsuccessfull", "error"))
+
+      } else dispatch(notify("login unsuccessfull", "error"))
       // setTimeout(() => { dismissNotifications(); }, 2000);
       dispatch({ type: LOGIN_FAIL });
     });
@@ -88,22 +87,13 @@ export const LogoutAction = () => (dispatch, getState) => {
     });
 };
 
-export const ChangePassword = (password, token) => (dispatch, getState) => {
-  //Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  if (token) {
-    config.headers['Authorization'] = `Token ${token}`;
-  }
+export const ForgotPassword = (password, token) => (dispatch, getState) => {
   axios
-    .post(HTTP_API_PATH + '/api/auth/change_password', { password }, config)
+    .post(HTTP_API_PATH + '/api/auth/forgot_passord', { password }, tokenConfig(getState, token))
     .then(res => {
       dispatch(notify("password changed successfully", "success"))
       axios
-        .post(HTTP_API_PATH + '/api/auth/logout', null, config)
+        .post(HTTP_API_PATH + '/api/auth/logout', null, tokenConfig(getState, token))
         .then(res => {
           dispatch(notify("link is now expired and can not be reused", "info"))
         })
@@ -113,6 +103,20 @@ export const ChangePassword = (password, token) => (dispatch, getState) => {
       dispatch(notify("Failed to change password", "error"))
     });
 };
+
+export const ChangePassword = body => (dispatch, getState) => {
+  axios
+    .post(HTTP_API_PATH + '/api/auth/change_password', body, tokenConfig(getState))
+    .then(res => {
+      dispatch(notify("password changed successfully", "success"))
+    })
+    .catch(err => {
+      if (err.response.data['error'])
+        dispatch(notify(err.response.data['error'], "error"))
+      else dispatch(notify("Failed to change password", "error"))
+    });
+};
+
 
 export const PasswordRecovery = (body, form) => (dispatch, getState) => {
   axios
@@ -137,9 +141,11 @@ export const PasswordRecovery = (body, form) => (dispatch, getState) => {
 
 
 
-export const tokenConfig = getState => {
-  //Get token from state
-  const token = getState().auth.token;
+export const tokenConfig = (getState, setToken) => {
+  let token
+  if (!setToken)
+    token = getState().auth.token;
+  else token = setToken
 
   //Headers
   const config = {

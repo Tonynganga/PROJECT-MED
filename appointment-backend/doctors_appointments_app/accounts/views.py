@@ -85,7 +85,7 @@ class CheckEmailApi(generics.GenericAPIView):
                 "error": "no email sent"
             },status=status.HTTP_400_BAD_REQUEST)
 
-class ChangePasword(generics.GenericAPIView):
+class ForgotPassword(generics.GenericAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
@@ -93,5 +93,19 @@ class ChangePasword(generics.GenericAPIView):
         user = request.user
         # u = User.objects.get(id=request.user.id)
         user.set_password(request.data['password'])
+        user.save()
+        return Response({},status=status.HTTP_200_OK)
+class ChangePassword(generics.GenericAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        if not user.check_password(request.data['old_password']):
+            return Response({
+                "error": "failed to enter correct current password"
+            },status=status.HTTP_400_BAD_REQUEST)
+        # u = User.objects.get(id=request.user.id)
+        user.set_password(request.data['new_password'])
         user.save()
         return Response({},status=status.HTTP_200_OK)
