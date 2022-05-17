@@ -20,6 +20,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import "./Main.css";
 import Footer from "../Footer";
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
+import MainNavbar from "../MainNavbar";
 
 
 
@@ -109,6 +110,9 @@ function Register(props) {
     else return <Redirect to="/doctorhomepage" />;
   } else return (
     <div className="Register">
+      <div className='home__navbar'>
+        <MainNavbar />
+      </div>
       <div className="login__grid-outline">
         <div className="divloginimage">
           <img src="/images/loginimage.jpg" alt="#" />
