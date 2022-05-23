@@ -39,16 +39,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
-class LoginSerializer(serializers.Serializer):
-    username=serializers.CharField()
-    password=serializers.CharField()
-    def validate(self,data):
-        if User.objects.filter(username=data['username']).exists():
-            user=authenticate(**data)
-            if not user:
-                raise serializers.ValidationError("Incorrect Credentials")                
-            return user
-        raise serializers.ValidationError("user does not exist")
+# class LoginSerializer(serializers.Serializer):
+#     username=serializers.CharField()
+#     password=serializers.CharField()
+#     def validate(self,data):
+#         if User.objects.filter(username=data['username']).exists():
+#             user=authenticate(**data)
+#             if not user:
+#                 raise serializers.ValidationError("Incorrect Credentials")                
+#             return user
+#         raise serializers.ValidationError("user does not exist")
 
 class ProfileSerializer(serializers.ModelSerializer):
     user=UserSerializer()

@@ -1,12 +1,13 @@
 import email
 from rest_framework import generics, permissions,status
-from .serializer import RegisterSerializer, LoginSerializer, UserSerializer, ProfileSerializer
+from .serializer import RegisterSerializer, UserSerializer, ProfileSerializer
 from knox.models import AuthToken
 from rest_framework.response import Response
 from .models import Profile, User
 import os
 from rest_framework.decorators import action
 import datetime
+from django.contrib.auth import authenticate
 
 # Create your views here.
 
@@ -25,16 +26,21 @@ class RegisterAPI(generics.GenericAPIView):
 
 
 class LoginAPI(generics.GenericAPIView):
-    serializer_class = LoginSerializer
-
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
+        data = request.data
+        if User.objects.filter(username=data['username']).exists():
+            user = authenticate(**data)
+            if not user:
+                return Response({
+                    "detail": "Incorrect Credentials"
+                }, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                'token': AuthToken.objects.create(user)[1],
+                'user': UserSerializer(user, context=self.get_serializer_context()).data,
+            })
         return Response({
-            'token': AuthToken.objects.create(user)[1],
-            'user': UserSerializer(user, context=self.get_serializer_context()).data,
-        })
+            "detail": "user does not exist"
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProfileAPI(generics.ListCreateAPIView):

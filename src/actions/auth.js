@@ -52,10 +52,12 @@ export const LoginAction = (username, password) => dispatch => {
         err.response.data['non_field_errors'].forEach(element => {
           dispatch(notify(element, "error"))
         });
+        
 
       } else dispatch(notify("login unsuccessfull", "error"))
       // setTimeout(() => { dismissNotifications(); }, 2000);
       dispatch({ type: LOGIN_FAIL });
+      dispatch(getErrors(err.response.data, err.response.status));
     });
 };
 
@@ -83,7 +85,7 @@ export const LogoutAction = () => (dispatch, getState) => {
     })
     .catch(err => {
       dispatch({ type: LOGOUT });
-      dispatch(getErrors(err.data, err.status));
+      dispatch(getErrors(err.response.data, err.response.status));
     });
 };
 
@@ -111,8 +113,8 @@ export const ChangePassword = body => (dispatch, getState) => {
       dispatch(notify("password changed successfully", "success"))
     })
     .catch(err => {
-      if (err.response.data['error'])
-        dispatch(notify(err.response.data['error'], "error"))
+      if (err.response.data['detail'])
+        dispatch(notify(err.response.data['detail'], "error"))
       else dispatch(notify("Failed to change password", "error"))
     });
 };
