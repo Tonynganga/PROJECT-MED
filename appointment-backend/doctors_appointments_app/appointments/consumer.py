@@ -1,7 +1,6 @@
 import json
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
-from click import command
 from .models import Booked_appointments
 from accounts.models import User
 from .serializer import Booked_appointments_Serializer,Patient_Details_For_Booked_appointments_Serializer

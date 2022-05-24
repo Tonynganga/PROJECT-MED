@@ -89,6 +89,7 @@
   }
   .about-img{
       border-radius: 20px;
+      content: url("../../../public/images/aboutimage.jpg");
   }
   
   .about-heading .about-heading-lower {

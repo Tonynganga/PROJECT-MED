@@ -2,24 +2,47 @@ SHELL:= /bin/bash
 start-react-server:
 	npm run start
 start-django-server:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver
+	python3 appointment-backend/doctors_appointments_app/manage.py runserver
 python-install-dep:
-	source ./appointment-backend/env/bin/activate && pip3 install -r requirements.txt
+	pip3 install -r requirements.txt
 start-django-server-network:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver 192.168.100.56:8000
+	python3 appointment-backend/doctors_appointments_app/manage.py runserver 192.168.100.56:8000
 django-makemigrations:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py makemigrations
+	python3 appointment-backend/doctors_appointments_app/manage.py makemigrations
 django-migrate:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py migrate
+	python3 appointment-backend/doctors_appointments_app/manage.py migrate
 django-test-accounts:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test accounts
+	python3 appointment-backend/doctors_appointments_app/manage.py test accounts
 django-test-reviews:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test reviews
+	python3 appointment-backend/doctors_appointments_app/manage.py test reviews
 django-shell:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py shell
+	python3 appointment-backend/doctors_appointments_app/manage.py shell
 django-dbshell:
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py dbshell
+	python3 appointment-backend/doctors_appointments_app/manage.py dbshell
 setup-env-python3:
 	python3 -m virtualenv env && source ./env/bin/activate && python3 -m pip install -r requirements.txt && mv env ./appointment-backend
 setup-env-python:
 	python -m virtualenv env && source ./env/bin/activate && python -m pip install -r requirements.txt && mv env ./appointment-backend
+update-python-dep:
+	pip freeze >requirements.txt
+
+start-django-server-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver
+python-install-dep-loc:
+	source ./appointment-backend/env/bin/activate && pip3 install -r requirements.txt
+start-django-server-network-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver 192.168.100.56:8000
+django-makemigrations-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py makemigrations
+django-migrate-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py migrate
+django-test-accounts-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test accounts
+django-test-reviews-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test reviews
+django-shell-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py shell
+django-dbshell-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py dbshell
+update-python-dep-loc:
+	source ./appointment-backend/env/bin/activate && pip freeze >requirements.txt

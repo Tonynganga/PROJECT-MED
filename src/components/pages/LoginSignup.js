@@ -63,7 +63,7 @@ function LoginSignup(props) {
 
         <div className="login__grid-outline">
           <div className="divloginimage">
-            <img src="/images/loginimage.jpg" alt="#" />
+            <img className="divloginimage-img"/>
           </div>
           <div className="grid">
             <Grid>

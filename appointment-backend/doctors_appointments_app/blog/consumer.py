@@ -1,7 +1,5 @@
 import json
 from channels.generic.websocket import WebsocketConsumer
-from click import command
-from yaml import serialize
 from django.utils.datastructures import MultiValueDictKeyError
 from .serializer import Blog_serializer,Comment_serializer,Comments_for_comments_serializer
 from rest_framework import serializers

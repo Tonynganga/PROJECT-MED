@@ -28,8 +28,7 @@ function Home() {
         <section className="about-section clearfix py-5">
           <div className="container bg-transparent">
             <div className="about">
-              <img className="about-img img-fluid mb-3 mb-lg-0 rounded"
-                src="images/aboutimage.jpg" alt="" />
+              <img className="about-img img-fluid mb-3 mb-lg-0 rounded" />
               <div className="about-text left-0 text-center bg-faded p-5 rounded">
                 <h2 className="about-heading mb-4">
                   <span className="about-heading-upper">Welcome</span>

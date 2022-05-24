@@ -20,6 +20,9 @@ padding: 40px;
   margin-right: 10px;
   
 }  
+.divloginimage-img{
+  content:url("../../../public/images/loginimage.jpg");
+}
 
 .background-red {
   background-color:  cornsilk;;
