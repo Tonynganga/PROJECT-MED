@@ -11,7 +11,8 @@ import { Grid, Paper, Avatar, Button, Typography, } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-
+import BgVideo from "../../assets/videos/loginbg.mp4";
+// import video from "../../../public/videos/loginpage.mp4"
 
 const BUTTON_WRAPPER_STYLES = {
   position: 'relative',
@@ -60,7 +61,7 @@ function LoginSignup(props) {
         <MainNavbar />
       </div>
       <div className="loginpage" >
-
+      <video src ={BgVideo} autoPlay loop muted/>
         <div className="login__grid-outline">
           <div className="divloginimage">
             <img className="divloginimage-img"/>
