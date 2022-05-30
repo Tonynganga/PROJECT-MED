@@ -25,13 +25,13 @@ class TestViews(TestCase):
             is_patient= False,
             date_of_birth="2005-01-01" 
         )
-        self.res=self.client.post(reverse('login'),{
+        self.res=self.client.post(reverse('login'),json.dumps({
             "username": "testuser","password": "kamikkkk"
-            })
+            }),content_type="application/json")
         self.res=json.loads(self.res.content.decode("UTF-8"))
-        self.res2=self.client.post(reverse('login'),{
+        self.res2=self.client.post(reverse('login'),json.dumps({
             "username": "testuser2","password": "kamikkkk"
-            })
+            }),content_type="application/json")
         self.res2=json.loads(self.res2.content.decode("UTF-8"))
         self.client.post(reverse('post_reviews'),{
             "star":2,

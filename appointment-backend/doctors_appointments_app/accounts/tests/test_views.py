@@ -28,21 +28,21 @@ class TestViews(TestCase):
         })
         self.assertEqual(response.status_code,201)
     def test_login_api(self):
-        response=self.client.post(reverse('login'),{
+        response=self.client.post(reverse('login'),json.dumps({
             "username": "testuser","password": "kamikkkk"
-            })
+            }),content_type="application/json")
         self.assertEqual(response.status_code,200)
     def test_logout_api(self):
-        res=self.client.post(reverse('login'),{
+        res=self.client.post(reverse('login'),json.dumps({
             "username": "testuser","password": "kamikkkk"
-            })
+            }),content_type="application/json")
         res=json.loads(res.content.decode("UTF-8"))
         logout_res=self.client.post(reverse('knox_logout'),HTTP_AUTHORIZATION="Token "+res['token'])
         self.assertEqual(logout_res.status_code,204)
     def test_profile_api(self):
-        res=self.client.post(reverse('login'),{
+        res=self.client.post(reverse('login'),json.dumps({
             "username": "testuser","password": "kamikkkk"
-            })
+            }),content_type="application/json")
         res=json.loads(res.content.decode("UTF-8"))
         profile_res=self.client.get(reverse('profile'),HTTP_AUTHORIZATION="Token "+res['token'])
         self.assertEqual(profile_res.status_code,200)
