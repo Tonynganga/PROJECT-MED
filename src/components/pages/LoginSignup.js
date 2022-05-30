@@ -24,10 +24,16 @@ const BUTTON_WRAPPER_STYLES = {
 
 function LoginSignup(props) {
   const paperStyle = {
+  backgroundColor: "transparent",
+  borderRadius:"none",
     padding: 20,
-    height: "70vh",
+    height: "64vh",
     width: 380,
     margin: "20px auto",
+    borderTopLeftRadius: "70px",
+  borderBottomLeftRadius: "0px",
+  borderTopRightRadius: "0px",
+  borderBottomRightRadius: "70px",
   };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -69,7 +75,7 @@ function LoginSignup(props) {
           <div className="grid">
             <Grid>
               <Paper elevation={10} style={paperStyle}>
-                <Grid align="center">
+                <Grid align="center" className="gridgrid">
                   <Avatar style={avatarStyle}>
                     <LockOutlinedIcon />
                   </Avatar>
