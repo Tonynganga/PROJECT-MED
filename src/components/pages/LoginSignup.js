@@ -11,7 +11,8 @@ import { Grid, Paper, Avatar, Button, Typography, } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-
+import BgVideo from "../../assets/videos/loginbg.mp4";
+// import video from "../../../public/videos/loginpage.mp4"
 
 const BUTTON_WRAPPER_STYLES = {
   position: 'relative',
@@ -23,10 +24,16 @@ const BUTTON_WRAPPER_STYLES = {
 
 function LoginSignup(props) {
   const paperStyle = {
+  backgroundColor: "transparent",
+  borderRadius:"none",
     padding: 20,
-    height: "70vh",
+    height: "64vh",
     width: 380,
     margin: "20px auto",
+    borderTopLeftRadius: "70px",
+  borderBottomLeftRadius: "0px",
+  borderTopRightRadius: "0px",
+  borderBottomRightRadius: "70px",
   };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -60,7 +67,7 @@ function LoginSignup(props) {
         <MainNavbar />
       </div>
       <div className="loginpage" >
-
+      <video src ={BgVideo} autoPlay loop muted/>
         <div className="login__grid-outline">
           <div className="divloginimage">
             <img className="divloginimage-img"/>
@@ -68,7 +75,7 @@ function LoginSignup(props) {
           <div className="grid">
             <Grid>
               <Paper elevation={10} style={paperStyle}>
-                <Grid align="center">
+                <Grid align="center" className="gridgrid">
                   <Avatar style={avatarStyle}>
                     <LockOutlinedIcon />
                   </Avatar>
