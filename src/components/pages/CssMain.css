@@ -67,6 +67,10 @@
   background-image: url("../../../public/images/hero5.jpg");
   animation-delay: 36s; 
 }
+.slideshow li:nth-child(8) span { 
+  background-image: url("../../../public/images/homepage.jpg");
+  animation-delay: 36s; 
+}
 
 
 
