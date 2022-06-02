@@ -23,10 +23,7 @@ function DoctorHomePage(props) {
     return (
         <div>
             <div className="doctorhomepage">
-                <div className='doctor__dashboard'>
-                    <h5>Home  /  Dashboard</h5>
-                    <h5>Dashboard</h5>
-                </div>
+               
                 <div className='doctorhome__container'>
                     <div className="doctorhome__sidebar">
 

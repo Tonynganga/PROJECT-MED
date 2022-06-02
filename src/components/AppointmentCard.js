@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext, useRef} from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import faker from 'faker';
 import './AppointmentCard.css';
 import { Link } from 'react-router-dom';
@@ -23,7 +23,7 @@ import { connect } from 'react-redux';
 import { errorMessage } from '../actions/notifyPopUp';
 // import { getDoctorAppointments } from '../actions/docAppointments';
 import propTypes from 'prop-types';
-import {capitalizeFirstLetter} from '../utils'
+import { capitalizeFirstLetter } from '../utils'
 import { WebSocketService } from '../websocket';
 
 
@@ -86,26 +86,26 @@ for (let i = 0; i < 7; i++) {
     }
 }
 
-const AppointmentCard=(props)=> {
+const AppointmentCard = (props) => {
     const ws = useContext(WebSocketService);
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [appointmentList,setAppointmentList]=useState([])
-    const [filteredList,setFilteredList]=useState([])
+    const [appointmentList, setAppointmentList] = useState([])
+    const [filteredList, setFilteredList] = useState([])
     const filterState = useRef('all')
 
 
-    useEffect(()=>{
+    useEffect(() => {
         ws.connectWsBookedAppointments()
-        ws.sendMessage('get_booked_appointments',{})
+        ws.sendMessage('get_booked_appointments', {})
         // getDoctorAppointments()
-    },[])
+    }, [])
 
-    useEffect(()=>{
-            setAppointmentList(props.docAppointmentsList)
-            setFilteredList(props.docAppointmentsList)
-    },[props.docAppointmentsList])
+    useEffect(() => {
+        setAppointmentList(props.docAppointmentsList)
+        setFilteredList(props.docAppointmentsList)
+    }, [props.docAppointmentsList])
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -116,118 +116,118 @@ const AppointmentCard=(props)=> {
         setPage(0);
     };
 
-    const filterAll=()=>{
+    const filterAll = () => {
         setFilteredList(appointmentList)
     }
 
-    const filterToday=()=>{
-        const tempList=appointmentList.filter(elem=>{
-            return elem.appointment_date==new Date().toISOString().slice(0, 10)
+    const filterToday = () => {
+        const tempList = appointmentList.filter(elem => {
+            return elem.appointment_date == new Date().toISOString().slice(0, 10)
         })
         setFilteredList(tempList)
     }
 
-    const filterPending=()=>{
-        const todayDate=new Date()
-        const tempList=appointmentList.filter(elem=>{
+    const filterPending = () => {
+        const todayDate = new Date()
+        const tempList = appointmentList.filter(elem => {
             const appointmentDate = new Date(elem.appointment_date)
             let parts = elem.appointment_time.match(/(\d+)[:](\d+)[:](\d+)/);
-            appointmentDate.setHours(parseInt(parts[1], 10)+2,0,0)
-            console.log(todayDate,"today date")
-            console.log(appointmentDate,"set date")
-            return appointmentDate>=todayDate
+            appointmentDate.setHours(parseInt(parts[1], 10) + 2, 0, 0)
+            console.log(todayDate, "today date")
+            console.log(appointmentDate, "set date")
+            return appointmentDate >= todayDate
         })
         setFilteredList(tempList)
-        
+
     }
 
     return (
         <div className='each__appointment'>
-                <div className='appointment'>
-                    <div className='appt__details'>
-                        <h4>Patient Appointment</h4>
-                        <div className='appt__btns'>
-                            <button onClick={filterAll} className='btn__upcoming' >All</button>
-                            <button onClick={filterToday} className='btn__today' >Today</button>
-                            <button onClick={filterPending} className='btn__today' >Pending</button>
-                        </div>
+            <div className='appointment'>
+                <div className='appt__details'>
+                    <h4>Patient Appointment</h4>
+                    <div className='appt__btns'>
+                        <button onClick={filterAll} className='btn__upcoming' >All</button>
+                        <button onClick={filterToday} className='btn__today' >Today</button>
+                        <button onClick={filterPending} className='btn__today' >Pending</button>
                     </div>
-                    
-                
-        <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell className={classes.tableHeaderCell}>Patient Info</TableCell>
-                        <TableCell className={classes.tableHeaderCell}>Appointment Date</TableCell>
-                        <TableCell className={classes.tableHeaderCell}>Payment Status</TableCell>
-                        <TableCell className={classes.tableHeaderCell}>Status</TableCell>
-                        <TableCell className={classes.tableHeaderCell}>View</TableCell>
+                </div>
 
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {filteredList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                        <TableRow key={row.id}>
-                            <TableCell>
-                                <Grid container>
-                                    <Grid item lg={2}>
-                                        <Avatar alt={capitalizeFirstLetter(row.patient_first_name)} src='.' className={classes.avatar} />
-                                    </Grid>
-                                    <Grid item lg={10}>
-                                        <Typography className={classes.name}>{capitalizeFirstLetter(row.patient_first_name)+' '+capitalizeFirstLetter(row.patient_last_name)}</Typography>
-                                        <Typography color="textSecondary" variant="body2">{row.patient_email}</Typography>
-                                        <Typography color="textSecondary" variant="body2">{row.patient_phone_no?row.patient_phone_no:""}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </TableCell>
-                            <TableCell>{row.appointment_date}</TableCell>
-                            <TableCell>
-                                <Typography
-                                    className={classes.payment}
-                                    style={{
-                                        backgroundColor:
-                                            ((row.payment === 'Paid' && 'green') ||
-                                                (row.payment === 'Unpaid' && 'red'))
-                                    }}
-                                >Paid</Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography
-                                    className={classes.status}
-                                    style={{
-                                        backgroundColor:
-                                            ((row.status === 'Active' && 'green') ||
-                                                (row.status === 'Pending' && 'blue'))
-                                    }}
-                                >Active</Typography>
-                            </TableCell>
 
-                            <TableCell>
-                                <Typography>
-                                    <Button component={Link} to="/about" variant="outlined" color="primary" cursor="pointer">
-                                        View
-                                    </Button>
-                                </Typography>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-                <TableFooter>
-                    <TablePagination
-                        rowsPerPageOptions={[5, 10, 15]}
-                        component="div"
-                        count={props.docAppointmentsList.length}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                    />
-                </TableFooter>
-            </Table>
-        </TableContainer>
-        </div>
+                <TableContainer component={Paper} className={classes.tableContainer}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={classes.tableHeaderCell}>Patient Info</TableCell>
+                                <TableCell className={classes.tableHeaderCell}>Appointment Date</TableCell>
+                                <TableCell className={classes.tableHeaderCell}>Payment Status</TableCell>
+                                <TableCell className={classes.tableHeaderCell}>Status</TableCell>
+                                <TableCell className={classes.tableHeaderCell}>View</TableCell>
+
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {filteredList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                                <TableRow key={row.id}>
+                                    <TableCell>
+                                        <Grid container>
+                                            <Grid item lg={2}>
+                                                <Avatar alt={capitalizeFirstLetter(row.patient_first_name)} src='.' className={classes.avatar} />
+                                            </Grid>
+                                            <Grid item lg={10}>
+                                                <Typography className={classes.name}>{capitalizeFirstLetter(row.patient_first_name) + ' ' + capitalizeFirstLetter(row.patient_last_name)}</Typography>
+                                                <Typography color="textSecondary" variant="body2">{row.patient_email}</Typography>
+                                                <Typography color="textSecondary" variant="body2">{row.patient_phone_no ? row.patient_phone_no : ""}</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </TableCell>
+                                    <TableCell>{row.appointment_date}</TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.payment}
+                                            style={{
+                                                backgroundColor:
+                                                    ((row.payment === 'Paid' && 'green') ||
+                                                        (row.payment === 'Unpaid' && 'red'))
+                                            }}
+                                        >Paid</Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            className={classes.status}
+                                            style={{
+                                                backgroundColor:
+                                                    ((row.status === 'Active' && 'green') ||
+                                                        (row.status === 'Pending' && 'blue'))
+                                            }}
+                                        >Active</Typography>
+                                    </TableCell>
+
+                                    <TableCell>
+                                        <Typography>
+                                            <Button component={Link} to="/about" variant="outlined" color="primary" cursor="pointer">
+                                                View
+                                            </Button>
+                                        </Typography>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                        <TableFooter>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 15]}
+                                component="div"
+                                count={props.docAppointmentsList.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onChangePage={handleChangePage}
+                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                            />
+                        </TableFooter>
+                    </Table>
+                </TableContainer>
             </div>
+        </div>
     );
 }
 
@@ -239,7 +239,7 @@ AppointmentCard.prototype = {
 
 const mapStateToProps = state => ({
     docAppointmentsList: state.docAppointments.docAppointments,
-    user:state.auth.user,
+    user: state.auth.user,
 });
 
-export default connect(mapStateToProps, {errorMessage })(AppointmentCard)
+export default connect(mapStateToProps, { errorMessage })(AppointmentCard)

@@ -1,27 +1,19 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-<<<<<<< HEAD
-# GNU Make 4.2.1
-=======
 make: *** No rule to make target 'all'.  Stop.
 
 # GNU Make 4.3
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-<<<<<<< HEAD
-# Make data base, printed on Tue May 24 18:00:41 2022
-=======
-# Make data base, printed on Wed May 25 13:21:36 2022
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
+# Make data base, printed on Thu Jun  2 05:50:54 2022
 
 # Variables
 
 # environment
-REMOTE_CONTAINERS_SOCKETS = ["/tmp/vscode-ssh-auth-a15a8cbd32d232ae900d05b3c9ff9b4cadd51887.sock","/root/.gnupg/S.gpg-agent"]
+REMOTE_CONTAINERS_SOCKETS = ["/tmp/vscode-ssh-auth-e05fd8063734fae43fd4eb2afd4dc7e3b75b5d61.sock","/root/.gnupg/S.gpg-agent"]
 # environment
 LC_ALL = C
 # environment
@@ -63,13 +55,13 @@ CURDIR := /workspaces/PROJECT-MED
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/vscode-ssh-auth-a15a8cbd32d232ae900d05b3c9ff9b4cadd51887.sock
+SSH_AUTH_SOCK = /tmp/vscode-ssh-auth-e05fd8063734fae43fd4eb2afd4dc7e3b75b5d61.sock
 # default
 .SHELLFLAGS := -c
 # automatic
@@ -103,13 +95,9 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 1
 # environment
-<<<<<<< HEAD
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-90a474d1-682f-4d76-93ed-b3741d3231e0.sock
-=======
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 # environment
 PATH = /vscode/vscode-server/bin/linux-x64/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # default
@@ -119,7 +107,7 @@ MAKEFILES :=
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
-REMOTE_CONTAINERS_IPC = /tmp/vscode-remote-containers-ipc-a15a8cbd32d232ae900d05b3c9ff9b4cadd51887.sock
+REMOTE_CONTAINERS_IPC = /tmp/vscode-remote-containers-ipc-e05fd8063734fae43fd4eb2afd4dc7e3b75b5d61.sock
 # environment
 REMOTE_CONTAINERS = true
 # automatic
@@ -145,7 +133,7 @@ VSCODE_AGENT_FOLDER = /root/.vscode-server
 # environment
 _ = /bin/cat
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-c449bd81-c00d-4454-b006-6a776c3dabb4.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-c27fb36b-4755-4d08-88d0-bb0ccc67e883.sock
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -153,13 +141,7 @@ HOME = /root
 # environment
 PYTHON_GET_PIP_SHA256 = e235c437e5c7d7524fbce3880ca39b917a73dc565e0c813465b7a7a329bb279a
 # default
-<<<<<<< HEAD
-MAKEFILES := 
-# environment
-LC_NUMERIC = om_KE.UTF-8
-=======
 .RECIPEPREFIX := 
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 # automatic
 <F = $(notdir $<)
 # default
@@ -175,15 +157,9 @@ SUFFIXES :=
 
 # Directories
 
-<<<<<<< HEAD
-# . (device 2053, inode 54264052): 21 files, no impossibilities.
-
-# 21 files, no impossibilities in 1 directories.
-=======
 # . (device 2057, inode 5511980): 18 files, no impossibilities.
 
 # 18 files, no impossibilities in 1 directories.
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 # Implicit Rules
 
@@ -191,18 +167,7 @@ SUFFIXES :=
 
 # Files
 
-<<<<<<< HEAD
-update-python-dep-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 48):
-	source ./appointment-backend/env/bin/activate && pip freeze >requirements.txt
-
-setup-env-python3:
-=======
 django-makemigrations-loc:
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -213,37 +178,8 @@ start-django-server-loc:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-<<<<<<< HEAD
-#  recipe to execute (from 'makefile', line 3):
-	npm run start
-
-django-makemigrations-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 36):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py makemigrations
- 
-make: *** No rule to make target 'all'.  Stop.
-
-
-# Not a target:
-all:
-#  Command line target.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
-=======
 #  recipe to execute (from 'makefile', line 30):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
-
-python-install-dep-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 32):
-	source ./appointment-backend/env/bin/activate && pip3 install -r requirements.txt
 
 update-python-dep:
 #  Implicit rule search has not been done.
@@ -263,27 +199,8 @@ python-install-dep-loc:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-<<<<<<< HEAD
-#  recipe to execute (from 'makefile', line 11):
-	python3 appointment-backend/doctors_appointments_app/manage.py makemigrations
-
-django-shell-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 44):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py shell
-
-start-django-server-network-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 34):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver 192.168.100.56:8000
-=======
 #  recipe to execute (from 'makefile', line 32):
 	source ./appointment-backend/env/bin/activate && pip3 install -r requirements.txt
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 python-install-dep:
 #  Implicit rule search has not been done.
@@ -291,22 +208,6 @@ python-install-dep:
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 7):
 	pip3 install -r requirements.txt
-<<<<<<< HEAD
-
-django-migrate-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 38):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py migrate
-
-# Not a target:
-makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-24 17:05:03.086869034
-#  File has been updated.
-#  Successfully updated.
-=======
 
 django-test-reviews:
 #  Implicit rule search has not been done.
@@ -314,14 +215,6 @@ django-test-reviews:
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 17):
 	python3 appointment-backend/doctors_appointments_app/manage.py test reviews
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
-
-start-django-server-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 30):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver
 
 django-shell:
 #  Implicit rule search has not been done.
@@ -329,8 +222,6 @@ django-shell:
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 19):
 	python3 appointment-backend/doctors_appointments_app/manage.py shell
-<<<<<<< HEAD
-=======
 
 django-makemigrations:
 #  Implicit rule search has not been done.
@@ -345,7 +236,6 @@ django-shell-loc:
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 44):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py shell
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 start-django-server-network:
 #  Implicit rule search has not been done.
@@ -359,27 +249,11 @@ start-django-server-network:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-<<<<<<< HEAD
-#  recipe to execute (from 'makefile', line 13):
-	python3 appointment-backend/doctors_appointments_app/manage.py migrate
-=======
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 django-dbshell:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-<<<<<<< HEAD
-#  recipe to execute (from 'makefile', line 5):
-	python3 appointment-backend/doctors_appointments_app/manage.py runserver
-
-django-test-accounts-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 40):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test accounts
-=======
 #  recipe to execute (from 'makefile', line 21):
 	python3 appointment-backend/doctors_appointments_app/manage.py dbshell
 
@@ -389,7 +263,6 @@ django-test-reviews-loc:
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 42):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test reviews
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 # Not a target:
 all:
@@ -408,12 +281,12 @@ start-react-server:
 django-dbshell-loc:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 46):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py dbshell
 
 setup-env-python3:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -441,21 +314,6 @@ django-test-accounts:
 #  recipe to execute (from 'makefile', line 15):
 	python3 appointment-backend/doctors_appointments_app/manage.py test accounts
 
-<<<<<<< HEAD
-django-test-reviews-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 42):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test reviews
-
-django-dbshell-loc:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'makefile', line 46):
-	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py dbshell
-=======
 # Not a target:
 makefile:
 #  Implicit rule search has been done.
@@ -469,28 +327,18 @@ django-test-accounts-loc:
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 40):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test accounts
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 start-django-server-network-loc:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-<<<<<<< HEAD
-#  recipe to execute (from 'makefile', line 17):
-	python3 appointment-backend/doctors_appointments_app/manage.py test reviews
-=======
 #  recipe to execute (from 'makefile', line 34):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py runserver 192.168.100.56:8000
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 start-django-server:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-<<<<<<< HEAD
-#  recipe to execute (from 'makefile', line 21):
-	python3 appointment-backend/doctors_appointments_app/manage.py dbshell
-=======
 #  recipe to execute (from 'makefile', line 5):
 	python3 appointment-backend/doctors_appointments_app/manage.py runserver
 
@@ -500,7 +348,6 @@ update-python-dep-loc:
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 48):
 	source ./appointment-backend/env/bin/activate && pip freeze >requirements.txt
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
 
 # files hash-table stats:
 # Load=27/1024=3%, Rehash=0, Collisions=0/37=0%
@@ -510,22 +357,12 @@ update-python-dep-loc:
 
 # No general ('VPATH' variable) search path.
 
-<<<<<<< HEAD
-# strcache buffers: 1 (0) / strings = 49 / storage = 744 B / avg = 15 B
-# current buf: size = 8162 B / used = 744 B / count = 49 / avg = 15 B
-
-# strcache performance: lookups = 76 / hit rate = 35%
-# hash-table stats:
-# Load=49/8192=1%, Rehash=0, Collisions=1/76=1%
-# Finished Make data base on Tue May 24 18:00:41 2022
-=======
 # strcache buffers: 1 (0) / strings = 46 / storage = 719 B / avg = 15 B
 # current buf: size = 8162 B / used = 719 B / count = 46 / avg = 15 B
 
 # strcache performance: lookups = 73 / hit rate = 36%
 # hash-table stats:
 # Load=46/8192=1%, Rehash=0, Collisions=0/73=0%
-# Finished Make data base on Wed May 25 13:21:36 2022
->>>>>>> dbe1120fdd6bc454f480c27dc6f3a415d254cbac
+# Finished Make data base on Thu Jun  2 05:50:54 2022
 
  

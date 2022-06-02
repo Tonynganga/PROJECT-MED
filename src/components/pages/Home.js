@@ -3,6 +3,9 @@ import './CssMain.css';
 import MainNavbar from '../../components/MainNavbar';
 import ViewReviews from './ViewReviews';
 import SendEmail from './SendEmail';
+import image from "../../assets/images/homepage.jpg";
+import image2 from "../../assets/images/loginimage.jpg";
+
 
 
 
@@ -18,17 +21,48 @@ function Home() {
       </div>
       <div className='main__home'>
         <section id="hero" className="d-flex align-items-center">
-          <div className="container text-center position-relative">
+          <div className='banner'>
+            <ul class="slideshow">
+              <li><span></span></li>
+              <li><span></span></li>
+              <li><span></span></li>
+              <li><span></span></li>
+              <li><span></span></li>
+              <li><span></span></li>
+              <li><span></span></li>
+              <li><span></span></li>
+            </ul>
+
+          </div>
+          <div className="container text-center position-absolute ml-300px">
             <h1>24/7 Care is available</h1>
             <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, deleniti.</h2>
             <a href="/loginsignup" className="main-btn">Get Started</a>
           </div>
         </section>
 
-        <section className="about-section clearfix py-5">
-          <div className="container bg-transparent">
+        <section className="about-section clearfix ">
+          <div className="new-container bg-transparent">
             <div className="about">
-              <img className="about-img img-fluid mb-3 mb-lg-0 rounded" />
+
+              <div class="about-card">
+                <div class="card_part card_part-one"> 
+                </div>
+                {/* <!-- Photo 2 --> */}
+                <div class="card_part card_part-two"> 
+                </div>
+                {/* <!-- Photo 3 --> */}
+                <div class="card_part card_part-three">
+                </div>
+                {/* <!-- Photo 4 --> */}
+                <div class="card_part card_part-four">  
+                </div>
+                <div class="card_part card_part-five">  
+                </div>
+                <div class="card_part card_part-six">
+                </div>
+              </div>
+
               <div className="about-text left-0 text-center bg-faded p-5 rounded">
                 <h2 className="about-heading mb-4">
                   <span className="about-heading-upper">Welcome</span>
@@ -39,6 +73,7 @@ function Home() {
                   autem sint sed deserunt
                   qui ullam porro quasi dignissimos. Pariatur commodi hic in!
                   autem sint sed deserunt
+                  
 
                 </p>
                 <div className="about-button mx-auto">
@@ -130,7 +165,10 @@ function Home() {
 
       </div>
 
+     
     </div>
+
+
 
 
 

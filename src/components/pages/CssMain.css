@@ -1,11 +1,104 @@
 /* ------------------------------------HOME PAGE START--------------------------------------------- */
 
 /* Hero Section */
-#hero {
-    padding-top: 30px;
+
+.banner{
+  text-align: center;
+  overflow: hidden;
+  height: 90vh;
+  width: 100%;
+}
+
+.slideshow {
+  list-style-type: none;
+}
+
+/** SLIDESHOW **/
+.slideshow,
+.slideshow:after { 
+    top: -16px; /*Not sure why I needed this fix*/
     width: 100%;
     height: 90vh;
-    background: url("../../../src/assets/images/homepage.jpg") center center;
+    left: 0px;
+    z-index: 0; 
+}
+
+.slideshow li span { 
+		position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    color: transparent;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 35s linear infinite 0s; 
+}
+
+
+
+.slideshow li:nth-child(1) span { 
+    background-image: url("../../../public/images/hero6.jpg");
+}
+.slideshow li:nth-child(2) span { 
+    background-image: url("../../../public/images/hero2.jpg");
+    animation-delay: 6s; 
+}
+.slideshow li:nth-child(3) span { 
+    background-image: url("../../../public/images/hero3.jpg");
+    animation-delay: 12s; 
+}
+.slideshow li:nth-child(4) span { 
+    background-image: url("../../../public/images/hero4.jpg");
+    animation-delay: 18s; 
+}
+.slideshow li:nth-child(5) span { 
+    background-image: url("../../../public/images/hero8.jpg");
+    animation-delay: 24s; 
+}
+.slideshow li:nth-child(6) span { 
+  background-image: url("../../../public/images/hero1.jpg");
+  animation-delay: 30s; 
+}
+.slideshow li:nth-child(7) span { 
+  background-image: url("../../../public/images/hero5.jpg");
+  animation-delay: 36s; 
+}
+
+
+
+@keyframes imageAnimation { 
+    0% { opacity: 0; animation-timing-function: ease-in; }
+    8% { opacity: 1; animation-timing-function: ease-out; }
+    17% { opacity: 1 }
+    25% { opacity: 0 }
+    100% { opacity: 0 }
+}
+
+
+@keyframes titleAnimation { 
+    0% { opacity: 0 }
+    8% { opacity: 1 }
+    17% { opacity: 1 }
+    19% { opacity: 0 }
+    100% { opacity: 0 }
+}
+
+
+.no-cssanimations .cb-slideshow li span {
+	opacity: 1;
+}
+
+#hero {
+    padding-top: 50px;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    /* background: url("../../../src/assets/images/homepage.jpg") center center; */
     background-size: cover;
     position: relative;
   }
@@ -15,6 +108,8 @@
     background: transparent;
     border: none;
     border-radius: 0;
+    justify-content: center;
+    align-items: center;
   }
 #hero:before {
     content: "";
@@ -69,14 +164,15 @@
 
   /*----about -section Start*/
   .about-section {
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+    margin-top: 2rem;
+    margin-bottom: 0rem;
     background: transparent;
   }
-  .container{
+  .new-container{
       background: transparent;
       border:none;
       box-shadow: none;
+      height: 80vh;
   }
   .about-heading {
     text-transform: uppercase;
@@ -89,7 +185,7 @@
   }
   .about-img{
       border-radius: 20px;
-      content: url("../../../public/images/aboutimage.jpg");
+      /* content: url("../../../public/images/aboutimage.jpg"); */
   }
   
   .about-heading .about-heading-lower {
@@ -112,14 +208,15 @@
   }
   
   @media (min-width: 992px) {
-    .about .about-img {
-      width: 75%;
+   .about-img {
+      width: 100%;
       float: right;
     }
     .about .about-text {
-      left: 0;
+      margin-left: 8%;
+      z-index: 9;
       width: 60%;
-      margin-top: 3rem;
+      margin-top: 1rem;
       position: absolute;
     }
     .about .about-text .about-button {
@@ -132,9 +229,104 @@
   
   @media (min-width: 1200px) {
     .about .about-text {
-      width: 45%;
+      margin-top: 5%;
+      width: 40%;
     }
   }  
+
+
+
+
+  *::before,
+  *::after { box-sizing: border-box; }
+  
+  
+  
+  .about-card {
+    margin-right: 12%;
+    position: relative;
+    width: 700px;
+    height: 450px;
+    overflow: hidden;
+    align-items: flex-end;
+    justify-content: right;
+    float: right;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  /*Light blue cover above the slide show*/
+  .card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 900;
+  
+    display: block;
+    width: 100%;
+    height: 100%;
+  
+    background-color: rgba(140, 22, 115, 0.2);
+  }
+  
+  .card_part {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 7;
+
+    align-items: center;
+    width: 700px;
+    height: 450px;
+    
+    transform: translateX( 500px );
+    background-image: url("../../../public/images/about7.jpg");
+    background-size: 700px 450px;
+    
+    animation: opaqTransition 28s cubic-bezier(0, 0, 0, 0.97) infinite;
+  }
+  
+  
+  .card_part.card_part-two {
+    z-index: 6;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../../public/images/about1.jpg");
+    animation-delay: 7s;
+  }
+  
+  .card_part.card_part-three {
+    z-index: 5;
+    background-image: url("../../../public/images/about2.jpg");
+    animation-delay: 14s;
+  }
+  
+  .card_part.card_part-four {
+    z-index: 4;
+    background-image: url("../../../public/images/about3.jpg");
+    animation-delay: 21s;
+  }
+  .card_part.card_part-five {
+    z-index: 4;
+    background-image: url("../../../public/images/about4.jpg");
+    animation-delay: 21s;
+  }
+  .card_part.card_part-six {
+    z-index: 4;
+    background-image: url("../../../public/images/about5.jpg");
+    animation-delay: 21s;
+  }
+  
+  
+  @keyframes opaqTransition {
+    3% { transform: translateX( 0 ); }
+    25% { transform: translateX( 0 ); }
+    28% { transform: translateX( -700px ); }
+    100% { transform: translateX( -700px ); }
+  }
+
+
 
   /* about section end  */
 
@@ -146,7 +338,7 @@
     height: 90vh;
     background-position: center;
     background-blend-mode: multiply;
-    padding-top: 1rem;
+    padding-top: 0rem;
     padding-bottom: 2rem;
   }
   
@@ -616,3 +808,12 @@
     margin-top: 30px;
   }
 /* -----------------------------------------COMMENTS START------------------------------------------------ */
+
+
+
+
+
+
+
+
+
