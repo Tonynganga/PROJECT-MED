@@ -210,6 +210,7 @@
 .doctorhome__container{
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
     
 }
 .app__activate{
@@ -266,6 +267,7 @@
     flex-direction: column;
     width: 100%;
     margin-right: 40px;
+
 }
 .appt__details{
     background: white;
@@ -288,7 +290,7 @@
     width: 90%;
 }
 .doctorhomepage{
-    margin-top: 60px;
+    margin-top: 70px;
     min-width: 100%;
 }
 .mypatients_hpage{

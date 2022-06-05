@@ -14,6 +14,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel'
+import PatientBars from '../PatientBars';
 
 
 const doct_type = [
@@ -54,7 +55,7 @@ function PatientHomePage(props) {
         { label: "Male", value: "M" },
         { label: "Female", value: "F" },
         { label: "Do not disclose", value: "D" },
-    
+
     ];
     const [category, setCategory] = useState("");
     const [isOpen, setIsOpen] = useState(false)
@@ -62,21 +63,21 @@ function PatientHomePage(props) {
     useEffect(() => {
         props.getAvailableAppointments()
     }, [])
-    const [filteredAppointments,setFilteredAppointments]=useState([])
-    useEffect(()=>{
-        if(props.appointments.length>0){
+    const [filteredAppointments, setFilteredAppointments] = useState([])
+    useEffect(() => {
+        if (props.appointments.length > 0) {
             setFilteredAppointments(props.appointments)
         }
-    },[props.appointments])
-    const onSearch=()=>{
+    }, [props.appointments])
+    const onSearch = () => {
         let tempList
-        if(props.appointments.length>0){
-        tempList=props.appointments.filter(appointment=>appointment.doctor_gender===gender)
-        if(location.length>1)
-        tempList=tempList.filter(appointment=>appointment.doctor_address.toLowerCase()===location.toLowerCase())
-        if(category.value.length>1)
-        tempList=tempList.filter(appointment=>appointment.appointment_type===category.value)
-        setFilteredAppointments(tempList)
+        if (props.appointments.length > 0) {
+            tempList = props.appointments.filter(appointment => appointment.doctor_gender === gender)
+            if (location.length > 1)
+                tempList = tempList.filter(appointment => appointment.doctor_address.toLowerCase() === location.toLowerCase())
+            if (category.value.length > 1)
+                tempList = tempList.filter(appointment => appointment.appointment_type === category.value)
+            setFilteredAppointments(tempList)
         }
     }
 
@@ -85,7 +86,7 @@ function PatientHomePage(props) {
     const [gender, setGender] = React.useState('F');
     const [location, setLocation] = React.useState("");
 
-    
+
     return (
         <div>
 
@@ -93,23 +94,19 @@ function PatientHomePage(props) {
                 <PatientNavBar />
             </div>
             <div className='patienthome__page'>
-                <div className='patient__dashboard'>
-                    <h5>Home  /  Dashboard</h5>
-                    <h5>Dashboard</h5>
-                    <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-                        <button onClick={() => setIsOpen(true)}>Open Modal</button>
+               
 
-                        <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
-                            Fancy Modal
-                        </ReviewModal>
-                    </div>
+                <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+                    <button onClick={() => setIsOpen(true)}>Open Modal</button>
+
+                    <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
+                        Fancy Modal
+                    </ReviewModal>
+
                 </div>
 
                 <div className="patienthome__container">
-
-                    <div className="patient__sidebar">
-                        <SideBar />
-                    </div>
+                <PatientBars/>
 
                     <div className='doctorcard__holder'>
                         {filteredAppointments.map(appointment => (
@@ -129,7 +126,7 @@ function PatientHomePage(props) {
                                         name="username"
                                         required
                                         value={location}
-                                        onChange={(e)=>setLocation(e.target.value)}
+                                        onChange={(e) => setLocation(e.target.value)}
                                     /><br />
                                 </div>
                                 <div className='ds-form__data__two'>
@@ -142,7 +139,7 @@ function PatientHomePage(props) {
                                             defaultValue="male"
                                             name="radio-buttons-group"
                                             value={gender}
-                                            onChange={(e)=>setGender(e.target.value)}>
+                                            onChange={(e) => setGender(e.target.value)}>
                                             <FormControlLabel value='M' control={<Radio />} label='Male' />
                                             <FormControlLabel value='F' control={<Radio />} label='Female' />
                                             <FormControlLabel value='D' control={<Radio />} label='Other' />
@@ -155,11 +152,11 @@ function PatientHomePage(props) {
                                         <label>Select Specialist :</label>
                                     </div>
                                     <Select
-                                    options={doct_type}
-                                    onChange={e => {
-                                        setCategory(e);
-                                    }}
-                                    value={category}
+                                        options={doct_type}
+                                        onChange={e => {
+                                            setCategory(e);
+                                        }}
+                                        value={category}
                                     />
                                 </div>
                                 <div className='ds-search-btn'>

@@ -8,12 +8,12 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jun  2 05:50:54 2022
+# Make data base, printed on Sun Jun  5 18:28:03 2022
 
 # Variables
 
 # environment
-REMOTE_CONTAINERS_SOCKETS = ["/tmp/vscode-ssh-auth-e05fd8063734fae43fd4eb2afd4dc7e3b75b5d61.sock","/root/.gnupg/S.gpg-agent"]
+REMOTE_CONTAINERS_SOCKETS = ["/tmp/vscode-ssh-auth-7e9d63556d6c3bf843d476535569ac316f0d26c9.sock","/root/.gnupg/S.gpg-agent"]
 # environment
 LC_ALL = C
 # environment
@@ -61,7 +61,7 @@ APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/vscode-ssh-auth-e05fd8063734fae43fd4eb2afd4dc7e3b75b5d61.sock
+SSH_AUTH_SOCK = /tmp/vscode-ssh-auth-7e9d63556d6c3bf843d476535569ac316f0d26c9.sock
 # default
 .SHELLFLAGS := -c
 # automatic
@@ -107,7 +107,7 @@ MAKEFILES :=
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
-REMOTE_CONTAINERS_IPC = /tmp/vscode-remote-containers-ipc-e05fd8063734fae43fd4eb2afd4dc7e3b75b5d61.sock
+REMOTE_CONTAINERS_IPC = /tmp/vscode-remote-containers-ipc-7e9d63556d6c3bf843d476535569ac316f0d26c9.sock
 # environment
 REMOTE_CONTAINERS = true
 # automatic
@@ -133,7 +133,7 @@ VSCODE_AGENT_FOLDER = /root/.vscode-server
 # environment
 _ = /bin/cat
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-c27fb36b-4755-4d08-88d0-bb0ccc67e883.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-a5771eb8-b778-4665-bbf4-3cbf447f0eca.sock
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -281,12 +281,12 @@ start-react-server:
 django-dbshell-loc:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 46):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py dbshell
 
 setup-env-python3:
- 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -358,11 +358,12 @@ update-python-dep-loc:
 # No general ('VPATH' variable) search path.
 
 # strcache buffers: 1 (0) / strings = 46 / storage = 719 B / avg = 15 B
+ 
 # current buf: size = 8162 B / used = 719 B / count = 46 / avg = 15 B
 
 # strcache performance: lookups = 73 / hit rate = 36%
 # hash-table stats:
 # Load=46/8192=1%, Rehash=0, Collisions=0/73=0%
-# Finished Make data base on Thu Jun  2 05:50:54 2022
+# Finished Make data base on Sun Jun  5 18:28:03 2022
 
  

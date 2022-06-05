@@ -9,6 +9,7 @@ import Select from 'react-select';
 import PatientNavBar from '../PatientNavBar';
 import './PatientProfile.css'
 import {HTTP_API_PATH} from '../../utils'
+import DoctorBars from '../DoctorBars';
 
 
 const genders = [
@@ -87,17 +88,13 @@ function DoctorProfile(props) {
         // const { profileImg } = this.state
         // return (
             <div>
-                <div className='patientnav__bar'>
-                <PatientNavBar />
-            </div>
+               
             <div className="profilemain__container">
             <div class="profile__header">
                 <h2>Profile</h2>
             </div>
             <div className='profile__container'>
-                <div className='profile__sidebar'>
-                    <SideBar2 />
-                </div>
+                <DoctorBars/>
                 <form
                 onSubmit={onSubmit} className='profile__form'>
 

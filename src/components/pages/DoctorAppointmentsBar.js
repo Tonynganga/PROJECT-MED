@@ -7,12 +7,10 @@ function DoctorAppiontmentsBar() {
     return (
         <div>
             <div className='patientnav__bar'>
-                <PatientNavBar />
+
             </div>
-            
-           
-                    <AppointmentCard />
-              
+            <AppointmentCard />
+
         </div>
     )
 

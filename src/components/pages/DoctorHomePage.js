@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { checkIfAppointmentSettingSet } from '../../actions/docAppointments';
 import DoctorAppiontmentsBar from "./DoctorAppointmentsBar";
 import DoctorAppiontmentSettingBar from "./DoctorAppointmentSettingBar";
+import DoctorBars from "../DoctorBars";
+import Footer from "../Footer";
 
 
 
@@ -25,17 +27,13 @@ function DoctorHomePage(props) {
             <div className="doctorhomepage">
                
                 <div className='doctorhome__container'>
-                    <div className="doctorhome__sidebar">
-
-                        <div className="doctor__sidebar">
-                            <SideBar2 />
-                        </div>
-                    </div>
+                    <DoctorBars/>
                     <div className='doctorpage__holder'>
                         {props.appointmentSettingSet ? (<DoctorAppiontmentsBar />) : (<DoctorAppiontmentSettingBar />)}
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

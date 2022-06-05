@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './PatientChangePass.css';
 import Footer from "../Footer";
 import { errorMessage } from '../../actions/notifyPopUp';
-import { ForgotPassword,ChangePassword } from '../../actions/auth';
+import { ForgotPassword, ChangePassword } from '../../actions/auth';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import DoctorBars from '../DoctorBars';
 
 
 function ChangePass(props) {
@@ -36,9 +37,9 @@ function ChangePass(props) {
     const onSubmit = (e) => {
         e.preventDefault()
         if (formValidation()) {
-            if(!props.token)
-            props.ForgotPassword(password, token)
-            else props.ChangePassword({old_password:oldPassword,new_password:password})
+            if (!props.token)
+                props.ForgotPassword(password, token)
+            else props.ChangePassword({ old_password: oldPassword, new_password: password })
         }
 
 
@@ -46,39 +47,42 @@ function ChangePass(props) {
 
     return (
         <div className='patientchangepass__page'>
-            <div className="patienthome__container">
-                <div className='ChangePass__container'>
-                    <div class="profile__header2">
-                        <h2>Change Password</h2>
-                    </div>
-                    <form onSubmit={onSubmit} className='ChangePass__form'>
-                        {props.token ? <div className='Changepassform__data'>
-                            <div className='pass-label'>
-                                <label>Old Password</label>
-                            </div>
-                            <input value={oldPassword} onChange={(e)=>setOldPassword(e.target.value)} type="password" placeholder="Old Password..." /><br />
-                        </div> : ""}
-                        <div className='Changepassform__data'>
-                            <div className='pass-label'>
-                                <label>New Password</label>
-                            </div>
-                            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="New Password..." /><br />
-                        </div>
-                        <div className='Changepassform__data'>
-                            <div className='pass-label'>
-                                <label>Confirm Password</label>
-                            </div>
-                            <input value={password2} onChange={(e) => setPassword2(e.target.value)} type="password" placeholder="Confirm Password..." /><br />
-                        </div>
-
-                        <input type="submit" value="Save Changes" className='save__changes' />
-
-
-
-                    </form>
-                </div>
-
+            <div class="profile__header2">
+                <h3>Change Password</h3>
             </div>
+            <div className='ChangePass__container'>
+
+                <DoctorBars />
+                <form onSubmit={onSubmit} className='ChangePass__form'>
+                    {props.token ? <div className='Changepassform__data'>
+                        <div className='pass-label'>
+                            <label>Old Password</label>
+                        </div>
+                        <input value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} type="password" placeholder="Old Password..." /><br />
+                    </div> : ""}
+                    <div className='Changepassform__data'>
+                        <div className='pass-label'>
+                            <label>New Password</label>
+                        </div>
+                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="New Password..." /><br />
+                    </div>
+                    <div className='Changepassform__data'>
+                        <div className='pass-label'>
+                            <label>Confirm Password</label>
+                        </div>
+                        <input value={password2} onChange={(e) => setPassword2(e.target.value)} type="password" placeholder="Confirm Password..." /><br />
+                    </div>
+
+                    <div>
+                        <input type="submit" value="Save Changes" className='save__changes' />
+                    </div>
+
+
+
+                </form>
+            </div>
+
+
 
 
 
@@ -94,4 +98,4 @@ const mapStateToProps = state => ({
     token: state.auth.token,
 });
 
-export default connect(mapStateToProps, { errorMessage, ForgotPassword ,ChangePassword})(ChangePass);
+export default connect(mapStateToProps, { errorMessage, ForgotPassword, ChangePassword })(ChangePass);
