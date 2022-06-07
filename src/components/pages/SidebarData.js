@@ -31,7 +31,7 @@ export const SidebarData = [
     {
         title: "Blog",
         icon: <CommentIcon/>,
-        link: "/bloghome"
+        link: "/blog"
     },
     {
         title: "LogOut",

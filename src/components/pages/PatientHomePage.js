@@ -96,14 +96,14 @@ function PatientHomePage(props) {
             <div className='patienthome__page'>
                
 
-                <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+                {/* <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
                     <button onClick={() => setIsOpen(true)}>Open Modal</button>
 
                     <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
                         Fancy Modal
                     </ReviewModal>
 
-                </div>
+                </div> */}
 
                 <div className="patienthome__container">
                 <PatientBars/>

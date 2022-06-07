@@ -9,7 +9,7 @@ import { getProfile, updateProfile } from '../../actions/profile';
 import { errorMessage } from '../../actions/notifyPopUp';
 import {HTTP_API_PATH} from '../../utils'
 import Select from 'react-select';
-
+import PatientBars from '../PatientBars';
 
 const genders = [
     { label: "Male", value: "M" },
@@ -102,24 +102,17 @@ const PatientProfile = props => {
         }
     };
     return (
-        // const { profileImg } = this.state
 
         <div className="profilemain__container">
-            <PatientNavBar />
-            <div className="patprof__dash">
-                <h5>Home / Dashboard</h5>
-                <h5>Dashboard</h5>
-            </div>
             <div class="profile__header">
                 <h2>Profile</h2>
             </div>
             <div className='profile__container'>
-                <div className='profile__sidebar'>
-                    <SideBar />
-                </div>
+                <PatientBars/>
+                
                 <form
                     onSubmit={onSubmit} className='profile__form'>
-                    {/* <div className='profile__form'> */}
+                
                     <div className="uploadimage__form">
                         <img src={HTTP_API_PATH + props.imageUrl} id="img" alt="#" width="100px" height="100px" />
                         <input type="file" accept="image/*" name="image-upload" id="input" onChange={onChangePicture} />
