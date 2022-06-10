@@ -23,7 +23,7 @@ const onSubmit=(e)=>{
   emailjs.sendForm('service_xkpysvg', 'template_uxuzxkd',form.current, '8ymZf0M1NM-taV10M')
   .then((result) => {
       console.log(result.text);
-      successMessage("Email sent successfully")
+      props.successMessage("Email sent successfully")
   }).catch((error) => {
       console.log(error.text);
   })}

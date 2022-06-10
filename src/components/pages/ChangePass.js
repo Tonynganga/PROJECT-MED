@@ -47,12 +47,13 @@ function ChangePass(props) {
 
     return (
         <div className='patientchangepass__page'>
-            <div class="profile__header2">
+            
+            <div class={props.token?"profile__header2":"profile__header3"}>
                 <h3>Change Password</h3>
             </div>
             <div className='ChangePass__container'>
 
-                <DoctorBars />
+            {props.token ?<DoctorBars />:""}
                 <form onSubmit={onSubmit} className='ChangePass__form'>
                     {props.token ? <div className='Changepassform__data'>
                         <div className='pass-label'>
