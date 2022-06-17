@@ -29,6 +29,8 @@ import PageNotFound from './components/pages/PageNotFound';
 import DoctorBars from './components/DoctorBars';
 import WebSocketProvider from './websocket';
 import PatientBars from './components/PatientBars';
+import BlognewHome from './components/blog/BlogHome';
+// import NewBlog from './components/pages/NewBlog';
 function App() {
   setUpNotifications({
     defaultProps: {
@@ -68,7 +70,17 @@ function App() {
         <Route path= '/my_patients' exact component={MyPatients}/>
         <Route path='/pagenotfound' exact component={PageNotFound}/>  
         <Route path='/doctorbars' exact component={DoctorBars}/> 
-        <Route path='/patientbars' exact component={PatientBars}/>       
+        <Route path='/patientbars' exact component={PatientBars}/>  
+        <Route path='/newblog' exact component={BlognewHome}/>
+
+
+
+
+
+
+        
+        {/* <Route path="/newblog" exact component={Home} />       */}
+
         </div>
       
       
