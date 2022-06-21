@@ -31,6 +31,7 @@ import WebSocketProvider from './websocket';
 import PatientBars from './components/PatientBars';
 import BlognewHome from './components/blog/BlogHome';
 // import NewBlog from './components/pages/NewBlog';
+import WriteBlog from "./components/blog/blogcomponents/WriteBlog.js";
 function App() {
   setUpNotifications({
     defaultProps: {
@@ -72,6 +73,8 @@ function App() {
         <Route path='/doctorbars' exact component={DoctorBars}/> 
         <Route path='/patientbars' exact component={PatientBars}/>  
         <Route path='/newblog' exact component={BlognewHome}/>
+        <Route path='/writeblog' exact component={WriteBlog}/>
+        
 
 
 
