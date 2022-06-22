@@ -20,33 +20,74 @@ function BlogSidebar() {
         <span className="sidebarTitle">CATEGORIES</span>
         <ul className="sidebarList">
           <li className="sidebarListItem">
-            <Link className="link" to="/posts?cat=Life">
-              Life
+            <Link className="link" to="">
+              General
             </Link>
           </li>
           <li className="sidebarListItem">
             <Link className="link" to="/posts?cat=Music">
-              Music
+              Dentry
             </Link>
           </li>
           <li className="sidebarListItem">
             <Link className="link" to="/posts?cat=Sport">
-              Sport
+              Neurological
             </Link>
           </li>
           <li className="sidebarListItem">
             <Link className="link" to="/posts?cat=Style">
-              Style
+              Urogenital
             </Link>
           </li>
           <li className="sidebarListItem">
             <Link className="link" to="/posts?cat=Tech">
-              Tech
+              Oral
             </Link>
           </li>
           <li className="sidebarListItem">
             <Link className="link" to="/posts?cat=Cinema">
-              Cinema
+              Dermatology
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Psychiatry
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Surgery
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Urology
+            
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Ophthalmology
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Allergy and immunology
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Pathology
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Pediatrics
+            </Link>
+          </li>
+          <li className="sidebarListItem">
+            <Link className="link" to="/posts?cat=Cinema">
+            Cardiology
             </Link>
           </li>
         </ul>

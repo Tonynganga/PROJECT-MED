@@ -1,5 +1,26 @@
 import React from "react";
 import "../Blog.css";
+import Select from 'react-select';
+
+
+const blog_type = [
+    { label: "General", value: "general" },
+    { label: "Dentry", value: "dentry" },
+    { label: "Neurological", value: "neurological" },
+    { label: "Urogenital", value: "urogenital" },
+    { label: "Oral", value: "oral" },
+    { label: "Dermatology", value: "dermatology" },
+    { label: "Psychiatry", value: "psychiatry" },
+    { label: "Surgery", value: "surgery" },
+    { label: "Urology", value: "urology" },
+    { label: "Ophthalmology", value: "ophthalmology" },
+    { label: "Allergy & Immunology", value: "allergy & immunology" },
+    { label: "Pathology", value: "pathology" },
+    { label: "Pediatrics", value: "pediatrics" },
+    { label: "Cardiology", value: "cardiology" },
+    
+
+];
 
 function WriteBlog() {
     return (
@@ -15,7 +36,7 @@ function WriteBlog() {
                         <i className="writeIcon fas fa-plus"></i>
                     </label>
 
-                    <input id="fileInput" type="file" style={{ display: "none" }} />
+                    <input id="fileInput" placeholder="Thumbnail" type="file" style={{ display: "none" }} />
                 </div>
                 <div className="writeFormGroup">
                     <div className="bloginputs">
@@ -24,14 +45,16 @@ function WriteBlog() {
                                 className="writeInput"
                                 placeholder="Title"
                                 type="text"
-                                autoFocus={true}
-                            />
-
+                                autoFocus={true} />
                         </div>
+                        <Select
+                            className="blogtype"
+                            required
+                            options={blog_type} />
                         <div className="bloginput">
                             <input
-                                className="writeInput"
-                                placeholder="Title"
+                                className="writeInput2"
+                                placeholder="Excerpt"
                                 type="text"
                                 autoFocus={true}
                             />
@@ -44,7 +67,7 @@ function WriteBlog() {
                 <div className="writeFormGroup">
                     <textarea
                         className="writeInput writeText"
-                        placeholder="Tell your story..."
+                        placeholder="Blog Content..."
                         type="text"
                         autoFocus={true}
                     />

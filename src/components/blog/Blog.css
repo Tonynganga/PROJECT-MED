@@ -97,7 +97,7 @@
     font-size: 13px;
     font-weight: 400;
     color: #999999;
-    margin-top: 15px;
+    margin-top: 5px;
   }
   
   .postDesc {
@@ -251,7 +251,7 @@
   
 /* =================== Write page =================*/
 .write {
-    padding-top: 50px;
+    padding-top: 30px;
   }
   
   .writeImg {
@@ -297,6 +297,15 @@
     border: 1px solid black;
     border-radius: 5px;
   }
+  .writeInput2 {
+    font-size: 20px;
+    border: none;
+    padding: 20px;
+    width: 70vw;
+    height: 1.5vw;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
   .bloginput{
       margin-top: 10px;
   }
@@ -310,10 +319,15 @@
   .writeInput:focus {
     outline-style: none;
   }
+  .blogtype{
+    margin-top: 10px;
+    border: 0.5px solid black;
+    border-radius: 10px;
+  }
   
   .writeText {
     width: 70vw;
-    height: 30vh;
+    height: 25vh;
     font-family: inherit;
     font-size: 20px;
     margin-top: 10px;
@@ -322,7 +336,7 @@
   .writeSubmit {
     position: absolute;
     top: 20px;
-    right: 50px;
+    right: 120px;
     color: white;
     background-color: teal;
     padding: 10px;

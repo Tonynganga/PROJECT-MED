@@ -19,8 +19,9 @@ function Post({ img }) {
                         Lorem ipsum dolor sit amet
                     </h3>
                 </span>
-                <hr />
+                
                 <span className="postDate">1 hour ago</span>
+                <span className="postDate">Dentry</span>
             </div>
             <p className="postDesc">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
@@ -29,7 +30,7 @@ function Post({ img }) {
                 atque, exercitationem quibusdam, reiciendis odio laboriosam?
             </p>
             <Link to={{
-                pathname: '/blog_details',
+                pathname: '/',
 
             }} className="stretched-link">Continue reading</Link>
         </div>
