@@ -15,7 +15,7 @@ function Blobar() {
       <div className="topCenter">
         <ul className="topList">
           <li className="topListItem">
-            <Link className="link" to="/">
+            <Link className="link" to="/newblog">
               HOME
             </Link>
           </li>
@@ -37,7 +37,7 @@ function Blobar() {
             />
           </Link>
     
-        <i className="topSearchIcon fas fa-search"></i>
+        
       </div>
     </div>
   );

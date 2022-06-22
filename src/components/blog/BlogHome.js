@@ -4,6 +4,7 @@ import Posts from "./blogcomponents/Posts";
 import BlogSidebar from "./blogcomponents/BlogSidebar";
 import "./Blog.css";
 import Blobar from "./blogcomponents/Blogbar";
+import Footer from "../Footer";
 
 function BlogHome() {
     const location = useLocation();
@@ -22,6 +23,7 @@ function BlogHome() {
                     <BlogSidebar />
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 }

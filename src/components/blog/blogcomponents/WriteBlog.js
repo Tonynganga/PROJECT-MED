@@ -1,6 +1,8 @@
 import React from "react";
 import "../Blog.css";
 import Select from 'react-select';
+import Blobar from "./Blogbar";
+import Footer from "../../Footer";
 
 
 const blog_type = [
@@ -25,6 +27,7 @@ const blog_type = [
 function WriteBlog() {
     return (
         <div className="write">
+            <Blobar/>
             <img
                 className="writeImg"
                 src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
@@ -48,6 +51,7 @@ function WriteBlog() {
                                 autoFocus={true} />
                         </div>
                         <Select
+                        placeholder="Select Category"
                             className="blogtype"
                             required
                             options={blog_type} />
@@ -76,6 +80,7 @@ function WriteBlog() {
                     Publish
                 </button>
             </form>
+            <Footer/>
         </div>
     );
 }
