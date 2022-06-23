@@ -13,6 +13,8 @@ django-migrate:
 	python3 appointment-backend/doctors_appointments_app/manage.py migrate
 django-test-accounts:
 	python3 appointment-backend/doctors_appointments_app/manage.py test accounts
+django-test-blog:
+	python3 appointment-backend/doctors_appointments_app/manage.py test blog
 django-test-reviews:
 	python3 appointment-backend/doctors_appointments_app/manage.py test reviews
 django-shell:
@@ -40,6 +42,8 @@ django-test-accounts-loc:
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test accounts
 django-test-reviews-loc:
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test reviews
+django-test-blog-loc:
+	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py test blog
 django-shell-loc:
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py shell
 django-dbshell-loc:
