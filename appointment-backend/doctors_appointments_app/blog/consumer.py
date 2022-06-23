@@ -33,6 +33,11 @@ class ModifiedWebsocketConsumer(WebsocketConsumer):
         )
 
 class BlogsConsumer(ModifiedWebsocketConsumer):    
+    '''
+        Blog consumer function dependent to blog views as database queries are made through
+        the views but clients get updates on changing queries through channels
+        This was done due to the inability of web sockets to work with media
+    '''
     def connect(self):
         self.room_group_name='blog'        
         async_to_sync(self.channel_layer.group_add)(self.room_group_name,self.channel_name)
@@ -46,7 +51,6 @@ class BlogsConsumer(ModifiedWebsocketConsumer):
         serializer = Blog_serializer(instance,many=False)
         self.send_to_group({'type':'update_for_added_blog','data':serializer.data},"send_message")
     def update_blog(self,data):
-        print("hello")
         instance = Blogs.objects.get(id=data["id"])
         serializer = Blog_serializer(instance,many=False)
         self.send_to_group({'type':'update_blog','data':serializer.data},"send_message")    
@@ -61,6 +65,9 @@ class BlogsConsumer(ModifiedWebsocketConsumer):
 
 
 class CommentsConsumer(ModifiedWebsocketConsumer):
+    '''
+        Comment consumer performs both database queries and update of clients through channels
+    '''
     def connect(self):
         self.room_group_name='comments'   
         async_to_sync(self.channel_layer.group_add)(self.room_group_name,self.channel_name)
