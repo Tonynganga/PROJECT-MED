@@ -20,7 +20,7 @@ const Comment = (props) => {
 
     useEffect(() => {
         setComment(props.elem)
-    }, [edit])
+    }, [edit,props.comment])
     const handleViewReplies = () => {
         if (viewReplies) {
             console.log(comment.from_original)
@@ -53,7 +53,7 @@ const Comment = (props) => {
             </div>
             <div className="comment-right-part">
                 <div className="comment-content">
-                    {edit ? <CommentForm index={props.index} elem={comment} isEnclosed={true} fromOriginal={comment.from_original} >
+                    {edit ? <CommentForm  elem={comment} isEnclosed={true} fromOriginal={comment.from_original} >
                         <button className="comment-form-button btn-danger" disabled={0}
                             onClick={() => setEdit(false)}>
                             Close
@@ -123,10 +123,10 @@ Comment.propTypes = {
 };
 
 
-// const mapStateToProps = (state, ownProps) => {
-//     return {
-//         comment: state.blogs.comments[ownProps.parentId][ownProps.index],
-//     }
-// };
+const mapStateToProps = (state, ownProps) => {
+    return {
+        comment: state.blogs.comments[''+ownProps.Id][ownProps.index],
+    }
+};
 
-export default connect(null, { clearComments, deleteComment, deleteCommentForComment })(Comment);
+export default connect(mapStateToProps, { clearComments, deleteComment, deleteCommentForComment })(Comment);

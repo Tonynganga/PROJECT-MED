@@ -61,6 +61,14 @@ export default function (state = initialState, action) {
             // if (state.comments[action.payload.key])
             tempComments = [...state.comments[action.payload.key], action.payload.data]
             return { ...state, comments: { [action.payload.key]: tempComments } }
+        case UPDATE_COMMENTS:
+            tempComments = state.comments[0].map((elem) => {
+                if (elem.id == action.payload.id)
+                    {return action.payload}
+                return elem
+            })
+            // state.comments[0]=tempComments
+            return { ...state, comments: { 0: tempComments } }
         case GET_COMMENTS_FAILED:
         case GET_COMMENTS_FOR_COMMENTS_FAILED:
             return {
@@ -70,14 +78,6 @@ export default function (state = initialState, action) {
         case CLEAR_COMMENTS:
             delete state.comments[action.payload]
             return state
-        case UPDATE_COMMENTS:
-            tempComments = state.comments[0].map((elem) => {
-                if (elem.id == action.payload.id)
-                    return action.payload
-                return elem
-            })
-            // state.comments[0]=tempComments
-            return { ...state, comments: { 0: tempComments } }
         case UPDATE_COMMENT_FOR_COMMENT:
             tempComments = state.comments[action.payload.key].map((elem) => {
                 if (elem.id == action.payload.data.id)

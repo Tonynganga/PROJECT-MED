@@ -44,7 +44,8 @@ export const updateBlog = (id,body,ws) => (dispatch, getState) => {
   axios
     .put(`${HTTP_API_PATH}/api/blogs/update_blog/${id}`, body, tokenConfig(getState))
     .then(res => {
-      ws.sendMessage("update_blog",{id})
+      ws.connectWsBlog()
+      ws.sendMessage("update_blog",{id},'blog')
       dispatch(notify("updated blog successfuly", "success"))      
       sessionStorage.setItem('title', "")
       sessionStorage.setItem('excrept', "")

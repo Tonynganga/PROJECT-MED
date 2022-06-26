@@ -37,13 +37,13 @@ function WriteBlog(props) {
   const [editorState, setEditorState] = useState(sessionStorage.getItem('content') ? editorStateSession(sessionStorage.getItem('content')) : EditorState.createEmpty())
   useEffect(() => {
     if (props.location && props.location.state && props.location.state.blog) {
-      console.log(props.location.state.blog)
       const { blog } = props.location.state
       setTitle(blog.blog_title)
       sessionStorage.setItem('title', blog.blog_title)
       setExcrept(blog.excerpt)
       sessionStorage.setItem('excrept', blog.excerpt)
       setContent(blog.blog_content)
+      editorStateSession(blog.blog_content)
       sessionStorage.setItem('content', blog.blog_content)
       setCategory(selectedCategory(blog.category))
       sessionStorage.setItem('category', blog.category)

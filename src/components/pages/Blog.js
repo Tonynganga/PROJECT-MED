@@ -105,7 +105,7 @@ function Blog(props) {
                         <div className="mb-1 text-muted">{monthNames[datePosted.getMonth()]} {datePosted.getDate()}</div>
                         <p className="mb-auto card-text">{blogPost.excerpt}</p>
                         <Link to={{
-                            pathname: '/blog_details',
+                            pathname: '/blog_details', 
                             state: {
                                 blog: blogPost,
                                 index
