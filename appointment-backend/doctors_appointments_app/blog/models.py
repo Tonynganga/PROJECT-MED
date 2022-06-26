@@ -6,8 +6,25 @@ from PIL import Image
 
 # Create your models here.
 
+class Categories(models.TextChoices):
+    GENERAL='general'
+    NEUROLOGICAL="neurological" 
+    PEDIATRICS="pediatrics"
+    UROGENITAL="urogenital"     
+    OPHTHALMOLOGY="ophthalmology" 
+    ALLERGY_ANG_IMMUNOLOGY="allergy and immunology" 
+    PSYCHIATRY="psychiatry" 
+    ORAL="oral" 
+    SURGERY="surgery" 
+    UROLOGY="urology" 
+    DERMATOLOGY="dermatology"
+    PATHOLOGY="pathology"
+    CARDIOLOGY= "cardiology" 
+    DENTISTRY= "dentistry"
+
 class Blogs(models.Model):
     blogger_account=models.ForeignKey(User,on_delete=models.CASCADE)
+    category=models.CharField(max_length = 25,choices=Categories.choices)
     date_posted=models.DateTimeField()
     last_date_modified=models.DateTimeField()
     blog_title=models.CharField(max_length=25)

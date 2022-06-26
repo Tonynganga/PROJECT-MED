@@ -16,9 +16,9 @@ class Blog_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = Blogs
-        fields = ['id','blog_title', 'blog_content', 'excerpt', 'date_posted', 'thumbnail',
+        fields = ['id','blog_title','category', 'blog_content', 'excerpt', 'date_posted', 'thumbnail',
                   'blogger_profile_pic', 'blogger_first_name', 'blogger_last_name', 'blogger_username']
-        read_only_fields = ['id', 'date_posted', 'thumbnail','blogger_profile_pic','blogger_first_name', 'blogger_last_name', 'blogger_username']
+        read_only_fields = ['id', 'date_posted','blogger_profile_pic','blogger_first_name', 'blogger_last_name', 'blogger_username']
         
 
 

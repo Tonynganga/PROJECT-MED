@@ -24,6 +24,7 @@ class TestModels(TestCase):
         )
         self.blog=Blogs.objects.create( 
             blogger_account=self.user,
+            category="general",
            blog_title="common cold",
            blog_content="never had it"
         )

@@ -28,7 +28,7 @@ export const SidebarData2 = [
     {
         title: "Blog",
         icon: <CommentIcon/>,
-        link: "/bloghome"
+        link: "/newblog"
     },
     {
         title: "Change Password",

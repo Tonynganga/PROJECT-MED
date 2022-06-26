@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../Blog.css";
+import propTypes from 'prop-types';
+import { getProfile, updateProfile } from '../../../actions/profile';
+import { connect } from 'react-redux';
+import { HTTP_API_PATH } from '../../../utils'
 
-function Blobar() {
+function Blobar(props) {
+  useEffect(()=>{
+    props.getProfile()
+  },[])  
   const user = true;
   return (
     <div className="top">
@@ -19,28 +26,37 @@ function Blobar() {
               HOME
             </Link>
           </li>
-          
+
           <li className="topListItem">
             <Link className="link" to="/writeblog">
               WRITE
             </Link>
           </li>
-          
+
         </ul>
       </div>
       <div className="topRight">
-          <Link className="link" to="/settings">
-            <img
-              className="topImg"
-              src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-            />
-          </Link>
-    
-        
+        {/* <Link className="link" to="/settings"> */}
+        <img
+          className="topImg"
+          src={HTTP_API_PATH + props.imageUrl}
+          // src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          alt=""
+        />
+        {/* </Link> */}
+
+
       </div>
     </div>
   );
 }
 
-export default Blobar;
+Blobar.propTypes = {
+  imageUrl: propTypes.string.isRequired,
+};
+const mapStateToProps = state => ({
+  imageUrl: state.profile.image,
+});
+
+export default connect(mapStateToProps, {getProfile})(Blobar) 
+

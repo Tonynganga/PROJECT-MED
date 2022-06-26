@@ -19,10 +19,8 @@ const Comment = (props) => {
     const [comment, setComment] = useState({})
 
     useEffect(() => {
-        if (props.comment)
-            setComment(props.comment)
-        else setComment(props.elem)
-    }, [props.comment])
+        setComment(props.elem)
+    }, [edit])
     const handleViewReplies = () => {
         if (viewReplies) {
             console.log(comment.from_original)
@@ -123,14 +121,12 @@ Comment.propTypes = {
     deleteComment: propTypes.func.isRequired,
     deleteCommentForComment: propTypes.func.isRequired,
 };
-const mapStateToProps = (state, ownProps) => {
-    let Id
-    if (ownProps.elem.from_original == null) Id = 0
-    else if (ownProps.elem.from_original != null && ownProps.elem.from_original === true) Id = '0' + ownProps.elem.parent_comment
-    else Id = ownProps.elem.parent_comment
-    return {
-        comment: state.blogs.comments[Id][ownProps.index],
-    }
-};
 
-export default connect(mapStateToProps, { clearComments, deleteComment, deleteCommentForComment })(Comment);
+
+// const mapStateToProps = (state, ownProps) => {
+//     return {
+//         comment: state.blogs.comments[ownProps.parentId][ownProps.index],
+//     }
+// };
+
+export default connect(null, { clearComments, deleteComment, deleteCommentForComment })(Comment);

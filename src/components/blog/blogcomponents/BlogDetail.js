@@ -5,13 +5,14 @@ import SinglePost from "./SinglePost";
 import Blobar from "./Blogbar";
 import Footer from "../../Footer";
 
-function BlogDetail() {
+function BlogDetail(props) {
+    const{blog}=props.location.state
     return (
         <div>
             <Blobar />
             <div className="single">
                 <div>
-                <SinglePost />
+                <SinglePost blog={blog} />
                 </div>
                 <div>
                 <BlogSidebar />

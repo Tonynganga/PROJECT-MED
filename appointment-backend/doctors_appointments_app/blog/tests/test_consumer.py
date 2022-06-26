@@ -24,13 +24,16 @@ class MyTests(TestCase):
         self.blog=Blogs.objects.create( 
             blogger_account=self.user,
            blog_title="common cold",
+           category="general",
            blog_content="never had it"
         )
         self.blog1=Blogs.objects.create(blogger_account=self.user,
            blog_title="common cold3",
+           category="general",
            blog_content="never had it3")
         self.blog_data={
            "blog_title":"common cold2",
+           "category":"general",
            'blog_content':"never had it2"
         }
         self.comment=Comments.objects.create( 
@@ -69,6 +72,7 @@ class MyTests(TestCase):
         '''
         blog=await database_sync_to_async(Blogs.objects.create)(blogger_account=self.user,
            blog_title="common cold5",
+           category="general",
            blog_content="never had it5")
         communicator = WebsocketCommunicator(BlogsConsumer.as_asgi(), "")
         await communicator.connect()

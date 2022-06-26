@@ -1,7 +1,7 @@
 import { useLocation } from "react-router";
 import BlogHeader from "./blogcomponents/BlogHeader";
 import Posts from "./blogcomponents/Posts";
-import BlogSidebar from "./blogcomponents/BlogSidebar";
+
 import "./Blog.css";
 import Blobar from "./blogcomponents/Blogbar";
 import Footer from "../Footer";
@@ -15,15 +15,10 @@ function BlogHome() {
             <div className="blogheader">
                 <BlogHeader />
             </div>
-            <div className="bloghome-container">
-                <div className="bloghome-posts">
-                    <Posts />
-                </div>
-                <div className="bloghome-sidebar">
-                    <BlogSidebar />
-                </div>
+            <div >
+                <Posts />
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 }

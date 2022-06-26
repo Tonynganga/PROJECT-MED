@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../Blog.css";
+import {HTTP_API_PATH,capitalizeFirstLetter,monthNames} from '../../../utils'
 
-function Post({ img }) {
+function Post({ img,blog }) {
+    let datePosted 
+    
+    datePosted = new Date(blog.date_posted)
     return (
         <div className="post">
             <img
-                className="postImg"
-                src={img}
+                className="postImg"                
+                src={blog.thumbnail?HTTP_API_PATH + blog.thumbnail:img}
                 alt=""
             />
             <div className="postInfo">
@@ -16,25 +20,25 @@ function Post({ img }) {
                 </div>
                 <span className="postTitle">
                     <h3 className="link">
-                        Lorem ipsum dolor sit amet
+                        {blog.blog_title?capitalizeFirstLetter(blog.blog_title):"Lorem ipsum dolor sit amet"}
                     </h3>
                 </span>
                 <div className="authorprofile">
                     <div className="authorimgand">
                         <img
                             className="topImg"
-                            src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                            src={HTTP_API_PATH + blog.blogger_profile_pic}
                             alt=""
                         />
                         <div className="authorname">
-                        <span>Author Name</span>
+                        <span>{blog?blog.blogger_first_name+" " +blog.blogger_last_name:"Author Name"}</span>
                         </div>
                         
                     </div>
 
                     <div className="authorhour">
-                        <span className="postDate">1 hour ago</span>
-                        <span className="postDate">Dentry</span>
+                        <span className="postDate">{blog?monthNames[datePosted.getMonth()]+" "+datePosted.getDate():"1 hour ago"}</span>
+                        <span className="postDate">{blog?blog.category:"Dentry"}</span>
                     </div>
 
 
@@ -44,15 +48,15 @@ function Post({ img }) {
 
             </div>
             <p className="postDesc">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
-                officia architecto deserunt deleniti? Labore ipsum aspernatur magnam
-                fugiat, reprehenderit praesentium blanditiis quos cupiditate ratione
-                atque, exercitationem quibusdam, reiciendis odio laboriosam?
+            {blog?blog.excerpt:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumendaia architecto deserunt deleniti? Labore ipsum aspernatur magnam"}
             </p>
             <Link to={{
-                pathname: '/blogdetail',
-
-            }} className="stretched-link">Continue reading</Link>
+                            pathname: '/blogdetail',
+                            state: {
+                                blog
+                            },
+                        }} >Continue reading</Link>
+            
         </div>
     );
 }

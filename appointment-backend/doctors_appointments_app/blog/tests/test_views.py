@@ -19,6 +19,7 @@ class TestViews(TestCase):
         )
         self.blog=Blogs.objects.create( 
             blogger_account=self.user,
+            category="general",
            blog_title="common cold2",
            blog_content="never had it2"
         )
@@ -28,6 +29,7 @@ class TestViews(TestCase):
     def test_blog_api_create(self):
         response=self.client.post(reverse('post_blog'),json.dumps({            
            "blog_title":"common cold3",
+           "category":"general",
            "blog_content":"never had it3"
         }),content_type="application/json",HTTP_AUTHORIZATION="Token "+self.login_res['token'])
         self.assertEqual(response.status_code,201)
@@ -37,6 +39,7 @@ class TestViews(TestCase):
     def test_blog_api_update(self):
         response=self.client.put(reverse('update_blog',args=(self.blog.id,)),json.dumps({            
            "blog_title":"common cold",
+           "category":"general",
            "blog_content":"never had it2"
         }),content_type="application/json",HTTP_AUTHORIZATION="Token "+self.login_res['token'])
         self.assertEqual(response.status_code,204)

@@ -36,8 +36,8 @@ const DisplayComment = (props) => {
   }, [props.comments])
 
   const dispComments = () => {
-    return comments.map((elem, index) => {
-      return (<Comment key={index} index={index} elem={elem} user={props.user} />)
+    return comments.map((elem, _) => {
+      return (<Comment key={elem.id}  index={elem.id} elem={elem} user={props.user} />)
     })
   }
 

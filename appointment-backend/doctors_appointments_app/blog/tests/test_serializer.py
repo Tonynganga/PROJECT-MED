@@ -25,6 +25,7 @@ class TestSerializers(TestCase):
         )
         self.blog=Blogs.objects.create( 
             blogger_account=self.user,
+            category="general",
            blog_title="common cold",
            blog_content="never had it"
         )
@@ -35,6 +36,7 @@ class TestSerializers(TestCase):
         )
         self.blog_data={
             "blogger_account":self.user.id,
+            "category":"general",
            "blog_title":"common cold2",
            'blog_content':"never had it2"
         }
