@@ -99,9 +99,9 @@ function WriteBlog(props) {
     
     <div className="write">
       <Blobar />
-      <div className="bloghome-container d-flex justify-content-around">      
+      <div className="bloghome-container d-flex justify-content-between">      
       <form className="writeForm" onSubmit={onSubmit} >
-        <div className="d-flex justify-content-between mt-5">
+        <div className="d-flex justify-content-between m-5">
           <fieldset className="form-group">
             <legend className="border-bottom  ml-4">Blog Post</legend>
 
