@@ -20,7 +20,7 @@ const Comment = (props) => {
 
     useEffect(() => {
         setComment(props.elem)
-    }, [edit,props.comment])
+    }, [props.elem])
     const handleViewReplies = () => {
         if (viewReplies) {
             console.log(comment.from_original)
@@ -129,4 +129,4 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-export default connect(mapStateToProps, { clearComments, deleteComment, deleteCommentForComment })(Comment);
+export default connect(null, { clearComments, deleteComment, deleteCommentForComment })(Comment);
