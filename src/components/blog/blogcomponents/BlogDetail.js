@@ -6,21 +6,21 @@ import Blobar from "./Blogbar";
 import Footer from "../../Footer";
 
 function BlogDetail(props) {
-    const{blog}=props.location.state
+    const { blog } = props.location.state
     return (
         <div>
             <Blobar />
             <div className="single">
-                <div>
-                <SinglePost blog={blog} />
+                <div className="blogdetailsingle">
+                    <SinglePost blog={blog} />
                 </div>
-                <div>
-                <BlogSidebar />
+                <div className="blogdetailsisebar">
+                    <BlogSidebar />
                 </div>
-                
-                
+
+
             </div>
-            <Footer/>
+            <Footer />
         </div>
 
     );
