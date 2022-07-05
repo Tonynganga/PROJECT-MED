@@ -8,12 +8,12 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Jun 30 09:37:21 2022
+# Make data base, printed on Tue Jul  5 06:06:48 2022
 
 # Variables
 
 # environment
-REMOTE_CONTAINERS_SOCKETS = ["/tmp/vscode-ssh-auth-bfc5f7f502d82c202242557781e6faa35b79a76a.sock","/root/.gnupg/S.gpg-agent"]
+REMOTE_CONTAINERS_SOCKETS = ["/tmp/vscode-ssh-auth-fc26ee39078d213febdfe0a86c2b6483fc373498.sock","/root/.gnupg/S.gpg-agent"]
 # environment
 LC_ALL = C
 # environment
@@ -55,13 +55,13 @@ CURDIR := /workspaces/PROJECT-MED
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/vscode-ssh-auth-bfc5f7f502d82c202242557781e6faa35b79a76a.sock
+SSH_AUTH_SOCK = /tmp/vscode-ssh-auth-fc26ee39078d213febdfe0a86c2b6483fc373498.sock
 # default
 .SHELLFLAGS := -c
 # automatic
@@ -107,7 +107,7 @@ MAKEFILES :=
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
-REMOTE_CONTAINERS_IPC = /tmp/vscode-remote-containers-ipc-bfc5f7f502d82c202242557781e6faa35b79a76a.sock
+REMOTE_CONTAINERS_IPC = /tmp/vscode-remote-containers-ipc-fc26ee39078d213febdfe0a86c2b6483fc373498.sock
 # environment
 REMOTE_CONTAINERS = true
 # automatic
@@ -133,7 +133,7 @@ VSCODE_AGENT_FOLDER = /root/.vscode-server
 # environment
 _ = /bin/cat
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-d254bf38-97a7-4a98-9ff1-5ef6f3d5731f.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-be5696fc-9f7f-4df7-8246-20caace332bf.sock
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -149,7 +149,6 @@ SUFFIXES :=
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
 # variable set hash-table stats:
- 
 # Load=68/1024=7%, Rehash=0, Collisions=2/99=2%
 
 # Pattern-specific Variable Values
@@ -158,7 +157,6 @@ SUFFIXES :=
 
 # Directories
 
- 
 # . (device 2057, inode 5511980): 18 files, no impossibilities.
 
 # 18 files, no impossibilities in 1 directories.
@@ -297,6 +295,7 @@ start-react-server:
 django-dbshell-loc:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 50):
 	source ./appointment-backend/env/bin/activate && python3 appointment-backend/doctors_appointments_app/manage.py dbshell
@@ -313,7 +312,6 @@ setup-env-python:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 27):
- 
 	python -m virtualenv env && source ./env/bin/activate && python -m pip install -r requirements.txt && mv env ./appointment-backend
 
 django-migrate:
@@ -379,6 +377,6 @@ update-python-dep-loc:
 # strcache performance: lookups = 77 / hit rate = 37%
 # hash-table stats:
 # Load=48/8192=1%, Rehash=0, Collisions=0/77=0%
-# Finished Make data base on Thu Jun 30 09:37:21 2022
+# Finished Make data base on Tue Jul  5 06:06:48 2022
 
  

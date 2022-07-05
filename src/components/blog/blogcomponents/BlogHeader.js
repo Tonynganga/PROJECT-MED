@@ -4,13 +4,13 @@ import "../Blog.css";
 
 function BlogHeader() {
   return (
-    <div className="header">
-      <div className="headerTitles">
-        <span className="headerTitleSm">Welcome to:</span>
-        <span className="headerTitleLg">PROJECT MED BLOG</span>
+    <div className="blog_header">
+      <div className="blog_headerTitles">
+        <span className="blog_headerTitleSm">Welcome to:</span>
+        <span className="blog_headerTitleLg">PROJECT MED BLOG</span>
       </div>
       <img
-        className="headerImg"
+        className="blog_headerImg"
         src="https://images.pexels.com/photos/1167355/pexels-photo-1167355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
         alt=""
       />

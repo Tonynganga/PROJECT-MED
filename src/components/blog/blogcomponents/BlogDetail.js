@@ -10,11 +10,11 @@ function BlogDetail(props) {
     return (
         <div>
             <Blobar />
-            <div className="single">
-                <div className="blogdetailsingle">
+            <div className="blog_single">
+                <div className="blog_detailsingle">
                     <SinglePost blog={blog} />
                 </div>
-                <div className="blogdetailsisebar">
+                <div className="blog_detailsidebar">
                     <BlogSidebar />
                 </div>
 

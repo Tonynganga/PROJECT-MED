@@ -1,7 +1,7 @@
 import { useLocation } from "react-router";
 import BlogHeader from "./blogcomponents/BlogHeader";
 import Posts from "./blogcomponents/Posts";
-
+import  propTypes from 'prop-types'
 import "./Blog.css";
 import Blobar from "./blogcomponents/Blogbar";
 import Footer from "../Footer";
