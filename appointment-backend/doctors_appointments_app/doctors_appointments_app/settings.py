@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'blog',
     'appointments',
     'rest_framework',
-    'knox',
-    
+    'knox',    
 ]
 
 MIDDLEWARE = [
@@ -70,7 +69,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR.parent.parent,'build')
+            # os.path.join(BASE_DIR.parent.parent,'build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -147,9 +146,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR.parent.parent,'build/static')
-]
+# STATICFILES_DIRS=[
+#     os.path.join(BASE_DIR.parent.parent,'build/static')
+# ]
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 REST_FRAMEWORK = {

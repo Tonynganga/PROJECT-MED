@@ -1,6 +1,6 @@
 SHELL:= /bin/bash
 start-react-server:
-	npm run start
+	yarn run start
 start-django-server:
 	python3 appointment-backend/doctors_appointments_app/manage.py runserver
 python-install-dep:

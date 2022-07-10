@@ -35,7 +35,7 @@ function Blobar(props) {
         <ul className="blog_topList">
           <li className="blog_topListItem">
             {/* If the user is a patient return to patient homepage else return to dactorhomepage */}
-            <Link className="blog_link" onClick={() => backHome()}>
+            <Link className="blog_link" to={props.user && props.user.is_patient?"/patienthomepage":"/doctorhomepage"}>
               HOME
             </Link>
           </li>
@@ -45,11 +45,11 @@ function Blobar(props) {
             </Link>
           </li>
 
-          <li className="blog_topListItem">
+         {props.user &&!props.user.is_patient? <li className="blog_topListItem">
             <Link className="blog_link" to="/writeblog">
               WRITE
             </Link>
-          </li>
+          </li>:""}
 
         </ul>
       </div>
