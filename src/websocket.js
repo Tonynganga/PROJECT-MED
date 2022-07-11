@@ -65,13 +65,13 @@ export default ({ children }) => {
         setTimeout(
             function () {
                 if (socketRef.current && socketRef.current.readyState !== 1) {
-                    if (prevUrl === currentUrl.current) { 
-                        connect(currentUrl.current) 
+                    if (prevUrl === currentUrl.current) {
+                        connect(currentUrl.current)
                         console.log('hello world')
-                    }else
+                    } else
                         console.log('hello')
                 }
-            }, 100); // wait 100 milisecond to recover connection
+            }, 1000); // wait 100 milisecond to recover connection
 
     }
 
@@ -79,6 +79,7 @@ export default ({ children }) => {
         if (socketRef.current && socketRef.current.readyState === 1)
             if (currentUrl.current != "comments/") {
                 socketRef.current.close()
+                console.log("mate")
                 socketRef.current = connect("comments/")
                 return
             }
@@ -233,9 +234,10 @@ export default ({ children }) => {
     }
 
     const closeWsConnection = () => {
-        if(socketRef.current)
-        {socketRef.current.close()
-        dispatch({ type: RESET_DATA });}
+        if (socketRef.current) {
+            socketRef.current.close()
+            dispatch({ type: RESET_DATA });
+        }
 
     }
 
@@ -246,22 +248,24 @@ export default ({ children }) => {
     const waitForSocketConnection = (callback) => {
         const socket = socketRef.current;
         const recursion = waitForSocketConnection;
-        setTimeout(
-            function () {
-                if (socket && socket.readyState === 1) {
-                    console.log("Connection is made")
-                    if (callback != null) {
-                        callback();
-                    }
-                    return;
-
-                } else {
+        
+            setTimeout(
+                function () {
+                    if (socket && socket.readyState === 1) {
+                        console.log("Connection is made")
+                        if (callback != null) {
+                            callback();
+                        }
+                        return;
+                    } 
+                    else {
                     console.log("wait for connection...")
                     // socketRef=connect()
                     recursion(callback);
                 }
-            }, 1000); // wait 5 milisecond for the connection...
-    }
+                }, 100); // wait 5 milisecond for the connection...
+        }
+    
 
     ws = {
         sendMessage,

@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext,useEffect} from "react";
 import { Link } from "react-router-dom";
 import CommentForm from "../../pages/CommentForm";
 import DisplayComment from "../../pages/DisplayComment";
@@ -12,6 +12,8 @@ import { WebSocketService } from '../../../websocket';
 function SinglePost(props) {
   const {blog,username}=props
   const ws = useContext(WebSocketService);
+  useEffect(()=>{
+  },[])
   console.log(blog.blogger_username == username,"Test")
   let img="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
   const datePosted = new Date(blog.date_posted)
