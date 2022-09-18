@@ -198,3 +198,9 @@
 .reset-form{
   width: 350px;
 }
+.review_button{
+  margin-right: 0;
+  margin-left: auto;
+  padding-right: 30px;
+  margin-top: -35px;
+}

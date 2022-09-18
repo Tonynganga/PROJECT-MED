@@ -6,11 +6,6 @@ import SendEmail from './SendEmail';
 import image from "../../assets/images/homepage.jpg";
 import image2 from "../../assets/images/loginimage.jpg";
 
-
-
-
-
-
 function Home() {
 
 

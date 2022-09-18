@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // import "./pages/Main.css";
 import './PatientNavBar.css';
 import HospitalDropdown from "./HospitalDropdown";
+import ReviewButton from "./ReviewButton";
 
 
 function PatientNavBar() {
@@ -93,6 +94,9 @@ function PatientNavBar() {
             
           </li>
         </ul>
+        <div className="review_button">
+          <ReviewButton />
+        </div>
       </nav>
     </div>
   );

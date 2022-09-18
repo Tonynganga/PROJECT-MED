@@ -7,7 +7,7 @@ import DoctorCard from '../DoctorCard';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { getAvailableAppointments } from '../../actions/appointments';
-import ReviewModal from '../ReviewModal';
+import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -58,7 +58,7 @@ function PatientHomePage(props) {
 
     ];
     const [category, setCategory] = useState("");
-    const [isOpen, setIsOpen] = useState(false)
+    
 
     useEffect(() => {
         props.getAvailableAppointments()
@@ -95,15 +95,6 @@ function PatientHomePage(props) {
             </div>
             <div className='patienthome__page'>
                
-
-                {/* <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-                    <button onClick={() => setIsOpen(true)}>Open Modal</button>
-
-                    <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
-                        Fancy Modal
-                    </ReviewModal>
-
-                </div> */}
 
                 <div className="patienthome__container">
                 <PatientBars/>

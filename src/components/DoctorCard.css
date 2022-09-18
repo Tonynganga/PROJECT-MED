@@ -29,7 +29,6 @@
     border-radius: 35px;
 }
 .card__details__wrapper{
-    background-color: details__wrapper;
     max-width: 200px;
     padding: 10px;
     margin-left: 10px;
@@ -41,11 +40,10 @@
     margin-bottom: 20px;
 }
 .cardbook__details__wrapper{
-    background-color: details__wrapper;
     padding: 10px;
     margin-left: 10px;
 }
-.book__btn{
+.booking__btn{
     text-decoration: none;
     padding: 10px;
     background-color: skyblue;
@@ -53,5 +51,4 @@
     font-size: 16px;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
 }

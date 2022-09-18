@@ -8,7 +8,7 @@ function BlogSidebar(props) {
       <div className="blog_sidebarItem">
         <span className="blog_sidebarTitle">ABOUT US</span>
         <img
-          src="https://themegoods-cdn-pzbycso8wng.stackpathdns.com/grandblog/demo/wp-content/uploads/2015/11/aboutme.jpg"
+          src="https://www.aims-co.com/wp-content/uploads/2016/12/Health-insurance-clipart.jpg"
           alt=""
         />
         <p>

@@ -519,6 +519,7 @@ video {
   align-items: flex-end;
 }
 
+
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
