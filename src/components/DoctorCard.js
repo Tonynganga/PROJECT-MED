@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 const DoctorCard = (props) => {
 
     return (
-        <div key={props.appointment.id} className="card">
+        <div key={props.appointment.id} className="card_main">
+            {/* <a href="#">click me</a> */}
             <div className="card__wrapper">
                 <div className="card__image">
                     <img src={HTTP_API_PATH + props.appointment.doctor_profile_pic} id="img" alt="#" width="80px" height="80px" />
@@ -35,17 +36,14 @@ const DoctorCard = (props) => {
                                 BOOK APPOINTMENT
                             </Link>
                         </div>
+                        
 
                     </div>
 
                 </div>
 
             </div>
-            <div className="card_details">
-                            <Link to='/appointment' className="booking__btn">
-                                BOOK APPOINTMENT
-                            </Link>
-                        </div>
+           
         </div>
         
     );
