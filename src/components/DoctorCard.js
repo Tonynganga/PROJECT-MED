@@ -32,7 +32,12 @@ const DoctorCard = (props) => {
                             <h5>{props.appointment.doctor_phone_no}</h5>
                         </div>
                         <div className="card_details">
-                            <Link to='/appointment' className="booking__btn">
+                            <Link className="booking__btn" to={{
+                                pathname: '/appointment',
+                                state: {
+                                    appointmentId: props.appointment.id,
+                                },
+                            }}>
                                 BOOK APPOINTMENT
                             </Link>
                         </div>
