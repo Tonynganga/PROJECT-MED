@@ -25,8 +25,6 @@ const hoursData = [
 function Appointment(props) {
     const [hours, setHours] = useState([]);
     const [appointmentDate, setAppointmentDate] = useState("");
-   
-
     useEffect(() => {
         let resultArray=[]
         if(props.availableAppointmentTime.length>0){
