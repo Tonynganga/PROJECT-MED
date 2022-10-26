@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from "react";
 import "./PatientNavBar.css";
 import ReactDom from 'react-dom';
-import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
+// import Box from '@mui/material/Box';
+import { Rating } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import propTypes from 'prop-types';
 import { connect } from "react-redux";
@@ -32,7 +32,7 @@ const OVERLAY_STYLES = {
 
 function ReviewModal(props) {
 
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(3.0);
   const [message,setMessage]=useState("")
   useEffect(()=>{
     props.getUserReview()
@@ -45,14 +45,7 @@ function ReviewModal(props) {
     }
   },[props.review])
 
-
   if (!props.open) return null
-
-  
-  
-
-  
-  
 
   const onSubmit=(e)=>{
     e.preventDefault()
@@ -79,11 +72,18 @@ function ReviewModal(props) {
               <div>
                 <Typography component="legend">Rating</Typography>
                 <Rating
-                  name="simple-controlled"
+                  name="half-rating"
                   value={value}
+                  precision={0.5}
                   onChange={(event, newValue) => {
-                    setValue(newValue);
+                    
+                    console.log(newValue)
+                    setValue(event.target.value);
                   }}
+                  // onChangeActive={(event, newHover) => {
+                  //   setHover(newHover);
+                  // }}
+                  // emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                 />
               </div>
 

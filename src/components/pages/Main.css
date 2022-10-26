@@ -55,7 +55,7 @@ video {
 }
 
 .divloginimage-img {
-  content: url("../../../public/images/loginimage.jpg");
+  content: url("../../public/images/loginimage.jpg");
   border-top-left-radius: 0;
   border-bottom-left-radius: 70px;
   border-top-right-radius: 70px;

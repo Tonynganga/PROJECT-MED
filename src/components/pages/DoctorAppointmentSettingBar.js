@@ -115,7 +115,7 @@ function DoctorAppiontmentSettingBar(props) {
                                 className="form-check-input"
                                 name="allSelect"
                                 checked={
-                                    hours.filter((hour) => hour?.isChecked !== true).length < 1
+                                    hours.filter((hour) => hour.isChecked !== true).length < 1
                                 }
                                 // checked={!hours.some((hour) => hour?.isChecked !== true)}
                                 onChange={handleChange}
@@ -128,7 +128,7 @@ function DoctorAppiontmentSettingBar(props) {
                                     type="checkbox"
                                     className="form-check-input"
                                     name={hour.name}
-                                    checked={hour?.isChecked || false}
+                                    checked={hour.isChecked || false}
                                     onChange={handleChange}
                                 />
                                 <label className="form-check-label ms-2">{hour.name}</label>

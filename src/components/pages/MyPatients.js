@@ -31,9 +31,9 @@ const MyPatients = (props) => {
                 <h3>My Patients</h3>
             </div>
             <div className='mypatients_hpage'>
-                <DoctorBars />
 
                 <div className="mypatients__container">
+                <DoctorBars />
                     {details.map(elem => <MyPatientCard details={elem} />)
                     }
                 </div>

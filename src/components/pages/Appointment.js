@@ -139,7 +139,7 @@ function Appointment(props) {
                                                 type="checkbox"
                                                 className="form-check-input"
                                                 name={hour.name}
-                                                checked={hour?.isChecked || false}
+                                                checked={hour.isChecked || false}
                                                 onChange={handleChange}
                                             />
                                             <label className="form-check-label">{hour.name}</label>
