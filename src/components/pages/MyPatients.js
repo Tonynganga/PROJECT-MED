@@ -31,15 +31,16 @@ const MyPatients = (props) => {
                 <h3>My Patients</h3>
             </div>
             <div className='mypatients_hpage'>
-
                 <div className="mypatients__container">
-                <DoctorBars />
-                    {details.map(elem => <MyPatientCard details={elem} />)
-                    }
+                    <DoctorBars />
+                    <div className='mypatient_innercont'>
+                        {details.map(elem => <MyPatientCard details={elem} />)
+                        }
+                    </div>
                 </div>
-
+                <Footer />
             </div>
-            <Footer/>
+            
         </div>
     )
 }
