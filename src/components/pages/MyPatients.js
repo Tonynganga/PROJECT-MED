@@ -24,23 +24,45 @@ const MyPatients = (props) => {
         setDetails(props.patientDetails)
     }, [props.patientDetails])
 
-
     return (
         <div>
-            <div class="mpatients__header">
-                <h3>My Patients</h3>
-            </div>
-            <div className='mypatients_hpage'>
-                <div className="mypatients__container">
+
+            <div className="mypatients_hpage">
+                <div className="doctor_bars">
                     <DoctorBars />
+                </div>
+                <div className="mypatients__container">
+                    <div class="mpatients__header">
+                        <h3>My Patients</h3>
+                    </div>
+                    <div className='search_patient'>
+                    <div className='p_search_box'>
+                        <div align='right' className="patient_search">
+                            <div align='left' className='p-search-form'>
+                                <div className='ps-form__data__two'>
+                                    <input type="text" placeholder="Enter Name..."
+                                        name="username"
+                                        required/>
+                                </div>
+                                <div className='ps-search-btn' align='right'>
+                                    <a href="#" onClick="" className='ds-book__btn' >Search</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    </div>
+
                     <div className='mypatient_innercont'>
                         {details.map(elem => <MyPatientCard details={elem} />)
                         }
                     </div>
                 </div>
-                <Footer />
+                
             </div>
-            
+            <Footer />
         </div>
     )
 }
