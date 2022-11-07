@@ -33,6 +33,7 @@ import BlognewHome from './components/blog/BlogHome';
 import WriteBlog from "./components/blog/blogcomponents/WriteBlog.js";
 import SinglePost from './components/blog/blogcomponents/SinglePost';
 import BlogDetail from './components/blog/blogcomponents/BlogDetail';
+import S_Appointment from './components/pages/S_Appointment';
 function App() {
   setUpNotifications({
     defaultProps: {
@@ -77,14 +78,8 @@ function App() {
         <Route path='/writeblog' exact component={WriteBlog}/>
         <Route path='/singlepost' exact component={SinglePost}/>
         <Route path='/blogdetail' exact component={BlogDetail}/>
-
-
+        <Route path='/s_appointment' exact component={S_Appointment}/>
         
-
-
-
-
-
 
         
         {/* <Route path="/newblog" exact component={Home} />       */}

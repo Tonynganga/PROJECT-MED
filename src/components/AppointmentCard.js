@@ -205,7 +205,7 @@ const AppointmentCard = (props) => {
 
                                     <TableCell>
                                         <Typography>
-                                            <Button component={Link} to="/about" variant="outlined" color="primary" cursor="pointer">
+                                            <Button component={Link} to="/s_appointment" variant="outlined" color="primary" cursor="pointer">
                                                 View
                                             </Button>
                                         </Typography>
