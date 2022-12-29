@@ -2,7 +2,7 @@ SHELL:= /bin/bash
 start-react-server:
 	yarn run start
 start-django-server:
-	python3 appointment-backend/doctors_appointments_app/manage.py runserver
+	python3 appointment-backend/doctors_appointments_app/manage.py runserver 0.0.0.0:8000
 python-install-dep:
 	pip3 install -r requirements.txt
 start-django-server-network:
