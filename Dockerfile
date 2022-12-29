@@ -9,7 +9,6 @@ RUN apt-get update
 RUN apt install -y yarn
 RUN apt-get install redis -y
 RUN apt-get install systemctl -y
-RUN apt-get install postgresql postgresql-contrib
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install -r requirements.txt
 
