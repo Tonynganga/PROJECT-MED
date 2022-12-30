@@ -17,10 +17,10 @@ jobs:
         role-to-assume: arn:aws:iam::577566418394:role/aws-service-role/organizations.amazonaws.com/AWSServiceRoleForOrganizations
         aws-region: ap-south-1
     - name: Login to Amazon ECR Public
-        id: login-ecr-public
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry-type: public
+      id: login-ecr-public
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registry-type: public
 
     - name: Build, tag, and push docker image to Amazon ECR Public
       env:
