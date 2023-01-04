@@ -108,7 +108,7 @@ DATABASES = {
       'ENGINE':'django.db.backends.postgresql_psycopg2',
       'NAME':'doc_app',
       'USER':'postgres',
-      'PASSWORD':'Kamikaze#17',
+      'PASSWORD': "${{ secrets.DATABASE_PASS }}",
       'HOST':'doc-app2.cwoh0aaqofu0.us-east-1.rds.amazonaws.com',
       'PORT':'5432',
    }
