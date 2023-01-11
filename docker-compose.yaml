@@ -6,6 +6,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=doc_app
+    ports:
+      - "5432:5432"
   app:
     build: 
       context: .
