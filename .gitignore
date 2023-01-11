@@ -13,7 +13,6 @@ __pycache__
 /appointment-backend/doctors_appointments_app/pytest.ini
 
 # production
-/build
 /appointment-backend/doctors_appointments_app/media/profile_pics
 /appointment-backend/doctors_appointments_app/media/blog-thumbnails
 
