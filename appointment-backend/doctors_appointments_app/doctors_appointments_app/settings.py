@@ -109,7 +109,7 @@ DATABASES = {
       'NAME':'doc_app',
       'USER':'postgres',
       'PASSWORD':'1234',
-      'HOST':'localhost',
+      'HOST':'postgres',
       'PORT':'5432',
    }
 }
