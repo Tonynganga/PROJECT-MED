@@ -90,7 +90,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": ['redis://localhost:6379/4']
+            "hosts": ['redis://redis:6379/4']
         }
     },
 }
@@ -108,8 +108,8 @@ DATABASES = {
       'ENGINE':'django.db.backends.postgresql_psycopg2',
       'NAME':'doc_app',
       'USER':'postgres',
-      'PASSWORD': "Kamikaze#17",
-      'HOST':'doc-app2.cwoh0aaqofu0.us-east-1.rds.amazonaws.com',
+      'PASSWORD': "1234",
+      'HOST':'postgres',
       'PORT':'5432',
    }
 }
