@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u1uekof5)y%kxewd@3f9e!hzoly*6r_+kz&5xln95n4l*#)90*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','192.168.100.56','127.0.0.1','postgres','0.0.0.0','ec2-44-204-92-31.compute-1.amazonaws.com']
+ALLOWED_HOSTS = ['localhost','192.168.100.56','127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -69,7 +69,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR.parent.parent,'build')
+            # os.path.join(BASE_DIR.parent.parent,'build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -108,7 +108,7 @@ DATABASES = {
       'ENGINE':'django.db.backends.postgresql_psycopg2',
       'NAME':'doc_app',
       'USER':'postgres',
-      'PASSWORD': "1234",
+      'PASSWORD':'1234',
       'HOST':'postgres',
       'PORT':'5432',
    }
@@ -154,9 +154,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR.parent.parent,'build/static')
-]
+# STATICFILES_DIRS=[
+#     os.path.join(BASE_DIR.parent.parent,'build/static')
+# ]
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 REST_FRAMEWORK = {
