@@ -7,8 +7,8 @@ export const monthNames = ["January", "February", "March", "April", "May", "June
 "July", "August", "September", "October", "November", "December"
 ];
 
-export const WS_API_PATH = 'ws://localhost:8000/';
-export const HTTP_API_PATH='http://localhost:8000';
+export const WS_API_PATH = 'ws://ec2-44-204-92-31.compute-1.amazonaws.com/';
+export const HTTP_API_PATH='http://ec2-44-204-92-31.compute-1.amazonaws.com';
 
 export const blog_type = [
   { label: "General", value: "general" },
