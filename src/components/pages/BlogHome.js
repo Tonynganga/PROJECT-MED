@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BlogNavbar from '../BlogNavbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 function BlogHome() {
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+
+    if (!isAuthenticated) {
+        return <Redirect to="/" />;
+      }
     return (
         <div>
             <div className='blognav ml-5'>

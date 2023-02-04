@@ -11,6 +11,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 // import { convertToHTML } from 'draft-convert';
 import draftToHtml from 'draftjs-to-html';
 // import {stateFromHTML} from 'draft-js-import-html';
+import { Redirect } from 'react-router-dom';
 import htmlToDraft from 'html-to-draftjs';
 import { errorMessage } from '../../actions/notifyPopUp';
 import { WebSocketService } from '../../websocket';
@@ -18,6 +19,10 @@ import { WebSocketService } from '../../websocket';
 
 const NewPost = (props) => {
   const ws = useContext(WebSocketService);
+
+  if (!props.isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   // const { blog,index } = props.location.state
   const editorStateSession = (item) => {
@@ -180,7 +185,12 @@ const NewPost = (props) => {
 NewPost.propTypes = {
   addBlog: propTypes.func.isRequired,
   updateBlog: propTypes.func.isRequired,
+  isAuthenticated:propTypes.bool.isRequired,
   errorMessage: propTypes.func.isRequired
 };
 
-export default connect(null, { addBlog, updateBlog, errorMessage })(NewPost)
+const mapStateToProps = state => ({
+  isAuthenticated:state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { addBlog, updateBlog, errorMessage })(NewPost)

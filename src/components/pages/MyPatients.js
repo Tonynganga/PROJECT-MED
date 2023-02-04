@@ -5,6 +5,7 @@ import PatientNavBar from '../PatientNavBar';
 import './PatientHomePage.css';
 import SideBar2 from './SideBar2';
 import propTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { WebSocketService } from '../../websocket';
 import DoctorBars from '../DoctorBars';
@@ -15,6 +16,11 @@ import Footer from '../Footer';
 const MyPatients = (props) => {
     const ws = useContext(WebSocketService);
     const [details, setDetails] = useState([])
+
+    if(!props.isAuthenticated){
+        return <Redirect to="/" />;
+    } 
+
     useEffect(() => {
         ws.connectWsMyPatientsDetails()
         ws.sendMessage('get_my_patients_details', {})
@@ -23,6 +29,7 @@ const MyPatients = (props) => {
     useEffect(() => {
         setDetails(props.patientDetails)
     }, [props.patientDetails])
+    
 
     return (
         <div>
@@ -70,10 +77,13 @@ const MyPatients = (props) => {
 MyPatients.propTypes = {
     patientDetails: propTypes.array.isRequired,
     getPatientDetailsForDoctor: propTypes.func.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
 };
 const mapStateToProps = state => ({
     patientDetails: state.docAppointments.patientDetailForDoc,
-    user: state.auth.user
+    user: state.auth.user,
+    isAuthenticated:state.auth.isAuthenticated,
+
 });
 
 export default connect(mapStateToProps, { getPatientDetailsForDoctor })(MyPatients)

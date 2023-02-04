@@ -5,6 +5,7 @@ import './CssMain.css'
 import DisplayComment from './DisplayComment';
 import { connect } from 'react-redux';
 import { deleteBlog } from '../../actions/blogs';
+import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { capitalizeFirstLetter, monthNames } from '../../utils'
 import { WebSocketService } from '../../websocket';
@@ -20,6 +21,10 @@ const BlogDetails = (props) => {
     const ws = useContext(WebSocketService);
     const { blog, index } = props.location.state
     const [blogPost, setBlogPost] = useState(blog)
+
+    if(!props.isAuthenticated){
+        return <Redirect to="/" />;
+    }
     useEffect(() => {
         if (props.stateBlogPost)
             setBlogPost(props.stateBlogPost)
@@ -79,13 +84,15 @@ const BlogDetails = (props) => {
 
 BlogDetails.propTypes = {
     deleteBlog: propTypes.func.isRequired,
-    stateBlogPost: propTypes.object.isRequired
+    stateBlogPost: propTypes.object.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
 
 };
 const mapStateToProps = (state, ownProps) => {
     return {
         stateBlogPost: state.blogs.blogs[ownProps.location.state.index],
-        user: state.auth.user
+        user: state.auth.user,
+        isAuthenticated:state.auth.isAuthenticated
     }
 };
 

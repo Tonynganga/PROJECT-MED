@@ -4,7 +4,17 @@ import Footer from "../Footer";
 import SideBar from './SideBar';
 import DoctorCard from "../DoctorCard";
 import PatientNavBar from '../PatientNavBar';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 function SearchDoctor() {
+
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+
+    if (!isAuthenticated) {
+        return <Redirect to="/" />;
+      }
+
     return (
         <div className='searchdoc__page'>
             <div className='searchdoc__navbar'>

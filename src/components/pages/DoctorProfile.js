@@ -3,6 +3,7 @@ import Footer from "../Footer";
 import SideBar2 from "./SideBar2";
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { getProfile, updateProfile } from '../../actions/profile';
 import { errorMessage } from '../../actions/notifyPopUp';
 import Select from 'react-select';
@@ -28,6 +29,10 @@ function DoctorProfile(props) {
     const [addressState, setAddress] = useState("");
     const [emailState, setEmail] = useState("");
     const [image, setImage] = useState(null);
+
+    if(!props.isAuthenticated){
+        return <Redirect to="/" />;
+    }
     
     useEffect(
         () => {
@@ -46,6 +51,7 @@ function DoctorProfile(props) {
         },
         [props.user]
     );
+   
     // useEffect (() => {
     //     if(props.imageUrl){
     //       setImage('http://localhost:8000'+props.imageUrl)
@@ -84,6 +90,8 @@ function DoctorProfile(props) {
             props.updateProfile(formData);
         }
     };
+
+   
     return (
         // const { profileImg } = this.state
         // return (
@@ -225,10 +233,12 @@ function DoctorProfile(props) {
 DoctorProfile.propTypes = {
     imageUrl: propTypes.string.isRequired,
     user: propTypes.object.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
     getProfile: propTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
     imageUrl: state.profile.image,
+    isAuthenticated:state.auth.isAuthenticated,
     user: state.auth.user
 });
 

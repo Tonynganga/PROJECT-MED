@@ -23,6 +23,7 @@ import {
 } from '@material-ui/core';
 import { WebSocketService } from '../../websocket';
 import {HTTP_API_PATH} from '../../utils'
+import { Redirect } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +66,10 @@ function Blog(props) {
     const classes = useStyles();
     const [blogs, setBlogs] = useState([]);
     const [featuredBlog, setFeaturedBlog] = useState([]);
+    
+    if(!props.isAuthenticated){
+        return <Redirect to="/" />;
+    }
     
     useEffect(() => {
         // props.getBlogs()
@@ -188,9 +193,11 @@ function Blog(props) {
 Blog.propTypes = {
     blogs: propTypes.array.isRequired,
     getBlogs: propTypes.func.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
 };
 const mapStateToProps = state => ({
     blogs: state.blogs.blogs,
+    isAuthenticated:state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getBlogs })(Blog)

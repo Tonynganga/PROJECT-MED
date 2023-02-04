@@ -194,8 +194,13 @@ function WriteBlog(props) {
 WriteBlog.propTypes = {
   addBlog: propTypes.func.isRequired,
   updateBlog: propTypes.func.isRequired,
-  errorMessage: propTypes.func.isRequired
+  errorMessage: propTypes.func.isRequired,
+  isAuthenticated:propTypes.bool.isRequired,
 };
 
-export default connect(null, { addBlog, updateBlog, errorMessage })(WriteBlog)
+const mapStateToProps = state => ({
+  isAuthenticated:state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { addBlog, updateBlog, errorMessage })(WriteBlog)
 

@@ -5,6 +5,8 @@ import SideBar2 from "./SideBar2";
 import PatientNavBar from '../PatientNavBar';
 import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from '@material-ui/core'
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
+import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import {
 //     faSignOutAlt,
@@ -15,8 +17,15 @@ import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 //   } from "@fortawesome/free-solid-svg-icons";
 
 
-export class P_Appointment extends Component {
-    render() {
+    function P_Appointment() {
+    
+        const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
+
+    if (!isAuthenticated) {
+        return <Redirect to="/" />;
+      }
+
         return (
             <div>
                 <div className="p__app__page">
@@ -43,7 +52,6 @@ export class P_Appointment extends Component {
             </div>
         );
     }
-}
 
 
 export default P_Appointment;

@@ -3,6 +3,7 @@ import './PatientProfile.css';
 import Footer from "../Footer";
 import SideBar from './SideBar';
 import PatientNavBar from '../../components/PatientNavBar';
+import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile, updateProfile } from '../../actions/profile';
@@ -42,6 +43,10 @@ const PatientProfile = props => {
     const [image, setImage] = useState(null);
     const [genderState, setGender] = useState({});
 
+    if (!props.isAuthenticated) {
+        return <Redirect to="/" />;
+    }
+
     useEffect(
         () => {
             props.getProfile()
@@ -67,6 +72,7 @@ const PatientProfile = props => {
 
     // }, [props.imageUrl]);
 
+   
 
     const onChangePicture = e => {
         setImage(e.target.files[0]);
@@ -251,10 +257,12 @@ const PatientProfile = props => {
 PatientProfile.propTypes = {
     imageUrl: propTypes.string.isRequired,
     user: propTypes.object.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
     getProfile: propTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
     imageUrl: state.profile.image,
+    isAuthenticated:state.auth.isAuthenticated,
     user: state.auth.user
 });
 

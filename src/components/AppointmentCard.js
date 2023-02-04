@@ -25,6 +25,7 @@ import { errorMessage } from '../actions/notifyPopUp';
 import propTypes from 'prop-types';
 import { capitalizeFirstLetter } from '../utils'
 import { WebSocketService } from '../websocket';
+import { Redirect } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -94,6 +95,10 @@ const AppointmentCard = (props) => {
     const [appointmentList, setAppointmentList] = useState([])
     const [filteredList, setFilteredList] = useState([])
     const filterState = useRef('all')
+
+    if (!props.isAuthenticated) {
+        return <Redirect to="/" />;
+      }
 
 
     useEffect(() => {
@@ -235,10 +240,12 @@ const AppointmentCard = (props) => {
 AppointmentCard.prototype = {
     // getDoctorAppointments: propTypes.func.isRequired,
     errorMessage: propTypes.func.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
     docAppointmentsList: state.docAppointments.docAppointments,
+    isAuthenticated:state.auth.isAuthenticated,
     user: state.auth.user,
 });
 

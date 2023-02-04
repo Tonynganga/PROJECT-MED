@@ -3,6 +3,7 @@ import './PatientChangePass.css';
 import Footer from "../Footer";
 import { errorMessage } from '../../actions/notifyPopUp';
 import { ForgotPassword, ChangePassword } from '../../actions/auth';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import DoctorBars from '../DoctorBars';
@@ -14,6 +15,11 @@ function ChangePass(props) {
     const [password2, setPassword2] = useState("")
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+
+    if(!props.isAuthenticated){
+        return <Redirect to="/" />;
+    }
+
     let token = ""
     if (props.token) {
         token = props.token
@@ -44,6 +50,8 @@ function ChangePass(props) {
 
 
     }
+
+  
 
     return (
         <div className='patientchangepass__page'>
@@ -93,10 +101,12 @@ function ChangePass(props) {
 }
 ChangePass.propTypes = {
     errorMessage: propTypes.func.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
     ChangePassword: propTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
     token: state.auth.token,
+    isAuthenticated:state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { errorMessage, ForgotPassword, ChangePassword })(ChangePass);

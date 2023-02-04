@@ -5,9 +5,10 @@ import SideBar from "./SideBar";
 import PatientNavBar from '../../components/PatientNavBar';
 import DoctorCard from '../DoctorCard';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { getAvailableAppointments } from '../../actions/appointments';
-import { Link } from 'react-router-dom';
+import ReviewModal from '../ReviewModal';
 import Select from 'react-select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -58,7 +59,11 @@ function PatientHomePage(props) {
 
     ];
     const [category, setCategory] = useState("");
-    
+    const [isOpen, setIsOpen] = useState(false)
+
+    if(!props.isAuthenticated){
+        return <Redirect to="/" />;
+    }
 
     useEffect(() => {
         props.getAvailableAppointments()
@@ -86,16 +91,27 @@ function PatientHomePage(props) {
     const [gender, setGender] = React.useState('F');
     const [location, setLocation] = React.useState("");
 
+    
+
 
     return (
         <div>
-            
+
 
             <div className='patientnav__bar'>
                 <PatientNavBar />
             </div>
             <div className='patienthome__page'>
                
+
+                {/* <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+                    <button onClick={() => setIsOpen(true)}>Open Modal</button>
+
+                    <ReviewModal open={isOpen} onClose={() => setIsOpen(false)}>
+                        Fancy Modal
+                    </ReviewModal>
+
+                </div> */}
 
                 <div className="patienthome__container">
                 <PatientBars/>
@@ -174,10 +190,12 @@ function PatientHomePage(props) {
 
 PatientHomePage.propTypes = {
     appointments: propTypes.array.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
     getAvailableAppointments: propTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-    appointments: state.appointments.appointmentList
+    appointments: state.appointments.appointmentList,
+    isAuthenticated:state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { getAvailableAppointments })(PatientHomePage)

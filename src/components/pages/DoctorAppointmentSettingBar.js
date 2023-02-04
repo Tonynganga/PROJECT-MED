@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { errorMessage } from '../../actions/notifyPopUp';
 import { setAppointmentSetting } from '../../actions/docAppointments';
+import { Redirect } from 'react-router-dom';
 
 const doct_type = [
     { label: "General Practitioner", value: "general practitioner" },
@@ -39,6 +40,10 @@ function DoctorAppiontmentSettingBar(props) {
     const [phonenumber, setPhoneNo] = useState("");
     const [location, setLocation] = useState("");
     const [appointmentPer2hr, setAppointmentPer2hr] = useState("");
+
+    if (!props.isAuthenticated) {
+        return <Redirect to="/" />;
+      }
 
     useEffect(() => {
         setHours(hoursData);
@@ -190,4 +195,8 @@ DoctorAppiontmentSettingBar.prototype = {
     errorMessage: propTypes.func.required,
 }
 
-export default connect(null, { setAppointmentSetting, errorMessage })(DoctorAppiontmentSettingBar)
+const mapStateToProps = state => ({
+    isAuthenticated:state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAppointmentSetting, errorMessage })(DoctorAppiontmentSettingBar)

@@ -11,11 +11,14 @@ services:
   app:
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  
+    depends_on:
+      - postgres  
     ports:
       - "8000:8000"
       - "3000:3000"
-    command: ["make django-makemigrations","make django-migrate"]
+    entrypoint: ["/bin/bash"]
+    command: ["-c","make start-django-server"]
   redis:
     image: redis:latest
     ports:

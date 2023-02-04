@@ -15,9 +15,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import DoctorBars from '../DoctorBars';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 
 function S_Appointment(){
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    if(!isAuthenticated){
+        return <Redirect to="/" />;
+    }
+
     return (
         <div>
             <div className='s_appointment_page'>

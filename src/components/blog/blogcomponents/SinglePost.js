@@ -8,10 +8,15 @@ import { connect } from 'react-redux';
 import { deleteBlog } from '../../../actions/blogs';
 import propTypes from 'prop-types';
 import { WebSocketService } from '../../../websocket';
+import { Redirect } from 'react-router-dom';
 
 function SinglePost(props) {
   const {blog,username}=props
   const ws = useContext(WebSocketService);
+
+  if (!props.isAuthenticated) {
+    return <Redirect to="/" />;
+  }
   useEffect(()=>{
   },[])
   console.log(blog.blogger_username == username,"Test")
@@ -110,12 +115,14 @@ function SinglePost(props) {
 
 SinglePost.propTypes = {
   deleteBlog: propTypes.func.isRequired,
-  username: propTypes.string.isRequired
+  username: propTypes.string.isRequired,
+  isAuthenticated:propTypes.bool.isRequired,
 
 };
 const mapStateToProps = (state, ownProps) => {
   return {
-    username: state.auth.user.username
+    username: state.auth.user.username,
+    isAuthenticated:state.auth.isAuthenticated
   }
 };
 

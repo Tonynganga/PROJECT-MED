@@ -11,6 +11,7 @@ import { Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBasel
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import { connect } from 'react-redux';
 import { errorMessage } from '../../actions/notifyPopUp';
+import { Redirect } from 'react-router-dom';
 import { setAppointment,getAppointmentTimePerDate } from '../../actions/appointments';
 import propTypes from 'prop-types';
 
@@ -25,6 +26,10 @@ const hoursData = [
 function Appointment(props) {
     const [hours, setHours] = useState([]);
     const [appointmentDate, setAppointmentDate] = useState("");
+
+    if(!props.isAuthenticated){
+        return <Redirect to="/" />;
+    }
     useEffect(() => {
         let resultArray=[]
         if(props.availableAppointmentTime.length>0){
@@ -362,11 +367,13 @@ function Appointment(props) {
 Appointment.prototype = {
     setAppointment: propTypes.func.isRequired,
     errorMessage: propTypes.func.isRequired,
-    getAppointmentTimePerDate:propTypes.func.isRequired
+    getAppointmentTimePerDate:propTypes.func.isRequired,
+    isAuthenticated:propTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
     availableAppointmentTime: state.appointments.availableAppointmentTime,
+    isAuthenticated:state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, {setAppointment,getAppointmentTimePerDate,  errorMessage })(Appointment)
