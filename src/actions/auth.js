@@ -62,7 +62,7 @@ export const LoginAction = (username, password) => dispatch => {
 };
 
 export const RegisterAction = data => dispatch => {
-  console.log(data)
+  // console.log(data)
 
   axios
     .post(HTTP_API_PATH + '/api/auth/register', data, config)
@@ -70,9 +70,13 @@ export const RegisterAction = data => dispatch => {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
       dispatch(notify("registeration successfull", "success"))
     })
-    .catch(err => {
-      dispatch(getErrors(err.data, err.status));
-      dispatch(notify("registration unsuccessfull", "error"))
+    .catch((err) => {
+      dispatch(getErrors(err.response.data,400));
+      const valuesArray = Object.values(err.response.data);
+      valuesArray.forEach(function(element) {
+        dispatch(notify(element[0], "error"))
+      });
+      
       dispatch({ type: REGISTER_FAIL });
     });
 };
