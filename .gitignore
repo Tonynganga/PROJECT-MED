@@ -30,5 +30,5 @@ yarn-debug.log*
 yarn-error.log*
 
 #database
-/appointment-backend/doctors_appointments_app/db.sqlite3
+# /appointment-backend/doctors_appointments_app/db.sqlite3
 
