@@ -13,5 +13,5 @@ pytest==7.0.1
 pytest-django==4.5.2
 pytest-forked==1.4.0
 pytest-xdist==2.5.0
-psycopg2==2.9.5
+
 
