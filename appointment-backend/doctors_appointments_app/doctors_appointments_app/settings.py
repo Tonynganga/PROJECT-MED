@@ -28,7 +28,7 @@ DEBUG = True
 
 PORT = int(os.environ.get('PORT', 8000))
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com','docapp-472bb3deb390.herokuapp.com']
 
 AUTH_USER_MODEL = 'accounts.User'
 
