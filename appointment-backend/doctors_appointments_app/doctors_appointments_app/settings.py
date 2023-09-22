@@ -28,7 +28,7 @@ DEBUG = True
 
 PORT = int(os.environ.get('PORT', 8000))
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com','docapp-472bb3deb390.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com','docapp-472bb3deb390.herokuapp.com','172.22.68.150']
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -156,11 +156,11 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR.parent.parent,'build/static')
+# STATIC_ROOT = os.path.join(BASE_DIR.parent.parent,'build/static')
 
-# STATICFILES_DIRS=[
-#     os.path.join(BASE_DIR.parent.parent,'build/static')
-# ]
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR.parent.parent,'build/static')
+]
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 REST_FRAMEWORK = {
