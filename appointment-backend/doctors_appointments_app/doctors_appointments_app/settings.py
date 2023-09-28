@@ -28,7 +28,7 @@ DEBUG = True
 
 PORT = int(os.environ.get('PORT', 8000))
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com','docapp-472bb3deb390.herokuapp.com','172.22.68.150']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com','docapp-472bb3deb390.herokuapp.com','172.22.68.150','0.0.0.0']
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -62,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'doctors_appointments_app.urls'
@@ -156,8 +157,9 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR.parent.parent,'build/static')
-DJANGO_DEV_SERVER = '0.0.0.0:{}'.format(PORT)
+STATIC_ROOT = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# DJANGO_DEV_SERVER = '0.0.0.0:{}'.format(PORT)
 
 # STATICFILES_DIRS=[
 #     os.path.join(BASE_DIR.parent.parent,'build/static')
