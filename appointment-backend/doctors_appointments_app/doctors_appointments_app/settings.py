@@ -158,7 +158,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT= '/static/'
-# STATIC_ROOT =  os.path.join(BASE_DIR.parent.parent,'build/static')
+STATIC_ROOT =  os.path.join(BASE_DIR.parent.parent,'build/static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # DJANGO_DEV_SERVER = '0.0.0.0:{}'.format(PORT)
 
