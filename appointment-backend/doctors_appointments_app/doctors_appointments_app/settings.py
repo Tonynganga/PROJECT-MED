@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-u1uekof5)y%kxewd@3f9e!hzoly*6r_+kz&5xln95n4l*#)90*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-PORT = int(os.environ.get('PORT', 80))
+# PORT = int(os.environ.get('PORT', 80))
 
 ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com','docapp-472bb3deb390.herokuapp.com','172.22.68.150','0.0.0.0']
 
