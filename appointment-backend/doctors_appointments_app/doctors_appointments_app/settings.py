@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ DEBUG = True
 
 # PORT = int(os.environ.get('PORT', 80))
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','ec2-44-204-92-31.compute-1.amazonaws.com','www.testproject149.com','docapp-472bb3deb390.herokuapp.com','172.22.68.150','0.0.0.0']
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -158,13 +159,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT= '/static/'
-STATIC_ROOT =  os.path.join(BASE_DIR.parent.parent.parent,'static')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT =  os.path.join(BASE_DIR.parent.parent.parent,'static')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC ROOT= os.path.join(BASE_DIR,' staticfiles ' )
 # DJANGO_DEV_SERVER = '0.0.0.0:{}'.format(PORT)
+django_heroku.settings(locals())
 
-# STATICFILES_DIRS=[
-#     os.path.join(BASE_DIR.parent.parent,'build/static')
-# ]
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR.parent.parent.parent,'static')
+]
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 REST_FRAMEWORK = {
