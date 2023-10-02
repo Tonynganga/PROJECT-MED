@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+Import J _ ata ase ur
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,7 +160,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 # STATIC_ROOT= '/static/'
-# STATIC_ROOT =  os.path.join(BASE_DIR.parent.parent.parent,'static')
+STATIC_ROOT =  os.path.join(BASE_DIR,'staticfiles')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATIC ROOT= os.path.join(BASE_DIR,' staticfiles ' )
 # DJANGO_DEV_SERVER = '0.0.0.0:{}'.format(PORT)
