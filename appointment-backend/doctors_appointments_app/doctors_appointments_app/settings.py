@@ -161,7 +161,7 @@ STATIC_URL = '/static/'
 # STATIC_ROOT= '/static/'
 STATIC_ROOT = 'staticfiles'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATIC ROOT= os.path.join(BASE_DIR,' staticfiles ' )
+STATIC ROOT= os.path.join(BASE_DIR.parent.parent.parent,'static')
 # DJANGO_DEV_SERVER = '0.0.0.0:{}'.format(PORT)
 django_heroku.settings(locals())
 
