@@ -17,5 +17,6 @@ STATIC_DIR = Path(__file__).resolve().parent.parent.parent.parent
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'doctors_appointments_app.settings')
 
 application = get_wsgi_application()
+# application = WhiteNoise(application, root='/home/vicmwass/PROJECT-MED/build')
 application = WhiteNoise(application, root=os.path.join(STATIC_DIR,'build'))
 # application.add_files("/path/to/more/static/files", prefix="more-files/")
