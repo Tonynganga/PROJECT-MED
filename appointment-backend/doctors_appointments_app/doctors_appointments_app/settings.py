@@ -160,13 +160,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_ROOT= '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT= os.path.join(BASE_DIR.parent.parent,' staticfiles ' )
+# STATIC_ROOT= os.path.join(BASE_DIR.parent.parent,'static' )
 # DJANGO_DEV_SERVER = '0.0.0.0:{}'.format(PORT)
 django_heroku.settings(locals())
 
-# STATICFILES_DIRS=[
-#     os.path.join(BASE_DIR.parent.parent.parent,'static')
-# ]
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR.parent.parent,'build')
+]
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
 REST_FRAMEWORK = {
