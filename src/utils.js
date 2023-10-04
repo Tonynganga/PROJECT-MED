@@ -7,8 +7,10 @@ export const monthNames = ["January", "February", "March", "April", "May", "June
 "July", "August", "September", "October", "November", "December"
 ];
 
-export const WS_API_PATH = 'wss://www.testproject149.com/';
-export const HTTP_API_PATH='https://www.testproject149.com';
+// export const WS_API_PATH = 'wss://www.testproject149.com/';
+// export const HTTP_API_PATH='https://www.testproject149.com';
+export const WS_API_PATH = 'https://docapp-472bb3deb390.herokuapp.com/';
+export const HTTP_API_PATH='https://docapp-472bb3deb390.herokuapp.com';
 
 export const blog_type = [
   { label: "General", value: "general" },
