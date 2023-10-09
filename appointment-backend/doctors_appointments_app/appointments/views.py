@@ -85,14 +85,14 @@ class Available_time_choice_ps_API(viewsets.ModelViewSet):
         for item in serializer_list:
             self.perform_create(item)
             headers = self.get_success_headers(item.data)
-            data_list.append(item.data)
+            data_list.append(itempermission_classes = [
+        permissions.IsAuthenticated,
+    ].data)
         return Response(data_list, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class Booked_appointments_API(viewsets.ModelViewSet):
-    permission_classes = [
-        permissions.IsAuthenticated,
-    ]
+    
     serializer_class = Booked_appointments_Serializer
 
     def get_queryset(self):
